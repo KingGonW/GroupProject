@@ -89,4 +89,13 @@ public class Customer {
             this.phoneNumber = null;
 
     }
+
+
+    public void showCustomer(){
+        System.out.println("Customer ID: " + id);
+        System.out.println("Customer Name: " + name + lastName);
+        System.out.println("Customer Email: " + name);
+        System.out.println("Customer Phone Number: " + name);
+
+    }
 }
