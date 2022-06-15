@@ -21,12 +21,30 @@ public class Customer {
 
 
     public boolean checkISAAcc(Object obj) {
-        if (obj != null)
+        if (obj != null) {
             return true;
-        else{
+        }else{
             System.out.println("test");
             return false;
     }}
+
+    public Customer findCustomer(int id, Customer[] customers){
+        for (int i = 0; i < customers.length; i++){
+            if(customers[i].getId() == id)
+                return customers[i];
+        }
+        System.out.println("Customer does not exist");
+        return null;
+
+    }
+
+    public void findAll(Customer[] customers){
+        for (int i = 0; i < customers.length; i++){
+                  customers[i].showCustomer();
+        }
+
+
+    }
 
     public long getId() {
         return id;
