@@ -28,6 +28,24 @@ public class Customer {
             return false;
     }}
 
+    public Customer findCustomer(int id, Customer[] customers){
+        for (int i = 0; i < customers.length; i++){
+            if(customers[i].getId() == id)
+                return customers[i];
+        }
+        System.out.println("Customer does not exist");
+        return null;
+
+    }
+
+    public void findAll(Customer[] customers){
+        for (int i = 0; i < customers.length; i++){
+                  customers[i].showCustomer();
+        }
+
+
+    }
+
     public long getId() {
         return id;
     }
