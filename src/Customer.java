@@ -22,15 +22,15 @@ public class Customer {
 
     public boolean checkISAAcc(Object obj) {
         if (obj != null) {
-            return true;
-        }else{
             System.out.println("You  already have an ISA Account");
             return false;
-    }}
+        } else
+            return true;
+    }
 
-    public Customer findCustomer(int id, Customer[] customers){
-        for (int i = 0; i < customers.length; i++){
-            if(customers[i].getId() == id)
+    public Customer findCustomer(int id, Customer[] customers) {
+        for (int i = 0; i < customers.length; i++) {
+            if (customers[i].getId() == id)
                 return customers[i];
         }
         System.out.println("Customer does not exist");
@@ -38,9 +38,9 @@ public class Customer {
 
     }
 
-    public void findAll(Customer[] customers){
-        for (int i = 0; i < customers.length; i++){
-                  customers[i].showCustomer();
+    public void findAll(Customer[] customers) {
+        for (int i = 0; i < customers.length; i++) {
+            customers[i].showCustomer();
         }
 
 
@@ -109,7 +109,7 @@ public class Customer {
     }
 
 
-    public void showCustomer(){
+    public void showCustomer() {
         System.out.println("Customer ID: " + id);
         System.out.println("Customer Name: " + name + lastName);
         System.out.println("Customer Email: " + name);
