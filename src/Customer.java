@@ -6,8 +6,7 @@ public class Customer {
     private String emailAddress;
     private String phoneNumber;
 
-    public Customer(long id, String name, String lastName, String emailAddress, String phoneNumber) {
-        this.id = id;
+    public Customer( String name, String lastName, String emailAddress, String phoneNumber) {
         this.name = name;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
