@@ -88,4 +88,6 @@ public class Customer {
             this.phoneNumber = null;
 
     }
+
+    //Testing updating Test1 - remember to remove this comment
 }
