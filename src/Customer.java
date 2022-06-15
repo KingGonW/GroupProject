@@ -1,3 +1,6 @@
+import java.util.Random;
+import java.util.regex.Pattern;
+
 public class Customer {
 
     private long id;
@@ -6,11 +9,22 @@ public class Customer {
     private String emailAddress;
     private String phoneNumber;
 
-    public Customer( String name, String lastName, String emailAddress, String phoneNumber) {
-        this.name = name;
-        this.lastName = lastName;
-        this.emailAddress = emailAddress;
-        this.phoneNumber = phoneNumber;
+
+    public Customer(String name, String lastName, String emailAddress, String phoneNumber) {
+        Random random = new Random();
+        setId(random.nextLong(1000));
+        setEmailAddress(emailAddress);
+        setName(name);
+        setLastName(lastName);
+        setPhoneNumber(phoneNumber);
+    }
+
+
+    public boolean checkISAAcc(Object obj) {
+        if (obj != null)
+            return true;
+        else
+            return false;
     }
 
     public long getId() {
@@ -26,7 +40,8 @@ public class Customer {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (!name.isEmpty())
+            this.name = name;
     }
 
     public String getLastName() {
@@ -34,7 +49,8 @@ public class Customer {
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        if (!lastName.isEmpty())
+            this.lastName = lastName;
     }
 
     public String getEmailAddress() {
@@ -42,14 +58,34 @@ public class Customer {
     }
 
     public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
+        if (emailAddress.contains("@") && emailAddress.contains("."))
+            this.emailAddress = emailAddress;
+        else {
+            this.emailAddress = null;
+            System.out.println("Please enter a valid email address");
+
+        }
     }
 
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    public boolean isNumeric(String phoneNumber) {
+        try {
+            Double.parseDouble(phoneNumber);
+            return true;
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid phone number");
+            return false;
+        }
+    }
+
     public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+        if (isNumeric(phoneNumber))
+            this.phoneNumber = phoneNumber;
+        else
+            this.phoneNumber = null;
+
     }
 }
