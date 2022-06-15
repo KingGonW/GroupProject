@@ -2,7 +2,7 @@
 
 public class BankTransactions {
 
-    double balance, prevTransaction;
+    private double balance, prevTransaction;
 
     public BankTransactions(double balance, double prevTransaction) {
         this.balance = 0.0;
