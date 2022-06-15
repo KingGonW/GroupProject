@@ -33,7 +33,7 @@ public class Customer {
             if(customers[i].getId() == id)
                 return customers[i];
         }
-        System.out.println("Customer does not exist");
+        System.out.println("Customer doesn't exist");
         return null;
 
     }
