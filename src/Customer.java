@@ -21,9 +21,9 @@ public class Customer {
 
 
     public boolean checkISAAcc(Object obj) {
-        if (obj != null)
+        if (obj != null) {
             return true;
-        else{
+        }else{
             System.out.println("test");
             return false;
     }}
