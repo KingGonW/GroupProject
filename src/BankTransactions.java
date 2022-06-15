@@ -19,6 +19,7 @@ public class BankTransactions {
     public double getPrevTransaction() {
         return this.prevTransaction;
     }
+    // array list to store history of transactions
 
 
 

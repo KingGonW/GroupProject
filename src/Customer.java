@@ -59,7 +59,7 @@ public class Customer {
     }
 
     public void setEmailAddress(String emailAddress) {
-        if (emailAddress.contains("@") && emailAddress.contains("."))
+        if (emailAddress.contains("@") && emailAddress.contains(".")) //add email endings
             this.emailAddress = emailAddress;
         else {
             this.emailAddress = null;
