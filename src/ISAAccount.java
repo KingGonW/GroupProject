@@ -2,24 +2,7 @@ import static java.lang.Math.*;
 
 public class ISAAccount extends BankAcc{
 
-final int interestRate, timePeriod;
 
-
-    public ISAAccount(int balance, int interestRate, int timePeriod) {
-        super(balance); // implement balance from bankAcc
-        this.interestRate = interestRate;
-        this.timePeriod = timePeriod;
-    }
-
-    public int getInterestRate() {
-        return interestRate;
-    }
-
-    public int getTimePeriod() {
-        return timePeriod;
-    }
-
-    /*
     ISAAccount (double initialDeposit) {
         super();
         this.setBalance(initialDeposit);
@@ -36,7 +19,7 @@ final int interestRate, timePeriod;
         System.out.println("\n Interest accumulated for your amount  " + PAmount + " is = " + simpleInterest);
     }
 
-*/
+
 
 
 

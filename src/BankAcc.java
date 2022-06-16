@@ -1,8 +1,11 @@
 import java.util.Random;
 
 public class BankAcc {
-    private String sortCode;
+    private final String sortCode;
     private int accNum;
+    private double balance;
+    private double transactionHistory;
+    private double interest;
 
     public BankAcc(){
         Random rand= new Random();
@@ -15,6 +18,30 @@ public class BankAcc {
         this.sortCode= sb.toString();
         this.accNum= rand.nextInt(99999999);
     //update another one
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public double getTransactionHistory() {
+        return transactionHistory;
+    }
+
+    public void setTransactionHistory(double transactionHistory) {
+        this.transactionHistory = transactionHistory;
+    }
+
+    public double getInterest() {
+        return interest;
+    }
+
+    public void setInterest(double interest) {
+        this.interest = interest;
     }
 }
 
