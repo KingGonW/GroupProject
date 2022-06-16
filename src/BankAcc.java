@@ -8,9 +8,9 @@ public class BankAcc {
 
     public BankAcc(){
         Random rand= new Random();
-        int previousaccNum = accNum;
+        int nextNum = accNum;
         this.accNum= rand.nextInt(99999999);
-        while (this.accNum == previousaccNum)
+        if (this.accNum == nextNum)
         {
             this.accNum = rand.nextInt(99999999);
         }
