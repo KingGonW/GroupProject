@@ -9,6 +9,7 @@ public class Customer {
     private String emailAddress;
     private String phoneNumber;
 
+    // add BankAcc account to variables in order to create a new account from customer
 
     public Customer(String name, String lastName, String emailAddress, String phoneNumber) {
         Random random = new Random();
