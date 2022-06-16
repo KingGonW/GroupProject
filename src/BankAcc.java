@@ -6,6 +6,8 @@ public class BankAcc {
     private double transactionHistory;
     private double interest;
 
+
+
     public BankAcc(){
         Random rand= new Random();
         int nextNum = accNum;
@@ -55,6 +57,8 @@ public class BankAcc {
             System.out.println("You have withdrawn " + withdrawalAmount + " from your account" + "\n" +
                     "Your Balance is now: " + this.balance);
         }
+
+        //NB ISA accounts can't go below 100, so some logic above to check for an ISA account is needed
     }
 
     public void moneyTransfer(BankAcc thisAccount, BankAcc toAccount, double amountToTransfer){
@@ -65,6 +69,7 @@ public class BankAcc {
             System.out.println("You don't have enough funds");
         }
     }
+    //NB ISA accounts can't go below 100, so some logic above to check for an ISA account is needed
     /*
     https://codereview.stackexchange.com/questions/259695/simple-bank-application-in-java
 */
