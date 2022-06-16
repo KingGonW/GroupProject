@@ -1,14 +1,19 @@
 ﻿import java.util.Random;
 
-public class BankAcc {
+public abstract class BankAcc {
     public int accNum;
     private double balance;
+    private static double interestRate;
+    private double numberDeposits;
+    private double numberWithdrawals;
     private double transactionHistory;
 
 
 
 
-    public BankAcc(){
+    public BankAcc(double balance, int accNum){
+
+        this.balance = balance;
         Random rand= new Random();
         int nextNum = this.accNum;
         this.accNum= rand.nextInt(99999999);
@@ -34,22 +39,40 @@ public class BankAcc {
         this.transactionHistory = transactionHistory;
     }
 
-    
+
+    public double getNumberDeposits() {
+        return numberDeposits;
+    }
+
+    public void setNumberDeposits(double numberDeposits) {
+        this.numberDeposits = numberDeposits;
+    }
+
+    public double getNumberWithdrawals() {
+        return numberWithdrawals;
+    }
+
+    public void setNumberWithdrawals(double numberWithdrawals) {
+        this.numberWithdrawals = numberWithdrawals;
+    }
+
+
+
     public void depositMoney(double depositAmount) {
         System.out.println("Please enter the amount you want to deposit: ");
         this.balance += depositAmount;
-        System.out.println("You have deposited " + depositAmount +  " from your account." + "\n" +
-                "Balance is now: " + this.balance);
+        this.numberDeposits++; // increment number of deposits each time one is made
+
     }
 
-    public void withdrawMoney(double withdrawalAmount) {
-        if(this.balance < withdrawalAmount) {
+    public void withdrawMoney(double withdrawAmount) {
+        if(balance < withdrawAmount) {
             System.out.println("Insufficient Funds. \n Please Deposit an Amount.");
         }
         else {
-            this.balance -= withdrawalAmount;
-            System.out.println("You have withdrawn " + withdrawalAmount + " from your account" + "\n" +
-                    "Your Balance is now: " + this.balance);
+            balance -= withdrawAmount;
+            numberWithdrawals++; // increment number of withdrawals made each time money is withdrawn
+
         }
 
         //NB ISA accounts can't go below 100, so some logic above to check for an ISA account is needed
@@ -58,7 +81,7 @@ public class BankAcc {
     public void moneyTransfer(BankAcc thisAccount, BankAcc toAccount, double amountToTransfer){
         if(thisAccount.getBalance() > 0) {
             toAccount.setBalance(toAccount.balance += amountToTransfer);
-            thisAccount.setBalance(this.balance -= amountToTransfer);
+            thisAccount.setBalance(balance -= amountToTransfer);
         } else {
             System.out.println("You don't have enough funds");
         }
@@ -67,6 +90,12 @@ public class BankAcc {
     /*
     https://codereview.stackexchange.com/questions/259695/simple-bank-application-in-java
 */
+
+    public void transactionHistory() {
+    this.numberWithdrawals = 0;
+    this.numberWithdrawals = 0;
+    }
+
 
 
 }
