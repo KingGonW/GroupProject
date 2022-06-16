@@ -1,16 +1,16 @@
 ﻿import java.util.Random;
 
 public class BankAcc {
-    private int accNum;
+    public int accNum;
     private double balance;
     private double transactionHistory;
-    private double interest;
+
 
 
 
     public BankAcc(){
         Random rand= new Random();
-        int nextNum = accNum;
+        int nextNum = this.accNum;
         this.accNum= rand.nextInt(99999999);
         if (this.accNum == nextNum)
         {
@@ -34,13 +34,7 @@ public class BankAcc {
         this.transactionHistory = transactionHistory;
     }
 
-    public double getInterest() {
-        return interest;
-    }
-
-    public void setInterest(double interest) {
-        this.interest = interest;
-    }
+    
     public void depositMoney(double depositAmount) {
         System.out.println("Please enter the amount you want to deposit: ");
         this.balance += depositAmount;
