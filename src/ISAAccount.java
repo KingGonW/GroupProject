@@ -1,10 +1,9 @@
-import static java.lang.Math.*;
-
 public class ISAAccount extends BankAcc{
 
-
-    ISAAccount (double initialDeposit) {
+final String sortCode;
+    ISAAccount (double initialDeposit, String sortCode) {
         super();
+        this.sortCode = "22-66-44";
         this.setBalance(initialDeposit);
         if(initialDeposit > 100) {
             this.setInterest(0.02);
@@ -19,9 +18,9 @@ public class ISAAccount extends BankAcc{
         System.out.println("\n Interest accumulated for your amount  " + PAmount + " is = " + simpleInterest);
     }
 
-
-
-
+    public String getSortCode() {
+        return sortCode;
+    }
 
 
 }
