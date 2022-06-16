@@ -8,8 +8,12 @@ public class BankAcc {
 
     public BankAcc(){
         Random rand= new Random();
+        int previousaccNum = accNum;
         this.accNum= rand.nextInt(99999999);
-    //update another one
+        while (this.accNum == previousaccNum)
+        {
+            this.accNum = rand.nextInt(99999999);
+        }
     }
 
     public double getBalance() {
