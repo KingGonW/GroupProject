@@ -43,5 +43,36 @@ public class BankAcc {
     public void setInterest(double interest) {
         this.interest = interest;
     }
+    public void depositMoney(double depositAmount) {
+        System.out.println("Please enter the amount you want to deposit: ");
+        this.balance += depositAmount;
+        System.out.println("You have deposited " + depositAmount +  " from your account." + "\n" +
+                "Balance is now: " + this.balance);
+    }
+
+    public void withdrawMoney(double withdrawalAmount) {
+        if(this.balance < withdrawalAmount) {
+            System.out.println("Insufficient Funds. \n Please Deposit an Amount.");
+        }
+        else {
+            this.balance -= withdrawalAmount;
+            System.out.println("You have withdrawn " + withdrawalAmount + " from your account" + "\n" +
+                    "Your Balance is now: " + this.balance);
+        }
+    }
+
+    public void moneyTransfer(BankTransactions thisAccount, BankTransactions toAccount, double amountToTransfer){
+        if(thisAccount.getBalance() > 0) {
+            toAccount.setBalance(toAccount.balance += amountToTransfer);
+            thisAccount.setBalance(this.balance -= amountToTransfer);
+        } else {
+            System.out.println("You don't have enough funds");
+        }
+    }
+    /*
+    https://codereview.stackexchange.com/questions/259695/simple-bank-application-in-java
+*/
+
+
 }
 
