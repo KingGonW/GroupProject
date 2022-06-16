@@ -1,12 +1,20 @@
 import java.util.Random;
 
 public class BankAcc {
-    public static void main (String[] args){
+    private String sortCode;
+    private int accNum;
+
+    public BankAcc(){
         Random rand= new Random();
-        int sort_code = rand.nextInt(999999); // use split method to finalise sort code
-        System.out.println(sort_code);
-        //return String.format("%06d", sort_code);
-        int accnum = rand.nextInt(99999999);
-        System.out.println(accnum);
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<3;i++){
+            sb.append(rand.nextInt(99));
+            sb.append("-");
+        }
+        sb.deleteCharAt(8);
+        this.sortCode= sb.toString();
+        this.accNum= rand.nextInt(99999999);
+    //update another one
     }
 }
+
