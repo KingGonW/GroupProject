@@ -1,9 +1,10 @@
 public class ISAAccount extends BankAcc{
 
-final String sortCode;
+    private static String accountType = "ISA Account";
+final String ISAsortCode;
     ISAAccount (double initialDeposit, String sortCode) {
         super();
-        this.sortCode = "22-66-44";
+        this.ISAsortCode = "22-66-44";
         this.setBalance(initialDeposit);
         if(initialDeposit > 100) {
             this.setInterest(0.02);
@@ -19,7 +20,7 @@ final String sortCode;
     }
 
     public String getSortCode() {
-        return sortCode;
+        return ISAsortCode;
     }
 
 
