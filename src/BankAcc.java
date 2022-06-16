@@ -61,7 +61,7 @@ public class BankAcc {
         }
     }
 
-    public void moneyTransfer(BankTransactions thisAccount, BankTransactions toAccount, double amountToTransfer){
+    public void moneyTransfer(BankAcc thisAccount, BankAcc toAccount, double amountToTransfer){
         if(thisAccount.getBalance() > 0) {
             toAccount.setBalance(toAccount.balance += amountToTransfer);
             thisAccount.setBalance(this.balance -= amountToTransfer);
