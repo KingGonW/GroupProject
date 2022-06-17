@@ -41,7 +41,8 @@ public class Main {
         } while (!input.equals("3"));
     }
 
-
+// add feature to allow admin to transfer money between accounts
+    //add feature to allow admin to create accounts for customers.
 
         private static void adminMenu() {
             System.out.println("ADMIN MANU\nPlease select an option ... ");
