@@ -45,7 +45,7 @@ public class Main {
 
         private static void adminMenu() {
             System.out.println("ADMIN MANU\nPlease select an option ... ");
-            System.out.println("1.All customers\n2.find a Customer\n3.delete a customer\n4.Exit to main menu");
+            System.out.println("1.All customers\n2.find a Customer\n3.delete a customer\n4.Transfer money\n5.Exit to main menu");
 
             do {
                 input = scanner.next();
@@ -59,17 +59,25 @@ public class Main {
                     case "3":
                         deleteCustomer();
                         break;
+                    case "4":
+                        transferMoney();
+                        break;
                     default:
-                        if (!input.equals("4")) {
-                            if (!input.equals("4")){
+                        if (!input.equals("5")) {
+                            if (!input.equals("5")){
                                 System.out.println("Please enter a valid number");
                                 adminMenu();}
                         }break;
                 }
-            } while (!input.equals("4"));
+            } while (!input.equals("5"));
         }
 
-        private static void customerMenu() {
+    private static void transferMoney() {
+
+
+    }
+
+    private static void customerMenu() {
             System.out.println("CUSTOMER MANU\nPlease select an option ... ");
             System.out.println("1.Register\n2.Login\n3.Help\n4.Exit to main menu");
             do {
@@ -141,23 +149,55 @@ public class Main {
             customerMenu();
         }
 
-        public static boolean validation(){
+        public static long validation(){
             System.out.println("Please enter your name ");
             String cusName = scanner.next();
             for (int i = 0; i < customers.size(); i++){
                 if(customers.get(i).getName().equals(cusName)){
                     System.out.println("====> WELCOME " + cusName );
-                    return true;
+                    return customers.get(i).getId();
                 }
             }
-            return false;
+            return 0;
         }
         public static void customerLogin(){
-            if(!validation()){
-                System.out.println("====> Your bank");
+            if(validation() != 0){
+                yourBank();
             }
-            mainMenu();
+             else
+                System.out.println("Please enter a valid name ");
+            customerMenu();
 
         }
 
+        public static void yourBank(){
+            System.out.println("BANK MANU\nPlease select an option ... ");
+            System.out.println("1.create a new Bank account\n2.list of the current accounts\n3.Exit to main menu");
+            do {
+                input = scanner.next();
+                switch (input) {
+                    case "1":
+                        createNewBankAccount();
+                        break;
+                    case "2":
+                        currentBankAccounts();
+                        break;
+                    default:
+                        if (!input.equals("3")) {
+                            if (!input.equals("3")){
+                                System.out.println("Please enter a valid number");
+                                customerMenu();}
+                        }break;
+                }
+            } while (!input.equals("3"));
+        }
+    private static void createNewBankAccount() {
+
     }
+    private static void currentBankAccounts() {
+
+    }
+
+
+
+}
