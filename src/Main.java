@@ -120,9 +120,12 @@ public class Main {
             System.out.println("Please enter the customer ID");
             Long cusID = scanner.nextLong();
             for (int i = 0; i < customers.size(); i++){
-                if(customers.get(i).getId() == cusID)
+                if(customers.get(i).getId() == cusID){
                     System.out.println(customers.get(i).toString());
+                    adminMenu();
+                }
             }
+            System.out.println("====> Customer does not exist");
             adminMenu();
         }
         public static void newCustomer(){
