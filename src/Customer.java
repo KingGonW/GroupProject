@@ -1,3 +1,6 @@
+
+
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Pattern;
 
@@ -9,6 +12,8 @@ public class Customer {
     private String emailAddress;
     private String phoneNumber;
 
+    private ArrayList<BankAcc> bankAccounts;
+
 
     public Customer(String name, String lastName, String emailAddress, String phoneNumber) {
         Random random = new Random();
@@ -17,6 +22,7 @@ public class Customer {
         setName(name);
         setLastName(lastName);
         setPhoneNumber(phoneNumber);
+        bankAccounts = new ArrayList<>();
     }
 
 
@@ -77,7 +83,8 @@ public class Customer {
     }
 
     public void setEmailAddress(String emailAddress) {
-        if (emailAddress.contains("@") && emailAddress.contains(".")) //add email endings
+        System.out.println("Please enter your email address using one of the following email providers : gmail,hotmail,outlook");
+        if (emailAddress.contains("@gmail.com") || emailAddress.contains("@outlook.com") || emailAddress.contains("@hotmail.com")) //add email endings
             this.emailAddress = emailAddress;
         else {
             this.emailAddress = null;
@@ -106,6 +113,13 @@ public class Customer {
         else
             this.phoneNumber = null;
 
+    }
+
+    @Override
+    public String toString(){
+        return "Customer ID:" + id + " Customer Name: " +
+                name + lastName + "Customer Email: " + emailAddress +
+                "Customer Phone Number: " + name;
     }
 
 
