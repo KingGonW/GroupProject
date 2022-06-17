@@ -8,7 +8,7 @@ public class BusinessAccount extends BankAcc {
     private double balance;
     private double subscription;
 
-    private double aftersub;
+    private double afterSub;
 
     public BusinessAccount(double balance,double initialDeposit, int accNum, String businessSortCode, int businessAccountNumber) {
         super(balance, accNum);
@@ -21,15 +21,15 @@ public class BusinessAccount extends BankAcc {
     }
     public void subscription(){
         LocalDate date = LocalDate.parse("2022-1-1");
-        LocalDate nextyear = date.plusDays(365);
+        LocalDate nextYear = date.plusDays(365);
         this.subscription = 25;
         for (int i=0; i<365; i++){
-            LocalDate nextdate = date.plusDays(1);
-            if (nextyear == nextdate){
-                this.aftersub = this.balance - this.subscription;
+            LocalDate nextDate = date.plusDays(1);
+            if (nextYear == nextDate){
+                this.afterSub = this.balance - this.subscription;
             }
         }
-        System.out.println("The balance after annual subscription is"+ this.aftersub);
+        System.out.println("The balance after annual subscription is"+ this.afterSub);
     }
     public void withdraw(double withdrawAmount) {  //override withdraw method from BankAcc class
         if(super.getBalance() < 25) {
