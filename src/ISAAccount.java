@@ -7,7 +7,7 @@ final String ISAsortCode;
         this.ISAsortCode = "22-66-44";
         this.setBalance(initialDeposit);
         if(initialDeposit > 100) {
-            this.setInterest(0.02);
+         //   this.setInterest(0.02);
         }
     }
     public static void calInterest(double PAmount, double ROI, double TimePeriod)
