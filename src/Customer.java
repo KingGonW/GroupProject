@@ -17,7 +17,7 @@ public class Customer {
 
     public Customer(String name, String lastName, String emailAddress, String phoneNumber) {
         Random random = new Random();
-        setId(random.nextLong(1000));
+        setId(random.nextLong(100));
         setEmailAddress(emailAddress);
         setName(name);
         setLastName(lastName);
@@ -44,13 +44,6 @@ public class Customer {
 
     }
 
-    public void findAll(Customer[] customers) {
-        for (int i = 0; i < customers.length; i++) {
-            customers[i].showCustomer();
-        }
-
-
-    }
 
     public long getId() {
         return id;
@@ -83,7 +76,7 @@ public class Customer {
     }
 
     public void setEmailAddress(String emailAddress) {
-        System.out.println("Please enter your email address using one of the following email providers : gmail,hotmail,outlook");
+       // System.out.println("Please enter your email address using one of the following email providers : gmail,hotmail,outlook");
         if (emailAddress.contains("@gmail.com") || emailAddress.contains("@outlook.com") || emailAddress.contains("@hotmail.com")) //add email endings
             this.emailAddress = emailAddress;
         else {
@@ -118,8 +111,8 @@ public class Customer {
     @Override
     public String toString(){
         return "Customer ID:" + id + " Customer Name: " +
-                name + lastName + "Customer Email: " + emailAddress +
-                "Customer Phone Number: " + name;
+                name +" Customer lastName: " + lastName + " Customer Email: " + emailAddress +
+                " Customer Phone Number: " + name;
     }
 
 
