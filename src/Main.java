@@ -72,7 +72,6 @@ public class Main {
         private static void customerMenu() {
             System.out.println("CUSTOMER MANU\nPlease select an option ... ");
             System.out.println("1.Register\n2.Login\n3.Help\n4.Exit to main menu");
-
             do {
                 input = scanner.next();
                 switch (input) {
@@ -84,6 +83,7 @@ public class Main {
                         break;
                     case "3":
                         System.out.println("please call +44123456789 to get help\n---------------------------");
+                        customerMenu();
                         break;
                     default:
                         if (!input.equals("4")) {
