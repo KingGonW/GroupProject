@@ -29,6 +29,10 @@ public class ISAAccount extends BankAcc{
         return ISAsortCode;
     }
 
+    public int accountNumber() {
+        return ISAAccountNumber;
+    }
+
 
     public void withdraw(double withdrawAmount) {
         //override withdraw method from BankAcc class

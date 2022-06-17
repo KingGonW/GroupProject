@@ -3,21 +3,20 @@ import java.time.*;
 public class BusinessAccount extends BankAcc {
 
     private static String accountType = "Business Account";
-    final String businessSortCode;
+    private final String businessSortCode = "12-23-24";
     private int businessAccountNumber;
     private double balance;
     private double subscription;
 
     private double afterSub;
 
-    public BusinessAccount(double balance,double initialDeposit, int accNum, String businessSortCode, int businessAccountNumber) {
+    public BusinessAccount(double balance, int accNum) {
         super(balance, accNum);
-        this.businessSortCode = "12-23-24";
         this.businessAccountNumber = accNum;
-        this.setBalance(initialDeposit);
+        /*this.setBalance(initialDeposit);
         if(initialDeposit <= 100) {
             System.out.println("must deposit 25 or more to create an Business account");
-        }
+        }*/
     }
     public void subscription(){
         LocalDate date = LocalDate.parse("2022-1-1");
@@ -43,11 +42,13 @@ public class BusinessAccount extends BankAcc {
                     "Your Balance is now: " + this.balance);
         }
     }
-    public String getBusinessSortCode() {
+    public String getSortCode() {
+
         return businessSortCode;
     }
 
-    public int getBusinessAccountNumber() {
+    public int getAccountNumber() {
         return businessAccountNumber;
     }
+
 }
