@@ -37,7 +37,7 @@ public abstract class BankAcc {
     public void setClosingBalance(double closingBalance) {
         this.closingBalance = closingBalance;
     }
-    
+
 
     public double getAccNum() {
         return accNum;
@@ -117,8 +117,11 @@ public abstract class BankAcc {
     }
 
     public void transactionHistory() {
-        this.numberWithdrawals = 0;
-        this.numberDeposits = 0;
+        numberWithdrawals = 0;
+        numberDeposits = 0;
+        getOpeningBalance();
+        getClosingBalance();
+
     }
 
 }
