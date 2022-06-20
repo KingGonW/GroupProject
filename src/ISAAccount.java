@@ -70,7 +70,7 @@ public class ISAAccount extends BankAcc {
     public String toString() {
         return "Account Type:" + accountType + " Sort Code: " +
                 ISAsortCode + " Account Number: " + ISAAccountNumber +
-                " Interest Rate: " + interestRate;
+                " Interest Rate: " + interestRate + "&&";
 
 
     }
