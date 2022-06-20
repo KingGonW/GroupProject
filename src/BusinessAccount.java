@@ -7,26 +7,24 @@ public class BusinessAccount extends BankAcc {
     private int businessAccountNumber;
     private double balance;
     private double subscription;
-
     private double afterSub;
+
+    private LocalDate CreationDate;
 
     public BusinessAccount(double balance, int accNum) {
         super(balance, accNum);
         this.businessAccountNumber = accNum;
+        this.CreationDate = LocalDate.now();
         /*this.setBalance(initialDeposit);
         if(initialDeposit <= 100) {
             System.out.println("must deposit 25 or more to create an Business account");
         }*/
     }
     public void subscription(){
-        LocalDate date = LocalDate.parse("2022-1-1");
-        LocalDate nextYear = date.plusDays(365);
-        this.subscription = 25;
-        for (int i=0; i<365; i++){
-            LocalDate nextDate = date.plusDays(1);
-            if (nextYear == nextDate){
-                this.afterSub = this.balance - this.subscription;
-            }
+        LocalDate date = LocalDate.now();
+        if(this.CreationDate.getMonth() == date.getMonth() && this.CreationDate.getDayOfMonth() == date.getDayOfMonth()){
+            this.subscription = 25;
+            this.afterSub = this.balance - this.subscription;
         }
         System.out.println("The balance after annual subscription is"+ this.afterSub);
     }
