@@ -1,4 +1,4 @@
-public class ISAAccount extends BankAcc{
+public class ISAAccount extends BankAcc {
 
     private final String accountType = "ISA Account";
     private final String ISAsortCode = "22-66-44";
@@ -36,12 +36,11 @@ public class ISAAccount extends BankAcc{
 
     public void withdraw(double withdrawAmount) {
         //override withdraw method from BankAcc class
-        if(super.getBalance() - withdrawAmount < 100) {
+        if (super.getBalance() - withdrawAmount < 100) {
             System.out.println("Your account balance will be too low, " +
                     "to keep your ISA account, please keep balance over 100");
             System.out.println("Would you like to deposit money?");
-        }
-        else {
+        } else {
             super.withdrawMoney(withdrawAmount);
             System.out.println("You have withdrawn " + withdrawAmount + " from your account" + "\n" +
                     "Your Balance is now: " + this.getBalance());
@@ -50,10 +49,9 @@ public class ISAAccount extends BankAcc{
 
     public void deposit(double depositAmount) {  //override deposit method from BankAcc class
         super.depositMoney(depositAmount);
-        System.out.println("You have deposited " + depositAmount +  " from your account." + "\n" +
+        System.out.println("You have deposited " + depositAmount + " from your account." + "\n" +
                 "Balance is now: " + this.getBalance());
     }
-
 
 
     public void calcInterest() // method to calculate interest on customers most recent balance
@@ -68,5 +66,13 @@ public class ISAAccount extends BankAcc{
 
     }
 
+    @Override
+    public String toString() {
+        return "Account Type:" + accountType + " Sort Code: " +
+                ISAsortCode + " Account Number: " + ISAAccountNumber +
+                " Interest Rate: " + interestRate;
+
+
+    }
 
 }
