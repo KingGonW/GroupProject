@@ -56,10 +56,10 @@ public class ISAAccount extends BankAcc{
 
 
 
-    public void calInterest() // method to calculate interest on customers most recent balance
+    public void calcInterest() // method to calculate interest on customers most recent balance
     {
 
-        yearlyInterest = interestRate*(365/365);
+        yearlyInterest = (1 + (interestRate * 1));
         yearlyInterest = this.getBalance() * yearlyInterest;
         this.setBalance(yearlyInterest);
         System.out.print("Interest accumulated on your balance is: " +
