@@ -10,8 +10,8 @@ public class BusinessAccount extends BankAcc {
     private double afterSub;
     private LocalDate CreationDate;
 
-    public BusinessAccount(double balance, int accNum) {
-        super(balance, accNum);
+    public BusinessAccount(double openingBalance, double closingBalance, int accNum) {
+        super(openingBalance, closingBalance, accNum);
         this.businessAccountNumber = accNum;
         this.CreationDate = LocalDate.now();
         /*this.setBalance(initialDeposit);
@@ -27,18 +27,7 @@ public class BusinessAccount extends BankAcc {
         }
         System.out.println("The balance after annual subscription is"+ this.afterSub);
     }
-    public void withdraw(double withdrawAmount) {  //override withdraw method from BankAcc class
-        if(super.getBalance() < 25) {
-            System.out.println("Your account balance is too low, " +
-                    "to keep your Business account, please keep balance over 25");
-            System.out.println("Would you like to deposit money?");
-        }
-        else {
-            super.withdrawMoney(withdrawAmount);
-            System.out.println("You have withdrawn " + withdrawAmount + " from your account" + "\n" +
-                    "Your Balance is now: " + this.balance);
-        }
-    }
+
     public String getBusinessSortCode() {
 
         return businessSortCode;
@@ -47,6 +36,24 @@ public class BusinessAccount extends BankAcc {
     public int getBusinessAccountNumber() {
 
         return businessAccountNumber;
+    }
+
+    public void withdraw(double withdrawAmount) {  //override withdraw method from BankAcc class
+        if(super.getOpeningBalance() < 25) {
+            System.out.println("Your account balance is too low, " +
+                    "to keep your Business account, please keep balance over 25");
+            System.out.println("Would you like to deposit money?");
+        }
+        else {
+            super.withdrawMoney(withdrawAmount);
+            System.out.println("You have withdrawn " + withdrawAmount + " from your account" + "\n" +
+                    "Your Balance is now: " + getClosingBalance());
+        }
+    }
+    public void deposit(double depositAmount) {  //override deposit method from BankAcc class
+        super.depositMoney(depositAmount);
+        System.out.println("You have deposited " + depositAmount + " from your account." + "\n" +
+                "Balance is now: " + getClosingBalance());
     }
 
 }
