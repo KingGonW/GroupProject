@@ -45,6 +45,7 @@ public class BusinessAccount extends BankAcc {
     }
 
     public int getAccountNumber() {
+
         return businessAccountNumber;
     }
 
