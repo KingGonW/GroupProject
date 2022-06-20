@@ -2,41 +2,45 @@ import java.util.Random;
 
 public abstract class BankAcc {
     private int accNum;
-    private double balance;
+    private double openingBalance;
+    private double closingBalance;
     BankAcc ISAAccount;
     private double numberDeposits;
     private double numberWithdrawals;
-    private double transactionHistory;
 
-    public BankAcc(double balance, int accNum){
 
-        this.balance = balance;
-        Random rand= new Random();
+
+    public BankAcc(double openingBalance, double closingBalance, int accNum) {
+        // added opening and closing balance to constructor
+        this.openingBalance = openingBalance;
+        this.closingBalance = closingBalance;
+        Random rand = new Random();
         int nextNum = this.accNum;
-        this.accNum= rand.nextInt(99999999);
-        if (this.accNum == nextNum)
-        {
+        this.accNum = rand.nextInt(99999999);
+        if (this.accNum == nextNum) {
             this.accNum = rand.nextInt(99999999);
         }
     }
 
-    public double getBalance() {
-        return balance;
+    public double getOpeningBalance() {
+        return openingBalance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public void setOpeningBalance(double openingBalance) {
+        this.openingBalance = openingBalance;
     }
+
+    public double getClosingBalance() {
+        return closingBalance;
+    }
+
+    public void setClosingBalance(double closingBalance) {
+        this.closingBalance = closingBalance;
+    }
+    
 
     public double getAccNum() {
         return accNum;
-    }
-    public double getTransactionHistory() {
-        return transactionHistory;
-    }
-
-    public void setTransactionHistory(double transactionHistory) {
-        this.transactionHistory = transactionHistory;
     }
 
 
@@ -57,60 +61,65 @@ public abstract class BankAcc {
     }
 
 
-
     public void depositMoney(double depositAmount) {
         System.out.println("Please enter the amount you want to deposit: ");
-        this.balance += depositAmount;
+        //sets closing balance to balance after deposit was made
+        setClosingBalance(openingBalance += depositAmount);
+        //new opening balance is the last closing balance amount
+        setOpeningBalance(getClosingBalance());
         this.numberDeposits++; // increment number of deposits each time one is made
 
     }
 
     public void withdrawMoney(double withdrawAmount) {
 
-        if(balance < withdrawAmount) {
+        if (openingBalance < withdrawAmount) {
             System.out.println("Insufficient Funds. \n Please Deposit an Amount.");
-        }
-        else {
-            balance -= withdrawAmount;
+        } else {
+            setClosingBalance(openingBalance -= withdrawAmount);
+            setOpeningBalance(closingBalance);
             numberWithdrawals++; // increment number of withdrawals made each time money is withdrawn
 
         }
 
-        //NB ISA accounts can't go below 100, so some logic above to check for an ISA account is needed
     }
-//display all bank accounts
-    //ask user to input two numbers from account
-    //ask user two numbers to account
-    //ask user to input amount of money
-    public void moneyTransfer(BankAcc fromAccount, BankAcc toAccount, double amountToTransfer){
+
+    public void moneyTransfer(BankAcc fromAccount, BankAcc toAccount, double amountToTransfer) {
+
         if (fromAccount == ISAAccount) {
-           //not sure how to validate withdrawal will go under 100
-           if(ISAAccount.getBalance() - amountToTransfer < 100) {
-               System.out.println("Your transfer will make your new balance less than 100 +" +
-                       "please keep 100 and above at all times");
-               return;
-           }
+            if (ISAAccount.getOpeningBalance() - amountToTransfer < 100) {
+                System.out.println("Your transfer will make your new openingBalance less than 100 +" +
+                        "please keep 100 and above at all times");
+                return;
+            }
         }
-        if(fromAccount.balance > amountToTransfer) {
-            toAccount.setBalance(toAccount.balance += amountToTransfer);
-           fromAccount.setBalance(balance -= amountToTransfer);
+        if (fromAccount.openingBalance > amountToTransfer) {
+            //sets the receivers closing balance to include new deposit
+            toAccount.setClosingBalance(toAccount.openingBalance += amountToTransfer);
+            // new opening balance of receiver is last closing balance amount
+            toAccount.setOpeningBalance(closingBalance);
+
+            //sets the senders closing balance to include withdrawal made
+            fromAccount.setClosingBalance(fromAccount.openingBalance -= amountToTransfer);
+            //sets senders opening to reflect closing balance
+            fromAccount.setOpeningBalance(closingBalance);
             System.out.println("Funds successfully .");
         } else {
-            System.out.println("Insufficient funds.");
+            System.out.println("Insufficient Funds, Transfer Unsuccessful");
         }
-    }
-    //NB need to put in BankAcc toSort, preferable generated by the user, which allows us to designate the destination account
-    //NB As above with the BankAcc toAccount, i.e. get is from the user typing.
+// worth adding a try catch here for transferring between accounts
 
     /*
     https://codereview.stackexchange.com/questions/259695/simple-bank-application-in-java
 */
 
-    public void transactionHistory() {
-        this.numberWithdrawals = 0;
-        this.numberWithdrawals = 0;
+
     }
 
+    public void transactionHistory() {
+        this.numberWithdrawals = 0;
+        this.numberDeposits = 0;
+    }
 
 }
 
