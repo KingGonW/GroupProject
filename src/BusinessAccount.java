@@ -15,7 +15,7 @@ public class BusinessAccount extends BankAcc {
         this.businessAccountNumber = accNum;
         this.CreationDate = LocalDate.now();
         /*this.setBalance(initialDeposit);
-        if(initialDeposit <= 100) {
+        if(initialDeposit < 25) {
             System.out.println("must deposit 25 or more to create an Business account");
         }*/
     }
@@ -39,12 +39,12 @@ public class BusinessAccount extends BankAcc {
                     "Your Balance is now: " + this.balance);
         }
     }
-    public String getSortCode() {
+    public String getBusinessSortCode() {
 
         return businessSortCode;
     }
 
-    public int getAccountNumber() {
+    public int getBusinessAccountNumber() {
 
         return businessAccountNumber;
     }

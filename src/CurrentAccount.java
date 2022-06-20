@@ -9,12 +9,12 @@ public class CurrentAccount extends BankAcc{
         this.currentAccountNumber = accNum;
     }
 
-    public String getSortCode() {
+    public String getCurrentSortCode() {
 
         return currentSortCode;
     }
 
-    public int getAccountNumber() {
+    public int getCurrentAccountNumber() {
         return currentAccountNumber;
     }
 

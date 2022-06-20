@@ -24,12 +24,12 @@ public class ISAAccount extends BankAcc {
     }
 
 
-    public String getSortCode() {
+    public String getISAsortCode() {
 
         return ISAsortCode;
     }
 
-    public int accountNumber() {
+    public int getISAAccountNumber() {
         return ISAAccountNumber;
     }
 
