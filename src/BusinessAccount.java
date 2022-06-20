@@ -8,7 +8,6 @@ public class BusinessAccount extends BankAcc {
     private double balance;
     private double subscription;
     private double afterSub;
-
     private LocalDate CreationDate;
 
     public BusinessAccount(double balance, int accNum) {
@@ -46,6 +45,7 @@ public class BusinessAccount extends BankAcc {
     }
 
     public int getAccountNumber() {
+
         return businessAccountNumber;
     }
 
