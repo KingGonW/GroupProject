@@ -10,12 +10,24 @@ public class Main {
     public static void main(String[] args) {
         customers = new ArrayList<>();
         // temporary created to test the app
-        customers.add(new Customer("Mohsen","-","Mohsen@gmail.com", "999999999"));
-        customers.add(new Customer("King","-","King@gmail.com", "999999999"));
-        customers.add(new Customer("Tamara","-","Tamara@gmail.com", "999999999"));
-        customers.add(new Customer("Andy","-","Andy@gmail.com", "999999999"));
+        validCustomer(new Customer("Mohsen","-","mohsen@gmail.com", "999999999"));
+        validCustomer(new Customer("King","-","king@gmail.com", "999999999"));
+        validCustomer(new Customer("Tamara","-","tamara@gmail.com", "999999999"));
+        validCustomer(new Customer("Andy","-","andy@gmail.com", "999999999"));
+
 
         mainMenu();
+    }
+
+    public static void validCustomer(Customer customer){
+        Customer temp = customer;
+        for (int i = 0; i < customers.size(); i++) {
+            if(customers.get(i).getEmailAddress().equals(customer.getEmailAddress())) {
+                System.out.println("ERROR: This email address is already exist");
+                return ;
+            }
+        }
+        customers.add(temp);
     }
 
     public static void mainMenu(){
@@ -46,7 +58,7 @@ public class Main {
 
         private static void adminMenu() {
             System.out.println("ADMIN MANU\nPlease select an option ... ");
-            System.out.println("1.All customers\n2.find a Customer\n3.delete a customer\n4.Transfer money\n5.Exit to main menu");
+            System.out.println("1.All customers // 2.find a Customer // 3.delete a customer // 4.Transfer money // 5.Exit to main menu");
 
             do {
                 input = scanner.next();
@@ -80,7 +92,7 @@ public class Main {
 
     private static void customerMenu() {
             System.out.println("CUSTOMER MANU\nPlease select an option ... ");
-            System.out.println("1.Register\n2.Login\n3.Help\n4.Exit to main menu");
+            System.out.println("1.Register 2.Login 3.Help 4.Exit to main menu");
             do {
                 input = scanner.next();
                 switch (input) {
@@ -104,6 +116,8 @@ public class Main {
             } while (!input.equals("4"));
 
         }
+
+
 
         public static void deleteCustomer(){
             System.out.println("Please enter the customer ID");
@@ -146,11 +160,11 @@ public class Main {
             String tempEmailAddress = scanner.next();
             System.out.println("Please enter your phone number:");
             String tempPhone = scanner.next();
-            customers.add(new Customer(tempName,tempLastName,tempEmailAddress,tempPhone));
+            validCustomer(new Customer(tempName,tempLastName,tempEmailAddress,tempPhone));
             customerMenu();
         }
 
-        public static long validation(){
+        public static long loginValidation(){
             System.out.println("Please enter your name ");
             String cusName = scanner.next();
             for (int i = 0; i < customers.size(); i++){
@@ -162,7 +176,7 @@ public class Main {
             return 0;
         }
         public static void customerLogin(){
-            if(validation() != 0){
+            if(loginValidation() != 0){
                 yourBank();
             }
              else
@@ -173,7 +187,7 @@ public class Main {
 
         public static void yourBank(){
             System.out.println("BANK MANU\nPlease select an option ... ");
-            System.out.println("1.create a new Bank account\n2.list of the current accounts\n3.Exit to main menu");
+            System.out.println("1.create a new Bank account // 2.list of the current accounts // 3.Exit to main menu");
             do {
                 input = scanner.next();
                 switch (input) {

@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.UUID;
 import java.util.regex.Pattern;
 
 public class Customer {
@@ -12,12 +13,16 @@ public class Customer {
     private String emailAddress;
     private String phoneNumber;
 
+    private static long counter = 0;
+
     private ArrayList<BankAcc> bankAccounts;
 
+    public Customer() {
+        setId(generateUniqueId());
+    }
 
     public Customer(String name, String lastName, String emailAddress, String phoneNumber) {
-        Random random = new Random();
-        setId(random.nextLong(100));
+        setId(generateUniqueId());
         setEmailAddress(emailAddress);
         setName(name);
         setLastName(lastName);
@@ -26,12 +31,18 @@ public class Customer {
     }
 
 
+
     public boolean checkISAAcc(Object obj) {
         if (obj != null) {
             System.out.println("You  already have an ISA Account");
             return false;
         } else
             return true;
+    }
+
+    public long generateUniqueId() {
+        counter++;
+        return counter;
     }
 
     public Customer findCustomer(int id, Customer[] customers) {
@@ -76,7 +87,7 @@ public class Customer {
     }
 
     public void setEmailAddress(String emailAddress) {
-       // System.out.println("Please enter your email address using one of the following email providers : gmail,hotmail,outlook");
+        // System.out.println("Please enter your email address using one of the following email providers : gmail,hotmail,outlook");
         if (emailAddress.contains("@gmail.com") || emailAddress.contains("@outlook.com") || emailAddress.contains("@hotmail.com")) //add email endings
             this.emailAddress = emailAddress;
         else {
@@ -109,9 +120,9 @@ public class Customer {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Customer ID:" + id + " Customer Name: " +
-                name +" Customer lastName: " + lastName + " Customer Email: " + emailAddress +
+                name + " Customer lastName: " + lastName + " Customer Email: " + emailAddress +
                 " Customer Phone Number: " + name;
     }
 
