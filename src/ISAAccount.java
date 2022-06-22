@@ -34,6 +34,8 @@ public class ISAAccount extends BankAcc {
     }
 
 
+    //I think the withdraw below can be folded into the BankAcc parent class method, with an if/else targetting ISA.
+    // Method morphology etc.
     public void withdraw(double withdrawAmount) {
         //override withdraw method from BankAcc class
         if (super.getOpeningBalance() - withdrawAmount < 100) {
@@ -47,6 +49,8 @@ public class ISAAccount extends BankAcc {
         }
     }
 
+
+    //Why is there a separate deposit()?
     public void deposit(double depositAmount) {  //override deposit method from BankAcc class
         super.depositMoney(depositAmount);
         System.out.println("You have deposited " + depositAmount + " from your account." + "\n" +
