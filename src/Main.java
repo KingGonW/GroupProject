@@ -241,6 +241,7 @@ public class Main {
         System.out.println("Choose an Option");
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer");
     }
+
     //renamed the below, so we don't confuse the use of the word "current"
     private static void customerAccounts() {
 
