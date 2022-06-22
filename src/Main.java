@@ -207,7 +207,7 @@ public class Main {
         }
     private static void createNewBankAccount() {
         System.out.println("Choose an account to create");
-        System.out.println(" 1.Current Account \n 2.Business Account \n 3. ISA Account \n 4.Exit to Customer");
+        System.out.println(" 1.Current Account \n 2.Business Account \n 3. ISA Account \n 4.Exit to Customer Menu");
         do {
             input = scanner.next();
             switch (input) {
@@ -230,15 +230,15 @@ public class Main {
     }
     public static void CurrentAccount(){
         System.out.println("Choose an Option");
-        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
     }
     public static void BusinessAccount(){
         System.out.println("Choose an Option");
-        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
     }
     public static void ISAAccount(){
         System.out.println("Choose an Option");
-        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
     }
 
     //renamed the below, so we don't confuse the use of the word "current"
