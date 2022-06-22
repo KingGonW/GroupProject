@@ -187,7 +187,7 @@ public class Main {
 
         public static void yourBank(){
             System.out.println("BANK MENU\nPlease select an option ... ");
-            System.out.println("1.create a new Bank account // 2.list of the current accounts // 3.Exit to main menu");
+            System.out.println(" 1.Create a new Bank account \n 2.See Your accounts \n 3.Exit to main menu");
             do {
                 input = scanner.next();
                 switch (input) {
@@ -195,7 +195,7 @@ public class Main {
                         createNewBankAccount();
                         break;
                     case "2":
-                        currentBankAccounts();
+                        customerAccounts();
                         break;
                     default:
                         if (!input.equals("3")) {
@@ -209,7 +209,9 @@ public class Main {
     private static void createNewBankAccount() {
 
     }
-    private static void currentBankAccounts() {
+
+    //renamed the below, so we don't confuse the use of the word "current"
+    private static void customerAccounts() {
 
     }
 
