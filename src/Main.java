@@ -199,9 +199,8 @@ public class Main {
                         break;
                     default:
                         if (!input.equals("3")) {
-                            if (!input.equals("3")){
-                                System.out.println("Please enter a valid number");
-                                customerMenu();}
+                            System.out.println("Please enter a valid number");
+                            customerMenu();
                         }break;
                 }
             } while (!input.equals("3"));
