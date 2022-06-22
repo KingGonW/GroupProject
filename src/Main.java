@@ -207,9 +207,40 @@ public class Main {
             } while (!input.equals("3"));
         }
     private static void createNewBankAccount() {
-
+        System.out.println("Choose an account to create");
+        System.out.println(" 1.Current Account \n 2.Business Account \n 3. ISA Account \n 4.Exit to Customer");
+        do {
+            input = scanner.next();
+            switch (input) {
+                case "1":
+                    CurrentAccount();
+                    break;
+                case "2":
+                    BusinessAccount();
+                    break;
+                case "3":
+                    ISAAccount();
+                    break;
+                default:
+                    if (!input.equals("4")) {
+                        System.out.println("Please enter a valid number");
+                        customerMenu();
+                    }break;
+            }
+        } while (!input.equals("4"));
     }
-
+    public static void CurrentAccount(){
+        System.out.println("Choose an Option");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer");
+    }
+    public static void BusinessAccount(){
+        System.out.println("Choose an Option");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer");
+    }
+    public static void ISAAccount(){
+        System.out.println("Choose an Option");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer");
+    }
     //renamed the below, so we don't confuse the use of the word "current"
     private static void customerAccounts() {
 
