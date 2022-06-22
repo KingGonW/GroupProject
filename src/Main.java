@@ -31,7 +31,7 @@ public class Main {
     }
 
     public static void mainMenu(){
-        System.out.println("MAIN MANU\nPlease select an option ... ");
+        System.out.println("MAIN MENU\nPlease select an option ... ");
 
         do {
             System.out.println("1.Admin\n2.Customer\n3.Exit");
@@ -57,8 +57,8 @@ public class Main {
     //add feature to allow admin to create accounts for customers.
 
         private static void adminMenu() {
-            System.out.println("ADMIN MANU\nPlease select an option ... ");
-            System.out.println("1.All customers // 2.find a Customer // 3.delete a customer // 4.Transfer money // 5.Exit to main menu");
+            System.out.println("ADMIN MENU\nPlease select an option ... ");
+            System.out.println(" 1.All customers \n 2.find a Customer \n 3.delete a customer \n 4.Transfer money \n 5.Exit to main menu");
 
             do {
                 input = scanner.next();
@@ -91,8 +91,8 @@ public class Main {
     }
 
     private static void customerMenu() {
-            System.out.println("CUSTOMER MANU\nPlease select an option ... ");
-            System.out.println("1.Register 2.Login 3.Help 4.Exit to main menu");
+            System.out.println("CUSTOMER MENU\nPlease select an option ... ");
+            System.out.println(" 1.Register \n 2.Login \n 3.Help \n 4.Exit to main menu");
             do {
                 input = scanner.next();
                 switch (input) {
@@ -186,8 +186,8 @@ public class Main {
         }
 
         public static void yourBank(){
-            System.out.println("BANK MANU\nPlease select an option ... ");
-            System.out.println("1.create a new Bank account // 2.list of the current accounts // 3.Exit to main menu");
+            System.out.println("BANK MENU\nPlease select an option ... ");
+            System.out.println(" 1.Create a new Bank account \n 2.See Your accounts \n 3.Exit to main menu");
             do {
                 input = scanner.next();
                 switch (input) {
@@ -195,7 +195,7 @@ public class Main {
                         createNewBankAccount();
                         break;
                     case "2":
-                        currentBankAccounts();
+                        customerAccounts();
                         break;
                     default:
                         if (!input.equals("3")) {
@@ -209,7 +209,9 @@ public class Main {
     private static void createNewBankAccount() {
 
     }
-    private static void currentBankAccounts() {
+
+    //renamed the below, so we don't confuse the use of the word "current"
+    private static void customerAccounts() {
 
     }
 
