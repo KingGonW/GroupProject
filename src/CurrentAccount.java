@@ -4,9 +4,9 @@ public class CurrentAccount extends BankAcc{
     public static String currentSortCode = "00-04-01";
     private int currentAccountNumber;
 
-    public CurrentAccount(double openingBalance, double closingBalance, int accNum) {
-        super(openingBalance, closingBalance, accNum,accountType,currentSortCode);
-        this.currentAccountNumber = accNum;
+    public CurrentAccount() {
+        super(accountType,currentSortCode);
+        super.getAccNum();
     }
 
     public String getCurrentSortCode() {

@@ -30,7 +30,7 @@ public class BankAcc {
 
     BankAcc(){}
 
-    public BankAcc(double openingBalance, double closingBalance, int accNum,String accType,String sortCode) {
+    public BankAcc(String accType,String sortCode) {
         this.accType = accType;
         this.sortCode = sortCode;
         // added opening and closing balance to constructor

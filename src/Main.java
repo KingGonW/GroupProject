@@ -221,7 +221,7 @@ public class Main {
 
     public static void customerLogin() {
         if (loginValidation() != 0) {
-            yourBank();
+            yourBank(loginValidation());
         } else {
             System.out.println("Please enter a valid name ");
             customerMenu();
@@ -229,14 +229,14 @@ public class Main {
 
     }
 
-    public static void yourBank() {
+    public static void yourBank(long customerNumber) {
         System.out.println("BANK MENU\nPlease select an option ... ");
         System.out.println(" 1.Create a new Bank account \n 2.See Your accounts \n 3.Exit to main menu");
         do {
             input = scanner.next();
             switch (input) {
                 case "1":
-                    createNewBankAccount();
+                    createNewBankAccount(customerNumber);
                     break;
                 case "2":
                     customerAccounts();
@@ -251,14 +251,14 @@ public class Main {
         } while (!input.equals("3"));
     }
 
-    private static void createNewBankAccount() {
+    private static void createNewBankAccount(long customerNumber) {
         System.out.println("Choose an account to create");
         System.out.println(" 1.Current Account \n 2.Business Account \n 3. ISA Account \n 4.Exit to Customer Menu");
         do {
             input = scanner.next();
             switch (input) {
                 case "1":
-                    CurrentAccount();
+                    CurrentAccount(customerNumber);
                     break;
                 case "2":
                     BusinessAccount();
@@ -276,8 +276,10 @@ public class Main {
         } while (!input.equals("4"));
     }
 
-    public static void CurrentAccount() {
+    public static void CurrentAccount(Long customerNumber) {
         BankAcc currentAcc = new CurrentAccount();
+        int customerNumberInInt = customerNumber.intValue();
+        customers.get(customerNumberInInt).getBankAccounts().add(currentAcc);
         System.out.println("Choose an Option");
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
     }
