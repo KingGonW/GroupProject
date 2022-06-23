@@ -14,6 +14,7 @@ public class CurrentAccount extends BankAcc{
         this.currentAccountNumber = currentAccountNumber;
     }
 
+    @Override
     public String toString() {
         return "Account Type:" + accountType + " Sort Code: " +
                 currentSortCode + " Account Number: " + currentAccountNumber;
