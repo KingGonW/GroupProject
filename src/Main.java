@@ -239,7 +239,7 @@ public class Main {
                     createNewBankAccount(customerNumber);
                     break;
                 case "2":
-                    customerAccounts();
+                    customerAccounts(customerNumber);
                     break;
                 default:
                     if (!input.equals("3")) {
@@ -304,10 +304,29 @@ public class Main {
     }
 
     //renamed the below, so we don't confuse the use of the word "current"
-    private static void customerAccounts() {
+    private static void customerAccounts(long customerNumber) {
         System.out.println("Choose the account to view");
-        System.out.println(" 1.Current Account \n 2.Business Account \n 3. ISA Account \n 4.Exit to Customer Menu");
-
+        System.out.println(" 1.Current Account \n 2.Business Account \n 3.ISA Account \n 4.Exit to Customer Menu");
+        do {
+            input = scanner.next();
+            switch (input) {
+                case "1":
+                    CurrentAccount(customerNumber);
+                    break;
+                case "2":
+                    BusinessAccount(customerNumber);
+                    break;
+                case "3":
+                    ISAAccount(customerNumber);
+                    break;
+                default:
+                    if (!input.equals("4")) {
+                        System.out.println("Please enter a valid number");
+                        customerMenu();
+                    }
+                    break;
+            }
+        } while (!input.equals("4"));
     }
 
 
