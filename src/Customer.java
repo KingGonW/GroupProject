@@ -15,14 +15,15 @@ public class Customer {
 
     private static long counter = 0;
 
+    private BankAcc currentBankAcc;
     private ArrayList<BankAcc> bankAccounts;
 
 
     public Customer() {
-        setId(generateUniqueId());
     }
 
     public Customer(String name, String lastName, String emailAddress, String phoneNumber) {
+        currentBankAcc = new BankAcc();
         setId(generateUniqueId());
         setEmailAddress(emailAddress);
         setName(name);
@@ -72,6 +73,9 @@ public class Customer {
         }
     }
 
+
+
+
     public long getId() {
         return id;
     }
@@ -87,6 +91,14 @@ public class Customer {
     public void setName(String name) {
         if (!name.isEmpty())
             this.name = name;
+    }
+
+    public BankAcc getCurrentBankAcc() {
+        return currentBankAcc;
+    }
+
+    public void setCurrentBankAcc(BankAcc currentBankAcc) {
+        this.currentBankAcc = currentBankAcc;
     }
 
     public String getLastName() {

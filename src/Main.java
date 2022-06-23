@@ -5,9 +5,11 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
     private static String input;
     private static ArrayList<Customer> customers;
+    private static Customer currentAccount;
 
     public static void main(String[] args) {
         customers = new ArrayList<>();
+        currentAccount = new Customer();
         // temporary created to test the app
         validCustomer(new Customer("Mohsen", "-", "mohsen@gmail.com", "999999999"));
         validCustomer(new Customer("King", "-", "king@gmail.com", "999999999"));
@@ -67,7 +69,10 @@ public class Main {
                     findAllCustomers();
                     break;
                 case "2":
-                    findCustomer();
+                    System.out.println("Please enter the customer ID");
+                    Long cusID = scanner.nextLong();
+                    findCustomer(cusID);
+                    adminMenu();
                     break;
                 case "3":
                     deleteCustomer();
@@ -88,6 +93,7 @@ public class Main {
     }
 
     private static void transferMoney() {
+        findAllCustomers();
         System.out.println("Please enter the customer number that you would to transfer from ...");
         String tempCus1 = scanner.next();
         int cus1 = Integer.parseInt(tempCus1);
@@ -104,10 +110,25 @@ public class Main {
         int acc2 = Integer.parseInt(tempAcc1);
         System.out.println("please enter the the amount of money  ....");
         String tempAmount = scanner.next();
-        int amount = Integer.parseInt(tempAcc1);
-
+        double amount = Double.parseDouble(tempAcc1);
+        currentAccount.getCurrentBankAcc().moneyTransfer(getAnAccountNumber(cus1,acc1), getAnAccountNumber(cus2,acc2), amount);
 
     }
+
+
+    public static BankAcc getAnAccountNumber(int customerId, int accNumber) {
+        Long tempLong = Long.valueOf(customerId);
+        Customer temp = findCustomer(tempLong);
+        for (int i = 0; i < temp.getBankAccounts().size(); i++) {
+            if (temp.getBankAccounts().get(i).getAccNum() == accNumber)
+                return temp.getBankAccounts().get(i);
+        }
+
+        System.out.println("Cant find the the Account ");
+        return null;
+
+    }
+
 
     private static void customerMenu() {
         System.out.println("CUSTOMER MENU\nPlease select an option ... ");
@@ -161,17 +182,16 @@ public class Main {
         adminMenu();
     }
 
-    public static void findCustomer() {
-        System.out.println("Please enter the customer ID");
-        Long cusID = scanner.nextLong();
+    public static Customer findCustomer(Long customerID) {
+
         for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getId() == cusID) {
+            if (customers.get(i).getId() == customerID) {
                 System.out.println(customers.get(i).toString());
-                adminMenu();
+                return customers.get(i);
             }
         }
         System.out.println("====> Customer does not exist");
-        adminMenu();
+        return null;
     }
 
     public static void newCustomer() {

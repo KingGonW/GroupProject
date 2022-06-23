@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public abstract class BankAcc {
+public class BankAcc {
     private int accNum;
     private double openingBalance;
     private double closingBalance;
@@ -27,6 +27,8 @@ public abstract class BankAcc {
     public void setAccType(String accType) {
         this.accType = accType;
     }
+
+    BankAcc(){}
 
     public BankAcc(double openingBalance, double closingBalance, int accNum,String accType,String sortCode) {
         this.accType = accType;
@@ -59,7 +61,7 @@ public abstract class BankAcc {
     }
 
 
-    public double getAccNum() {
+    public int getAccNum() {
         return accNum;
     }
 
