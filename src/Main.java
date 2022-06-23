@@ -280,6 +280,7 @@ public class Main {
         BankAcc currentAcc = new CurrentAccount();
         int customerNumberInInt = customerNumber.intValue();
         customers.get(customerNumberInInt).getBankAccounts().add(currentAcc);
+        customers.get(customerNumberInInt).getListOfBankAccounts();
         System.out.println("Choose an Option");
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
     }
