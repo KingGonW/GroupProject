@@ -111,12 +111,12 @@ public class Main {
         System.out.println("please enter the the amount of money  ....");
         String tempAmount = scanner.next();
         double amount = Double.parseDouble(tempAcc1);
-        currentAccount.getCurrentBankAcc().moneyTransfer(getAnAccountNumber(cus1,acc1), getAnAccountNumber(cus2,acc2), amount);
+        currentAccount.getCurrentBankAcc().moneyTransfer(getTheAccountNumber(cus1,acc1), getTheAccountNumber(cus2,acc2), amount);
 
     }
 
 
-    public static BankAcc getAnAccountNumber(int customerId, int accNumber) {
+    public static BankAcc getTheAccountNumber(int customerId, int accNumber) {
         Long tempLong = Long.valueOf(customerId);
         Customer temp = findCustomer(tempLong);
         for (int i = 0; i < temp.getBankAccounts().size(); i++) {
@@ -277,6 +277,7 @@ public class Main {
     }
 
     public static void CurrentAccount() {
+        BankAcc currentAcc = new CurrentAccount();
         System.out.println("Choose an Option");
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
     }
