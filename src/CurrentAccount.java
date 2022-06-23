@@ -7,17 +7,19 @@ public class CurrentAccount extends BankAcc{
     public CurrentAccount() {
         super(accountType,currentSortCode);
         super.getAccNum();
+        setCurrentAccountNumber(super.getAccNum());
     }
 
-    public String getCurrentSortCode() {
-
-        return currentSortCode;
+    public void setCurrentAccountNumber(int currentAccountNumber) {
+        this.currentAccountNumber = currentAccountNumber;
     }
 
-    public int getCurrentAccountNumber() {
-        return currentAccountNumber;
-    }
+    public String toString() {
+        return "Account Type:" + accountType + " Sort Code: " +
+                currentSortCode + " Account Number: " + currentAccountNumber;
 
+
+    }
 
     //commenting out below as seems unneeded
     //public void withdraw(double withdrawAmount) {
