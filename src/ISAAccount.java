@@ -7,9 +7,9 @@ public class ISAAccount extends BankAcc {
     private double yearlyInterest;
 
 
-    public ISAAccount(double openingBalance, double closingBalance, int accNum) {
+    public ISAAccount() {
      //   super(openingBalance, closingBalance, accNum,accountType,ISAsortCode);
-        this.ISAAccountNumber = accNum;
+        setISAAccountNumber(super.getAccNum());
         /*this.setBalance(initialDeposit);
         if(initialDeposit >= 100) {
             this.setInterest(0.02);
@@ -24,15 +24,9 @@ public class ISAAccount extends BankAcc {
     }
 
 
-    public String getISAsortCode() {
-
-        return ISAsortCode;
+    public void setISAAccountNumber(int ISAAccountNumber) {
+        this.ISAAccountNumber = ISAAccountNumber;
     }
-
-    public int getISAAccountNumber() {
-        return ISAAccountNumber;
-    }
-
 
     //I think the withdraw below can be folded into the BankAcc parent class method, with an if/else targetting ISA.
     // Method morphology etc.
@@ -73,7 +67,7 @@ public class ISAAccount extends BankAcc {
     @Override
     public String toString() {
         return "Account Type:" + accountType + " Sort Code: " +
-                this.getISAsortCode() + " Account Number: " + this.getISAAccountNumber() +
+                ISAsortCode + " Account Number: " + ISAAccountNumber +
                 " Interest Rate: " + this.getInterestRate() + "%%";
 
 
