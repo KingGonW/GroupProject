@@ -1,9 +1,6 @@
 
 
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.UUID;
-import java.util.regex.Pattern;
 
 public class Customer {
 
@@ -64,7 +61,7 @@ public class Customer {
         this.bankAccounts = bankAccounts;
     }
 
-    public void getListofBankAccounts() {
+    public void getListOfBankAccounts() {
         for (int i = 0; i < bankAccounts.size(); i++) {
             System.out.println("Account type : " + bankAccounts.get(i).getAccType() + " Account number : "
                     + bankAccounts.get(i).getAccNum() +

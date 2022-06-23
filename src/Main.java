@@ -97,14 +97,14 @@ public class Main {
         System.out.println("Please enter the customer number that you would to transfer from ...");
         String tempCus1 = scanner.next();
         int cus1 = Integer.parseInt(tempCus1);
-        customers.get(cus1).getListofBankAccounts();
+        customers.get(cus1).getListOfBankAccounts();
         System.out.println("please enter the account number to transfer from ....");
         String tempAcc1 = scanner.next();
         int acc1 = Integer.parseInt(tempAcc1);
         System.out.println("Please enter the customer number that you would to transfer from ...");
         String tempCus2 = scanner.next();
         int cus2 = Integer.parseInt(tempCus2);
-        customers.get(cus2).getListofBankAccounts();
+        customers.get(cus2).getListOfBankAccounts();
         System.out.println("please enter the account number to transfer from ....");
         String tempAcc2 = scanner.next();
         int acc2 = Integer.parseInt(tempAcc1);
