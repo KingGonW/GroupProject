@@ -239,7 +239,7 @@ public class Main {
                     createNewBankAccount(customerNumber);
                     break;
                 case "2":
-                    customerAccounts(customerNumber);
+                    allCustomerAccounts(customerNumber);
                     break;
                 default:
                     if (!input.equals("3")) {
@@ -251,6 +251,10 @@ public class Main {
         } while (!input.equals("3"));
     }
 
+    private static void allCustomerAccounts(long customerNumber) {
+
+    }
+
     private static void createNewBankAccount(long customerNumber) {
         System.out.println("Choose an account to create");
         System.out.println(" 1.Current Account // 2.Business Account // 3. ISA Account // 4.Exit to Customer Menu");
@@ -258,13 +262,13 @@ public class Main {
             input = scanner.next();
             switch (input) {
                 case "1":
-                    CurrentAccount(customerNumber);
+                    createCurrentAccount(customerNumber);
                     break;
                 case "2":
-                    BusinessAccount(customerNumber);
+                    createBusinessAccount(customerNumber);
                     break;
                 case "3":
-                    ISAAccount(customerNumber);
+                    createISAAccount(customerNumber);
                     break;
                 default:
                     if (!input.equals("4")) {
@@ -276,7 +280,7 @@ public class Main {
         } while (!input.equals("4"));
     }
 
-    public static void CurrentAccount(Long customerNumber) {
+    public static void createCurrentAccount(Long customerNumber) {
         BankAcc currentAcc = new CurrentAccount();
         int customerNumberInInt = customerNumber.intValue();
         customers.get(customerNumberInInt).getBankAccounts().add(currentAcc);
@@ -285,7 +289,7 @@ public class Main {
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
-    public static void BusinessAccount(Long customerNumber) {
+    public static void createBusinessAccount(Long customerNumber) {
         BankAcc businessAcc = new BusinessAccount();
         int customerNumberInInt = customerNumber.intValue();
         //ask user to deposit money to open ISA account
@@ -299,7 +303,7 @@ public class Main {
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
-    public static void ISAAccount(Long customerNumber) {
+    public static void createISAAccount(Long customerNumber) {
         BankAcc ISAAcc = new ISAAccount();
         int customerNumberInInt = customerNumber.intValue();
         customers.get(customerNumberInInt).getBankAccounts().add(ISAAcc);
@@ -309,30 +313,6 @@ public class Main {
     }
 
     //renamed the below, so we don't confuse the use of the word "current"
-    private static void customerAccounts(long customerNumber) {
-        System.out.println("Choose the account to view");
-        System.out.println(" 1.Current Account \n 2.Business Account \n 3.ISA Account \n 4.Exit to Customer Menu");
-        do {
-            input = scanner.next();
-            switch (input) {
-                case "1":
-                    CurrentAccount(customerNumber);
-                    break;
-                case "2":
-                    BusinessAccount(customerNumber);
-                    break;
-                case "3":
-                    ISAAccount(customerNumber);
-                    break;
-                default:
-                    if (!input.equals("4")) {
-                        System.out.println("Please enter a valid number");
-                        customerMenu();
-                    }
-                    break;
-            }
-        } while (!input.equals("4"));
-    }
 
 
 }
