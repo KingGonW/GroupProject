@@ -71,6 +71,8 @@ public abstract class BankAcc {
 
     }
 
+
+    //see comments in ISAAccount. I think nested if/else would work better here to check if account is an ISA
     public void withdrawMoney(double withdrawAmount) {
 
         if (openingBalance < withdrawAmount) {

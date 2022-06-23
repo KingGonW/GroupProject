@@ -31,7 +31,7 @@ public class Main {
     }
 
     public static void mainMenu(){
-        System.out.println("MAIN MANU\nPlease select an option ... ");
+        System.out.println("MAIN MENU\nPlease select an option ... ");
 
         do {
             System.out.println("1.Admin\n2.Customer\n3.Exit");
@@ -57,8 +57,8 @@ public class Main {
     //add feature to allow admin to create accounts for customers.
 
         private static void adminMenu() {
-            System.out.println("ADMIN MANU\nPlease select an option ... ");
-            System.out.println("1.All customers // 2.find a Customer // 3.delete a customer // 4.Transfer money // 5.Exit to main menu");
+            System.out.println("ADMIN MENU\nPlease select an option ... ");
+            System.out.println(" 1.All customers \n 2.find a Customer \n 3.delete a customer \n 4.Transfer money \n 5.Exit to main menu");
 
             do {
                 input = scanner.next();
@@ -85,43 +85,14 @@ public class Main {
             } while (!input.equals("5"));
         }
 
-    private static void getBankAccount(Customer customer) {
+    private static void transferMoney() {
 
-        System.out.println("Please enter customer name");
-        String tempName = scanner.next();
-        for (int i = 0; i < customers.size(); i++){
-            if(customers.get(i).getName().equals(tempName)){
-                System.out.println("====> WELCOME " + tempName );
-            }
-        }
-        System.out.println("1.Register // 2.Login // 3.Help // 4.Exit to main menu");
-        do {
-            input = scanner.next();
-            switch (input) {
-                case "1":
-                    newCustomer();
-                    break;
-                case "2":
-                    customerLogin();
-                    break;
-                case "3":
-                    System.out.println("please call +44123456789 to get help\n---------------------------");
-                    customerMenu();
-                    break;
-                default:
-                    if (!input.equals("4")) {
-                        if (!input.equals("4")){
-                            System.out.println("Please enter a valid number");
-                            customerMenu();}
-                    }break;
-            }
-        } while (!input.equals("4"));
 
     }
 
     private static void customerMenu() {
-            System.out.println("CUSTOMER MANU\nPlease select an option ... ");
-            System.out.println("1.Register // 2.Login // 3.Help // 4.Exit to main menu");
+            System.out.println("CUSTOMER MENU\nPlease select an option ... ");
+            System.out.println(" 1.Register \n 2.Login \n 3.Help \n 4.Exit to main menu");
             do {
                 input = scanner.next();
                 switch (input) {
@@ -215,8 +186,8 @@ public class Main {
         }
 
         public static void yourBank(){
-            System.out.println("BANK MANU\nPlease select an option ... ");
-            System.out.println("1.create a new Bank account // 2.list of the current accounts // 3.Exit to main menu");
+            System.out.println("BANK MENU\nPlease select an option ... ");
+            System.out.println(" 1.Create a new Bank account \n 2.See Your accounts \n 3.Exit to main menu");
             do {
                 input = scanner.next();
                 switch (input) {
@@ -224,21 +195,54 @@ public class Main {
                         createNewBankAccount();
                         break;
                     case "2":
-                        currentBankAccounts();
+                        customerAccounts();
                         break;
                     default:
                         if (!input.equals("3")) {
-                            if (!input.equals("3")){
-                                System.out.println("Please enter a valid number");
-                                customerMenu();}
+                            System.out.println("Please enter a valid number");
+                            customerMenu();
                         }break;
                 }
             } while (!input.equals("3"));
         }
     private static void createNewBankAccount() {
-
+        System.out.println("Choose an account to create");
+        System.out.println(" 1.Current Account \n 2.Business Account \n 3. ISA Account \n 4.Exit to Customer Menu");
+        do {
+            input = scanner.next();
+            switch (input) {
+                case "1":
+                    CurrentAccount();
+                    break;
+                case "2":
+                    BusinessAccount();
+                    break;
+                case "3":
+                    ISAAccount();
+                    break;
+                default:
+                    if (!input.equals("4")) {
+                        System.out.println("Please enter a valid number");
+                        customerMenu();
+                    }break;
+            }
+        } while (!input.equals("4"));
     }
-    private static void currentBankAccounts() {
+    public static void CurrentAccount(){
+        System.out.println("Choose an Option");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
+    }
+    public static void BusinessAccount(){
+        System.out.println("Choose an Option");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
+    }
+    public static void ISAAccount(){
+        System.out.println("Choose an Option");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
+    }
+
+    //renamed the below, so we don't confuse the use of the word "current"
+    private static void customerAccounts() {
 
     }
 
