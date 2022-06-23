@@ -8,7 +8,7 @@ public class ISAAccount extends BankAcc {
 
 
     public ISAAccount(double openingBalance, double closingBalance, int accNum) {
-        super(openingBalance, closingBalance, accNum,accountType,ISAsortCode);
+     //   super(openingBalance, closingBalance, accNum,accountType,ISAsortCode);
         this.ISAAccountNumber = accNum;
         /*this.setBalance(initialDeposit);
         if(initialDeposit >= 100) {

@@ -60,7 +60,7 @@ public class Main {
 
     private static void adminMenu() {
         System.out.println("ADMIN MENU\nPlease select an option ... ");
-        System.out.println(" 1.All customers \n 2.find a Customer \n 3.delete a customer \n 4.Transfer money \n 5.Exit to main menu");
+        System.out.println(" 1.All customers // 2.find a Customer // 3.delete a customer // 4.Transfer money // 5.Exit to main menu");
 
         do {
             input = scanner.next();
@@ -132,7 +132,7 @@ public class Main {
 
     private static void customerMenu() {
         System.out.println("CUSTOMER MENU\nPlease select an option ... ");
-        System.out.println(" 1.Register \n 2.Login \n 3.Help \n 4.Exit to main menu");
+        System.out.println(" 1.Register // 2.Login // 3.Help // 4.Exit to main menu");
         do {
             input = scanner.next();
             switch (input) {
@@ -231,7 +231,7 @@ public class Main {
 
     public static void yourBank(long customerNumber) {
         System.out.println("BANK MENU\nPlease select an option ... ");
-        System.out.println(" 1.Create a new Bank account \n 2.See Your accounts \n 3.Exit to main menu");
+        System.out.println(" 1.Create a new Bank account // 2.See Your accounts // 3.Exit to main menu");
         do {
             input = scanner.next();
             switch (input) {
@@ -253,7 +253,7 @@ public class Main {
 
     private static void createNewBankAccount(long customerNumber) {
         System.out.println("Choose an account to create");
-        System.out.println(" 1.Current Account \n 2.Business Account \n 3. ISA Account \n 4.Exit to Customer Menu");
+        System.out.println(" 1.Current Account // 2.Business Account // 3. ISA Account // 4.Exit to Customer Menu");
         do {
             input = scanner.next();
             switch (input) {
