@@ -262,13 +262,13 @@ public class Main {
             input = scanner.next();
             switch (input) {
                 case "1":
-                    CurrentAccount(customerNumber);
+                    createCurrentAccount(customerNumber);
                     break;
                 case "2":
-                    BusinessAccount(customerNumber);
+                    createBusinessAccount(customerNumber);
                     break;
                 case "3":
-                    ISAAccount(customerNumber);
+                    createISAAccount(customerNumber);
                     break;
                 default:
                     if (!input.equals("4")) {
@@ -280,7 +280,7 @@ public class Main {
         } while (!input.equals("4"));
     }
 
-    public static void CurrentAccount(Long customerNumber) {
+    public static void createCurrentAccount(Long customerNumber) {
         BankAcc currentAcc = new CurrentAccount();
         int customerNumberInInt = customerNumber.intValue();
         customers.get(customerNumberInInt).getBankAccounts().add(currentAcc);
@@ -289,7 +289,7 @@ public class Main {
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
-    public static void BusinessAccount(Long customerNumber) {
+    public static void createBusinessAccount(Long customerNumber) {
         BankAcc businessAcc = new BusinessAccount();
         int customerNumberInInt = customerNumber.intValue();
         customers.get(customerNumberInInt).getBankAccounts().add(businessAcc);
@@ -298,7 +298,7 @@ public class Main {
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
-    public static void ISAAccount(Long customerNumber) {
+    public static void createISAAccount(Long customerNumber) {
         BankAcc ISAAcc = new ISAAccount();
         int customerNumberInInt = customerNumber.intValue();
         customers.get(customerNumberInInt).getBankAccounts().add(ISAAcc);
