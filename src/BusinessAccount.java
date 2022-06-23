@@ -2,8 +2,8 @@ import java.time.*;
 
 public class BusinessAccount extends BankAcc {
 
-    private static String accountType = "Business Account";
-    private static String businessSortCode = "12-23-24";
+    public static String accountType = "Business Account";
+    public static String businessSortCode = "12-23-24";
     private int businessAccountNumber;
     private double balance;
     private double subscription;

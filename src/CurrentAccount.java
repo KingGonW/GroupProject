@@ -1,7 +1,7 @@
 public class CurrentAccount extends BankAcc{
 
-    private static String accountType = "Current Account";
-    private static String currentSortCode = "00-04-01";
+    public static String accountType = "Current Account";
+    public static String currentSortCode = "00-04-01";
     private int currentAccountNumber;
 
     public CurrentAccount(double openingBalance, double closingBalance, int accNum) {

@@ -1,7 +1,7 @@
 public class ISAAccount extends BankAcc {
 
-    private static String accountType = "ISA Account";
-    private static String ISAsortCode = "22-66-44";
+    public static String accountType = "ISA Account";
+    public static String ISAsortCode = "22-66-44";
     private final double interestRate = 0.02;
     private int ISAAccountNumber;
     private double yearlyInterest;
