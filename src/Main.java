@@ -261,10 +261,10 @@ public class Main {
                     CurrentAccount(customerNumber);
                     break;
                 case "2":
-                    BusinessAccount();
+                    BusinessAccount(customerNumber);
                     break;
                 case "3":
-                    ISAAccount();
+                    ISAAccount(customerNumber);
                     break;
                 default:
                     if (!input.equals("4")) {
@@ -285,12 +285,20 @@ public class Main {
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
     }
 
-    public static void BusinessAccount() {
+    public static void BusinessAccount(Long customerNumber) {
+        BankAcc businessAcc = new BusinessAccount();
+        int customerNumberInInt = customerNumber.intValue();
+        customers.get(customerNumberInInt).getBankAccounts().add(businessAcc);
+        customers.get(customerNumberInInt).getListOfBankAccounts();
         System.out.println("Choose an Option");
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
     }
 
-    public static void ISAAccount() {
+    public static void ISAAccount(Long customerNumber) {
+        BankAcc ISAAcc = new ISAAccount();
+        int customerNumberInInt = customerNumber.intValue();
+        customers.get(customerNumberInInt).getBankAccounts().add(ISAAcc);
+        customers.get(customerNumberInInt).getListOfBankAccounts();
         System.out.println("Choose an Option");
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
     }
