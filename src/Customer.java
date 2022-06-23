@@ -63,9 +63,9 @@ public class Customer {
 
     public void getListOfBankAccounts() {
         for (int i = 0; i < bankAccounts.size(); i++) {
-            System.out.println("Account type : " + bankAccounts.get(i).getAccType() + " Account number : "
+            System.out.println("Account type : " + bankAccounts.get(i).getAccType() + ", Account number : "
                     + bankAccounts.get(i).getAccNum() +
-                    " Sort code : " + bankAccounts.get(i).getSortCode() + "Balance : " + bankAccounts.get(i).getClosingBalance()
+                    ", Sort code : " + bankAccounts.get(i).getSortCode() + ", Balance : " + bankAccounts.get(i).getClosingBalance()
             );
         }
     }

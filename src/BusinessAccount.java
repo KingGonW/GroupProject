@@ -11,7 +11,7 @@ public class BusinessAccount extends BankAcc {
     private LocalDate CreationDate;
 
     public BusinessAccount(double openingBalance, double closingBalance, int accNum) {
-        super(openingBalance, closingBalance, accNum,accountType,businessSortCode);
+      //  super(openingBalance, closingBalance, accNum,accountType,businessSortCode);
         this.businessAccountNumber = accNum;
         this.CreationDate = LocalDate.now();
         /*this.setBalance(initialDeposit);
