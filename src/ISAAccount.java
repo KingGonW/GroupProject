@@ -8,20 +8,13 @@ public class ISAAccount extends BankAcc {
 
 
     public ISAAccount() {
-     //   super(openingBalance, closingBalance, accNum,accountType,ISAsortCode);
         setISAAccountNumber(super.getAccNum());
-        /*this.setBalance(initialDeposit);
-        if(initialDeposit >= 100) {
-            this.setInterest(0.02);
-        }
-        else if(initialDeposit < 100) {
-            System.out.println("must deposit 100 or more to create an ISA account");
-        }*/
+
     }
 
-    public double getInterestRate() {
+    /*public double getInterestRate() {
         return interestRate;
-    }
+    }*/
 
 
     public void setISAAccountNumber(int ISAAccountNumber) {
@@ -32,14 +25,14 @@ public class ISAAccount extends BankAcc {
     @Override
     public void withdrawMoney(double withdrawAmount) {
         //override withdraw method from BankAcc class
-        if (getOpeningBalance() - withdrawAmount < 100) {
+        if (this.getOpeningBalance() - withdrawAmount < 100) {
             System.out.println("Your account balance will be too low, " +
                     "to keep your ISA account, please keep balance over 100");
             System.out.println("Would you like to deposit money?");
         } else {
             withdrawMoney(withdrawAmount);
             System.out.println("You have withdrawn " + withdrawAmount + " from your account" + "\n" +
-                    "Your Balance is now: " + getClosingBalance());
+                    "Your Balance is now: " + this.getClosingBalance());
         }
     }
 
@@ -62,7 +55,7 @@ public class ISAAccount extends BankAcc {
         return "Account Type:" + accountType + " Sort Code: " +
                 ISAsortCode + " Account Number: " + ISAAccountNumber
                 + " Balance" + super.getClosingBalance() +
-                " Interest Rate: " + getInterestRate() + "%%";
+                " Interest Rate: " + interestRate + "%%";
 
 
     }

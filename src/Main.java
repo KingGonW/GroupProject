@@ -288,6 +288,11 @@ public class Main {
     public static void BusinessAccount(Long customerNumber) {
         BankAcc businessAcc = new BusinessAccount();
         int customerNumberInInt = customerNumber.intValue();
+        //ask user to deposit money to open ISA account
+        //check if balance is less than 100, if yes
+        //prompt user to make balance 100
+        //only then when balance = 100 or more
+        //add the created account to customer array
         customers.get(customerNumberInInt).getBankAccounts().add(businessAcc);
         customers.get(customerNumberInInt).getListOfBankAccounts();
         System.out.println("Choose an Option");
