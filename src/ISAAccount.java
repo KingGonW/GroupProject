@@ -28,34 +28,27 @@ public class ISAAccount extends BankAcc {
         this.ISAAccountNumber = ISAAccountNumber;
     }
 
-    //I think the withdraw below can be folded into the BankAcc parent class method, with an if/else targetting ISA.
-    // Method morphology etc.
-    public void withdraw(double withdrawAmount) {
+  //overriding parent class method
+    @Override
+    public void withdrawMoney(double withdrawAmount) {
         //override withdraw method from BankAcc class
-        if (super.getOpeningBalance() - withdrawAmount < 100) {
+        if (getOpeningBalance() - withdrawAmount < 100) {
             System.out.println("Your account balance will be too low, " +
                     "to keep your ISA account, please keep balance over 100");
             System.out.println("Would you like to deposit money?");
         } else {
-            super.withdrawMoney(withdrawAmount);
+            withdrawMoney(withdrawAmount);
             System.out.println("You have withdrawn " + withdrawAmount + " from your account" + "\n" +
                     "Your Balance is now: " + getClosingBalance());
         }
     }
 
+//removed deposit method
 
-    //Why is there a separate deposit()?
-    public void deposit(double depositAmount) {  //override deposit method from BankAcc class
-        super.depositMoney(depositAmount);
-        System.out.println("You have deposited " + depositAmount + " from your account." + "\n" +
-                "Balance is now: " + getClosingBalance());
-    }
-
-
-    public void calcInterest() // method to calculate interest on customers most recent balance
+    public void calcInterest() // method to calculate interest on customers yearly balance
     {
 
-        yearlyInterest = (1 + (interestRate * 1));
+        yearlyInterest = (1 + (interestRate));
         yearlyInterest = getClosingBalance() * yearlyInterest;
         setClosingBalance(yearlyInterest);
         System.out.print("Interest accumulated on your balance is: " +
