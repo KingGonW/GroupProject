@@ -31,7 +31,7 @@ public class BusinessAccount extends BankAcc {
         }
         System.out.println("The balance after annual subscription is"+ this.afterSub);
     }
-    
+
 
 
     @Override
