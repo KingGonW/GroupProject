@@ -35,7 +35,7 @@ public class Customer {
 
     public boolean checkISAAcc(Object obj) {
         if (obj != null) {
-            System.out.println("You  already have an ISA Account");
+            System.out.println("You  already have an ISA Account ");
             return false;
         } else
             return true;
