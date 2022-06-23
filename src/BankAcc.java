@@ -141,11 +141,8 @@ public class BankAcc {
     }
 
     public void transactionHistory() {
-        numberWithdrawals = 0;
-        numberDeposits = 0;
-        getOpeningBalance();
-        getClosingBalance();
-
+        this.numberWithdrawals = 0;
+        this.numberDeposits = 0;
     }
 
 }
