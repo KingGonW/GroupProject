@@ -3,7 +3,7 @@ import java.time.*;
 public class BusinessAccount extends BankAcc {
 
     private static String accountType = "Business Account";
-    private final String businessSortCode = "12-23-24";
+    private static String businessSortCode = "12-23-24";
     private int businessAccountNumber;
     private double balance;
     private double subscription;
@@ -11,7 +11,7 @@ public class BusinessAccount extends BankAcc {
     private LocalDate CreationDate;
 
     public BusinessAccount(double openingBalance, double closingBalance, int accNum) {
-        super(openingBalance, closingBalance, accNum);
+        super(openingBalance, closingBalance, accNum,accountType,businessSortCode);
         this.businessAccountNumber = accNum;
         this.CreationDate = LocalDate.now();
         /*this.setBalance(initialDeposit);

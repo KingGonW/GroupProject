@@ -1,11 +1,11 @@
 public class CurrentAccount extends BankAcc{
 
     private static String accountType = "Current Account";
-    private final String currentSortCode = "00-04-01";
+    private static String currentSortCode = "00-04-01";
     private int currentAccountNumber;
 
     public CurrentAccount(double openingBalance, double closingBalance, int accNum) {
-        super(openingBalance, closingBalance, accNum);
+        super(openingBalance, closingBalance, accNum,accountType,currentSortCode);
         this.currentAccountNumber = accNum;
     }
 

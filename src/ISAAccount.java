@@ -1,14 +1,14 @@
 public class ISAAccount extends BankAcc {
 
-    private final String accountType = "ISA Account";
-    private final String ISAsortCode = "22-66-44";
+    private static String accountType = "ISA Account";
+    private static String ISAsortCode = "22-66-44";
     private final double interestRate = 0.02;
     private int ISAAccountNumber;
     private double yearlyInterest;
 
 
     public ISAAccount(double openingBalance, double closingBalance, int accNum) {
-        super(openingBalance, closingBalance, accNum);
+        super(openingBalance, closingBalance, accNum,accountType,ISAsortCode);
         this.ISAAccountNumber = accNum;
         /*this.setBalance(initialDeposit);
         if(initialDeposit >= 100) {

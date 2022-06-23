@@ -17,6 +17,7 @@ public class Customer {
 
     private ArrayList<BankAcc> bankAccounts;
 
+
     public Customer() {
         setId(generateUniqueId());
     }
@@ -29,7 +30,6 @@ public class Customer {
         setPhoneNumber(phoneNumber);
         bankAccounts = new ArrayList<>();
     }
-
 
 
     public boolean checkISAAcc(Object obj) {
@@ -55,6 +55,22 @@ public class Customer {
 
     }
 
+    public ArrayList<BankAcc> getBankAccounts() {
+        return bankAccounts;
+    }
+
+    public void setBankAccounts(ArrayList<BankAcc> bankAccounts) {
+        this.bankAccounts = bankAccounts;
+    }
+
+    public void getListofBankAccounts() {
+        for (int i = 0; i < bankAccounts.size(); i++) {
+            System.out.println("Account type : " + bankAccounts.get(i).getAccType() + " Account number : "
+                    + bankAccounts.get(i).getAccNum() +
+                    " Sort code : " + bankAccounts.get(i).getSortCode() + "Balance : " + bankAccounts.get(i).getClosingBalance()
+            );
+        }
+    }
 
     public long getId() {
         return id;

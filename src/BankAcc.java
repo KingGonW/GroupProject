@@ -8,9 +8,29 @@ public abstract class BankAcc {
     private double numberDeposits;
     private double numberWithdrawals;
 
+    private String accType;
 
+    private String sortCode;
 
-    public BankAcc(double openingBalance, double closingBalance, int accNum) {
+    public String getSortCode() {
+        return sortCode;
+    }
+
+    public void setSortCode(String sortCode) {
+        this.sortCode = sortCode;
+    }
+
+    public String getAccType() {
+        return accType;
+    }
+
+    public void setAccType(String accType) {
+        this.accType = accType;
+    }
+
+    public BankAcc(double openingBalance, double closingBalance, int accNum,String accType,String sortCode) {
+        this.accType = accType;
+        this.sortCode = sortCode;
         // added opening and closing balance to constructor
         this.openingBalance = openingBalance;
         this.closingBalance = closingBalance;
