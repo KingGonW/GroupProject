@@ -60,8 +60,9 @@ public class ISAAccount extends BankAcc {
     @Override
     public String toString() {
         return "Account Type:" + accountType + " Sort Code: " +
-                ISAsortCode + " Account Number: " + ISAAccountNumber +
-                " Interest Rate: " + this.getInterestRate() + "%%";
+                ISAsortCode + " Account Number: " + ISAAccountNumber
+                + " Balance" + super.getClosingBalance() +
+                " Interest Rate: " + getInterestRate() + "%%";
 
 
     }
