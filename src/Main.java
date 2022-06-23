@@ -85,14 +85,43 @@ public class Main {
             } while (!input.equals("5"));
         }
 
-    private static void transferMoney() {
+    private static void getBankAccount(Customer customer) {
 
+        System.out.println("Please enter customer name");
+        String tempName = scanner.next();
+        for (int i = 0; i < customers.size(); i++){
+            if(customers.get(i).getName().equals(tempName)){
+                System.out.println("====> WELCOME " + tempName );
+            }
+        }
+        System.out.println("1.Register // 2.Login // 3.Help // 4.Exit to main menu");
+        do {
+            input = scanner.next();
+            switch (input) {
+                case "1":
+                    newCustomer();
+                    break;
+                case "2":
+                    customerLogin();
+                    break;
+                case "3":
+                    System.out.println("please call +44123456789 to get help\n---------------------------");
+                    customerMenu();
+                    break;
+                default:
+                    if (!input.equals("4")) {
+                        if (!input.equals("4")){
+                            System.out.println("Please enter a valid number");
+                            customerMenu();}
+                    }break;
+            }
+        } while (!input.equals("4"));
 
     }
 
     private static void customerMenu() {
             System.out.println("CUSTOMER MANU\nPlease select an option ... ");
-            System.out.println("1.Register 2.Login 3.Help 4.Exit to main menu");
+            System.out.println("1.Register // 2.Login // 3.Help // 4.Exit to main menu");
             do {
                 input = scanner.next();
                 switch (input) {
