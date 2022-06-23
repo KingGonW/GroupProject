@@ -231,7 +231,7 @@ public class Main {
 
     public static void yourBank(long customerNumber) {
         System.out.println("BANK MENU\nPlease select an option ... ");
-        System.out.println(" 1.Create a new Bank account // 2.See Your accounts // 3.Exit to main menu");
+        System.out.println("1.Create a new Bank account // 2.See Your accounts // 3.Exit to main menu");
         do {
             input = scanner.next();
             switch (input) {
@@ -282,7 +282,7 @@ public class Main {
         customers.get(customerNumberInInt).getBankAccounts().add(currentAcc);
         customers.get(customerNumberInInt).getListOfBankAccounts();
         System.out.println("Choose an Option");
-        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
     public static void BusinessAccount(Long customerNumber) {
@@ -291,7 +291,7 @@ public class Main {
         customers.get(customerNumberInInt).getBankAccounts().add(businessAcc);
         customers.get(customerNumberInInt).getListOfBankAccounts();
         System.out.println("Choose an Option");
-        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
     public static void ISAAccount(Long customerNumber) {
@@ -300,11 +300,13 @@ public class Main {
         customers.get(customerNumberInInt).getBankAccounts().add(ISAAcc);
         customers.get(customerNumberInInt).getListOfBankAccounts();
         System.out.println("Choose an Option");
-        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3. Transfer \n 4. View Balance \n 5.Exit to Customer Menu");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
     //renamed the below, so we don't confuse the use of the word "current"
     private static void customerAccounts() {
+        System.out.println("Choose the account to view");
+        System.out.println(" 1.Current Account \n 2.Business Account \n 3. ISA Account \n 4.Exit to Customer Menu");
 
     }
 
