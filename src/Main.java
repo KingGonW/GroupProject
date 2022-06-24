@@ -40,6 +40,8 @@ public class Main{
 
         //print a summary of user accounts
         //defined in Customer.java
+
+        //adapt this to display a list of customers + a list of account?
         currentCustomer.printAccountsSummary();
 
         //initialise
