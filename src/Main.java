@@ -259,7 +259,7 @@ public class Main {
                 createNewBankAccount(customerNumber);
                 break;
             case "2":
-                yourAccount(allCustomerAccounts(customerNumber));
+                allCustomerAccounts(customerNumber);
                 break;
             default:
                 if (!input.equals("3")) {
@@ -272,29 +272,6 @@ public class Main {
             yourBank(customerNumber);
         else
             customerLogin();
-    }
-
-    private BankAcc allCustomerAccounts(long customerNumber) {
-        Customer temp = new Customer();
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getId() == customerNumber) {
-                temp = customers.get(i);
-            }
-        }
-        System.out.println(temp.getName());
-        temp.getListOfBankAccounts();
-        System.out.println("Please select an account to continue ...  ");
-        int accNum = scanner.nextInt();
-        if (accNum - 1 <= temp.getBankAccounts().size())
-            return temp.getBankAccounts().get(accNum - 1);
-
-        System.out.println("please enter a valid number");
-        return null;
-    }
-
-    public void yourAccount(BankAcc bankAcc) {
-        System.out.println("Choose an Option");
-        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
     private void createNewBankAccount(long customerNumber) {
@@ -324,11 +301,31 @@ public class Main {
             yourBank(customerNumber);
     }
 
+    private void allCustomerAccounts(long customerNumber) {
+        for (int i = 0; i < customers.size(); i++) {
+            if (customers.get(i).getId() == customerNumber) {
+                customers.get(i).getListOfBankAccounts();;
+            }
+        }
+
+        System.out.println("Please select an account to continue ...  ");
+//        int accNum = scanner.nextInt();
+//        if (accNum - 1 <= temp.getBankAccounts().size())
+//            return temp.getBankAccounts().get(accNum - 1);
+//
+//        System.out.println("please enter a valid number");
+    }
+
+    public void yourAccount(BankAcc bankAcc) {
+        System.out.println("Choose an Option");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
+    }
+
     public void createCurrentAccount(Long customerNumber) {
         BankAcc currentAcc = new CurrentAccount();
         int customerNumberInInt = customerNumber.intValue();
-        customers.get(customerNumberInInt ).getBankAccounts().add(currentAcc);
-        customers.get(customerNumberInInt ).getListOfBankAccounts();
+        customers.get(customerNumberInInt - 1).getBankAccounts().add(currentAcc);
+        customers.get(customerNumberInInt - 1 ).getListOfBankAccounts();
     }
 
     public void createBusinessAccount(Long customerNumber) {
