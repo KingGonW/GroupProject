@@ -63,7 +63,7 @@ public class Customer {
 
     public void getListOfBankAccounts() {
         for (int i = 0; i < bankAccounts.size(); i++) {
-            System.out.println(bankAccounts.get(i).toString());
+            System.out.println(i + 1 + " = " + bankAccounts.get(i).toString());
             System.out.println();
         }
     }
