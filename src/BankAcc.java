@@ -1,6 +1,10 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class BankAcc {
+
+    //below line is to work with Bank class. Does not interfere with existing code, so don't panic
+    private String accountNumber;
     private int accNum;
     private double openingBalance;
     private double closingBalance;
@@ -11,6 +15,11 @@ public class BankAcc {
     private String accType;
 
     private String sortCode;
+
+    private Customer holder;
+
+    //below line is to work with Transaction class. Does not interfere with existing code, so don't panic
+    private ArrayList<Transaction> transactions;
 
     public String getSortCode() {
         return sortCode;
@@ -140,10 +149,54 @@ public class BankAcc {
 
     }
 
-    public void transactionHistory() {
-        this.numberWithdrawals = 0;
-        this.numberDeposits = 0;
+
+    //commenting out the below as using a different method to do it. Does not interfere with existing code, so don't panic
+    //public void transactionHistory() {
+       // this.numberWithdrawals = 0;
+        //this.numberDeposits = 0;
+   // }
+
+    //this is to enable the showTransactions
+    //print the transaction history of the account
+    public void printTransHistory() {
+        System.out.printf("\nTransaction History for account %s\n", this.accNum);
+        for(int t = this.transactions.size()-1; t>=0; t--){
+            System.out.printf(this.transactions.get(t).getSummaryLine());
+        }
+        System.out.println();
     }
 
+    public String getSummaryLine() {
+        //get the balance
+        double balance = this.getBalance();
+
+        //format the summary line depending on whether the balance is overdrawn - consider if needed for Group Projects
+
+        if (balance >= 0){
+
+            //this tells the string to format as a decimal, with 2 points
+            //%s is the account id, £% is the balance in brackets for negative values, then another %s for the account name
+            return String.format("%s: £%.02f : %s", this.accNum, balance, this.accType);
+        } else {
+            return String.format("%s: £(%.02f ): %s", this.accNum, balance, this.accType);
+        }
+
+    }
+
+    //get the balance of the account
+    public double getBalance() {
+        double balance = 0;
+        //run a loop to go through the transactions array list - defined above - and return the balance
+        for(Transaction t: this.transactions){
+            balance += t.getAmount();
+        }
+        return balance;
+    }
+
+    //below needed for Bank Class. Does not interfere with existing code, so don't panic
+    public String getID() {
+
+        return this.accountNumber;
+    }
 }
 

@@ -5,6 +5,7 @@ public class Main {
     private Scanner scanner = new Scanner(System.in);
     private String input;
     private ArrayList<Customer> customers;
+    private ArrayList<BankAcc> bankAccounts;
     private Customer currentAccount;
 
     public static void main(String[] args) {
@@ -17,7 +18,6 @@ public class Main {
         main.validCustomer(new Customer("Tamara", "-", "tamara@gmail.com", "999999999"));
         main.validCustomer(new Customer("Andy", "-", "andy@gmail.com", "999999999"));
 
-
         main.mainMenu();
     }
 
@@ -25,7 +25,7 @@ public class Main {
         Customer temp = customer;
         for (int i = 0; i < customers.size(); i++) {
             if (customers.get(i).getEmailAddress().equals(customer.getEmailAddress())) {
-                System.out.println("ERROR: This email address is already exist");
+                System.out.println("ERROR: This email address already exists");
                 return;
             }
         }
@@ -59,9 +59,17 @@ public class Main {
 // add feature to allow admin to transfer money between accounts
     //add feature to allow admin to create accounts for customers.
 
+
+    //writing a different version of the menu, can always be undone. To test showTransaction()
+
+
     private void adminMenu() {
         System.out.println("ADMIN MENU\nPlease select an option ... ");
-        System.out.println(" 1.All customers // 2.find a Customer // 3.delete a customer // 4.Transfer money // 5.Exit to main menu");
+        System.out.println(" 1.All customers " +
+                "\n2.find a Customer" +
+                " \n 3.delete a customer" +
+                " \n 4.Transfer money " +
+                "\n 5.Exit to main menu");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -78,9 +86,10 @@ public class Main {
             case "4":
                 transferMoney();
                 break;
+
             default:
                 if (!input.equals("5")) {
-                    if (!input.equals("5")) {
+                    if (!input.equals("6")) {
                         System.out.println("Please enter a valid number");
                         adminMenu();
                     }
@@ -339,7 +348,7 @@ public class Main {
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
-    //renamed the below, so we don't confuse the use of the word "current"
+
 
 
 }
