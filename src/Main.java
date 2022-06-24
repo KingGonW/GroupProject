@@ -50,24 +50,21 @@ public class Main {
         System.out.println("MAIN MENU\nPlease select an option ... ");
 
         do {
-            System.out.println("1.Admin\n2.Customer\n3.Exit");
+            System.out.println("1.Admin\n2.Exit");
 
             input = scanner.next();
             switch (input) {
                 case "1":
                     adminMenu();
                     break;
-                case "2":
-                    customerMenu();
-                    break;
                 default:
-                    if (!input.equals("3")) {
-                        if (!input.equals("3"))
+                    if (!input.equals("2")) {
+                        if (!input.equals("2"))
                             System.out.println("Please enter a valid number");
                     }
                     break;
             }
-        } while (!input.equals("3"));
+        } while (!input.equals("2"));
     }
 
 // add feature to allow admin to transfer money between accounts
@@ -75,7 +72,7 @@ public class Main {
 
     private void adminMenu() {
         System.out.println("ADMIN MENU\nPlease select an option ... ");
-        System.out.println(" 1.All customers // 2.create new customer // 3.find a Customer // 4.delete a customer // 5.Transfer money // 6.Exit to main menu");
+        System.out.println(" 1.All customers // 2.create new customer // 3.Login to a customer account // 4.find a Customer // 5.delete a customer // 6.Transfer money // 7.Exit to main menu");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -85,24 +82,27 @@ public class Main {
                 newCustomer();
                 break;
             case "3":
+                customerLogin();
+                break;
+            case "4":
                 System.out.println("Please enter the customer ID");
                 Long cusID = scanner.nextLong();
                 findCustomer(cusID);
                 break;
-            case "4":
+            case "5":
                 deleteCustomer();
                 break;
-            case "5":
+            case "6":
                 transferMoney();
                 break;
             default:
-                if (!input.equals("6")) {
+                if (!input.equals("7")) {
                     System.out.println("Please enter a valid number");
                     adminMenu();
                 }
                 break;
         }
-        if (!input.equals("6"))
+        if (!input.equals("7"))
             adminMenu();
         else
             mainMenu();
@@ -145,39 +145,6 @@ public class Main {
         return null;
 
     }
-
-
-    private void customerMenu() {
-        System.out.println("CUSTOMER MENU\nPlease select an option ... ");
-        System.out.println(" 1.Register // 2.Login // 3.Help // 4.Exit to main menu");
-        input = scanner.next();
-        switch (input) {
-            case "1":
-                newCustomer();
-                break;
-            case "2":
-                customerLogin();
-                break;
-            case "3":
-                System.out.println("please call +44123456789 to get help\n---------------------------");
-                customerMenu();
-                break;
-            default:
-                if (!input.equals("4")) {
-                    if (!input.equals("4")) {
-                        System.out.println("Please enter a valid number");
-                        customerMenu();
-                    }
-                }
-                break;
-        }
-        if (!input.equals("4"))
-            customerMenu();
-        else
-            mainMenu();
-
-    }
-
 
     public void deleteCustomer() {
         System.out.println("Please enter the customer ID");
@@ -223,12 +190,12 @@ public class Main {
         System.out.println("Please enter your phone number:");
         String tempPhone = scanner.next();
         validCustomer(new Customer(tempName, tempLastName, tempEmailAddress, tempPhone));
-        customerMenu();
+        adminMenu();
     }
 
     public long loginValidation() {
         long temp = 0;
-        System.out.println("Please enter your name ");
+        System.out.println("Please enter customer name ");
         String cusName = scanner.next();
         for (int i = 0; i < customers.size(); i++) {
             if (customers.get(i).getName().equals(cusName)) {
@@ -246,7 +213,7 @@ public class Main {
             yourBank(temp);
         } else {
             System.out.println("Please enter a valid name ");
-            customerMenu();
+            adminMenu();
         }
     }
 
@@ -264,7 +231,7 @@ public class Main {
             default:
                 if (!input.equals("3")) {
                     System.out.println("Please enter a valid number");
-                    customerMenu();
+                    adminMenu();
                 }
                 break;
         }
