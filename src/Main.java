@@ -43,8 +43,7 @@ public class Main {
                 adminMenu();
             } else {
                 if (!input.equals("2")) {
-                    if (!input.equals("2"))
-                        System.out.println("Please enter a valid number");
+                    System.out.println("Please enter a valid number");
                 }
             }
         } while (!input.equals("2"));
