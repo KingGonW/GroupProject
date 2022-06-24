@@ -26,7 +26,8 @@ public class Customer {
         setName(name);
         setLastName(lastName);
         setPhoneNumber(phoneNumber);
-        bankAccounts = new ArrayList<>();
+        //bankAccounts = new ArrayList<>();
+        setBankAccounts(new ArrayList<>());
     }
 
 
