@@ -75,7 +75,7 @@ public class Main {
 
     private void adminMenu() {
         System.out.println("ADMIN MENU\nPlease select an option ... ");
-        System.out.println(" 1.All customers // 2.find a Customer // 3.delete a customer // 4.Transfer money // 5.Exit to main menu");
+        System.out.println(" 1.All customers // 2.create new customer // 3.find a Customer // 4.delete a customer // 5.Transfer money // 6.Exit to main menu");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -277,7 +277,7 @@ public class Main {
     private BankAcc allCustomerAccounts(long customerNumber) {
         Customer temp = null;
         for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getId() == customerNumber) {
+            if (customers.get(i).getId() == customerNumber - 1) {
                 temp = customers.get(i);
                 break;
             }
@@ -327,8 +327,8 @@ public class Main {
     public void createCurrentAccount(Long customerNumber) {
         BankAcc currentAcc = new CurrentAccount();
         int customerNumberInInt = customerNumber.intValue();
-        customers.get(customerNumberInInt).getBankAccounts().add(currentAcc);
-        customers.get(customerNumberInInt).getListOfBankAccounts();
+        customers.get(customerNumberInInt - 1).getBankAccounts().add(currentAcc);
+        customers.get(customerNumberInInt - 1).getListOfBankAccounts();
     }
 
     public void createBusinessAccount(Long customerNumber) {
@@ -339,8 +339,8 @@ public class Main {
         //prompt user to make balance 100
         //only then when balance = 100 or more
         //add the created account to customer array
-        customers.get(customerNumberInInt).getBankAccounts().add(businessAcc);
-        customers.get(customerNumberInInt).getListOfBankAccounts();
+        customers.get(customerNumberInInt - 1).getBankAccounts().add(businessAcc);
+        customers.get(customerNumberInInt - 1).getListOfBankAccounts();
         System.out.println("Choose an Option");
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
@@ -348,8 +348,8 @@ public class Main {
     public void createISAAccount(Long customerNumber) {
         BankAcc ISAAcc = new ISAAccount();
         int customerNumberInInt = customerNumber.intValue();
-        customers.get(customerNumberInInt).getBankAccounts().add(ISAAcc);
-        customers.get(customerNumberInInt).getListOfBankAccounts();
+        customers.get(customerNumberInInt - 1).getBankAccounts().add(ISAAcc);
+        customers.get(customerNumberInInt - 1).getListOfBankAccounts();
         System.out.println("Choose an Option");
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
