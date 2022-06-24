@@ -1,4 +1,7 @@
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -8,6 +11,17 @@ public class Main {
     private Customer currentAccount;
 
     public static void main(String[] args) {
+
+        float[] yearlyBalance = new float[366];
+        Random rand = new Random();
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        for (int i = 0; i < yearlyBalance.length; i++) {
+            yearlyBalance[i] = rand.nextFloat(100, 10000);
+            yearlyBalance[i] = Float.valueOf(decimalFormat.format(yearlyBalance[i]));
+        }
+        System.out.println(Arrays.toString(yearlyBalance));
+
+
         Main main = new Main();
         main.customers = new ArrayList<>();
         main.currentAccount = new Customer();
@@ -68,26 +82,27 @@ public class Main {
                 findAllCustomers();
                 break;
             case "2":
+                newCustomer();
+                break;
+            case "3":
                 System.out.println("Please enter the customer ID");
                 Long cusID = scanner.nextLong();
                 findCustomer(cusID);
                 break;
-            case "3":
+            case "4":
                 deleteCustomer();
                 break;
-            case "4":
+            case "5":
                 transferMoney();
                 break;
             default:
-                if (!input.equals("5")) {
-                    if (!input.equals("5")) {
-                        System.out.println("Please enter a valid number");
-                        adminMenu();
-                    }
+                if (!input.equals("6")) {
+                    System.out.println("Please enter a valid number");
+                    adminMenu();
                 }
                 break;
         }
-        if (!input.equals("5"))
+        if (!input.equals("6"))
             adminMenu();
         else
             mainMenu();
