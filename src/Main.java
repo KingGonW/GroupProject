@@ -1,26 +1,13 @@
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     private String input;
     private ArrayList<Customer> customers;
     private Customer currentAccount;
 
     public static void main(String[] args) {
-
-        float[] yearlyBalance = new float[366];
-        Random rand = new Random();
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
-        for (int i = 0; i < yearlyBalance.length; i++) {
-            yearlyBalance[i] = rand.nextFloat(100, 10000);
-            yearlyBalance[i] = Float.valueOf(decimalFormat.format(yearlyBalance[i]));
-        }
-        System.out.println(Arrays.toString(yearlyBalance));
-
 
         Main main = new Main();
         main.customers = new ArrayList<>();
@@ -36,14 +23,13 @@ public class Main {
     }
 
     public void validCustomer(Customer customer) {
-        Customer temp = customer;
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getEmailAddress().equals(customer.getEmailAddress())) {
+        for (Customer value : customers) {
+            if (value.getEmailAddress().equals(customer.getEmailAddress())) {
                 System.out.println("ERROR: This email address is already exist");
                 return;
             }
         }
-        customers.add(temp);
+        customers.add(customer);
     }
 
     public void mainMenu() {
@@ -53,23 +39,18 @@ public class Main {
             System.out.println("1.Admin\n2.Exit");
 
             input = scanner.next();
-            switch (input) {
-                case "1":
-                    adminMenu();
-                    break;
-                default:
-                    if (!input.equals("2")) {
-                        if (!input.equals("2"))
-                            System.out.println("Please enter a valid number");
-                    }
-                    break;
+            if ("1".equals(input)) {
+                adminMenu();
+            } else {
+                if (!input.equals("2")) {
+                    System.out.println("Please enter a valid number");
+                }
             }
         } while (!input.equals("2"));
     }
 
 // add feature to allow admin to transfer money between accounts
     //add feature to allow admin to create accounts for customers.
-
     private void adminMenu() {
         System.out.println("ADMIN MENU\nPlease select an option ... ");
         System.out.println(" 1.All customers // 2.create new customer // 3.Login to a customer account // 4.find a Customer // 5.delete a customer // 6.Transfer money // 7.Exit to main menu");
@@ -124,17 +105,17 @@ public class Main {
         customers.get(cus2).getListOfBankAccounts();
         System.out.println("please enter the account number to transfer from ....");
         String tempAcc2 = scanner.next();
-        int acc2 = Integer.parseInt(tempAcc1);
+        int acc2 = Integer.parseInt(tempAcc2);
         System.out.println("please enter the the amount of money  ....");
         String tempAmount = scanner.next();
-        double amount = Double.parseDouble(tempAcc1);
+        double amount = Double.parseDouble(tempAmount);
         currentAccount.getCurrentBankAcc().moneyTransfer(getTheAccountNumber(cus1, acc1), getTheAccountNumber(cus2, acc2), amount);
 
     }
 
 
     public BankAcc getTheAccountNumber(int customerId, int accNumber) {
-        Long tempLong = Long.valueOf(customerId);
+        Long tempLong = (long) customerId;
         Customer temp = findCustomer(tempLong);
         for (int i = 0; i < temp.getBankAccounts().size(); i++) {
             if (temp.getBankAccounts().get(i).getAccNum() == accNumber)
@@ -148,7 +129,7 @@ public class Main {
 
     public void deleteCustomer() {
         System.out.println("Please enter the customer ID");
-        Long cusID = scanner.nextLong();
+        long cusID = scanner.nextLong();
         for (int i = 0; i < customers.size(); i++) {
             if (customers.get(i).getId() == cusID) {
                 customers.remove(i);
@@ -162,18 +143,18 @@ public class Main {
 
     public void findAllCustomers() {
         System.out.println("Please enter the customer ID");
-        for (int i = 0; i < customers.size(); i++) {
-            System.out.println(customers.get(i).toString());
+        for (Customer customer : customers) {
+            System.out.println(customer.toString());
         }
         adminMenu();
     }
 
     public Customer findCustomer(Long customerID) {
 
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getId() == customerID) {
-                System.out.println(customers.get(i).toString());
-                return customers.get(i);
+        for (Customer customer : customers) {
+            if (customer.getId() == customerID) {
+                System.out.println(customer);
+                return customer;
             }
         }
         System.out.println("====> Customer does not exist");
@@ -197,10 +178,10 @@ public class Main {
         long temp = 0;
         System.out.println("Please enter customer name ");
         String cusName = scanner.next();
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getName().equals(cusName)) {
+        for (Customer customer : customers) {
+            if (customer.getName().equals(cusName)) {
                 System.out.println("====> WELCOME " + cusName);
-                temp = customers.get(i).getId();
+                temp = customer.getId();
             }
         }
         return temp;
@@ -269,9 +250,9 @@ public class Main {
     }
 
     private void allCustomerAccounts(long customerNumber) {
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getId() == customerNumber) {
-                customers.get(i).getListOfBankAccounts();;
+        for (Customer customer : customers) {
+            if (customer.getId() == customerNumber) {
+                customer.getListOfBankAccounts();
             }
         }
 
