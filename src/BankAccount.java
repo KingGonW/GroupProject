@@ -3,17 +3,22 @@ import java.util.ArrayList;
 //this is the super class of bank accounts. ISAs etc inherit from here.
 public class BankAccount {
 
-
-
-    //name here = this used to be just name
     private String AccountType;
 
     private double balance;
 
-    //this used to be AcctId
     private String AccountNumber;
 
     private Customer holder;
+
+
+    //interest and minimumBalance are shared by all accounts *but* only in ISA accounts will they have a value
+    private int interest;
+
+    private int minimumBalance;
+
+    //similarly, all accounts have an annual cost, but only in Business Accounts will this have a value
+    private int annualCost;
 
 
     //this array list will get called in showTransaction()
@@ -46,10 +51,10 @@ public class BankAccount {
         if (balance >= 0){
 
             //this tells the string to format as a decimal, with 2 points
-            //%s is the account id, £% is the balance in brackets for negative values, then another %s for the account name
-            return String.format(" Account Number: %s Balance: £%.02f Account Type: %s", this.AccountNumber, balance, this.AccountType);
+            //%s is the account id, % is the balance in brackets for negative values, then another %s for the account name
+            return String.format("Account Number: %s, Balance in pounds: %.02f, Account Type: %s", this.AccountNumber, balance, this.AccountType);
         } else {
-            return String.format("%s: £(%.02f ): %s", this.AccountNumber, balance, this.AccountType);
+            return String.format("Account Number: %s, Balance in pounds: (%.02f), Account Type:: %s", this.AccountNumber, balance, this.AccountType);
         }
 
     }
@@ -67,10 +72,19 @@ public class BankAccount {
     //print the transaction history of the account
     public void printTransHistory() {
         System.out.printf("\nTransaction History for account %s\n", this.AccountNumber);
+        //this prints the transactions in reverse order, i.e. the most recent first
         for(int t = this.transactions.size()-1; t>=0; t--){
             System.out.printf(this.transactions.get(t).getSummaryLine());
         }
         System.out.println();
+    }
+
+    //below called by Customer but defined here, because it creates a new Transaction object,
+    // and adds it to the array list, which then allows it to be accessed
+    public void addTransaction(double amount, String memo) {
+
+        Transaction newTransaction = new Transaction(amount, memo, this);
+        this.transactions.add(newTransaction);
     }
 }
 

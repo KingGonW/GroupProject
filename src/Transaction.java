@@ -17,6 +17,7 @@ public class Transaction {
     private BankAccount inAccount;
 
     //one with the memo, and one without. This is overloading.
+    // this means we can safely skip the memo part in the Main.java class, in the withdrawFunds() and depositFunds()
     public Transaction( double amount, BankAccount inAccount){
 
         this.amount = amount;
@@ -42,13 +43,14 @@ public class Transaction {
         return this.amount;
     }
     //see printAccountSummary in Customer.java for explanation
+    //£ is not recognised!
     public String getSummaryLine() {
         if(this.amount >= 0){
-            return String.format("%s : £%.02f : %s",
+            return String.format("Date and time :%s\n Amount in pounds : %.02f\n Memo: %s\n",
                     this.timestamp.toString(),
                     this.amount, this.memo);
         } else {
-            return String.format("%s : £(%.02f) : %s",
+            return String.format("Date and time :%s\n Amount in pounds: (%.02f)\n Memo: %s\n",
                     this.timestamp.toString(),
                     this.amount, this.memo);
         }
