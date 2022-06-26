@@ -56,9 +56,6 @@ public class Main {
         } while (!input.equals("3"));
     }
 
-// add feature to allow admin to transfer money between accounts
-    //add feature to allow admin to create accounts for customers.
-
     private void adminMenu() {
         System.out.println("ADMIN MENU\nPlease select an option ... ");
         System.out.println(" 1.All customers // 2.find a Customer // 3.delete a customer // 4.Transfer money // 5.Exit to main menu");
@@ -339,7 +336,7 @@ public class Main {
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
-    //renamed the below, so we don't confuse the use of the word "current"
+
 
 
 }
