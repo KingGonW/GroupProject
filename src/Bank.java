@@ -5,13 +5,13 @@ import java.util.Random;
 // it mimics the bank as an entity, e.g. being able to create customers etc.
 // it also interacts with other classes, as per Object Orientated Programming
 public class Bank {
-    private String name;
+    private final String name;
 
-    private ArrayList<Customer> customers;
+    private final ArrayList<Customer> customers;
 
-    private ArrayList<BankAccount> bankAccounts;
+    private final ArrayList<BankAccount> bankAccounts;
 
-    //in group project Account = BankAcc and the array accounts here = bankAccounts;
+
 
     public Bank(String name) {
         this.name = name;
@@ -88,15 +88,7 @@ public class Bank {
         //the 'this' below makes it refer to the class it is in, i.e "Bank"
         Customer newCustomer = new Customer(firstName,lastName,this);
         this.customers.add(newCustomer);
-
-        //create a savings account for the customer - in group project we have separate logic for this
-        //note that inside the Main, another addAccount is called, for an ISA.
-        BankAccount newAccount = new BankAccount("Savings",newCustomer,this);
-        // add to customer and bank lists
-        newCustomer.addAccount(newAccount);
-        this.bankAccounts.add(newAccount);
         return newCustomer;
-
     }
 
     //the below lets users log in, but we probably will not use this as Trevor does not need to log in :)
@@ -113,7 +105,28 @@ public class Bank {
 
     //name here refers to the bank name
     public Object getName() {
-
         return this.name;
+    }
+
+    public void printCustomerSummary() {
+
+        System.out.printf("\n\n%s' List of Customers:", this.name);
+
+        // sets our counter at 0,
+        // as long as the counter is less than the size of the accounts array
+        // adds one to the counter
+        for (int a = 0; a <this.customers.size(); a++){
+
+            //%d is the format for an integer
+            //%s is the summary line - each account instance will generate one of these
+            //getSummaryLine() is defined in Accounts.java
+            System.out.printf("\n%d) %s", a+1,
+                    this.customers.get(a).getSummaryLine());
+        }
+        System.out.println();
+    }
+
+    public int numCustomers() {
+        return this.customers.size();
     }
 }

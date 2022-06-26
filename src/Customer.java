@@ -4,13 +4,15 @@ import java.util.ArrayList;
 
 public class Customer {
 
-        private String firstName;
+        private final String firstName;
 
-        private String lastName;
+        private final String lastName;
 
-        private String CustomerId;
+        private final String CustomerId;
 
-        private ArrayList<BankAccount> bankAccounts;
+
+
+        private final ArrayList<BankAccount> bankAccounts;
 
         public Customer(String firstName, String lastName, Bank theBank) {
 
@@ -24,8 +26,8 @@ public class Customer {
             //create an empty list of accounts
             this.bankAccounts=new ArrayList<BankAccount>();
 
-            //Print log message
-            System.out.printf("New User: %s %s with ID %s created.", firstName, lastName, this.CustomerId);
+            //Print log message - not needed? Maybe call it, maybe not
+            //System.out.printf("New User: %s %s with ID %s created.", firstName, lastName, this.CustomerId);
         }
 
         public void addAccount(BankAccount account) {
@@ -45,7 +47,7 @@ public class Customer {
         //this prints a summary of the accounts of this user
         public void printAccountsSummary() {
 
-            System.out.printf("\n\n%s's Accounts Summary:", this.firstName);
+            System.out.printf("\n\n%s %s's Accounts Summary:", this.firstName,this.lastName);
 
             // sets our counter at 0,
             // as long as the counter is less than the size of the accounts array
@@ -89,6 +91,15 @@ public class Customer {
     //this gets the Account Number of a particular account
     public String getAccountNumber(int accountIndex) {
         return this.bankAccounts.get(accountIndex).getID();
+    }
+
+    public Object getSummaryLine() {
+            //%s is the customer name % is the 2nd name and the last  %s is the id
+            return String.format("Customer Name: %s  %s, ID: %s", this.firstName, this.lastName, this.CustomerId);
+    }
+
+    public Object getLastName() {
+            return this.lastName;
     }
 }
 

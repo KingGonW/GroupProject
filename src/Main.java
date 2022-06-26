@@ -15,22 +15,70 @@ public class Main{
         //for Group Project we need an interface, i.e. menus, to create customers and accounts
 
         Customer aCustomer = theBank.addCustomer("Mister","Test");
+        Customer Tamara = theBank.addCustomer("Novus","Tamara");
+        Customer Mohsen = theBank.addCustomer("Novus","Mohsen");
+        Customer Andy = theBank.addCustomer("Novus","Andy");
+        Customer King = theBank.addCustomer("Novus","King");
 
-        //create an ISA for testing purposes
+        //create several accounts for testing purposes
         BankAccount anAccount = new BankAccount("ISA",aCustomer,theBank);
         aCustomer.addAccount(anAccount);
         theBank.addAccount(anAccount);
+
+        BankAccount tamaraAccount1 = new BankAccount("ISA",Tamara,theBank);
+        Tamara.addAccount(tamaraAccount1);
+        theBank.addAccount(tamaraAccount1);
+        BankAccount tamaraAccount2 = new BankAccount("Business",Tamara,theBank);
+        Tamara.addAccount(tamaraAccount2);
+        theBank.addAccount(tamaraAccount2);
+        BankAccount tamaraAccount3 = new BankAccount("Current",Tamara,theBank);
+        Tamara.addAccount(tamaraAccount3);
+        theBank.addAccount(tamaraAccount3);
+
+        BankAccount andyAccount1 = new BankAccount("ISA",Andy,theBank);
+        Andy.addAccount(andyAccount1);
+        theBank.addAccount(andyAccount1);
+        BankAccount andyAccount2 = new BankAccount("Business",Andy,theBank);
+        Andy.addAccount(andyAccount2);
+        theBank.addAccount(andyAccount2);
+        BankAccount andyAccount3 = new BankAccount("Current",Andy,theBank);
+        Andy.addAccount(andyAccount3);
+        theBank.addAccount(andyAccount3);
+
+        BankAccount mohsenAccount1 = new BankAccount("ISA",Mohsen,theBank);
+        Mohsen.addAccount(mohsenAccount1);
+        theBank.addAccount(mohsenAccount1);
+        BankAccount mohsenAccount2 = new BankAccount("Business",Mohsen,theBank);
+        Mohsen.addAccount(mohsenAccount2);
+        theBank.addAccount(mohsenAccount2);
+        BankAccount mohsenAccount3 = new BankAccount("Current",Mohsen,theBank);
+        Mohsen.addAccount(mohsenAccount3);
+        theBank.addAccount(mohsenAccount3);
+
+        BankAccount kingAccount1 = new BankAccount("ISA",King,theBank);
+        King.addAccount(kingAccount1);
+        theBank.addAccount(kingAccount1);
+        BankAccount kingAccount2 = new BankAccount("Business",King,theBank);
+        King.addAccount(kingAccount2);
+        theBank.addAccount(kingAccount2);
+        BankAccount kingAccount3 = new BankAccount("Current",King,theBank);
+        King.addAccount(kingAccount3);
+        theBank.addAccount(kingAccount3);
+
+
 
         Customer currentCustomer;
         while(true){
 
             //'sc' below refers to the scanner - defined above - which gets passed to the methods
 
-            //stay in the login prompt until successful login
-            currentCustomer = Main.mainMenuPrompt(theBank, sc);
+           //this means we start with current Customer selected, and then display the chosen menu
+            currentCustomer= Main.printCustomerMenu(theBank, sc);
+
+                    Main.printCustomerMenu(theBank, sc);
 
             //stay in main menu until user quits
-            Main.printUserMenu(currentCustomer, sc);
+            Main.printAccountsMenu(currentCustomer, sc);
 
         }
 
@@ -42,11 +90,11 @@ public class Main{
     // createCustomer(),deleteCustomer()
     // checkInterest(), checkBalance()
 
-    private static void printUserMenu(Customer currentCustomer, Scanner sc) {
+    private static void printAccountsMenu(Customer currentCustomer, Scanner sc) {
 
         //print a summary of user accounts
         //defined in Customer.java
-        //adapt this to display a list of customers + a list of account?
+
         currentCustomer.printAccountsSummary();
 
         //initialise
@@ -55,18 +103,19 @@ public class Main{
         //user menu
         do
         {
-            System.out.printf("\nWelcome %s, what would you like to do?:", currentCustomer.getFirstName());
+            System.out.printf("\nWelcome to the accounts of %s %s, what would you like to do?:", currentCustomer.getFirstName(), currentCustomer.getLastName());
             //the "currentCustomer" variable needs to be changed to be Trevor
             //there will be more options below,
             // e.g. createAccount(), deleteAccount(),
             // createCustomer(),deleteCustomer()
             // checkInterest(), checkBalance()
+
             System.out.println();
             System.out.println(" 1. Show Account Transaction History");
             System.out.println(" 2. Make a withdrawal");
             System.out.println(" 3. Make a deposit");
             System.out.println(" 4. Make a Transfer");
-            System.out.println(" 5. Exit");
+            System.out.println(" 5. Exit to main menu");
             System.out.println();
             System.out.println(" Enter your choice");
             userChoice = sc.nextInt();
@@ -84,17 +133,15 @@ public class Main{
             case 3 -> Main.depositFunds(currentCustomer, sc);
             case 4 -> Main.transferFunds(currentCustomer, sc);
 
-
             //in the video there is no default case, but I think we need one
             //also, put something for exit option, e.g. a goodbye message
-
         }
 
         //redisplay the menu unless the user wants to quit
 
         //the below is recursion, calling a method within a method. Time to watch Inception again.
         if(userChoice !=5){
-            Main.printUserMenu(currentCustomer, sc);
+            Main.printAccountsMenu(currentCustomer, sc);
         }
 
     }
@@ -218,7 +265,7 @@ public class Main{
                 System.out.println("Amount must be greater than zero!");
             } else if (withdrawAmount > accountBalance){
                 System.out.printf("You cannot withdraw more than your balance\nof %.02f.\n", accountBalance);
-                Main.printUserMenu(currentCustomer,sc);
+                Main.printAccountsMenu(currentCustomer,sc);
             }
         } while(withdrawAmount < 0 || withdrawAmount > accountBalance);
 
@@ -278,34 +325,78 @@ public class Main{
 
         //finally allow the deposit
         currentCustomer.addAccountTransaction(toAccount,depositAmount, memo);
-      Main.printUserMenu(currentCustomer,sc);
+      Main.printAccountsMenu(currentCustomer,sc);
     }
 
-    private static Customer mainMenuPrompt(Bank theBank, Scanner sc) {
-        //this will need to be redone, or removed, for the group project
+    //aim of customer menu is to display all the customers for the admin to choose from.
+    //selecting a customer then brings up the other menu, where they can act on accounts
+    private static Customer printCustomerMenu(Bank theBank, Scanner sc) {
+
+        //print a summary of user accounts
+        //defined in Customer.java
+        theBank.printCustomerSummary();
+
         //initialise
         String CustomerID;
         Customer AuthCustomer;
 
-        do{
-            //prompt user for log in details until correct input is achieved
-            //group project -this would be a good place to list customers
-            System.out.println("");
-            System.out.printf("\nWelcome to %s\n", theBank.getName());
-            System.out.print("Enter Customer ID:");
+        //user menu
+
+        //rewrite this to have an exit option
+
+
+        do {
+            System.out.printf("\nWelcome  to %s, what would you like to do?:", theBank.getName());
+            //the "currentCustomer" variable needs to be changed to be Trevor
+            //there will be more options below,
+            // e.g. createAccount(), deleteAccount(),
+            // createCustomer(),deleteCustomer()
+            // checkInterest(), checkBalance()
+            System.out.print("\nChoose one of the above Customer ID:");
             CustomerID = sc.nextLine();
 
-            //ignoring PIN stuff from the video
 
             //try to get the Customer object that corresponds to the ID
             AuthCustomer = theBank.customerLogin(CustomerID);
-            if (AuthCustomer == null){
+            if (AuthCustomer == null) {
                 System.out.println("Incorrect User. \n Try again.");
             }
-        } while( AuthCustomer == null);//continues looping until successful login
+        } while (AuthCustomer == null);//continues looping until successful login
 
         return AuthCustomer;
-    }
+    }}
+       // Customer currentCustomer = CustomerID;
+
+       // printAccountsMenu(currentCustomer, sc);
+
+        //process the userChoice
+
+       // switch (choice) {
+          //  case 1 -> Main.showTransactionHistory(currentCustomer, sc);
+           // case 2 -> Main.withdrawFunds(currentCustomer, sc);
+           // case 3 -> Main.depositFunds(currentCustomer, sc);
+           // case 4 -> Main.transferFunds(currentCustomer, sc);
 
 
-}
+            //in the video there is no default case, but I think we need one
+            //also, put something for exit option, e.g. a goodbye message
+
+        //}
+
+        //redisplay the menu unless the user wants to quit
+
+        //the below is recursion, calling a method within a method. Time to watch Inception again.
+        //if(choice !=5){
+            //Main.printCustomerMenu(currentCustomer, sc);
+       // }
+
+   // }
+       // private static void addCustomer(Bank theBank, Scanner sc) {
+       // System.out.println("Please enter your first name:");
+       // String tempFirstName = sc.next();
+       // System.out.println("Please enter your last name:");
+       // String tempLastName = sc.next();
+       // theBank.addCustomer(tempFirstName,tempLastName);
+    //}
+
+//}
