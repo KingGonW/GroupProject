@@ -1,19 +1,18 @@
 import java.text.DecimalFormat;
-import java.util.Arrays;
 import java.util.Random;
 
 public class ISAAccount extends BankAcc {
 
     public static String accountType = "ISA Account";
     public static String ISAsortCode = "22-66-44";
-    private static float[] yearlyBalance = new float[366];
-    private static float interestRate = 0.02f;
+    private static final float[] yearlyBalance = new float[366];
+    private static final float interestRate = 0.02f;
     private int ISAAccountNumber;
 
 
-
-
     public ISAAccount() {
+        super(accountType, ISAsortCode);
+        super.getAccNum();
         setISAAccountNumber(super.getAccNum());
 
     }
@@ -22,10 +21,10 @@ public class ISAAccount extends BankAcc {
         this.ISAAccountNumber = ISAAccountNumber;
     }
 
-  //overriding parent class withdraw method
+    //overriding parent class withdraw method
     @Override
     public void withdrawMoney(double withdrawAmount) {
-        //override withdraw method from BankAcc class
+        //this checks to make withdraw amount doesn't move balance below 100
         if (this.getOpeningBalance() - withdrawAmount < 100) {
             System.out.println("Your account balance will be too low, " +
                     "to keep your ISA account, please keep balance over 100");
@@ -36,7 +35,6 @@ public class ISAAccount extends BankAcc {
                     "Your Balance is now: " + this.getClosingBalance());
         }
     }
-
 
 
     /*
@@ -56,13 +54,14 @@ public class ISAAccount extends BankAcc {
             //the for loop will go through each index of the array and assign it a random value
             yearlyBalance[i] = arrRandom.nextFloat(100, 10000);
             //this formats the array to only display up to 2 decimal points
-            yearlyBalance[i] = Float.valueOf(decimalFormat.format(yearlyBalance[i]));
+            yearlyBalance[i] = Float.parseFloat(decimalFormat.format(yearlyBalance[i]));
         }
 
         //return yearly balance to be used in calcInterest method
         return yearlyBalance;
 
     }
+
     public static void calcInterest(float[] yearlyBalance) {
 
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
@@ -79,19 +78,17 @@ public class ISAAccount extends BankAcc {
             //yearly average assigned value of equation
             yearlyAverage = sum / yearlyBalance.length;
             //uses format function to only include 2 decimal places
-            yearlyAverage = Float.valueOf(decimalFormat.format(yearlyAverage));
+            yearlyAverage = Float.parseFloat(decimalFormat.format(yearlyAverage));
         }
 
         //calculate interest by multiplying average by the interest rate
         yearlyInterest = yearlyAverage * interestRate;
         //using format function to only include 2 decimal places in result
-        yearlyInterest = Float.valueOf(decimalFormat.format(yearlyInterest));
+        yearlyInterest = Float.parseFloat(decimalFormat.format(yearlyInterest));
 
         System.out.println("$" + yearlyAverage);
         System.out.println("$" + yearlyInterest);
     }
-
-
 
 
     @Override
