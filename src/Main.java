@@ -352,7 +352,7 @@ public class Main{
             // e.g. createAccount(), deleteAccount(),
             // createCustomer(),deleteCustomer()
             // checkInterest(), checkBalance()
-            System.out.print("\nChoose one of the above Customer ID:");
+            System.out.print("\nChoose one of the above Customer IDs:");
             CustomerID = sc.nextLine();
 
 
@@ -365,38 +365,4 @@ public class Main{
 
         return AuthCustomer;
     }}
-       // Customer currentCustomer = CustomerID;
 
-       // printAccountsMenu(currentCustomer, sc);
-
-        //process the userChoice
-
-       // switch (choice) {
-          //  case 1 -> Main.showTransactionHistory(currentCustomer, sc);
-           // case 2 -> Main.withdrawFunds(currentCustomer, sc);
-           // case 3 -> Main.depositFunds(currentCustomer, sc);
-           // case 4 -> Main.transferFunds(currentCustomer, sc);
-
-
-            //in the video there is no default case, but I think we need one
-            //also, put something for exit option, e.g. a goodbye message
-
-        //}
-
-        //redisplay the menu unless the user wants to quit
-
-        //the below is recursion, calling a method within a method. Time to watch Inception again.
-        //if(choice !=5){
-            //Main.printCustomerMenu(currentCustomer, sc);
-       // }
-
-   // }
-       // private static void addCustomer(Bank theBank, Scanner sc) {
-       // System.out.println("Please enter your first name:");
-       // String tempFirstName = sc.next();
-       // System.out.println("Please enter your last name:");
-       // String tempLastName = sc.next();
-       // theBank.addCustomer(tempFirstName,tempLastName);
-    //}
-
-//}
