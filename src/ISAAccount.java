@@ -39,7 +39,10 @@ public class ISAAccount extends BankAcc {
 
 
 
-    // method to calculate interest on customers yearly average balance
+    /*
+     method to calculate interest on customers yearly average balance
+    to access interest calculation from main menu use calcInterest(calcYearlyAverage())
+    */
     public static float[] calcYearlyAverage() {
 
         //use random function to populate array with random balances
