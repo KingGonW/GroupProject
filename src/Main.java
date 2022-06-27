@@ -91,6 +91,7 @@ public class Main {
 
     }
 
+
     private void transferMoney() {
         findAllCustomers();
         System.out.println("Please enter the customer number that you would to transfer from ...");
@@ -104,14 +105,20 @@ public class Main {
         String tempCus2 = scanner.next();
         int cus2 = Integer.parseInt(tempCus2);
         customers.get(cus2).getListOfBankAccounts();
-        System.out.println("please enter the account number to transfer from ....");
+        System.out.println("please enter the account number to transfer to ....");
         String tempAcc2 = scanner.next();
         int acc2 = Integer.parseInt(tempAcc1);
         System.out.println("please enter the the amount of money  ....");
         String tempAmount = scanner.next();
         double amount = Double.parseDouble(tempAcc1);
         currentAccount.getCurrentBankAcc().moneyTransfer(getTheAccountNumber(cus1, acc1), getTheAccountNumber(cus2, acc2), amount);
-
+       //the below posts this info to the Transactions class
+        //this should work
+        // to test, let us call transferMoney() from one of the menus
+        Customer.addAccountTransaction(acc1, -1*amount, String.format("Origin account %s",
+                Customer.getAccountNumber(acc2)));
+      Customer.addAccountTransaction(acc2, amount, String.format("Destination account %s",
+                Customer.getAccountNumber(acc1)));
     }
 
 
@@ -167,7 +174,7 @@ public class Main {
         for (int i = 0; i < customers.size(); i++) {
             if (customers.get(i).getId() == cusID) {
                 customers.remove(i);
-                System.out.println("====> Selected customer is successfully removed from the system");
+                System.out.println("====> Selected customer has been successfully removed from the system");
                 adminMenu();
             }
         }
@@ -276,7 +283,7 @@ public class Main {
 
     public void yourAccount(BankAcc bankAcc) {
         System.out.println("Choose an Option");
-        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
+        System.out.println(" 1.Deposit \n 2.Withdraw \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
     private void createNewBankAccount(long customerNumber) {
@@ -334,6 +341,34 @@ public class Main {
         customers.get(customerNumberInInt).getListOfBankAccounts();
         System.out.println("Choose an Option");
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
+    }
+
+    //below method shows transaction history
+    //it takes the Customer selected, shown as currentCustomer
+    //loops through the accounts associated with the Customer
+    //and displays the information
+    //that information needs to be generated in the withdraw(), deposit() and transfer() methods.
+    public static void showTransactionHistory(Customer currentCustomer, Scanner sc) {
+
+        int theAccount;
+        //get the account for which we wish to show the history
+
+        do{
+            //account is chosen from the arraylist. Number refers to the account in the array list,
+            // not the account number
+            System.out.printf("Enter the number  (1-%d) of the account\n"
+                    + "you wish to see the history of:",  currentCustomer.numAccounts());
+
+            // -1 to get to the 0 index position
+            theAccount = sc.nextInt()-1;
+            if(theAccount < 0  || theAccount >= currentCustomer.numAccounts())
+            {
+                System.out.println("Invalid Account chosen. Please try again.");
+            }
+        } while(theAccount < 0  || theAccount >= currentCustomer.numAccounts());
+
+        //print transactions history
+        currentCustomer.printAccountTransactionHistory(theAccount);
     }
 
 

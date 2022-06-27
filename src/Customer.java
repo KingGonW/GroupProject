@@ -13,7 +13,7 @@ public class Customer {
     private static long counter = 0;
 
     private BankAcc currentBankAcc;
-    private ArrayList<BankAcc> bankAccounts;
+    private static ArrayList<BankAcc> bankAccounts;
 
 
     public Customer() {
@@ -26,8 +26,12 @@ public class Customer {
         setName(name);
         setLastName(lastName);
         setPhoneNumber(phoneNumber);
-        bankAccounts = new ArrayList<>();
+
+        //creates an empty list of accounts
+        this.bankAccounts = new ArrayList<BankAcc>();
     }
+
+
 
 
     public boolean checkISAAcc(Object obj) {
@@ -156,5 +160,27 @@ public class Customer {
         System.out.println("Customer Email: " + name);
         System.out.println("Customer Phone Number: " + name);
 
+    }
+
+    //the below links to showTransactionHistory(), defined and called in Main.
+    //think of this as a helper method
+    public void printAccountTransactionHistory(int accountIndex) {
+        this.bankAccounts.get(accountIndex).printTransHistory();
+    }
+
+    //the below links to showTransactionHistory(), defined and called in Main.
+    //think of this as a helper method
+    public int numAccounts() {
+        return  this.bankAccounts.size();
+    }
+
+    //the below gets called in transfer, withdraw and deposit operations
+    public static void addAccountTransaction(int accountIndex, double amount, String memo) {
+        Customer.bankAccounts.get(accountIndex).addTransaction(amount, memo);
+    }
+
+    //the below gets called in transfer, withdraw and deposit operations
+    public static int getAccountNumber(int accountIndex) {
+        return Customer.bankAccounts.get(accountIndex).getAccNum();
     }
 }
