@@ -12,10 +12,10 @@ public class Main {
         main.customers = new ArrayList<>();
         main.currentAccount = new Customer();
         // temporary created to test the app
-        main.validCustomer(new Customer("Mohsen", "-", "mohsen@gmail.com", "999999999"));
-        main.validCustomer(new Customer("King", "-", "king@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Tamara", "-", "tamara@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Andy", "-", "andy@gmail.com", "999999999"));
+        main.validCustomer(new Customer("Mohsen,", "-", "mohsen@gmail.com", "999999999"));
+        main.validCustomer(new Customer("King,", "-", "king@gmail.com", "999999999"));
+        main.validCustomer(new Customer("Tamara,", "-", "tamara@gmail.com", "999999999"));
+        main.validCustomer(new Customer("Andy,", "-", "andy@gmail.com", "999999999"));
 
 
         main.mainMenu();
@@ -112,12 +112,12 @@ public class Main {
         String tempAmount = scanner.next();
         double amount = Double.parseDouble(tempAcc1);
         currentAccount.getCurrentBankAcc().moneyTransfer(getTheAccountNumber(cus1, acc1), getTheAccountNumber(cus2, acc2), amount);
-       //the below posts this info to the Transactions class
+        //the below posts this info to the Transactions class
         //this should work
         // to test, let us call transferMoney() from one of the menus
-        Customer.addAccountTransaction(acc1, -1*amount, String.format("Origin account %s",
+        Customer.addAccountTransaction(acc1, -1 * amount, String.format("Origin account %s",
                 Customer.getAccountNumber(acc2)));
-      Customer.addAccountTransaction(acc2, amount, String.format("Destination account %s",
+        Customer.addAccountTransaction(acc2, amount, String.format("Destination account %s",
                 Customer.getAccountNumber(acc1)));
     }
 
@@ -353,25 +353,22 @@ public class Main {
         int theAccount;
         //get the account for which we wish to show the history
 
-        do{
+        do {
             //account is chosen from the arraylist. Number refers to the account in the array list,
             // not the account number
             System.out.printf("Enter the number  (1-%d) of the account\n"
-                    + "you wish to see the history of:",  currentCustomer.numAccounts());
+                    + "you wish to see the history of:", currentCustomer.numAccounts());
 
             // -1 to get to the 0 index position
-            theAccount = sc.nextInt()-1;
-            if(theAccount < 0  || theAccount >= currentCustomer.numAccounts())
-            {
+            theAccount = sc.nextInt() - 1;
+            if (theAccount < 0 || theAccount >= currentCustomer.numAccounts()) {
                 System.out.println("Invalid Account chosen. Please try again.");
             }
-        } while(theAccount < 0  || theAccount >= currentCustomer.numAccounts());
+        } while (theAccount < 0 || theAccount >= currentCustomer.numAccounts());
 
         //print transactions history
         currentCustomer.printAccountTransactionHistory(theAccount);
     }
-
-
 
 
 }
