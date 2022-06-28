@@ -2,95 +2,93 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     private String input;
     private ArrayList<Customer> customers;
     private Customer currentAccount;
 
     public static void main(String[] args) {
+
         Main main = new Main();
         main.customers = new ArrayList<>();
         main.currentAccount = new Customer();
         // temporary created to test the app
-        main.validCustomer(new Customer("Mohsen,", "-", "mohsen@gmail.com", "999999999"));
-        main.validCustomer(new Customer("King,", "-", "king@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Tamara,", "-", "tamara@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Andy,", "-", "andy@gmail.com", "999999999"));
+        main.validCustomer(new Customer("Mohsen", "-", "mohsen@gmail.com", "999999999"));
+        main.validCustomer(new Customer("King", "-", "king@gmail.com", "999999999"));
+        main.validCustomer(new Customer("Tamara", "-", "tamara@gmail.com", "999999999"));
+        main.validCustomer(new Customer("Andy", "-", "andy@gmail.com", "999999999"));
 
 
         main.mainMenu();
     }
 
     public void validCustomer(Customer customer) {
-        Customer temp = customer;
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getEmailAddress().equals(customer.getEmailAddress())) {
+        for (Customer value : customers) {
+            if (value.getEmailAddress().equals(customer.getEmailAddress())) {
                 System.out.println("ERROR: This email address is already exist");
                 return;
             }
         }
-        customers.add(temp);
+        customers.add(customer);
     }
 
     public void mainMenu() {
         System.out.println("MAIN MENU\nPlease select an option ... ");
 
         do {
-            System.out.println("1.Admin\n2.Customer\n3.Exit");
+            System.out.println("1.Admin\n2.Exit");
 
             input = scanner.next();
-            switch (input) {
-                case "1":
-                    adminMenu();
-                    break;
-                case "2":
-                    customerMenu();
-                    break;
-                default:
-                    if (!input.equals("3")) {
-                        if (!input.equals("3"))
-                            System.out.println("Please enter a valid number");
-                    }
-                    break;
+            if ("1".equals(input)) {
+                adminMenu();
+            } else {
+                if (!input.equals("2")) {
+                    System.out.println("Please enter a valid number");
+                }
             }
-        } while (!input.equals("3"));
+        } while (!input.equals("2"));
     }
 
+    // add feature to allow admin to transfer money between accounts
+    //add feature to allow admin to create accounts for customers.
     private void adminMenu() {
         System.out.println("ADMIN MENU\nPlease select an option ... ");
-        System.out.println(" 1.All customers // 2.find a Customer // 3.delete a customer // 4.Transfer money // 5.Exit to main menu");
+        System.out.println(" 1.All customers // 2.create new customer // 3.Login to a customer account // 4.find a Customer // 5.delete a customer // 6.Transfer money // 7.Exit to main menu");
         input = scanner.next();
         switch (input) {
             case "1":
                 findAllCustomers();
                 break;
             case "2":
+                newCustomer();
+                break;
+            case "3":
+                customerLogin();
+                break;
+            case "4":
                 System.out.println("Please enter the customer ID");
                 Long cusID = scanner.nextLong();
                 findCustomer(cusID);
                 break;
-            case "3":
+            case "5":
                 deleteCustomer();
                 break;
-            case "4":
+            case "6":
                 transferMoney();
                 break;
             default:
-                if (!input.equals("5")) {
-                    if (!input.equals("5")) {
-                        System.out.println("Please enter a valid number");
-                        adminMenu();
-                    }
+                if (!input.equals("7")) {
+                    System.out.println("Please enter a valid number");
+                    adminMenu();
                 }
                 break;
         }
-        if (!input.equals("5"))
+        if (!input.equals("7"))
             adminMenu();
         else
             mainMenu();
 
     }
-
 
     private void transferMoney() {
         findAllCustomers();
@@ -105,25 +103,26 @@ public class Main {
         String tempCus2 = scanner.next();
         int cus2 = Integer.parseInt(tempCus2);
         customers.get(cus2).getListOfBankAccounts();
-        System.out.println("please enter the account number to transfer to ....");
+        System.out.println("please enter the account number to transfer from ....");
         String tempAcc2 = scanner.next();
-        int acc2 = Integer.parseInt(tempAcc1);
+        int acc2 = Integer.parseInt(tempAcc2);
         System.out.println("please enter the the amount of money  ....");
         String tempAmount = scanner.next();
-        double amount = Double.parseDouble(tempAcc1);
+        double amount = Double.parseDouble(tempAmount);
         currentAccount.getCurrentBankAcc().moneyTransfer(getTheAccountNumber(cus1, acc1), getTheAccountNumber(cus2, acc2), amount);
-        //the below posts this info to the Transactions class
+//the below posts this info to the Transactions class
         //this should work
         // to test, let us call transferMoney() from one of the menus
         Customer.addAccountTransaction(acc1, -1 * amount, String.format("Origin account %s",
                 Customer.getAccountNumber(acc2)));
         Customer.addAccountTransaction(acc2, amount, String.format("Destination account %s",
                 Customer.getAccountNumber(acc1)));
+
     }
 
 
     public BankAcc getTheAccountNumber(int customerId, int accNumber) {
-        Long tempLong = Long.valueOf(customerId);
+        Long tempLong = (long) customerId;
         Customer temp = findCustomer(tempLong);
         for (int i = 0; i < temp.getBankAccounts().size(); i++) {
             if (temp.getBankAccounts().get(i).getAccNum() == accNumber)
@@ -135,46 +134,13 @@ public class Main {
 
     }
 
-
-    private void customerMenu() {
-        System.out.println("CUSTOMER MENU\nPlease select an option ... ");
-        System.out.println(" 1.Register // 2.Login // 3.Help // 4.Exit to main menu");
-        input = scanner.next();
-        switch (input) {
-            case "1":
-                newCustomer();
-                break;
-            case "2":
-                customerLogin();
-                break;
-            case "3":
-                System.out.println("please call +44123456789 to get help\n---------------------------");
-                customerMenu();
-                break;
-            default:
-                if (!input.equals("4")) {
-                    if (!input.equals("4")) {
-                        System.out.println("Please enter a valid number");
-                        customerMenu();
-                    }
-                }
-                break;
-        }
-        if (!input.equals("4"))
-            customerMenu();
-        else
-            mainMenu();
-
-    }
-
-
     public void deleteCustomer() {
         System.out.println("Please enter the customer ID");
-        Long cusID = scanner.nextLong();
+        long cusID = scanner.nextLong();
         for (int i = 0; i < customers.size(); i++) {
             if (customers.get(i).getId() == cusID) {
                 customers.remove(i);
-                System.out.println("====> Selected customer has been successfully removed from the system");
+                System.out.println("====> Selected customer is successfully removed from the system");
                 adminMenu();
             }
         }
@@ -184,18 +150,18 @@ public class Main {
 
     public void findAllCustomers() {
         System.out.println("Please enter the customer ID");
-        for (int i = 0; i < customers.size(); i++) {
-            System.out.println(customers.get(i).toString());
+        for (Customer customer : customers) {
+            System.out.println(customer.toString());
         }
         adminMenu();
     }
 
     public Customer findCustomer(Long customerID) {
 
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getId() == customerID) {
-                System.out.println(customers.get(i).toString());
-                return customers.get(i);
+        for (Customer customer : customers) {
+            if (customer.getId() == customerID) {
+                System.out.println(customer);
+                return customer;
             }
         }
         System.out.println("====> Customer does not exist");
@@ -212,17 +178,17 @@ public class Main {
         System.out.println("Please enter your phone number:");
         String tempPhone = scanner.next();
         validCustomer(new Customer(tempName, tempLastName, tempEmailAddress, tempPhone));
-        customerMenu();
+        adminMenu();
     }
 
     public long loginValidation() {
         long temp = 0;
-        System.out.println("Please enter your name ");
+        System.out.println("Please enter customer name ");
         String cusName = scanner.next();
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getName().equals(cusName)) {
+        for (Customer customer : customers) {
+            if (customer.getName().equals(cusName)) {
                 System.out.println("====> WELCOME " + cusName);
-                temp = customers.get(i).getId();
+                temp = customer.getId();
             }
         }
         return temp;
@@ -235,7 +201,7 @@ public class Main {
             yourBank(temp);
         } else {
             System.out.println("Please enter a valid name ");
-            customerMenu();
+            adminMenu();
         }
     }
 
@@ -248,12 +214,12 @@ public class Main {
                 createNewBankAccount(customerNumber);
                 break;
             case "2":
-                yourAccount(allCustomerAccounts(customerNumber));
+                allCustomerAccounts(customerNumber);
                 break;
             default:
                 if (!input.equals("3")) {
                     System.out.println("Please enter a valid number");
-                    customerMenu();
+                    adminMenu();
                 }
                 break;
         }
@@ -261,29 +227,6 @@ public class Main {
             yourBank(customerNumber);
         else
             customerLogin();
-    }
-
-    private BankAcc allCustomerAccounts(long customerNumber) {
-        Customer temp = null;
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getId() == customerNumber) {
-                temp = customers.get(i);
-                break;
-            }
-        }
-        temp.getListOfBankAccounts();
-        System.out.println("Please select an account to continue ...  ");
-        int accNum = scanner.nextInt();
-        if (accNum - 1 <= temp.getBankAccounts().size())
-            return temp.getBankAccounts().get(accNum - 1);
-
-        System.out.println("please enter a valid number");
-        return null;
-    }
-
-    public void yourAccount(BankAcc bankAcc) {
-        System.out.println("Choose an Option");
-        System.out.println(" 1.Deposit \n 2.Withdraw \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
     private void createNewBankAccount(long customerNumber) {
@@ -313,11 +256,31 @@ public class Main {
             yourBank(customerNumber);
     }
 
+    private void allCustomerAccounts(long customerNumber) {
+        for (Customer customer : customers) {
+            if (customer.getId() == customerNumber) {
+                customer.getListOfBankAccounts();
+            }
+        }
+
+        System.out.println("Please select an account to continue ...  ");
+//        int accNum = scanner.nextInt();
+//        if (accNum - 1 <= temp.getBankAccounts().size())
+//            return temp.getBankAccounts().get(accNum - 1);
+//
+//        System.out.println("please enter a valid number");
+    }
+
+    public void yourAccount(BankAcc bankAcc) {
+        System.out.println("Choose an Option");
+        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
+    }
+
     public void createCurrentAccount(Long customerNumber) {
         BankAcc currentAcc = new CurrentAccount();
         int customerNumberInInt = customerNumber.intValue();
-        customers.get(customerNumberInInt).getBankAccounts().add(currentAcc);
-        customers.get(customerNumberInInt).getListOfBankAccounts();
+        customers.get(customerNumberInInt - 1).getBankAccounts().add(currentAcc);
+        customers.get(customerNumberInInt - 1 ).getListOfBankAccounts();
     }
 
     public void createBusinessAccount(Long customerNumber) {
@@ -328,7 +291,7 @@ public class Main {
         //prompt user to make balance 100
         //only then when balance = 100 or more
         //add the created account to customer array
-        customers.get(customerNumberInInt).getBankAccounts().add(businessAcc);
+        customers.get(customerNumberInInt ).getBankAccounts().add(businessAcc);
         customers.get(customerNumberInInt).getListOfBankAccounts();
         System.out.println("Choose an Option");
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
@@ -337,8 +300,8 @@ public class Main {
     public void createISAAccount(Long customerNumber) {
         BankAcc ISAAcc = new ISAAccount();
         int customerNumberInInt = customerNumber.intValue();
-        customers.get(customerNumberInInt).getBankAccounts().add(ISAAcc);
-        customers.get(customerNumberInInt).getListOfBankAccounts();
+        customers.get(customerNumberInInt ).getBankAccounts().add(ISAAcc);
+        customers.get(customerNumberInInt ).getListOfBankAccounts();
         System.out.println("Choose an Option");
         System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
@@ -369,6 +332,7 @@ public class Main {
         //print transactions history
         currentCustomer.printAccountTransactionHistory(theAccount);
     }
+
 
 
 }
