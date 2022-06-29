@@ -60,7 +60,7 @@ public class Main {
             case "1":
                 findAllCustomers();
                 for (int i = 0; i < customers.size(); i++) {
-                    System.out.println(customers.get(i).getBankAccounts().toString());
+                    System.out.println(customers.get(i).getName() + customers.get(i).getBankAccounts().toString());
                 }
                 adminMenu();
                 break;
