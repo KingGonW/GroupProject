@@ -97,18 +97,18 @@ public class Main {
 
     private void transferMoney() {
         findAllCustomers();
-        System.out.println("Please enter the Customer ID that you would to transfer from ...");
+        System.out.println("Please enter the customer number that you would to transfer from ...");
         String tempCus1 = scanner.next();
         int cus1 = Integer.parseInt(tempCus1);
         customers.get(cus1-1).getListOfBankAccounts();
-        System.out.println("Please enter the account number to transfer from ....");
+        System.out.println("please enter the account number to transfer from ....");
         String tempAcc1 = scanner.next();
         int acc1 = Integer.parseInt(tempAcc1);
-        System.out.println("Please enter the Customer ID that you would to transfer to ...");
+        System.out.println("Please enter the customer number that you would to transfer to ...");
         String tempCus2 = scanner.next();
         int cus2 = Integer.parseInt(tempCus2);
         customers.get(cus2-1).getListOfBankAccounts();
-        System.out.println("Please enter the account number to transfer from ....");
+        System.out.println("please enter the account number to transfer from ....");
         String tempAcc2 = scanner.next();
         int acc2 = Integer.parseInt(tempAcc2);
         System.out.println("please enter the the amount of money  ....");
