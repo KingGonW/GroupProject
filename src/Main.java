@@ -168,7 +168,7 @@ public class Main {
         System.out.println("Please enter the customer ID");
         for (Customer customer : customers) {
             System.out.println(customer.toString());
-                customer.getBankAccounts().toString();
+            System.out.println(customer.getBankAccounts().toString());
 
         }
     }
