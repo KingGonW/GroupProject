@@ -94,9 +94,6 @@ public class Main {
 
     private void transferMoney() {
         findAllCustomers();
-        for (int i = 0; i < customers.size(); i++) {
-            customers.get(i).getBankAccounts();
-        }
         System.out.println("Please enter the customer number that you would to transfer from ...");
         String tempCus1 = scanner.next();
         int cus1 = Integer.parseInt(tempCus1);
@@ -171,6 +168,8 @@ public class Main {
         System.out.println("Please enter the customer ID");
         for (Customer customer : customers) {
             System.out.println(customer.toString());
+                customer.getBankAccounts().toString();
+
         }
     }
 
