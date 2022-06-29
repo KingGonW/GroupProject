@@ -12,15 +12,13 @@ public class Customer {
 
     private static long counter = 0;
 
-    private BankAcc currentBankAcc;
-    private static ArrayList<BankAcc> bankAccounts;
+    private ArrayList<BankAcc> bankAccounts;
 
 
     public Customer() {
     }
 
     public Customer(String name, String lastName, String emailAddress, String phoneNumber) {
-        currentBankAcc = new BankAcc();
         setId(generateUniqueId());
         setEmailAddress(emailAddress);
         setName(name);
@@ -92,13 +90,13 @@ public class Customer {
             this.name = name;
     }
 
-    public BankAcc getCurrentBankAcc() {
-        return currentBankAcc;
-    }
-
-    public void setCurrentBankAcc(BankAcc currentBankAcc) {
-        this.currentBankAcc = currentBankAcc;
-    }
+//    public BankAcc getCurrentBankAcc() {
+//        return currentBankAcc;
+//    }
+//
+//    public void setCurrentBankAcc(BankAcc currentBankAcc) {
+//        this.currentBankAcc = currentBankAcc;
+//    }
 
     public String getLastName() {
         return lastName;
@@ -175,12 +173,13 @@ public class Customer {
     }
 
     //the below gets called in transfer, withdraw and deposit operations
-    public static void addAccountTransaction(int accountIndex, double amount, String memo) {
-        Customer.bankAccounts.get(accountIndex).addTransaction(amount, memo);
+    public  void addAccountTransaction(int accountIndex, double amount, String memo) {
+        bankAccounts.get(accountIndex).addTransaction(amount, memo);
     }
 
+
     //the below gets called in transfer, withdraw and deposit operations
-    public static int getAccountNumber(int accountIndex) {
-        return Customer.bankAccounts.get(accountIndex).getAccNum();
+    public  int getAccountNumber(int accountIndex) {
+        return bankAccounts.get(accountIndex).getAccNum();
     }
 }

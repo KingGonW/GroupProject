@@ -18,8 +18,9 @@ public class Main {
         main.validCustomer(new Customer("Tamara", "-", "tamara@gmail.com", "999999999"));
         main.validCustomer(new Customer("Andy", "-", "andy@gmail.com", "999999999"));
 
-
         main.mainMenu();
+
+
     }
 
     public void validCustomer(Customer customer) {
@@ -58,6 +59,9 @@ public class Main {
         switch (input) {
             case "1":
                 findAllCustomers();
+                for (int i = 0; i < customers.size(); i++) {
+                    System.out.println(customers.get(i).getBankAccounts().toString());
+                }
                 adminMenu();
                 break;
             case "2":
@@ -96,43 +100,57 @@ public class Main {
         System.out.println("Please enter the customer number that you would to transfer from ...");
         String tempCus1 = scanner.next();
         int cus1 = Integer.parseInt(tempCus1);
-        customers.get(cus1).getListOfBankAccounts();
+        customers.get(cus1-1).getListOfBankAccounts();
         System.out.println("please enter the account number to transfer from ....");
         String tempAcc1 = scanner.next();
         int acc1 = Integer.parseInt(tempAcc1);
         System.out.println("Please enter the customer number that you would to transfer to ...");
         String tempCus2 = scanner.next();
         int cus2 = Integer.parseInt(tempCus2);
-        customers.get(cus2).getListOfBankAccounts();
+        customers.get(cus2-1).getListOfBankAccounts();
         System.out.println("please enter the account number to transfer from ....");
         String tempAcc2 = scanner.next();
         int acc2 = Integer.parseInt(tempAcc2);
         System.out.println("please enter the the amount of money  ....");
         String tempAmount = scanner.next();
         double amount = Double.parseDouble(tempAmount);
-        customers.get(cus1).getCurrentBankAcc().moneyTransfer(getTheAccountNumber(cus1, acc1), getTheAccountNumber(cus2, acc2), amount);
+        customers.get(cus1-1).getBankAccounts().get(0).moneyTransfer(getTheAccountNumber(cus1 - 1, acc1 - 1), getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
 //the below posts this info to the Transactions class
         //this should work
         // to test, let us call transferMoney() from one of the menus
-        Customer.addAccountTransaction(acc1, -1 * amount, String.format("Origin account %s",
-                Customer.getAccountNumber(acc2)));
-        Customer.addAccountTransaction(acc2, amount, String.format("Destination account %s",
-                Customer.getAccountNumber(acc1)));
+//        customers.get(cus1-1).addAccountTransaction(acc1, -1 * amount, String.format("Origin account %s",
+//                customers.get(cus1-1).getAccountNumber(acc2)));
+//        customers.get(cus1-1).addAccountTransaction(acc2, amount, String.format("Destination account %s",
+//                customers.get(cus1-1).getAccountNumber(acc1)));
 
     }
 
 
     public BankAcc getTheAccountNumber(int customerId, int accNumber) {
         Long tempLong = (long) customerId;
-        Customer temp = findCustomer(tempLong);
+        Customer temp = null;
+        for (int i = 0; i < customers.size(); i++) {
+            temp =  customers.get(customerId);
+        }
         for (int i = 0; i < temp.getBankAccounts().size(); i++) {
-            if (temp.getBankAccounts().get(i).getAccNum() == accNumber)
-                return temp.getBankAccounts().get(i);
+                return temp.getBankAccounts().get(accNumber);
         }
 
         System.out.println("Cant find the the Account  ");
         return null;
 
+    }
+
+    public Customer findCustomer(Long customerID) {
+
+        for (Customer customer : customers) {
+            if (customer.getId() == customerID) {
+                System.out.println(customer);
+                return customer;
+            }
+        }
+        System.out.println("====> Customer does not exist");
+        return null;
     }
 
     public void deleteCustomer() {
@@ -156,17 +174,7 @@ public class Main {
         }
     }
 
-    public Customer findCustomer(Long customerID) {
 
-        for (Customer customer : customers) {
-            if (customer.getId() == customerID) {
-                System.out.println(customer);
-                return customer;
-            }
-        }
-        System.out.println("====> Customer does not exist");
-        return null;
-    }
 
     public void newCustomer() {
         System.out.println("Please enter your name:");
@@ -191,6 +199,7 @@ public class Main {
                 temp = customer.getId();
             }
         }
+        System.out.println(temp);
         return temp;
 
     }
