@@ -111,29 +111,26 @@ public class Main {
         System.out.println("please enter the the amount of money  ....");
         String tempAmount = scanner.next();
         double amount = Double.parseDouble(tempAmount);
-        getTheAccountNumber(cus1 -1 , acc1);
-        getTheAccountNumber(cus2 - 1, acc2);
-        //customers.get(cus1-1).getBankAccounts().get(0).moneyTransfer(getTheAccountNumber(cus1, acc1), getTheAccountNumber(cus2, acc2), amount);
+        customers.get(cus1-1).getBankAccounts().get(0).moneyTransfer(getTheAccountNumber(cus1 - 1, acc1 - 1), getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
 //the below posts this info to the Transactions class
         //this should work
         // to test, let us call transferMoney() from one of the menus
-        customers.get(cus1-1).addAccountTransaction(acc1, -1 * amount, String.format("Origin account %s",
-                customers.get(cus1-1).getAccountNumber(acc2)));
-        customers.get(cus1-1).addAccountTransaction(acc2, amount, String.format("Destination account %s",
-                customers.get(cus1-1).getAccountNumber(acc1)));
+//        customers.get(cus1-1).addAccountTransaction(acc1, -1 * amount, String.format("Origin account %s",
+//                customers.get(cus1-1).getAccountNumber(acc2)));
+//        customers.get(cus1-1).addAccountTransaction(acc2, amount, String.format("Destination account %s",
+//                customers.get(cus1-1).getAccountNumber(acc1)));
 
     }
 
 
     public BankAcc getTheAccountNumber(int customerId, int accNumber) {
         Long tempLong = (long) customerId;
-        System.out.println(tempLong);
-        Customer temp = findCustomer(tempLong);
-        for (int i = 0; i < temp.getBankAccounts().size(); i++) {
-            if (temp.getBankAccounts().get(i).getAccNum() == accNumber){
-                temp.getBankAccounts().get(i).getAccNum();
-                return temp.getBankAccounts().get(i);
+        Customer temp = null;
+        for (int i = 0; i < customers.size(); i++) {
+            temp =  customers.get(customerId);
         }
+        for (int i = 0; i < temp.getBankAccounts().size(); i++) {
+                return temp.getBankAccounts().get(accNumber);
         }
 
         System.out.println("Cant find the the Account  ");
@@ -145,7 +142,6 @@ public class Main {
 
         for (Customer customer : customers) {
             if (customer.getId() == customerID) {
-                System.out.println("ssssssssssssss");
                 System.out.println(customer);
                 return customer;
             }
@@ -289,7 +285,6 @@ public class Main {
     public void createCurrentAccount(Long customerNumber) {
         BankAcc currentAcc = new CurrentAccount();
         int customerNumberInInt = customerNumber.intValue();
-        System.out.println(customers.get(customerNumberInInt - 1).getName());
         customers.get(customerNumberInInt - 1).getBankAccounts().add(currentAcc);
         customers.get(customerNumberInInt - 1 ).getListOfBankAccounts();
     }
