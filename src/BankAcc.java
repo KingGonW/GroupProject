@@ -87,6 +87,7 @@ public class BankAcc {
         if (this.accNum == nextNum) {
             this.accNum = rand.nextInt(99999999);
         }
+        depositMoney(200);
     }
 
     public double getOpeningBalance() {
@@ -182,14 +183,14 @@ public class BankAcc {
 
     public void moneyTransfer(BankAcc fromAccount, BankAcc toAccount, double amountToTransfer) {
 
-        if (fromAccount == ISAAccount) {
+        if (fromAccount.accType == "ISAAccount") {
             if (ISAAccount.getOpeningBalance() - amountToTransfer < 100) {
                 System.out.println("Your transfer will make your new openingBalance less than 100 +" +
                         "please keep 100 and above at all times");
                 return;
             }
         }
-        if (fromAccount.openingBalance > amountToTransfer) {
+        if (fromAccount.openingBalance >= amountToTransfer) {
             //sets the receivers closing balance to include new deposit
             toAccount.setClosingBalance(toAccount.openingBalance += amountToTransfer);
             // new opening balance of receiver is last closing balance amount
