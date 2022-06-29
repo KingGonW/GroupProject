@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -193,6 +194,9 @@ public class Main {
         long temp = 0;
         System.out.println("Please enter customer name ");
         String cusName = scanner.next();
+        //this changes the first letter of users input to capital letter
+        //so no matter what a lower or upper case input, the user will be found by their name
+        cusName = cusName.substring(0,1).toUpperCase() + cusName.substring(1);
         for (Customer customer : customers) {
             if (customer.getName().equals(cusName)) {
                 System.out.println("====> WELCOME " + cusName);
