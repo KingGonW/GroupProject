@@ -94,6 +94,9 @@ public class Main {
 
     private void transferMoney() {
         findAllCustomers();
+        for (int i = 0; i < customers.size(); i++) {
+            customers.get(i).getBankAccounts();
+        }
         System.out.println("Please enter the customer number that you would to transfer from ...");
         String tempCus1 = scanner.next();
         int cus1 = Integer.parseInt(tempCus1);
