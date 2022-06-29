@@ -59,6 +59,9 @@ public class Main {
         switch (input) {
             case "1":
                 findAllCustomers();
+                for (int i = 0; i < customers.size(); i++) {
+                    System.out.println(customers.get(i).getBankAccounts().toString());
+                }
                 adminMenu();
                 break;
             case "2":
@@ -168,8 +171,6 @@ public class Main {
         System.out.println("Please enter the customer ID");
         for (Customer customer : customers) {
             System.out.println(customer.toString());
-            System.out.println(customer.getBankAccounts().toString());
-
         }
     }
 
