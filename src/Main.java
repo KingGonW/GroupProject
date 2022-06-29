@@ -282,7 +282,7 @@ public class Main {
 
     public void yourAccount(BankAcc bankAcc) {
         System.out.println("Choose an Option");
-        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
+        System.out.println(" 1.Deposit \n 2.Withdrawal \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
     public void createCurrentAccount(Long customerNumber) {
