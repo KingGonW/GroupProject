@@ -58,6 +58,7 @@ public class Main {
         switch (input) {
             case "1":
                 findAllCustomers();
+                adminMenu();
                 break;
             case "2":
                 newCustomer();
@@ -99,7 +100,7 @@ public class Main {
         System.out.println("please enter the account number to transfer from ....");
         String tempAcc1 = scanner.next();
         int acc1 = Integer.parseInt(tempAcc1);
-        System.out.println("Please enter the customer number that you would to transfer from ...");
+        System.out.println("Please enter the customer number that you would to transfer to ...");
         String tempCus2 = scanner.next();
         int cus2 = Integer.parseInt(tempCus2);
         customers.get(cus2).getListOfBankAccounts();
@@ -109,7 +110,7 @@ public class Main {
         System.out.println("please enter the the amount of money  ....");
         String tempAmount = scanner.next();
         double amount = Double.parseDouble(tempAmount);
-        currentAccount.getCurrentBankAcc().moneyTransfer(getTheAccountNumber(cus1, acc1), getTheAccountNumber(cus2, acc2), amount);
+        customers.get(cus1).getCurrentBankAcc().moneyTransfer(getTheAccountNumber(cus1, acc1), getTheAccountNumber(cus2, acc2), amount);
 //the below posts this info to the Transactions class
         //this should work
         // to test, let us call transferMoney() from one of the menus
@@ -153,7 +154,6 @@ public class Main {
         for (Customer customer : customers) {
             System.out.println(customer.toString());
         }
-        adminMenu();
     }
 
     public Customer findCustomer(Long customerID) {
@@ -226,7 +226,7 @@ public class Main {
         if (!input.equals("3"))
             yourBank(customerNumber);
         else
-            customerLogin();
+            adminMenu();
     }
 
     private void createNewBankAccount(long customerNumber) {
