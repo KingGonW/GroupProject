@@ -54,7 +54,7 @@ public class Main {
     //add feature to allow admin to create accounts for customers.
     private void adminMenu() {
         System.out.println("ADMIN MENU\nPlease select an option ... ");
-        System.out.println(" 1.All customers // 2.create new customer // 3.Login to a customer account // 4.find a Customer // 5.delete a customer // 6.Transfer money // 7.Exit to main menu");
+        System.out.println(" 1.All customers \n 2.create new customer \n 3.Login to a customer account \n 4.find a Customer \n 5.delete a customer \n 6.Transfer money \n 7.Exit to main menu");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -111,7 +111,7 @@ public class Main {
         System.out.println("Please enter the account ID to transfer from ....");
         String tempAcc2 = scanner.next();
         int acc2 = Integer.parseInt(tempAcc2);
-        System.out.println("please enter the the amount of money  ....");
+        System.out.println("Please enter the the amount of money  ....");
         String tempAmount = scanner.next();
         double amount = Double.parseDouble(tempAmount);
         customers.get(cus1-1).getBankAccounts().get(0).moneyTransfer(getTheAccountNumber(cus1 - 1, acc1 - 1), getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
