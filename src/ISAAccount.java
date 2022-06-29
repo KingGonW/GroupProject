@@ -91,11 +91,12 @@ public class ISAAccount extends BankAcc {
     }
 
 
+    //The toString method is used to return a string representation of the ISA object.
     @Override
     public String toString() {
         return "Account Type:" + accountType + " Sort Code: " +
                 ISAsortCode + " Account Number: " + ISAAccountNumber
-                + " Balance" + super.getClosingBalance() +
+                + " Balance " + super.getClosingBalance() +
                 " Interest Rate: " + interestRate + "%%";
 
 
