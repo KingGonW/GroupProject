@@ -132,26 +132,33 @@ public class NewMenu {
     }
 
     public void newCustomer() {
-        System.out.println("Please enter your name:");
+        System.out.println("Please Enter Your First Name:");
         String tempName = scanner.next();
-        System.out.println("Please enter your last name:");
+        System.out.println("Please Enter Your Last Name:");
         String tempLastName = scanner.next();
-        System.out.println("Please enter your email address:");
+        System.out.println("Please Enter Your Email Address");
         String tempEmailAddress = scanner.next();
-        System.out.println("Please enter your phone number:");
+        System.out.println("Please Enter Your Phone Number");
         String tempPhone = scanner.next();
+
+        //if user inputs name in lower case, this method
+        // turns first letter of name to upper case
+        tempName = tempName.substring(0, 1).toUpperCase() + tempName.substring(1);
+        tempLastName = tempLastName.substring(0, 1).toUpperCase() + tempLastName.substring(1);
 
         //checking to see if customer has put in right information
         //option to restart process if info is incorrect
         //if correct creates new customer and prints greeting message
         System.out.println("Is all your information correct? \n" +
-                "Y to continue, N to start again");
-        if("Y".equals(scanner.nextLine())|| "y".equals(scanner.nextLine())) {
+                "Y to Continue, N to Restart");
+        String userAnswer = scanner.next();
+
+        if("Y".equals(userAnswer) || "y".equals(userAnswer)) {
             validCustomer(new Customer(tempName, tempLastName, tempEmailAddress, tempPhone));
-            System.out.println("======= Welcome " + tempName + "to Novus Banking System =======");
+            System.out.println( tempName + tempLastName + " Has Been Added As a Customer");
             returnMenus();
         }
-        else if("N".equals(scanner.nextLine()) || "n".equals(scanner.nextLine())){
+        else if("N".equals(userAnswer) || "n".equals(userAnswer)){
             newCustomer();
         }
     }
