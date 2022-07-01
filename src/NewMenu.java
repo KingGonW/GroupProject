@@ -60,19 +60,20 @@ public class NewMenu {
     //add feature to allow admin to create accounts for customers.
     private void adminMenu() {
         System.out.println("\nPlease choose an option");
-        System.out.println("1: View All Customers \n" +
-                "2: Create New Customer\n" +
-                "3: Login to Customer Account\n" +
-                "4: Find Customer\n" +
-                "5: Delete Customer\n" +
-                "6: Transfer Money\n" +
-                "7: Exit to Main Menu");
+        System.out.println("""
+                1: View All Customers\s
+                2: Create New Customer
+                3: Login to Customer Account
+                4: Find Customer
+                5: Delete Customer
+                6: Transfer Money
+                7: Exit to Main Menu""");
         input = scanner.next();
         switch (input) {
             case "1":
                 findAllCustomers();
-                for (int i = 0; i < customers.size(); i++) {
-                    System.out.println(customers.get(i).getName() + customers.get(i).getBankAccounts().toString());
+                for (Customer customer : customers) {
+                    System.out.println(customer.getName() + customer.getBankAccounts().toString());
                 }
                 break;
             case "2":
@@ -85,7 +86,7 @@ public class NewMenu {
                 System.out.println("Please enter the customer ID");
                 Long cusID = scanner.nextLong();
                 findCustomer(cusID);
-
+                returnMenus();
                 break;
             case "5":
                 deleteCustomer();
@@ -106,7 +107,7 @@ public class NewMenu {
 
     public void returnMenus() {
         // created default back option to return to previous menu or initial main menu
-        System.out.println("Choose an Option");
+        System.out.println("\nChoose an Option");
         System.out.println("1: Back to Admin Menu\n" +
                 "2: Back to Main Menu");
 
@@ -126,11 +127,7 @@ public class NewMenu {
             System.out.println(customer.toString());
         }
         returnMenus();
-        input = scanner.next();
-        switch (input) {
-            default:
-                findAllCustomers();
-        }
+
 
     }
 
@@ -149,12 +146,12 @@ public class NewMenu {
         //if correct creates new customer and prints greeting message
         System.out.println("Is all your information correct? \n" +
                 "Y to continue, N to start again");
-        if(input.equals("Y")|| input.equals("y")) {
+        if("Y".equals(scanner.nextLine())|| "y".equals(scanner.nextLine())) {
             validCustomer(new Customer(tempName, tempLastName, tempEmailAddress, tempPhone));
             System.out.println("======= Welcome " + tempName + "to Novus Banking System =======");
             returnMenus();
         }
-        else if(input.equals("N") || input.equals("n")){
+        else if("N".equals(scanner.nextLine()) || "n".equals(scanner.nextLine())){
             newCustomer();
         }
     }
@@ -188,7 +185,7 @@ public class NewMenu {
     }
 
     public Customer findCustomer(Long customerID) {
-        try {
+
             for (Customer customer : customers) {
                 if (customer.getId() == customerID) {
                     System.out.println(customer);
@@ -197,10 +194,9 @@ public class NewMenu {
                 }
 
             }
-        } catch (Exception e) {
-            System.out.println("====> Customer does not exist");
-        }
+        System.out.println("====> Customer does not exist");
         return null;
+
     }
 
 
@@ -270,9 +266,10 @@ public class NewMenu {
 
     public void yourBank(long customerNumber) {
         System.out.println("Please select an option");
-        System.out.println("1: Create New Account\n" +
-                "2: View Accounts\n" +
-                "3: Return to Menus");
+        System.out.println("""
+                1: Create New Account
+                2: View Accounts
+                3: Return to Menus""");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -295,8 +292,12 @@ public class NewMenu {
     }
 
     private void createNewBankAccount(long customerNumber) {
-        System.out.println("Choose an account to create");
-        System.out.println(" 1.Create Current Account // 2.Create Business Account // 3.Create ISA Account // 4.Back to Customer Accounts");
+        System.out.println("Choose An Account to Create");
+        System.out.println("""
+                 1: Create Current Account
+                2: Create Business Account
+                3: Create ISA Account
+                4: Back to Customer Accounts""");
         input = scanner.next();
         switch (input) {
             case "1":
