@@ -13,10 +13,10 @@ public class NewMenu {
         menu.customers = new ArrayList<>();
         menu.currentAccount = new Customer();
         // temporary created to test the app
-        menu.validCustomer(new Customer("Mohsen", "-", "mohsen@gmail.com", "999999999"));
-        menu.validCustomer(new Customer("King", "-", "king@gmail.com", "999999999"));
-        menu.validCustomer(new Customer("Tamara", "-", "tamara@gmail.com", "999999999"));
-        menu.validCustomer(new Customer("Andy", "-", "andy@gmail.com", "999999999"));
+        menu.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "072812712"));
+        menu.validCustomer(new Customer("King", "K", "king@gmail.com", "077435261"));
+        menu.validCustomer(new Customer("Tamara", "T", "tamara@gmail.com", "074362811"));
+        menu.validCustomer(new Customer("Andy", "A", "andy@gmail.com", "078547711"));
 
         menu.mainMenu();
 
@@ -34,9 +34,11 @@ public class NewMenu {
     }
 
     public void mainMenu() {
+        System.out.println("\n\n");
         System.out.println("==================================================");
         System.out.println("====== Welcome to Novus Banking Application ======");
         System.out.println("==================================================");
+        System.out.println("\n");
 
         do {
             System.out.println("Please choose an option");
@@ -57,7 +59,7 @@ public class NewMenu {
     // add feature to allow admin to transfer money between accounts
     //add feature to allow admin to create accounts for customers.
     private void adminMenu() {
-        System.out.println("Please choose an option");
+        System.out.println("\nPlease choose an option");
         System.out.println("1: View All Customers \n" +
                 "2: Create New Customer\n" +
                 "3: Login to Customer Account\n" +
@@ -103,6 +105,7 @@ public class NewMenu {
     }
 
     public void returnMenus() {
+        // created default back option to return to previous menu or initial main menu
         System.out.println("Choose an Option");
         System.out.println("1: Back to Admin Menu\n" +
                 "2: Back to Main Menu");
@@ -140,8 +143,20 @@ public class NewMenu {
         String tempEmailAddress = scanner.next();
         System.out.println("Please enter your phone number:");
         String tempPhone = scanner.next();
-        validCustomer(new Customer(tempName, tempLastName, tempEmailAddress, tempPhone));
-        returnMenus();
+
+        //checking to see if customer has put in right information
+        //option to restart process if info is incorrect
+        //if correct creates new customer and prints greeting message
+        System.out.println("Is all your information correct? \n" +
+                "Y to continue, N to start again");
+        if(input.equals("Y")|| input.equals("y")) {
+            validCustomer(new Customer(tempName, tempLastName, tempEmailAddress, tempPhone));
+            System.out.println("======= Welcome " + tempName + "to Novus Banking System =======");
+            returnMenus();
+        }
+        else if(input.equals("N") || input.equals("n")){
+            newCustomer();
+        }
     }
 
     public long loginValidation() {
@@ -173,17 +188,18 @@ public class NewMenu {
     }
 
     public Customer findCustomer(Long customerID) {
+        try {
+            for (Customer customer : customers) {
+                if (customer.getId() == customerID) {
+                    System.out.println(customer);
+                    return customer;
 
-        for (Customer customer : customers) {
-            if (customer.getId() == customerID) {
-                System.out.println(customer);
-                return customer;
+                }
 
             }
-
+        } catch (Exception e) {
+            System.out.println("====> Customer does not exist");
         }
-        System.out.println("====> Customer does not exist");
-
         return null;
     }
 
