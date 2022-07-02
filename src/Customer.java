@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Customer {
 
     private long id;
-    private String name;
+    private String firstName;
     private String lastName;
     private String emailAddress;
     private String phoneNumber;
@@ -84,12 +84,12 @@ public class Customer {
     }
 
     public String getName() {
-        return name;
+        return firstName;
     }
 
     public void setName(String name) {
         if (!name.isEmpty())
-            this.name = name;
+            this.firstName = firstName;
     }
 
     public BankAcc getCurrentBankAcc() {
@@ -149,16 +149,16 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer ID:" + id + " Customer Name: " +
-                name + " Customer lastName: " + lastName + " Customer Email: " + emailAddress +
-                " Customer Phone Number: " + name;
+                firstName + " Customer lastName: " + lastName + " Customer Email: " + emailAddress +
+                " Customer Phone Number: " + firstName;
     }
 
 
     public void showCustomer() {
         System.out.println("Customer ID: " + id);
-        System.out.println("Customer Name: " + name + lastName);
-        System.out.println("Customer Email: " + name);
-        System.out.println("Customer Phone Number: " + name);
+        System.out.println("Customer Name: " + firstName + lastName);
+        System.out.println("Customer Email: " + firstName);
+        System.out.println("Customer Phone Number: " + firstName);
 
     }
 

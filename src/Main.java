@@ -5,18 +5,26 @@ public class Main {
     private Scanner scanner = new Scanner(System.in);
     private String input;
     private ArrayList<Customer> customers;
-    private Customer currentAccount;
+
+    //why are we naming our instance of Customer "currentAccount"? This is confusing;
+    private static Customer currentAccount;
 
     public static void main(String[] args) {
         Main main = new Main();
         main.customers = new ArrayList<>();
         main.currentAccount = new Customer();
         // temporary created to test the app
+
         main.validCustomer(new Customer("Mohsen", "-", "mohsen@gmail.com", "999999999"));
         main.validCustomer(new Customer("King", "-", "king@gmail.com", "999999999"));
         main.validCustomer(new Customer("Tamara", "-", "tamara@gmail.com", "999999999"));
         main.validCustomer(new Customer("Andy", "-", "andy@gmail.com", "999999999"));
 
+
+        // we ought to give these test customers some bank accounts as well
+        //refer to comments in BankAcc class, we really ought to use the constructor that links the Customer to the Account...
+        BankAcc anAccount = new BankAcc("ISA", "22-66-44");
+        BankAcc tamaraAccount = new BankAcc("ISA", "22-66-44", holder);
 
         main.mainMenu();
     }
@@ -25,7 +33,7 @@ public class Main {
         Customer temp = customer;
         for (int i = 0; i < customers.size(); i++) {
             if (customers.get(i).getEmailAddress().equals(customer.getEmailAddress())) {
-                System.out.println("ERROR: This email address is already exist");
+                System.out.println("ERROR: This email address already exists");
                 return;
             }
         }
@@ -58,7 +66,7 @@ public class Main {
 
     private void adminMenu() {
         System.out.println("ADMIN MENU\nPlease select an option ... ");
-        System.out.println(" 1.All customers // 2.find a Customer // 3.delete a customer // 4.Transfer money // 5.Exit to main menu");
+        System.out.println(" 1.All customers \n 2.find a Customer \n3.delete a customer \n 4.Transfer money \n 5. Show Transaction History\n 6.Exit to main menu");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -75,9 +83,11 @@ public class Main {
             case "4":
                 transferMoney();
                 break;
-            default:
-                if (!input.equals("5")) {
-                    if (!input.equals("5")) {
+            case "5":
+                showTransactionHistory(currentAccount, scanner);
+                default:
+                if (!input.equals("6")) {
+                    if (!input.equals("6")) {
                         System.out.println("Please enter a valid number");
                         adminMenu();
                     }
@@ -340,7 +350,7 @@ public class Main {
         customers.get(customerNumberInInt).getBankAccounts().add(ISAAcc);
         customers.get(customerNumberInInt).getListOfBankAccounts();
         System.out.println("Choose an Option");
-        System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
+        System.out.println(" 1.Deposit \n 2.Withdraw \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
     }
 
     //below method shows transaction history
@@ -357,7 +367,7 @@ public class Main {
             //account is chosen from the arraylist. Number refers to the account in the array list,
             // not the account number
             System.out.printf("Enter the number  (1-%d) of the account\n"
-                    + "you wish to see the history of:",  currentCustomer.numAccounts());
+                    + "you wish to see the history of:",  currentAccount.numAccounts());
 
             // -1 to get to the 0 index position
             theAccount = sc.nextInt()-1;
