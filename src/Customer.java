@@ -18,14 +18,9 @@ public class Customer {
     private static ArrayList<Customer> customers;
 
 
-    //adding a customer should maybe be the domain of a separate class.
-    // Actions a customer is expected to do should be here, but I don't want to add new classes at this point (Andy)
-        public static Customer addCustomer(String firstName, String lastName, String s, String s1) {
-        Customer newCustomer = new Customer(firstName,lastName,emailAddress, phoneNumber);
-        Customer.customers.add(newCustomer);
 
-        return newCustomer;
-    }
+    // Actions a customer is expected to do should be here, but I don't want to add new classes at this point (Andy)
+
 
     public void addAccount(BankAcc account) {
         this.bankAccounts.add(account);

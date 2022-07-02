@@ -12,6 +12,8 @@ public class Main {
     public static void main(String[] args) {
         Main main = new Main();
         main.customers = new ArrayList<>();
+
+
         main.currentAccount = new Customer();
         // temporary created to test the app
 
@@ -30,50 +32,70 @@ public class Main {
         //refer to comments in BankAcc class, we really ought to use the constructor that links the Customer to the Account...
         //trying this below, might break things
 
+        Scanner sc = new Scanner(System.in);
+        Customer currentCustomer;
+
+        Bank theBank = new Bank("Novus Banking Services");
+
         //create the customer - accessed with Customer Class
 
-        Customer Tamara = Customer.addCustomer("Tamara", "-", "tamara@gmail.com", "0123456789");
+        Customer Tamara = theBank.addCustomer("Tamara", "-", "tamara@gmail.com", "0123456789");
 
-        //then give some bank accounts
+        //then give some bank accounts, which update the array lists of accounts and customers
         BankAcc tamaraAccount1 = new BankAcc("ISA", "22-66-44", Tamara);
         Tamara.addAccount(tamaraAccount1);
+        theBank.addAccount(tamaraAccount1);
         BankAcc tamaraAccount2 = new BankAcc("Current", "00-04-01", Tamara);
         Tamara.addAccount(tamaraAccount2);
+        theBank.addAccount(tamaraAccount2);
         BankAcc tamaraAccount3 = new BankAcc("Business", "12-23-24", Tamara);
         Tamara.addAccount(tamaraAccount3);
+        theBank.addAccount(tamaraAccount3);
 
         //create the customer - accessed with Customer Class
-        Customer Mohsen = Customer.addCustomer("Mohsen", "-", "mohsen@gmail.com", "0123456789");
 
-        //then give some bank accounts
+        Customer Mohsen = theBank.addCustomer("Mohsen", "-", "mohsen@gmail.com", "0123456789");
+
+        //then give some bank accounts, which update the array lists of accounts and customers
         BankAcc mohsenAccount1 = new BankAcc("ISA", "22-66-44", Mohsen);
-        Tamara.addAccount(mohsenAccount1);
+        Mohsen.addAccount(mohsenAccount1);
+        theBank.addAccount(mohsenAccount1);
         BankAcc mohsenAccount2 = new BankAcc("Current", "00-04-01", Mohsen);
-        Tamara.addAccount(mohsenAccount2);
+        Mohsen.addAccount(mohsenAccount2);
+        theBank.addAccount(mohsenAccount2);
         BankAcc mohsenAccount3 = new BankAcc("Business", "12-23-24", Mohsen);
-        Tamara.addAccount(mohsenAccount3);
+        Mohsen.addAccount(mohsenAccount3);
+        theBank.addAccount(mohsenAccount3);
 
         //create the customer - accessed with Customer Class
-        Customer King = Customer.addCustomer("King", "-", "king@gmail.com", "0123456789");
+        Customer King = theBank.addCustomer("King", "-", "king@gmail.com", "0123456789");
 
-        //then give some bank accounts
+        //then give some bank accounts, which update the array lists of accounts and customers
         BankAcc kingAccount1 = new BankAcc("ISA", "22-66-44", King);
-        Tamara.addAccount(kingAccount1);
+        King.addAccount(kingAccount1);
+        theBank.addAccount(kingAccount1);
         BankAcc kingAccount2 = new BankAcc("Current", "00-04-01", King);
-        Tamara.addAccount(kingAccount2);
+        King.addAccount(kingAccount2);
+        theBank.addAccount(kingAccount2);
         BankAcc kingAccount3 = new BankAcc("Business", "12-23-24", King);
-        Tamara.addAccount(kingAccount3);
+        King.addAccount(kingAccount3);
+        theBank.addAccount(kingAccount3);
 
         //create the customer - accessed with Customer Class
-        Customer Andy = Customer.addCustomer("Andy", "-", "andy@gmail.com", "0123456789");
+        Customer Andy = theBank.addCustomer("Andy", "-", "andy@gmail.com", "0123456789");
 
-        //then give some bank accounts
+        //then give some bank accounts, which update the array lists of accounts and customers
         BankAcc andyAccount1 = new BankAcc("ISA", "22-66-44", Andy);
-        Tamara.addAccount(andyAccount1);
+        Andy.addAccount(kingAccount1);
+        theBank.addAccount(kingAccount1);
         BankAcc andyAccount2 = new BankAcc("Current", "00-04-01", Andy);
-        Tamara.addAccount(andyAccount2);
+        Andy.addAccount(andyAccount2);
+        theBank.addAccount(andyAccount2);
         BankAcc andyAccount3 = new BankAcc("Business", "12-23-24", Andy);
-        Tamara.addAccount(andyAccount3);
+        Andy.addAccount(andyAccount3);
+        theBank.addAccount(andyAccount3);
+
+
 
 
         main.mainMenu();
@@ -91,6 +113,8 @@ public class Main {
     }
 
     public void mainMenu() {
+
+
         System.out.println("MAIN MENU\nPlease select an option ... ");
 
         do {
@@ -115,6 +139,8 @@ public class Main {
     }
 
     private void adminMenu() {
+
+
         System.out.println("ADMIN MENU\nPlease select an option ... ");
         System.out.println(" 1.All customers \n 2.find a Customer \n3.delete a customer \n 4.Transfer money \n 5. Show Transaction History\n 6.Exit to main menu");
         input = scanner.next();
