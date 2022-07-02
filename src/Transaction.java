@@ -19,18 +19,18 @@ public class Transaction {
     private BankAcc inAccount;
 
     //one with the memo, and one without. This is overloading.
-    public Transaction( double amount, BankAcc inAccount){
+    public Transaction(double amount, BankAcc inAccount) {
 
         this.amount = amount;
         this.inAccount = inAccount;
         this.timestamp = new Date();
-        this.memo="";
+        this.memo = "";
 
     }
 
-    public Transaction( double amount,String memo, BankAcc inAccount){
+    public Transaction(double amount, String memo, BankAcc inAccount) {
         //call the 2 argument constructor first, i.e. the one above
-        this(amount,inAccount);
+        this(amount, inAccount);
 
 
         //then set the memo
@@ -41,13 +41,14 @@ public class Transaction {
     public double getAmount() {
         return this.amount;
     }
+
     //see printAccountSummary in Customer.java for explanation
     public String getSummaryLine() {
 
         //the if relates to the deposits and the else to withdrawals, hence the () in the formatting.
 
         //£ does not properly display here
-        if(this.amount >= 0){
+        if (this.amount >= 0) {
             return String.format("Date and time :%s\n Amount : %.02f\n Memo: %s\n",
                     this.timestamp.toString(),
                     this.amount, this.memo);

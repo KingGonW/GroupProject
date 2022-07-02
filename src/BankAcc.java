@@ -29,7 +29,7 @@ public class BankAcc {
         this.accType = accType;
     }
 
-    
+
     //the below array list relates to Transaction class
     //the idea is that each account holds an array list of the transactions
     //this will be called
@@ -48,20 +48,22 @@ public class BankAcc {
     //this might make more sense held in another class,
     // e.g. "Bank" to mimic a bank having a list of accounts
     private ArrayList<BankAcc> bankAccounts;
-    BankAcc(){}
-    
+
+    BankAcc() {
+    }
+
     //alternate constructor below, with Customer variable attached
-public BankAcc(String accType,String sortCode, Customer holder){
+    public BankAcc(String accType, String sortCode, Customer holder) {
         this.accType = accType;
         this.sortCode = sortCode;
         this.accNum = this.getNewAccountNumber();
-        
-}
+
+    }
 
 
-//this method relates to the alternate constructor above
+    //this method relates to the alternate constructor above
     private int getNewAccountNumber() {
-        
+
         Random rand = new Random();
         int accountNumber = this.accNum;
         this.accNum = rand.nextInt(99999999);
@@ -73,8 +75,7 @@ public BankAcc(String accType,String sortCode, Customer holder){
     }
 
 
-
-    public BankAcc(String accType,String sortCode) {
+    public BankAcc(String accType, String sortCode) {
         this.accType = accType;
         this.sortCode = sortCode;
         // added opening and closing balance to constructor
@@ -86,6 +87,7 @@ public BankAcc(String accType,String sortCode, Customer holder){
         if (this.accNum == nextNum) {
             this.accNum = rand.nextInt(99999999);
         }
+        depositMoney(200);
     }
 
     public double getOpeningBalance() {
@@ -128,11 +130,11 @@ public BankAcc(String accType,String sortCode, Customer holder){
 
 
     public void depositMoney(double depositAmount) {
-        System.out.println("Please enter the amount you want to deposit:  ");
+      //  System.out.println("Please enter the amount you want to deposit:  ");
         //sets closing balance to balance after deposit was made
         setClosingBalance(openingBalance += depositAmount);
         //new opening balance is the last closing balance amount
-        setOpeningBalance(getClosingBalance());
+        setOpeningBalance(closingBalance);
         this.numberDeposits++; // increment number of deposits each time one is made
 
 
@@ -141,13 +143,13 @@ public BankAcc(String accType,String sortCode, Customer holder){
         // to test, let us call depositMoney() from one of the menus
         //scanner also needed if we want a memo to be added
         // commenting out the code until necessary things are added
-       // System.out.println("Enter a memo");
-       // memo= sc.nextLine();
+        // System.out.println("Enter a memo");
+        // memo= sc.nextLine();
 
         // ideally we want a way to choose the specific customer
 
         //Customer.addAccountTransaction(toAccount,depositAmount, memo);
-       // ATM.printUserMenu(currentCustomer,sc);
+        // ATM.printUserMenu(currentCustomer,sc);
 
     }
 
@@ -164,7 +166,6 @@ public BankAcc(String accType,String sortCode, Customer holder){
             setClosingBalance(openingBalance -= withdrawAmount);
             setOpeningBalance(closingBalance);
             numberWithdrawals++; // increment number of withdrawals made each time money is withdrawn
-
         }
 
         //the below posts this info to the Transactions class
@@ -175,21 +176,21 @@ public BankAcc(String accType,String sortCode, Customer holder){
         // commenting out the code until necessary things are added
 
         // System.out.println("Enter a memo");
-       // memo= sc.nextLine();
-       //Customer.addAccountTransaction(fromAccount,-1*withdrawAmount, memo);
+        // memo= sc.nextLine();
+        //Customer.addAccountTransaction(fromAccount,-1*withdrawAmount, memo);
 
     }
 
     public void moneyTransfer(BankAcc fromAccount, BankAcc toAccount, double amountToTransfer) {
 
-        if (fromAccount == ISAAccount) {
+        if (fromAccount.accType == "ISAAccount") {
             if (ISAAccount.getOpeningBalance() - amountToTransfer < 100) {
                 System.out.println("Your transfer will make your new openingBalance less than 100 +" +
                         "please keep 100 and above at all times");
                 return;
             }
         }
-        if (fromAccount.openingBalance > amountToTransfer) {
+        if (fromAccount.openingBalance >= amountToTransfer) {
             //sets the receivers closing balance to include new deposit
             toAccount.setClosingBalance(toAccount.openingBalance += amountToTransfer);
             // new opening balance of receiver is last closing balance amount
@@ -203,12 +204,6 @@ public BankAcc(String accType,String sortCode, Customer holder){
         } else {
             System.out.println("Insufficient Funds, Transfer Unsuccessful");
         }
-// worth adding a try catch here for transferring between accounts
-
-    /*
-    https://codereview.stackexchange.com/questions/259695/simple-bank-application-in-java
-*/
-
 
     }
 
@@ -224,7 +219,7 @@ public BankAcc(String accType,String sortCode, Customer holder){
         System.out.printf("\nTransaction History for account %s\n", this.accNum);
 
         //this prints the transactions in reverse order, i.e. the most recent first
-        for(int t = this.transactions.size()-1; t>=0; t--){
+        for (int t = this.transactions.size() - 1; t >= 0; t--) {
             System.out.printf(this.transactions.get(t).getSummaryLine());
         }
         System.out.println();

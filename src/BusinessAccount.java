@@ -10,28 +10,25 @@ public class BusinessAccount extends BankAcc {
     private LocalDate CreationDate;
 
     public BusinessAccount() {
-      //  super(openingBalance, closingBalance, accNum,accountType,businessSortCode);
+        super(accountType, businessSortCode);
+        super.getAccNum();
         setBusinessAccountNumber(super.getAccNum());
         this.CreationDate = LocalDate.now();
-        /*this.setBalance(initialDeposit);
-        if(initialDeposit < 25) {
-            System.out.println("must deposit 25 or more to create an Business account");
-        }*/
+
     }
 
     public void setBusinessAccountNumber(int businessAccountNumber) {
         this.businessAccountNumber = businessAccountNumber;
     }
 
-    public void subscription(){
+    public void subscription() {
         LocalDate date = LocalDate.now();
-        if(this.CreationDate.getMonth() == date.getMonth() && this.CreationDate.getDayOfMonth() == date.getDayOfMonth()){
+        if (this.CreationDate.getMonth() == date.getMonth() && this.CreationDate.getDayOfMonth() == date.getDayOfMonth()) {
             this.subscription = 25;
             this.afterSub = this.getClosingBalance() - this.subscription;
         }
-        System.out.println("The balance after annual subscription is"+ this.afterSub);
+        System.out.println("The balance after annual subscription is" + this.afterSub);
     }
-
 
 
     @Override
