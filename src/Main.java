@@ -15,16 +15,66 @@ public class Main {
         main.currentAccount = new Customer();
         // temporary created to test the app
 
-        main.validCustomer(new Customer("Mohsen", "-", "mohsen@gmail.com", "999999999"));
-        main.validCustomer(new Customer("King", "-", "king@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Tamara", "-", "tamara@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Andy", "-", "andy@gmail.com", "999999999"));
+        //commenting out the below to test adding customers *with* accounts (see below)
+
+        //main.validCustomer(new Customer("Mohsen", "-", "mohsen@gmail.com", "999999999"));
+       // main.validCustomer(new Customer("King", "-", "king@gmail.com", "999999999"));
+        //main.validCustomer(new Customer("Tamara", "-", "tamara@gmail.com", "999999999"));
+        //main.validCustomer(new Customer("Andy", "-", "andy@gmail.com", "999999999"));
 
 
-        // we ought to give these test customers some bank accounts as well
-        //refer to comments in BankAcc class, we really ought to use the constructor that links the Customer to the Account...
+        // we ought to give these test customers some bank accounts as well, example below of an account with no attached customer
+
         BankAcc anAccount = new BankAcc("ISA", "22-66-44");
-        BankAcc tamaraAccount = new BankAcc("ISA", "22-66-44", holder);
+
+        //refer to comments in BankAcc class, we really ought to use the constructor that links the Customer to the Account...
+        //trying this below, might break things
+
+        //create the customer - accessed with Customer Class
+
+        Customer Tamara = Customer.addCustomer("Tamara", "-", "tamara@gmail.com", "0123456789");
+
+        //then give some bank accounts
+        BankAcc tamaraAccount1 = new BankAcc("ISA", "22-66-44", Tamara);
+        Tamara.addAccount(tamaraAccount1);
+        BankAcc tamaraAccount2 = new BankAcc("Current", "00-04-01", Tamara);
+        Tamara.addAccount(tamaraAccount2);
+        BankAcc tamaraAccount3 = new BankAcc("Business", "12-23-24", Tamara);
+        Tamara.addAccount(tamaraAccount3);
+
+        //create the customer - accessed with Customer Class
+        Customer Mohsen = Customer.addCustomer("Mohsen", "-", "mohsen@gmail.com", "0123456789");
+
+        //then give some bank accounts
+        BankAcc mohsenAccount1 = new BankAcc("ISA", "22-66-44", Mohsen);
+        Tamara.addAccount(mohsenAccount1);
+        BankAcc mohsenAccount2 = new BankAcc("Current", "00-04-01", Mohsen);
+        Tamara.addAccount(mohsenAccount2);
+        BankAcc mohsenAccount3 = new BankAcc("Business", "12-23-24", Mohsen);
+        Tamara.addAccount(mohsenAccount3);
+
+        //create the customer - accessed with Customer Class
+        Customer King = Customer.addCustomer("King", "-", "king@gmail.com", "0123456789");
+
+        //then give some bank accounts
+        BankAcc kingAccount1 = new BankAcc("ISA", "22-66-44", King);
+        Tamara.addAccount(kingAccount1);
+        BankAcc kingAccount2 = new BankAcc("Current", "00-04-01", King);
+        Tamara.addAccount(kingAccount2);
+        BankAcc kingAccount3 = new BankAcc("Business", "12-23-24", King);
+        Tamara.addAccount(kingAccount3);
+
+        //create the customer - accessed with Customer Class
+        Customer Andy = Customer.addCustomer("Andy", "-", "andy@gmail.com", "0123456789");
+
+        //then give some bank accounts
+        BankAcc andyAccount1 = new BankAcc("ISA", "22-66-44", Andy);
+        Tamara.addAccount(andyAccount1);
+        BankAcc andyAccount2 = new BankAcc("Current", "00-04-01", Andy);
+        Tamara.addAccount(andyAccount2);
+        BankAcc andyAccount3 = new BankAcc("Business", "12-23-24", Andy);
+        Tamara.addAccount(andyAccount3);
+
 
         main.mainMenu();
     }

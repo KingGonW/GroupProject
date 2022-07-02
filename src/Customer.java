@@ -7,23 +7,38 @@ public class Customer {
     private long id;
     private String firstName;
     private String lastName;
-    private String emailAddress;
-    private String phoneNumber;
+    private static String emailAddress;
+    private static String phoneNumber;
 
     private static long counter = 0;
 
     private BankAcc currentBankAcc;
     private static ArrayList<BankAcc> bankAccounts;
 
+    private static ArrayList<Customer> customers;
+
+
+    //adding a customer should maybe be the domain of a separate class.
+    // Actions a customer is expected to do should be here, but I don't want to add new classes at this point (Andy)
+        public static Customer addCustomer(String firstName, String lastName, String s, String s1) {
+        Customer newCustomer = new Customer(firstName,lastName,emailAddress, phoneNumber);
+        Customer.customers.add(newCustomer);
+
+        return newCustomer;
+    }
+
+    public void addAccount(BankAcc account) {
+        this.bankAccounts.add(account);
+    }
 
     public Customer() {
     }
 
-    public Customer(String name, String lastName, String emailAddress, String phoneNumber) {
+    public Customer(String firstName, String lastName, String emailAddress, String phoneNumber) {
         currentBankAcc = new BankAcc();
         setId(generateUniqueId());
         setEmailAddress(emailAddress);
-        setName(name);
+        setName(firstName);
         setLastName(lastName);
         setPhoneNumber(phoneNumber);
 
