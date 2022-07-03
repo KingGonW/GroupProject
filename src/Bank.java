@@ -108,6 +108,8 @@ public class Bank {
         return this.name;
     }
 
+    //below prints out a list of customers
+
     public void printCustomerSummary() {
 
         System.out.printf("\n\n%s' List of Customers:", this.name);
@@ -126,7 +128,26 @@ public class Bank {
         System.out.println();
     }
 
+    //below to find out how many customers there are
     public int numCustomers() {
         return this.customers.size();
+    }
+
+    //below prints out a list of accounts
+    public void printAccountsSummary() {
+        System.out.printf("\n Accounts held by %s :", this.name);
+
+        // sets our counter at 0,
+        // as long as the counter is less than the size of the accounts array
+        // adds one to the counter
+        for (int a = 0; a <this.bankAccounts.size(); a++){
+
+            //%d is the format for an integer
+            //%s is the summary line - each account instance will generate one of these
+            //getSummaryLine() is defined in Accounts.java
+            System.out.printf("\n%d) %s", a+1,
+                    this.bankAccounts.get(a).getSummaryLine());
+        }
+        System.out.println();
     }
 }

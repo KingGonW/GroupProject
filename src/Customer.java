@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Customer {
 
-        private final String firstName;
+        public final String firstName;
 
         private final String lastName;
 
@@ -30,7 +30,9 @@ public class Customer {
             //System.out.printf("New User: %s %s with ID %s created.", firstName, lastName, this.CustomerId);
         }
 
-        public void addAccount(BankAccount account) {
+
+
+    public void addAccount(BankAccount account) {
             this.bankAccounts.add(account);
         }
 
@@ -39,9 +41,10 @@ public class Customer {
             return this.CustomerId;
         }
 
-        public Object getFirstName() {
+        public String getFirstName() {
             return this.firstName;
         }
+
 
 
         //this prints a summary of the accounts of this user
@@ -98,7 +101,7 @@ public class Customer {
             return String.format("Customer Name: %s  %s, ID: %s", this.firstName, this.lastName, this.CustomerId);
     }
 
-    public Object getLastName() {
+    public String getLastName() {
             return this.lastName;
     }
 }

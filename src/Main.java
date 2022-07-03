@@ -14,16 +14,14 @@ public class Main{
         //this is hard coded here for testing purposes
         //for Group Project we need an interface, i.e. menus, to create customers and accounts
 
-        Customer aCustomer = theBank.addCustomer("Mister","Test");
+
         Customer Tamara = theBank.addCustomer("Novus","Tamara");
         Customer Mohsen = theBank.addCustomer("Novus","Mohsen");
         Customer Andy = theBank.addCustomer("Novus","Andy");
         Customer King = theBank.addCustomer("Novus","King");
 
         //create several accounts for testing purposes
-        BankAccount anAccount = new BankAccount("ISA",aCustomer,theBank);
-        aCustomer.addAccount(anAccount);
-        theBank.addAccount(anAccount);
+
 
         BankAccount tamaraAccount1 = new BankAccount("ISA",Tamara,theBank);
         Tamara.addAccount(tamaraAccount1);
@@ -68,19 +66,16 @@ public class Main{
 
 
         Customer currentCustomer;
-        while(true){
+
 
             //'sc' below refers to the scanner - defined above - which gets passed to the methods
 
            //this means we start with current Customer selected, and then display the chosen menu
-            currentCustomer= Main.printCustomerMenu(theBank, sc);
+           Main.printStartMenu(theBank, sc);
 
-                    Main.printCustomerMenu(theBank, sc);
 
-            //stay in main menu until user quits
-            Main.printAccountsMenu(currentCustomer, sc);
 
-        }
+
 
     }
 
@@ -90,6 +85,128 @@ public class Main{
     // createCustomer(),deleteCustomer()
     // checkInterest(), checkBalance()
 
+//==============================Main (Start) Menu & Methods=========================================
+    private static void printStartMenu(Bank theBank, Scanner  sc){
+        int userChoice;
+
+        do {
+            System.out.printf("\nWelcome  to %s, what would you like to do?:", theBank.getName());
+            System.out.println();
+            System.out.println(" 1. View All Customers");
+            System.out.println(" 2. View All Accounts");
+            System.out.println(" 3. Exit the App");
+            System.out.println();
+            System.out.println(" Enter your choice");
+            userChoice = sc.nextInt();
+            if (userChoice <1 || userChoice > 3){
+                System.out.println("Invalid choice, please choose 1 - 3.");
+            }
+
+
+        } while(userChoice <1 || userChoice > 3);
+        switch (userChoice) {
+            case 1 -> Main.viewCustomers(theBank, sc);
+            case 2 -> Main.viewAccounts(theBank);
+            case 3 -> Main.exitApp();
+
+
+            //in the video there is no default case, but I think we need one
+            //also, put something for exit option, e.g. a goodbye message
+        }
+
+    }
+
+    private static void viewCustomers(Bank theBank, Scanner sc) {
+        theBank.printCustomerSummary();
+        Main.customerMenu(theBank, sc);
+    }
+
+    //below to display all accounts
+    private static void viewAccounts(Bank theBank) {
+theBank.printAccountsSummary();
+Main.transactionsMenu();
+    }
+
+    //below to exit the app
+    private static void exitApp() {
+       System.exit(0);
+    }
+
+//==============================Main Number Two & Methods=========================================
+    //the below menu initialises when the admin has chosen option 1 in printStartMenu
+
+    private static void customerMenu(Bank theBank, Scanner sc){
+
+
+        int userChoice;
+
+        do {
+            System.out.printf("\nWelcome  to the customer Menu, what would you like to do?:", theBank.getName());
+            System.out.println();
+            System.out.println(" 1. Add a Customer");
+            System.out.println(" 2. Select a Customer");
+            System.out.println(" 3. Go back to the start menu");
+            System.out.println(" 4. Exit the App");
+            System.out.println();
+            System.out.println(" Enter your choice");
+            userChoice = sc.nextInt();
+            if (userChoice <1 || userChoice > 3){
+                System.out.println("Invalid choice, please choose 1 - 3.");
+            }
+
+
+        } while(userChoice <1 || userChoice > 3);
+        switch (userChoice) {
+            case 1 -> Main.addCustomer();
+            case 2 -> Main.selectCustomer(theBank, sc);
+            case 3 -> Main.printStartMenu(theBank, sc);
+            case 4 -> Main.exitApp();
+
+
+            //in the video there is no default case, but I think we need one
+            //also, put something for exit option, e.g. a goodbye message
+        }
+
+    }
+
+    private static Customer selectCustomer(Bank theBank, Scanner sc) {
+        theBank.printCustomerSummary();
+
+        //initialise
+        String CustomerID;
+        Customer AuthCustomer;
+
+        //user menu
+
+        //rewrite this to have an exit option
+
+
+        do {
+            System.out.print("\nChoose one of the above Customer IDs:");
+            CustomerID = sc.nextLine();
+
+
+            //try to get the Customer object that corresponds to the ID
+            AuthCustomer = theBank.customerLogin(CustomerID);
+            if (AuthCustomer == null) {
+                System.out.println("Incorrect User. \n Try again.");
+            }
+        } while (AuthCustomer == null);//continues looping until successful login
+
+        return AuthCustomer;
+
+
+    }
+
+    private static void addCustomer() {
+    }
+
+
+//==============================Main Number Three & Methods=========================================
+    //the below menu initialises when the admin has chosen option 2 in printStartMenu
+
+    private static void transactionsMenu() {
+    }
     private static void printAccountsMenu(Customer currentCustomer, Scanner sc) {
 
         //print a summary of user accounts
