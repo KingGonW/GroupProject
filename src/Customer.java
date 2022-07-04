@@ -30,9 +30,8 @@ public class Customer {
             //System.out.printf("New User: %s %s with ID %s created.", firstName, lastName, this.CustomerId);
         }
 
-
-
     public void addAccount(BankAccount account) {
+
             this.bankAccounts.add(account);
         }
 
@@ -40,12 +39,12 @@ public class Customer {
 
             return this.CustomerId;
         }
-
+    public void deleteAccount(String AccountNumber){
+        this.bankAccounts.remove(AccountNumber);
+    }
         public String getFirstName() {
             return this.firstName;
         }
-
-
 
         //this prints a summary of the accounts of this user
         public void printAccountsSummary() {
@@ -63,6 +62,7 @@ public class Customer {
                 System.out.printf("\n%d) %s", a+1,
                         this.bankAccounts.get(a).getSummaryLine());
             }
+
             System.out.println();
         }
 

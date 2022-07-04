@@ -37,10 +37,6 @@ public class BankAccount {
 
         //initialise transactions
         this.transactions = new ArrayList<Transaction>();
-
-
-
-
     }
 
     public String getID() {
@@ -51,7 +47,6 @@ public class BankAccount {
 
     public String getSummaryLine() {
 
-
         //get the balance
         double balance = this.getBalance();
 
@@ -61,8 +56,8 @@ public class BankAccount {
 
             //this tells the string to format as a decimal, with 2 points
             //%s is the account id, % is the balance in brackets for negative values, then another %s for the account name
-            return String.format("Account Number: %s, Balance in pounds: %.02f, Account Type: %s, linked to %s",
-                    this.AccountNumber, balance, this.AccountType, this.holder);
+            return String.format("Account Number: %s, Balance in pounds: %.02f, Account Type: %s, linked to %s %s",
+                    this.AccountNumber, balance, this.AccountType, this.holder.firstName, this.holder.getLastName());
         } else {
             return String.format("Account Number: %s, Balance in pounds: (%.02f), Account Type: %s, linked to %s",
                     this.AccountNumber, balance, this.AccountType, this.holder);
