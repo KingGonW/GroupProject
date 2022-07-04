@@ -35,10 +35,16 @@ public class Main {
     }
 
     public void mainMenu() {
-        System.out.println("MAIN MENU\nPlease select an option ... ");
+        System.out.println("\n");
+        System.out.println("==================================================");
+        System.out.println("====== Welcome to Novus Banking Application ======");
+        System.out.println("==================================================");
+        System.out.println("\n");
 
         do {
-            System.out.println("1.Admin\n2.Exit");
+            System.out.println("Please choose an option");
+            System.out.println("1: Admin Access\n2: Exit Program");
+
 
             input = scanner.next();
             if ("1".equals(input)) {
@@ -54,8 +60,15 @@ public class Main {
     // add feature to allow admin to transfer money between accounts
     //add feature to allow admin to create accounts for customers.
     private void adminMenu() {
-        System.out.println("ADMIN MENU\nPlease select an option ... ");
-        System.out.println(" 1.All customers \n 2.Login to a customer account \n 3.find a Customer \n 4.Transfer money \n 5.Exit to main menu");
+        System.out.println("\nPlease choose an option");
+        System.out.println("""
+                1: View All Customers\s
+                2: Create New Customer
+                3: Login to Customer Account
+                4: Find Customer
+                5: Delete Customer
+                6: Transfer Money
+                7: Exit to Main Menu""");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -88,6 +101,56 @@ public class Main {
         else
             mainMenu();
 
+    }
+
+    // created default back option to return to previous menu or initial main menu
+    //this can be used in any section of the menu, from viewing customers to creating accounts
+    public void returnMenus() {
+
+        System.out.println("\nChoose an Option");
+        System.out.println("1: Back to Admin Menu\n" +
+                "2: Back to Main Menu");
+
+        input = scanner.next();
+        switch (input) {
+            case "1":
+                adminMenu();
+            case "2":
+                mainMenu();
+
+        }
+
+    }
+
+    //adding methods in order that it shows up in the admin menu
+    public void findAllCustomers() {
+        System.out.println("Please enter the customer ID");
+        for (Customer customer : customers) {
+            System.out.println(customer.toString());
+        }
+    }
+
+
+    public void customerLogin() {
+        long temp = loginValidation();
+        if (temp != 0) {
+            yourBank(temp);
+        } else {
+            System.out.println("Please enter a valid name ");
+            adminMenu();
+        }
+    }
+    
+    public Customer findCustomer(Long customerID) {
+
+        for (Customer customer : customers) {
+            if (customer.getId() == customerID) {
+                System.out.println(customer);
+                return customer;
+            }
+        }
+        System.out.println("====> Customer does not exist");
+        return null;
     }
 
     private void transferMoney() {
@@ -136,17 +199,6 @@ public class Main {
 
     }
 
-    public Customer findCustomer(Long customerID) {
-
-        for (Customer customer : customers) {
-            if (customer.getId() == customerID) {
-                System.out.println(customer);
-                return customer;
-            }
-        }
-        System.out.println("====> Customer does not exist");
-        return null;
-    }
 
     /*public void deleteCustomer() {
         System.out.println("Please enter the customer ID");
@@ -162,12 +214,6 @@ public class Main {
         adminMenu();
     }*/
 
-    public void findAllCustomers() {
-        System.out.println("Please enter the customer ID");
-        for (Customer customer : customers) {
-            System.out.println(customer.toString());
-        }
-    }
 
 
 
@@ -202,15 +248,6 @@ public class Main {
 
     }
 
-    public void customerLogin() {
-        long temp = loginValidation();
-        if (temp != 0) {
-            yourBank(temp);
-        } else {
-            System.out.println("Please enter a valid name ");
-            adminMenu();
-        }
-    }
 
     public void yourBank(long customerNumber) {
         System.out.println("BANK MENU\nPlease select an option ... ");

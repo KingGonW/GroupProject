@@ -155,7 +155,7 @@ public class NewMenu {
         //if correct creates new customer and prints greeting message
         if("Y".equals(userAnswer) || "y".equals(userAnswer)) {
             validCustomer(new Customer(tempName, tempLastName, tempEmailAddress, tempPhone));
-            System.out.println( tempName + tempLastName + " Has Been Added As a Customer");
+            System.out.println( tempName + " " + tempLastName + " Has Been Added As a Customer");
             returnMenus();
         }
         //else restarts process to create a new customer
