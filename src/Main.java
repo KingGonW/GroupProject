@@ -21,7 +21,6 @@ public class Main {
 
         main.mainMenu();
 
-
     }
 
     public void validCustomer(Customer customer) {
@@ -79,14 +78,27 @@ public class Main {
                 adminMenu();
                 break;
             case "2":
+
                 customerLogin();
                 break;
             case "3":
+                for (Customer customer : customers) {
+                    System.out.println(customer.toString());
+                }
+
+                customerLogin();
+
+                break;
+            case "4":
+                for (Customer customer : customers) {
+                    System.out.println(customer.toString());
+                }
                 System.out.println("Please enter the customer ID");
                 Long cusID = scanner.nextLong();
                 findCustomer(cusID);
-                break;
-            case "4":
+            case "5" :
+               // deleteCustomer(); this is not yet connected
+            case "6":
                 transferMoney();
                 break;
             default:
@@ -130,8 +142,8 @@ public class Main {
         }
     }
 
-
     public void customerLogin() {
+        
         long temp = loginValidation();
         if (temp != 0) {
             yourBank(temp);
@@ -275,7 +287,7 @@ public class Main {
 
     private void createNewBankAccount(long customerNumber) {
         System.out.println("Choose an account to create");
-        System.out.println(" \n1.Create Current Account \n 2.Create Business Account \n 3.Create ISA Account \n 4.Back to Customer Accounts");
+        System.out.println(" \n1.Current Account \n 2. Business Account \n 3. ISA Account \n 4.Back to Customer Accounts");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -301,8 +313,8 @@ public class Main {
     }
 
     private void allCustomerAccounts(long customerNumber) {
-        for (Customer customer : customers) {
-            if (customer.getId() == customerNumber) {
+        for (Customer customer : customers ) {
+            if (customer.getId() == customerNumber -1) {
                 customer.getListOfBankAccounts();
             }
         }

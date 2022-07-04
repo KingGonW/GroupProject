@@ -29,9 +29,6 @@ public class Customer {
         this.bankAccounts = new ArrayList<BankAcc>();
     }
 
-
-
-
     public boolean checkISAAcc(Object obj) {
         if (obj != null) {
             System.out.println("You  already have an ISA Account ");
@@ -52,27 +49,20 @@ public class Customer {
         }
         System.out.println("Customer does not exist ");
         return null;
-
     }
 
     public ArrayList<BankAcc> getBankAccounts() {
         return bankAccounts;
     }
-
     public void setBankAccounts(ArrayList<BankAcc> bankAccounts) {
         this.bankAccounts = bankAccounts;
     }
-
     public void getListOfBankAccounts() {
         for (int i = 0; i < bankAccounts.size(); i++) {
             System.out.println(i + 1 + " = " + bankAccounts.get(i).toString());
             System.out.println();
         }
     }
-
-
-
-
     public long getId() {
         return id;
     }
@@ -155,8 +145,8 @@ public class Customer {
     public void showCustomer() {
         System.out.println("Customer ID: " + id);
         System.out.println("Customer Name: " + name + lastName);
-        System.out.println("Customer Email: " + name);
-        System.out.println("Customer Phone Number: " + name);
+        System.out.println("Customer Email: " + emailAddress);
+        System.out.println("Customer Phone Number: " + phoneNumber);
 
     }
 
