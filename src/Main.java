@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -8,6 +7,7 @@ public class Main {
     private ArrayList<Customer> customers;
     private Customer currentAccount;
 
+    //i hope this works
     public static void main(String[] args) {
 
         Main main = new Main();
@@ -134,7 +134,7 @@ public class Main {
             temp =  customers.get(customerId);
         }
         for (int i = 0; i < temp.getBankAccounts().size(); i++) {
-                return temp.getBankAccounts().get(accNumber);
+            return temp.getBankAccounts().get(accNumber);
         }
 
         System.out.println("Cant find the the Account  ");

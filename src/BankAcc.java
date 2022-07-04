@@ -130,7 +130,7 @@ public class BankAcc {
 
 
     public void depositMoney(double depositAmount) {
-      //  System.out.println("Please enter the amount you want to deposit:  ");
+        //  System.out.println("Please enter the amount you want to deposit:  ");
         //sets closing balance to balance after deposit was made
         setClosingBalance(openingBalance += depositAmount);
         //new opening balance is the last closing balance amount
