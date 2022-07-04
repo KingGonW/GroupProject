@@ -27,7 +27,7 @@ public class Main {
     public void validCustomer(Customer customer) {
         for (Customer value : customers) {
             if (value.getEmailAddress().equals(customer.getEmailAddress())) {
-                System.out.println("ERROR: This email address is already exist");
+                System.out.println("ERROR: This email address already exists");
                 return;
             }
         }
@@ -214,7 +214,7 @@ public class Main {
 
     public void yourBank(long customerNumber) {
         System.out.println("BANK MENU\nPlease select an option ... ");
-        System.out.println("1.Create a new Bank account // 2.Your accounts // 3.Exit to main menu");
+        System.out.println("\n 1.Create a new Bank account \n 2.View accounts \n 3.Exit to main menu");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -238,7 +238,7 @@ public class Main {
 
     private void createNewBankAccount(long customerNumber) {
         System.out.println("Choose an account to create");
-        System.out.println(" 1.Create Current Account // 2.Create Business Account // 3.Create ISA Account // 4.Back to Customer Accounts");
+        System.out.println(" \n1.Create Current Account \n 2.Create Business Account \n 3.Create ISA Account \n 4.Back to Customer Accounts");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -280,7 +280,7 @@ public class Main {
 
     public void yourAccount(BankAcc bankAcc) {
         System.out.println("Choose an Option");
-        System.out.println(" 1.Deposit \n 2.Withdrawal \n 3.View Balance \n 4.Exit to Customer Menu");
+        System.out.println(" 1.Make a deposit \n 2.Make a withdrawal \n 3.View Balance \n 4.Exit to Customer Menu");
     }
 
     public void createCurrentAccount(Long customerNumber) {
