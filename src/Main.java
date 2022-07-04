@@ -103,6 +103,25 @@ public class Main {
 
     }
 
+    // created default back option to return to previous menu or initial main menu
+    //this can be used in any section of the menu, from viewing customers to creating accounts
+    public void returnMenus() {
+
+        System.out.println("\nChoose an Option");
+        System.out.println("1: Back to Admin Menu\n" +
+                "2: Back to Main Menu");
+
+        input = scanner.next();
+        switch (input) {
+            case "1":
+                adminMenu();
+            case "2":
+                mainMenu();
+
+        }
+
+    }
+
     private void transferMoney() {
         findAllCustomers();
         System.out.println("Please enter the Customer ID that you would to transfer from ...");
