@@ -5,23 +5,35 @@ import java.util.ArrayList;
 public class Customer {
 
     private long id;
-    private String name;
+    private String firstName;
     private String lastName;
-    private String emailAddress;
-    private String phoneNumber;
+    private static String emailAddress;
+    private static String phoneNumber;
 
     private static long counter = 0;
 
-    private ArrayList<BankAcc> bankAccounts;
+    private BankAcc currentBankAcc;
+    private static ArrayList<BankAcc> bankAccounts;
 
+    private static ArrayList<Customer> customers;
+
+
+
+    // Actions a customer is expected to do should be here, but I don't want to add new classes at this point (Andy)
+
+
+    public void addAccount(BankAcc account) {
+        this.bankAccounts.add(account);
+    }
 
     public Customer() {
     }
 
-    public Customer(String name, String lastName, String emailAddress, String phoneNumber) {
+    public Customer(String firstName, String lastName, String emailAddress, String phoneNumber) {
+        currentBankAcc = new BankAcc();
         setId(generateUniqueId());
         setEmailAddress(emailAddress);
-        setName(name);
+        setName(firstName);
         setLastName(lastName);
         setPhoneNumber(phoneNumber);
 
@@ -82,21 +94,21 @@ public class Customer {
     }
 
     public String getName() {
-        return name;
+        return firstName;
     }
 
     public void setName(String name) {
         if (!name.isEmpty())
-            this.name = name;
+            this.firstName = firstName;
     }
 
-//    public BankAcc getCurrentBankAcc() {
-//        return currentBankAcc;
-//    }
-//
-//    public void setCurrentBankAcc(BankAcc currentBankAcc) {
-//        this.currentBankAcc = currentBankAcc;
-//    }
+    public BankAcc getCurrentBankAcc() {
+        return currentBankAcc;
+    }
+
+    public void setCurrentBankAcc(BankAcc currentBankAcc) {
+        this.currentBankAcc = currentBankAcc;
+    }
 
     public String getLastName() {
         return lastName;
@@ -146,17 +158,17 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer ID: " + id + " Name: " +
-                name + " Last Name: " + lastName + " Email: " + emailAddress +
-                " Phone Number: " + phoneNumber;
+        return "Customer ID:" + id + " Customer Name: " +
+                firstName + " Customer lastName: " + lastName + " Customer Email: " + emailAddress +
+                " Customer Phone Number: " + firstName;
     }
 
 
     public void showCustomer() {
         System.out.println("Customer ID: " + id);
-        System.out.println("Customer Name: " + name + lastName);
-        System.out.println("Customer Email: " + name);
-        System.out.println("Customer Phone Number: " + name);
+        System.out.println("Customer Name: " + firstName + lastName);
+        System.out.println("Customer Email: " + firstName);
+        System.out.println("Customer Phone Number: " + firstName);
 
     }
 
@@ -173,13 +185,12 @@ public class Customer {
     }
 
     //the below gets called in transfer, withdraw and deposit operations
-    public  void addAccountTransaction(int accountIndex, double amount, String memo) {
-        bankAccounts.get(accountIndex).addTransaction(amount, memo);
+    public static void addAccountTransaction(int accountIndex, double amount, String memo) {
+        Customer.bankAccounts.get(accountIndex).addTransaction(amount, memo);
     }
 
-
     //the below gets called in transfer, withdraw and deposit operations
-    public  int getAccountNumber(int accountIndex) {
-        return bankAccounts.get(accountIndex).getAccNum();
+    public static int getAccountNumber(int accountIndex) {
+        return Customer.bankAccounts.get(accountIndex).getAccNum();
     }
 }
