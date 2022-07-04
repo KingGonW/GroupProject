@@ -8,6 +8,7 @@ public class Main {
     private ArrayList<Customer> customers;
     private Customer currentAccount;
 
+    //i hope this works
     public static void main(String[] args) {
 
         Main main = new Main();
