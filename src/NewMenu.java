@@ -148,16 +148,18 @@ public class NewMenu {
 
         //checking to see if customer has put in right information
         //option to restart process if info is incorrect
-        //if correct creates new customer and prints greeting message
         System.out.println("Is all your information correct? \n" +
                 "Y to Continue, N to Restart");
         String userAnswer = scanner.next();
 
+        //if correct creates new customer and prints greeting message
         if("Y".equals(userAnswer) || "y".equals(userAnswer)) {
             validCustomer(new Customer(tempName, tempLastName, tempEmailAddress, tempPhone));
             System.out.println( tempName + tempLastName + " Has Been Added As a Customer");
             returnMenus();
         }
+        //else restarts process to create a new customer
+        //if statement checks both upper and lower case of user prompt 
         else if("N".equals(userAnswer) || "n".equals(userAnswer)){
             newCustomer();
         }
