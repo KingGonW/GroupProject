@@ -55,7 +55,7 @@ public class Main {
     //add feature to allow admin to create accounts for customers.
     private void adminMenu() {
         System.out.println("ADMIN MENU\nPlease select an option ... ");
-        System.out.println(" 1.All customers \n 2.create new customer \n 3.Login to a customer account \n 4.find a Customer \n 5.delete a customer \n 6.Transfer money \n 7.Exit to main menu");
+        System.out.println(" 1.All customers \n 2.Login to a customer account \n 3.find a Customer \n 4.Transfer money \n 5.Exit to main menu");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -66,20 +66,14 @@ public class Main {
                 adminMenu();
                 break;
             case "2":
-                newCustomer();
-                break;
-            case "3":
                 customerLogin();
                 break;
-            case "4":
+            case "3":
                 System.out.println("Please enter the customer ID");
                 Long cusID = scanner.nextLong();
                 findCustomer(cusID);
                 break;
-            case "5":
-                deleteCustomer();
-                break;
-            case "6":
+            case "4":
                 transferMoney();
                 break;
             default:
@@ -154,7 +148,7 @@ public class Main {
         return null;
     }
 
-    public void deleteCustomer() {
+    /*public void deleteCustomer() {
         System.out.println("Please enter the customer ID");
         long cusID = scanner.nextLong();
         for (int i = 0; i < customers.size(); i++) {
@@ -166,7 +160,7 @@ public class Main {
         }
         System.out.println("====> Customer does not exist");
         adminMenu();
-    }
+    }*/
 
     public void findAllCustomers() {
         System.out.println("Please enter the customer ID");
@@ -177,7 +171,7 @@ public class Main {
 
 
 
-    public void newCustomer() {
+    /*public void newCustomer() {
         System.out.println("Please enter your name:");
         String tempName = scanner.next();
         System.out.println("Please enter your last name:");
@@ -188,7 +182,7 @@ public class Main {
         String tempPhone = scanner.next();
         validCustomer(new Customer(tempName, tempLastName, tempEmailAddress, tempPhone));
         adminMenu();
-    }
+    }*/
 
     public long loginValidation() {
         long temp = 0;
