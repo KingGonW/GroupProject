@@ -35,10 +35,16 @@ public class Main {
     }
 
     public void mainMenu() {
-        System.out.println("MAIN MENU\nPlease select an option ... ");
+        System.out.println("\n");
+        System.out.println("==================================================");
+        System.out.println("====== Welcome to Novus Banking Application ======");
+        System.out.println("==================================================");
+        System.out.println("\n");
 
         do {
-            System.out.println("1.Admin\n2.Exit");
+            System.out.println("Please choose an option");
+            System.out.println("1: Admin Access\n2: Exit Program");
+
 
             input = scanner.next();
             if ("1".equals(input)) {
