@@ -83,6 +83,10 @@ public class Bank {
         this.bankAccounts.add(anAcct);
     }
 
+    public void deleteAccount(String AccountNumber){
+        this.bankAccounts.remove(AccountNumber);
+    }
+
     public Customer addCustomer(String firstName, String lastName){
 
         //the 'this' below makes it refer to the class it is in, i.e "Bank"
@@ -149,5 +153,28 @@ public class Bank {
                     this.bankAccounts.get(a).getSummaryLine());
         }
         System.out.println();
+    }
+
+    //the below to allow get all the accounts in the Banks array of accounts
+    public int numAccounts() {
+        return this.bankAccounts.size();
+    }
+    //the below to print the account history of a chosen account
+    public void printAccountTransactionHistory(int accountIndex) {
+        this.bankAccounts.get(accountIndex).printTransHistory();
+    }
+    //the below to print the account balance of a chosen account
+    public double getAccountBalance(int accountIndex) {
+        return this.bankAccounts.get(accountIndex).getBalance();
+    }
+
+    //the below to allow Bank Entity to make Account Transactions, same as how Customers can do it
+    public void addAccountTransaction(int accountIndex, double amount, String memo) {
+        this.bankAccounts.get(accountIndex).addTransaction(amount, memo);
+    }
+    //the below to allow Bank Entity to retrieve the Account Number, same as in the Customer class
+
+    public Object getAccountNumber(int accountIndex) {
+        return this.bankAccounts.get(accountIndex).getID();
     }
 }
