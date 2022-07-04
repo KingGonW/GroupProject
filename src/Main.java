@@ -306,8 +306,7 @@ public class Main {
         //add the created account to customer array
         customers.get(customerNumberInInt - 1 ).getBankAccounts().add(businessAcc);
         customers.get(customerNumberInInt - 1 ).getListOfBankAccounts();
-        //System.out.println("Choose an Option");
-        //System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
+
     }
 
     public void createISAAccount(Long customerNumber) {
@@ -315,8 +314,7 @@ public class Main {
         int customerNumberInInt = customerNumber.intValue();
         customers.get(customerNumberInInt - 1 ).getBankAccounts().add(ISAAcc);
         customers.get(customerNumberInInt - 1 ).getListOfBankAccounts();
-        //System.out.println("Choose an Option");
-        //System.out.println(" 1.Deposit \n 2.Withdrawn \n 3.Transfer \n 4.View Balance \n 5.Exit to Customer Menu");
+
     }
 
     //below method shows transaction history
