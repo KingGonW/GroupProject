@@ -238,7 +238,7 @@ public class Main {
 
     private void createNewBankAccount(long customerNumber) {
         System.out.println("Choose an account to create");
-        System.out.println(" \n1.Create Current Account \n 2.Create Business Account \n 3.Create ISA Account \n 4.Back to Customer Accounts");
+        System.out.println(" \n 1.Create Current Account \n 2.Create Business Account \n 3.Create ISA Account \n 4.Back to Customer Accounts");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -281,6 +281,36 @@ public class Main {
     public void yourAccount(BankAcc bankAcc) {
         System.out.println("Choose an Option");
         System.out.println(" 1.Make a deposit \n 2.Make a withdrawal \n 3.View Balance \n 4.Exit to Customer Menu");
+        input = scanner.next();
+        switch (input) {
+            case "1":
+                deposit();
+                break;
+            case "2":
+                withdrawal();
+                break;
+            /*case "3":
+                //viewbalance();
+                break;*/
+            default:
+                if (!input.equals("4")) {
+                    System.out.println("Please enter a valid number");
+                    adminMenu();
+                }
+                break;
+        }
+    }
+
+    public void deposit(){
+        BankAcc BA = new BankAcc();
+        double dmoney = scanner.nextDouble();
+        BA.depositMoney(dmoney);
+    }
+
+    public void withdrawal(){
+        BankAcc BA = new BankAcc();
+        double wmoney = scanner.nextDouble();
+        BA.withdrawMoney(wmoney);
     }
 
     public void createCurrentAccount(Long customerNumber) {
@@ -300,6 +330,7 @@ public class Main {
         //add the created account to customer array
         customers.get(customerNumberInInt - 1 ).getBankAccounts().add(businessAcc);
         customers.get(customerNumberInInt - 1 ).getListOfBankAccounts();
+
 
     }
 
