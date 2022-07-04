@@ -122,6 +122,38 @@ public class Main {
 
     }
 
+    //adding methods in order that it shows up in the admin menu
+    public void findAllCustomers() {
+        System.out.println("Please enter the customer ID");
+        for (Customer customer : customers) {
+            System.out.println(customer.toString());
+        }
+    }
+
+
+    public void customerLogin() {
+        long temp = loginValidation();
+        if (temp != 0) {
+            yourBank(temp);
+        } else {
+            System.out.println("Please enter a valid name ");
+            adminMenu();
+        }
+    }
+
+
+    public Customer findCustomer(Long customerID) {
+
+        for (Customer customer : customers) {
+            if (customer.getId() == customerID) {
+                System.out.println(customer);
+                return customer;
+            }
+        }
+        System.out.println("====> Customer does not exist");
+        return null;
+    }
+
     private void transferMoney() {
         findAllCustomers();
         System.out.println("Please enter the Customer ID that you would to transfer from ...");
@@ -168,17 +200,6 @@ public class Main {
 
     }
 
-    public Customer findCustomer(Long customerID) {
-
-        for (Customer customer : customers) {
-            if (customer.getId() == customerID) {
-                System.out.println(customer);
-                return customer;
-            }
-        }
-        System.out.println("====> Customer does not exist");
-        return null;
-    }
 
     /*public void deleteCustomer() {
         System.out.println("Please enter the customer ID");
@@ -194,12 +215,6 @@ public class Main {
         adminMenu();
     }*/
 
-    public void findAllCustomers() {
-        System.out.println("Please enter the customer ID");
-        for (Customer customer : customers) {
-            System.out.println(customer.toString());
-        }
-    }
 
 
 
@@ -234,15 +249,6 @@ public class Main {
 
     }
 
-    public void customerLogin() {
-        long temp = loginValidation();
-        if (temp != 0) {
-            yourBank(temp);
-        } else {
-            System.out.println("Please enter a valid name ");
-            adminMenu();
-        }
-    }
 
     public void yourBank(long customerNumber) {
         System.out.println("BANK MENU\nPlease select an option ... ");
