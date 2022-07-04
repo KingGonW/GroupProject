@@ -9,7 +9,7 @@ public class Bank {
 
     private final ArrayList<Customer> customers;
 
-    private final ArrayList<BankAccount> bankAccounts;
+    final ArrayList<BankAccount> bankAccounts;
 
 
 
@@ -83,9 +83,7 @@ public class Bank {
         this.bankAccounts.add(anAcct);
     }
 
-    public void deleteAccount(String AccountNumber){
-        this.bankAccounts.remove(AccountNumber);
-    }
+
 
     public Customer addCustomer(String firstName, String lastName){
 

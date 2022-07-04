@@ -272,12 +272,20 @@ Main.transactionsMenu(theBank, sc, currentCustomer);
         System.out.println();
         currentCustomer.printAccountsSummary();
 
-        AccountNumber = sc.nextLine();
+        ////////////////////////////////////////////////
 
-        theBank.deleteAccount(AccountNumber);
-        currentCustomer.deleteAccount(AccountNumber);
-        System.out.println("Account Deleted");
-        Main.printAccountsMenu(currentCustomer,sc, theBank);
+       System.out.println("Please enter the Account Number you would like to delete");
+     AccountNumber = sc.next();
+        for (int i = 0; i < theBank.bankAccounts.size(); i++) {
+            if (theBank.bankAccounts.get(i).getID() == AccountNumber) {
+                theBank.bankAccounts.remove(i);
+                System.out.println("====> Selected Account has been successfully removed from the system");
+                Main.selectCustomer(theBank,sc);
+            }
+        }
+        System.out.println("====> Account does not exist");
+        Main.selectCustomer(theBank,sc);
+
     }
 
     private static void addAccountToThisCustomer(Customer currentCustomer, Scanner sc, Bank theBank) {
