@@ -130,7 +130,7 @@ public class BankAcc {
 
 
     public void depositMoney(double depositAmount) {
-      //  System.out.println("Please enter the amount you want to deposit:  ");
+        //  System.out.println("Please enter the amount you want to deposit:  ");
         //sets closing balance to balance after deposit was made
         setClosingBalance(openingBalance += depositAmount);
         //new opening balance is the last closing balance amount
@@ -183,7 +183,6 @@ public class BankAcc {
 
     public void moneyTransfer(BankAcc fromAccount, BankAcc toAccount, double amountToTransfer) {
 
-        //runs a check to make sure the transferring amount doesn't go below 100
         if (fromAccount.accType == "ISAAccount") {
             if (ISAAccount.getOpeningBalance() - amountToTransfer < 100) {
                 System.out.println("Your transfer will make your new openingBalance less than 100 +" +

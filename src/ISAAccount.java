@@ -11,18 +11,13 @@ public class ISAAccount extends BankAcc {
 
 
     public ISAAccount() {
-        //super used to get variables from parent
         super(accountType, ISAsortCode);
         super.getAccNum();
-        //set method used here to set account number using the
-        //random account number method in parent class constructor
         setISAAccountNumber(super.getAccNum());
 
     }
 
-    //used to set account number
-    //made private as it is only to be used within this class to generate an account number
-    private void setISAAccountNumber(int ISAAccountNumber) {
+    public void setISAAccountNumber(int ISAAccountNumber) {
         this.ISAAccountNumber = ISAAccountNumber;
     }
 
@@ -35,8 +30,6 @@ public class ISAAccount extends BankAcc {
                     "to keep your ISA account, please keep balance over 100");
             System.out.println("Would you like to deposit money?");
         } else {
-            //after checking withdrawal doesn't go below 100 balance
-            //will execute withdrawal method from parent class
             withdrawMoney(withdrawAmount);
             System.out.println("You have withdrawn " + withdrawAmount + " from your account" + "\n" +
                     "Your Balance is now: " + this.getClosingBalance());
