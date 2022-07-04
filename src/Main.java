@@ -6,13 +6,12 @@ public class Main {
     private final Scanner scanner = new Scanner(System.in);
     private String input;
     private ArrayList<Customer> customers;
-    private Customer currentAccount;
+
 
     public static void main(String[] args) {
 
         Main main = new Main();
         main.customers = new ArrayList<>();
-        main.currentAccount = new Customer();
         // temporary created to test the app
         main.validCustomer(new Customer("Mohsen", "-", "mohsen@gmail.com", "999999999"));
         main.validCustomer(new Customer("King", "-", "king@gmail.com", "999999999"));
@@ -35,6 +34,7 @@ public class Main {
     }
 
     public void mainMenu() {
+
         System.out.println("MAIN MENU\nPlease select an option ... ");
 
         do {
@@ -128,7 +128,6 @@ public class Main {
 
 
     public BankAcc getTheAccountNumber(int customerId, int accNumber) {
-        Long tempLong = (long) customerId;
         Customer temp = null;
         for (int i = 0; i < customers.size(); i++) {
             temp =  customers.get(customerId);
