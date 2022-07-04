@@ -21,6 +21,7 @@ public class Main {
 
         main.mainMenu();
 
+
     }
 
     public void validCustomer(Customer customer) {
@@ -78,16 +79,13 @@ public class Main {
                 adminMenu();
                 break;
             case "2":
-
-                customerLogin();
+                //createNewCustomer - not yet linked
                 break;
-            case "3":
+            case "3" :
                 for (Customer customer : customers) {
                     System.out.println(customer.toString());
                 }
-
                 customerLogin();
-
                 break;
             case "4":
                 for (Customer customer : customers) {
@@ -96,10 +94,14 @@ public class Main {
                 System.out.println("Please enter the customer ID");
                 Long cusID = scanner.nextLong();
                 findCustomer(cusID);
-            case "5" :
-               // deleteCustomer(); this is not yet connected
+                break;
+            case "5":
+                //deleteCustomer - not yet linked
             case "6":
                 transferMoney();
+                break;
+            case "7":
+               // exitApp(); not linked
                 break;
             default:
                 if (!input.equals("7")) {
@@ -142,8 +144,8 @@ public class Main {
         }
     }
 
+
     public void customerLogin() {
-        
         long temp = loginValidation();
         if (temp != 0) {
             yourBank(temp);
@@ -287,7 +289,7 @@ public class Main {
 
     private void createNewBankAccount(long customerNumber) {
         System.out.println("Choose an account to create");
-        System.out.println(" \n1.Current Account \n 2. Business Account \n 3. ISA Account \n 4.Back to Customer Accounts");
+        System.out.println(" \n 1.Create Current Account \n 2.Create Business Account \n 3.Create ISA Account \n 4.Back to Customer Accounts");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -313,8 +315,8 @@ public class Main {
     }
 
     private void allCustomerAccounts(long customerNumber) {
-        for (Customer customer : customers ) {
-            if (customer.getId() == customerNumber -1) {
+        for (Customer customer : customers) {
+            if (customer.getId() == customerNumber) {
                 customer.getListOfBankAccounts();
             }
         }
@@ -330,6 +332,36 @@ public class Main {
     public void yourAccount(BankAcc bankAcc) {
         System.out.println("Choose an Option");
         System.out.println(" 1.Make a deposit \n 2.Make a withdrawal \n 3.View Balance \n 4.Exit to Customer Menu");
+        input = scanner.next();
+        switch (input) {
+            case "1":
+                deposit();
+                break;
+            case "2":
+                withdrawal();
+                break;
+            /*case "3":
+                //viewbalance();
+                break;*/
+            default:
+                if (!input.equals("4")) {
+                    System.out.println("Please enter a valid number");
+                    adminMenu();
+                }
+                break;
+        }
+    }
+
+    public void deposit(){
+        BankAcc BA = new BankAcc();
+        double dmoney = scanner.nextDouble();
+        BA.depositMoney(dmoney);
+    }
+
+    public void withdrawal(){
+        BankAcc BA = new BankAcc();
+        double wmoney = scanner.nextDouble();
+        BA.withdrawMoney(wmoney);
     }
 
     public void createCurrentAccount(Long customerNumber) {
@@ -349,6 +381,7 @@ public class Main {
         //add the created account to customer array
         customers.get(customerNumberInInt - 1 ).getBankAccounts().add(businessAcc);
         customers.get(customerNumberInInt - 1 ).getListOfBankAccounts();
+
 
     }
 
