@@ -303,7 +303,7 @@ public class NewMenu {
     private void createNewBankAccount(long customerNumber) {
         System.out.println("Choose An Account to Create");
         System.out.println("""
-                 1: Create Current Account
+                1: Create Current Account
                 2: Create Business Account
                 3: Create ISA Account
                 4: Back to Customer Accounts""");
