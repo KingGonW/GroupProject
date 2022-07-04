@@ -54,8 +54,15 @@ public class Main {
     // add feature to allow admin to transfer money between accounts
     //add feature to allow admin to create accounts for customers.
     private void adminMenu() {
-        System.out.println("ADMIN MENU\nPlease select an option ... ");
-        System.out.println(" 1.All customers \n 2.Login to a customer account \n 3.find a Customer \n 4.Transfer money \n 5.Exit to main menu");
+        System.out.println("\nPlease choose an option");
+        System.out.println("""
+                1: View All Customers\s
+                2: Create New Customer
+                3: Login to Customer Account
+                4: Find Customer
+                5: Delete Customer
+                6: Transfer Money
+                7: Exit to Main Menu""");
         input = scanner.next();
         switch (input) {
             case "1":
