@@ -7,6 +7,8 @@ public class Main {
     private String input;
     private ArrayList<Customer> customers;
 
+    Customer currentCustomer = new Customer();
+
 
 
 
@@ -306,7 +308,8 @@ public class Main {
 
                 break;
             case "3":
-               showTransactionHistory(currentAccount, scanner);
+
+                showTransactionHistory(currentCustomer, scanner);
                 // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
                 break;
             case "4":
