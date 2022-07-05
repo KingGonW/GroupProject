@@ -37,21 +37,15 @@ public class Main {
         int randomInt2 = random.nextInt(1,4);
         int randomInt3 = random.nextInt(1,4);
 
-        System.out.println(randomInt);
         for (int i = 0; i < randomInt; i++) {
             createCurrentAccount(customer.getId());
-
         }
-
-        System.out.println(randomInt2);
         for (int i = 0; i < randomInt2; i++) {
             createBusinessAccount(customer.getId());
-        }System.out.println(randomInt3);
+        }
         for (int i = 0; i < randomInt3; i++) {
             createISAAccount(customer.getId());
         }
-
-
     }
     
     public void printCustomerAccounts(Long customerID){
