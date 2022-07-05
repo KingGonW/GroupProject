@@ -283,9 +283,12 @@ public class Main {
         System.out.println("""
                 1: Create a new Bank account\s
                 2: View accounts
-                3: View Account Transaction History: 
-                4: Exit to Admin Menu
-                5: Exit to Main Menu""");
+                3: View Account Transaction History
+                4. Deposit Funds
+                5. Withdraw Funds
+                6. Transfer Funds
+                7: Exit to Admin Menu
+                8: Exit to Main Menu""");
 
         input = scanner.next();
         switch (input) {
@@ -293,22 +296,36 @@ public class Main {
                 createNewBankAccount(customerNumber);
                 break;
             case "2":
-                /*for (int i = 0; i < customers.size(); i++) {
+               /*for (int i = 0; i < customers.size(); i++) {
+
                     System.out.println(customers.get(i).getName() + customers.get(i).getBankAccounts().toString());
                 }*/
-                allCustomerAccounts(customerNumber);
+                printCustomerAccounts(customerNumber);
+                //allCustomerAccounts(customerNumber);
                 break;
             case "3":
                 // showTransactionHistory(Customer currentCustomer, Scanner sc);
                 // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
                 break;
             case "4":
-                adminMenu();
+                deposit();
+                // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
                 break;
             case "5":
+                withdraw();
+                // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
+                break;
+            case "6":
+                transferMoney();
+                // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
+                break;
+            case "7":
+                adminMenu();
+                break;
+            case "8":
                 mainMenu();
             default:
-                if (!input.equals("6")) {
+                if (!input.equals("8")) {
                     System.out.println("Please enter a valid number");
                     adminMenu();
                 }
@@ -381,7 +398,7 @@ public class Main {
                 deposit();
                 break;
             case "2":
-                withdrawal();
+                withdraw();
                 break;
             /*case "3":
                 //viewbalance();
@@ -409,7 +426,7 @@ public class Main {
         BA.depositMoney(dmoney);
     }
 
-    public void withdrawal() {
+    public void withdraw() {
         BankAcc BA = new BankAcc();
         System.out.println("Please enter the amount to withdrawal");
         double wmoney = scanner.nextDouble();
