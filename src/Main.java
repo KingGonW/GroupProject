@@ -396,12 +396,14 @@ public class Main {
 
     public void deposit() {
         BankAcc BA = new BankAcc();
+        System.out.println("Please enter the amount to deposit");
         double dmoney = scanner.nextDouble();
         BA.depositMoney(dmoney);
     }
 
     public void withdrawal() {
         BankAcc BA = new BankAcc();
+        System.out.println("Please enter the amount to withdrawal");
         double wmoney = scanner.nextDouble();
         BA.withdrawMoney(wmoney);
     }
