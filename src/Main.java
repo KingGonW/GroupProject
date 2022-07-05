@@ -16,7 +16,7 @@ public class Main {
         Main main = new Main();
         main.customers = new ArrayList<>();
 
-     
+
         main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "07374829121"));
         main.validCustomer(new Customer("King", "K", "king@gmail.com", "07664738222"));
         main.validCustomer(new Customer("Tamara", "T", "tamara@gmail.com", "07776652499"));
@@ -25,6 +25,8 @@ public class Main {
         main.generateAccounts(main.customers.get(1));
         main.generateAccounts(main.customers.get(2));
         main.generateAccounts(main.customers.get(3));
+
+        System.out.println(main.customers.get(0).getListOfBankAccounts());
        /* for (int i = 0; i < main.customers.size(); i++) {
             main.printCustomerAccounts(i + 1l);
         }*/
@@ -43,7 +45,7 @@ public class Main {
             e.printStackTrace();
         }
 
-       /* try {
+        try {
             FileWriter writer = new FileWriter("customerAccounts.txt");
             Writer output = new BufferedWriter(writer);
             for (int i = 0; i < main.customers.size(); i++) {
@@ -54,7 +56,7 @@ public class Main {
         }catch (IOException e) {
             System.out.println("I cannot write that file");
             e.printStackTrace();
-        }*/
+        }
 
 
         main.mainMenu();
@@ -79,10 +81,10 @@ public class Main {
         }
     }
 
-    public void printCustomerAccounts(Long customerID) {
+    public String printCustomerAccounts(Long customerID) {
         int customerNumberInInt = customerID.intValue();
         customers.get(customerNumberInInt - 1).getName();
-        customers.get(customerNumberInInt - 1).getListOfBankAccounts();
+       return customers.get(customerNumberInInt - 1).getListOfBankAccounts();
 
     }
 
