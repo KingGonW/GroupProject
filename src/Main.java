@@ -471,12 +471,22 @@ public class Main {
 
     public void deposit(long customerNumber) {
         BankAcc BA = new BankAcc();
-        printCustomerAccounts(customerNumber);
-        System.out.println("Please enter the account to deposit");
-        int theAccount= scanner.nextInt();
-        System.out.println("Please enter the amount to deposit");
-        double dmoney = scanner.nextDouble();
-        BA.depositMoney(dmoney);
+        int theAccount;
+        double dmoney;
+        do{
+            printCustomerAccounts(customerNumber);
+            System.out.println("Please enter the account to deposit");
+            theAccount= scanner.nextInt();
+            if(theAccount < 0 || theAccount >= currentCustomer.numAccounts())
+            {
+                System.out.println("Invalid Account chosen. Please try again.");
+            }
+        }while (theAccount < 0 || theAccount >= currentCustomer.numAccounts());
+        do{
+            System.out.println("Please enter the amount to deposit");
+            dmoney = scanner.nextDouble();
+            BA.depositMoney(dmoney);
+        }while(dmoney < 0);
         System.out.println("Deposit successfully");
     }
 
