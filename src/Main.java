@@ -6,14 +6,12 @@ public class Main {
     private final Scanner scanner = new Scanner(System.in);
     private String input;
     private ArrayList<Customer> customers;
-    private Customer currentAccount;
 
     //i hope this works
     public static void main(String[] args) {
 
         Main main = new Main();
         main.customers = new ArrayList<>();
-        main.currentAccount = new Customer();
         // temporary created to test the app
         main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "999999999"));
         main.validCustomer(new Customer("King", "K", "king@gmail.com", "999999999"));
@@ -24,7 +22,7 @@ public class Main {
         main.generateAccounts(main.customers.get(2));
         main.generateAccounts(main.customers.get(3));
         for (int i = 0; i < main.customers.size(); i++) {
-            main.printCustomerAccounts(i + 1l);
+            main.printCustomerAccounts(i + 1L);
         }
         main.mainMenu();
 
