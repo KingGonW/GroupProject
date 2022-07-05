@@ -19,10 +19,10 @@ public class Main {
         Main main = new Main();
         main.customers = new ArrayList<>();
         // temporary created to test the app
-        main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "999999999"));
-        main.validCustomer(new Customer("King", "K", "king@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Tamara", "T", "tamara@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Andy", "A", "andy@gmail.com", "999999999"));
+        main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "07374829121"));
+        main.validCustomer(new Customer("King", "K", "king@gmail.com", "07664738222"));
+        main.validCustomer(new Customer("Tamara", "T", "tamara@gmail.com", "07776652499"));
+        main.validCustomer(new Customer("Andy", "A", "andy@gmail.com", "07542323451"));
         main.generateAccounts(main.customers.get(0));
         main.generateAccounts(main.customers.get(1));
         main.generateAccounts(main.customers.get(2));
@@ -324,7 +324,7 @@ public class Main {
                 break;
             case "3":
 
-                showTransactionHistory(currentCustomer, scanner);
+                showTransactionHistory(customerNumber);
 
                 break;
             case "4":
@@ -483,26 +483,26 @@ public class Main {
     //loops through the accounts associated with the Customer
     //and displays the information
     //that information needs to be generated in the withdraw(), deposit() and transfer() methods.
-    public static void showTransactionHistory( Customer currentCustomer, Scanner sc) {
-
+    public void showTransactionHistory(Long customerNumber) {
         int theAccount;
-        //get the account for which we wish to show the history
+        int customerNumberInInt = customerNumber.intValue();
 
+        //get the account for which we wish to show the history
         do {
             //account is chosen from the arraylist. Number refers to the account in the array list,
             // not the account number
             System.out.printf("Enter the number  (1-%d) of the account\n"
-                    + "you wish to see the history of:", currentCustomer.numAccounts());
+                    + "you wish to see the history of:", customers.get(customerNumberInInt - 1).numAccounts());
 
             // -1 to get to the 0 index position
-            theAccount = sc.nextInt() - 1;
-            if (theAccount < 0 || theAccount >= currentCustomer.numAccounts()) {
+            theAccount = scanner.nextInt() - 1;
+            if (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).numAccounts()) {
                 System.out.println("Invalid Account chosen. Please try again.");
             }
-        } while (theAccount < 0 || theAccount >= currentCustomer.numAccounts());
+        } while (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).numAccounts());
 
         //print transactions history
-        currentCustomer.printAccountTransactionHistory(theAccount);
+        customers.get(customerNumberInInt - 1).printAccountTransactionHistory(theAccount);
     }
 
 
