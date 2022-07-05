@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ public class Main {
 
 
     //i hope this works
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Main main = new Main();
         main.customers = new ArrayList<>();
@@ -29,6 +30,20 @@ public class Main {
        /* for (int i = 0; i < main.customers.size(); i++) {
             main.printCustomerAccounts(i + 1l);
         }*/
+
+        try {
+            FileWriter writer = new FileWriter("customerArray.txt");
+           Writer output = new BufferedWriter(writer);
+           int sz = main.customers.size();
+           for (int i = 0; i < sz; i++) {
+               output.write(main.customers.get(i).toString() + "\n");
+           }
+            output.close();
+
+        }catch (IOException e) {
+            System.out.println("I cannot read that file");
+            e.printStackTrace();
+        }
         main.mainMenu();
 
 
