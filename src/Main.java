@@ -19,10 +19,10 @@ public class Main {
         Main main = new Main();
         main.customers = new ArrayList<>();
         // temporary created to test the app
-        main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "999999999"));
-        main.validCustomer(new Customer("King", "K", "king@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Tamara", "T", "tamara@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Andy", "A", "andy@gmail.com", "999999999"));
+        main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "07374829121"));
+        main.validCustomer(new Customer("King", "K", "king@gmail.com", "07664738222"));
+        main.validCustomer(new Customer("Tamara", "T", "tamara@gmail.com", "07776652499"));
+        main.validCustomer(new Customer("Andy", "A", "andy@gmail.com", "07542323451"));
         main.generateAccounts(main.customers.get(0));
         main.generateAccounts(main.customers.get(1));
         main.generateAccounts(main.customers.get(2));
