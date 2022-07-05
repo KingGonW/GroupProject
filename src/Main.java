@@ -14,10 +14,10 @@ public class Main {
         main.customers = new ArrayList<>();
         main.currentAccount = new Customer();
         // temporary created to test the app
-        main.validCustomer(new Customer("Mohsen", "-", "mohsen@gmail.com", "999999999"));
-        main.validCustomer(new Customer("King", "-", "king@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Tamara", "-", "tamara@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Andy", "-", "andy@gmail.com", "999999999"));
+        main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "999999999"));
+        main.validCustomer(new Customer("King", "K", "king@gmail.com", "999999999"));
+        main.validCustomer(new Customer("Tamara", "T", "tamara@gmail.com", "999999999"));
+        main.validCustomer(new Customer("Andy", "A", "andy@gmail.com", "999999999"));
 
         main.mainMenu();
 
@@ -72,14 +72,14 @@ public class Main {
 
                 adminMenu();
                 break;
-            case "2" :
+            case "2":
                 for (Customer customer : customers) {
                     System.out.println(customer.toString());
                 }
                 customerLogin();
                 break;
             case "3":
-              mainMenu();
+                mainMenu();
                 break;
             default:
                 if (!input.equals("4")) {
@@ -116,7 +116,6 @@ public class Main {
 
     //adding methods in order that it shows up in the admin menu
     public void findAllCustomers() {
-        System.out.println("Please enter the customer ID");
         for (Customer customer : customers) {
             System.out.println(customer.toString());
         }
@@ -145,51 +144,58 @@ public class Main {
         return null;
     }
 
+   public BankAcc getTheAccountNumber(int customerId, int accNumber) {
+       Long tempLong = (long) customerId;
+       Customer temp = null;
+       for (int i = 0; i < customers.size(); i++) {
+           temp = customers.get(customerId);
+       }
+       for (int i = 0; i < temp.getBankAccounts().size(); i++) {
+           return temp.getBankAccounts().get(accNumber);
+       }
+
+       System.out.println("Cant find the the Account  ");
+       return null;
+
+   }
     private void transferMoney() {
         findAllCustomers();
+
         System.out.println("Please enter the Customer ID that you would to transfer from ...");
         String tempCus1 = scanner.next();
         int cus1 = Integer.parseInt(tempCus1);
-        customers.get(cus1-1).getListOfBankAccounts();
+        customers.get(cus1 - 1).getListOfBankAccounts();
+
         System.out.println("Please enter the account ID to transfer from ....");
         String tempAcc1 = scanner.next();
         int acc1 = Integer.parseInt(tempAcc1);
+
         System.out.println("Please enter the Customer ID that you would to transfer to ...");
         String tempCus2 = scanner.next();
         int cus2 = Integer.parseInt(tempCus2);
-        customers.get(cus2-1).getListOfBankAccounts();
+        customers.get(cus2 - 1).getListOfBankAccounts();
+
         System.out.println("Please enter the account ID to transfer from ....");
         String tempAcc2 = scanner.next();
         int acc2 = Integer.parseInt(tempAcc2);
+
         System.out.println("Please enter the the amount of money  ....");
         String tempAmount = scanner.next();
         double amount = Double.parseDouble(tempAmount);
-        customers.get(cus1-1).getBankAccounts().get(0).moneyTransfer(getTheAccountNumber(cus1 - 1, acc1 - 1), getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
-//the below posts this info to the Transactions class
-        //this should work
+        customers.get(cus1 - 1).getBankAccounts().get(0).moneyTransfer(getTheAccountNumber(cus1 - 1, acc1 - 1), getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
+
+        //the below posts this info to the Transactions class
+        // this should work
         // to test, let us call transferMoney() from one of the menus
-//        customers.get(cus1-1).addAccountTransaction(acc1, -1 * amount, String.format("Origin account %s",
-//                customers.get(cus1-1).getAccountNumber(acc2)));
-//        customers.get(cus1-1).addAccountTransaction(acc2, amount, String.format("Destination account %s",
-//                customers.get(cus1-1).getAccountNumber(acc1)));
+        // customers.get(cus1-1).addAccountTransaction(acc1, -1 * amount, String.format("Origin account %s",
+        // customers.get(cus1-1).getAccountNumber(acc2)));
+        //customers.get(cus1-1).addAccountTransaction(acc2, amount, String.format("Destination account %s",
+        //customers.get(cus1-1).getAccountNumber(acc1)));
 
     }
 
 
-    public BankAcc getTheAccountNumber(int customerId, int accNumber) {
-        Long tempLong = (long) customerId;
-        Customer temp = null;
-        for (int i = 0; i < customers.size(); i++) {
-            temp =  customers.get(customerId);
-        }
-        for (int i = 0; i < temp.getBankAccounts().size(); i++) {
-            return temp.getBankAccounts().get(accNumber);
-        }
 
-        System.out.println("Cant find the the Account  ");
-        return null;
-
-    }
 
 
     /*public void deleteCustomer() {
@@ -228,7 +234,7 @@ public class Main {
         String cusName = scanner.next();
         //this changes the first letter of users input to capital letter
         //so no matter what a lower or upper case input, the user will be found by their name
-        cusName = cusName.substring(0,1).toUpperCase() + cusName.substring(1);
+        cusName = cusName.substring(0, 1).toUpperCase() + cusName.substring(1);
         for (Customer customer : customers) {
             if (customer.getName().equals(cusName)) {
                 System.out.println("====> WELCOME " + cusName);
@@ -256,14 +262,14 @@ public class Main {
                 createNewBankAccount(customerNumber);
                 break;
             case "2":
-                for (int i = 0; i < customers.size(); i++) {
+                /*for (int i = 0; i < customers.size(); i++) {
                     System.out.println(customers.get(i).getName() + customers.get(i).getBankAccounts().toString());
-                }
+                }*/
                 allCustomerAccounts(customerNumber);
                 break;
             case "3":
-               // showTransactionHistory(Customer currentCustomer, Scanner sc);
-             // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
+                // showTransactionHistory(Customer currentCustomer, Scanner sc);
+                // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
                 break;
             case "4":
                 adminMenu();
@@ -328,8 +334,13 @@ public class Main {
     }
 
     public void yourAccount(BankAcc bankAcc) {
-        System.out.println("Choose an Option");
-        System.out.println(" 1.Make a deposit \n 2.Make a withdrawal \n 3.View Balance \n 4. View Account Transaction History  \n 5.Exit to Customer Menu");
+        System.out.println("Choose an Option\n");
+        System.out.println("""
+        1: Make a deposit\s
+        2: Make a withdrawal
+        3: View Balance
+        4: View Account Transaction History
+        5: Exit to Customer Menu""");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -341,7 +352,7 @@ public class Main {
             /*case "3":
                 //viewbalance();
                 break;*/
-             case "4":
+            case "4":
                 //showTransactionHistory(Customer currentCustomer, Scanner sc); - see notes in yourBank()
 
                 break;
@@ -357,13 +368,13 @@ public class Main {
         }
     }
 
-    public void deposit(){
+    public void deposit() {
         BankAcc BA = new BankAcc();
         double dmoney = scanner.nextDouble();
         BA.depositMoney(dmoney);
     }
 
-    public void withdrawal(){
+    public void withdrawal() {
         BankAcc BA = new BankAcc();
         double wmoney = scanner.nextDouble();
         BA.withdrawMoney(wmoney);
@@ -373,7 +384,7 @@ public class Main {
         BankAcc currentAcc = new CurrentAccount();
         int customerNumberInInt = customerNumber.intValue();
         customers.get(customerNumberInInt - 1).getBankAccounts().add(currentAcc);
-        customers.get(customerNumberInInt - 1 ).getListOfBankAccounts();
+        customers.get(customerNumberInInt - 1).getListOfBankAccounts();
     }
 
     public void createBusinessAccount(Long customerNumber) {
@@ -384,8 +395,8 @@ public class Main {
         //prompt user to make balance 100
         //only then when balance = 100 or more
         //add the created account to customer array
-        customers.get(customerNumberInInt - 1 ).getBankAccounts().add(businessAcc);
-        customers.get(customerNumberInInt - 1 ).getListOfBankAccounts();
+        customers.get(customerNumberInInt - 1).getBankAccounts().add(businessAcc);
+        customers.get(customerNumberInInt - 1).getListOfBankAccounts();
 
 
     }
@@ -393,8 +404,8 @@ public class Main {
     public void createISAAccount(Long customerNumber) {
         BankAcc ISAAcc = new ISAAccount();
         int customerNumberInInt = customerNumber.intValue();
-        customers.get(customerNumberInInt - 1 ).getBankAccounts().add(ISAAcc);
-        customers.get(customerNumberInInt - 1 ).getListOfBankAccounts();
+        customers.get(customerNumberInInt - 1).getBankAccounts().add(ISAAcc);
+        customers.get(customerNumberInInt - 1).getListOfBankAccounts();
 
     }
 
@@ -424,7 +435,6 @@ public class Main {
         //print transactions history
         currentCustomer.printAccountTransactionHistory(theAccount);
     }
-
 
 
 }
