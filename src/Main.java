@@ -6,12 +6,14 @@ public class Main {
     private final Scanner scanner = new Scanner(System.in);
     private String input;
     private ArrayList<Customer> customers;
+    private Customer currentAccount;
 
     //i hope this works
     public static void main(String[] args) {
 
         Main main = new Main();
         main.customers = new ArrayList<>();
+        main.currentAccount = new Customer();
         // temporary created to test the app
         main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "999999999"));
         main.validCustomer(new Customer("King", "K", "king@gmail.com", "999999999"));
@@ -21,9 +23,9 @@ public class Main {
         main.generateAccounts(main.customers.get(1));
         main.generateAccounts(main.customers.get(2));
         main.generateAccounts(main.customers.get(3));
-        for (int i = 0; i < main.customers.size(); i++) {
-            main.printCustomerAccounts(i + 1L);
-        }
+       /* for (int i = 0; i < main.customers.size(); i++) {
+            main.printCustomerAccounts(i + 1l);
+        }*/
         main.mainMenu();
 
 
@@ -146,7 +148,7 @@ public class Main {
     //adding methods in order that it shows up in the admin menu
     public void findAllCustomers() {
         for (Customer customer : customers) {
-            System.out.println(customer.toString());
+                System.out.println(customer.toString());
         }
     }
 
@@ -281,9 +283,12 @@ public class Main {
         System.out.println("""
                 1: Create a new Bank account\s
                 2: View accounts
-                3: View Account Transaction History: 
-                4: Exit to Admin Menu
-                5: Exit to Main Menu""");
+                3: View Account Transaction History
+                4. Deposit Funds
+                5. Withdraw Funds
+                6. Transfer Funds
+                7: Exit to Admin Menu
+                8: Exit to Main Menu""");
 
         input = scanner.next();
         switch (input) {
@@ -291,22 +296,36 @@ public class Main {
                 createNewBankAccount(customerNumber);
                 break;
             case "2":
-                /*for (int i = 0; i < customers.size(); i++) {
+               /*for (int i = 0; i < customers.size(); i++) {
+
                     System.out.println(customers.get(i).getName() + customers.get(i).getBankAccounts().toString());
                 }*/
-                allCustomerAccounts(customerNumber);
+                printCustomerAccounts(customerNumber);
+                //allCustomerAccounts(customerNumber);
                 break;
             case "3":
                 // showTransactionHistory(Customer currentCustomer, Scanner sc);
                 // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
                 break;
             case "4":
-                adminMenu();
+                deposit();
+                // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
                 break;
             case "5":
+                withdraw();
+                // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
+                break;
+            case "6":
+                transferMoney();
+                // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
+                break;
+            case "7":
+                adminMenu();
+                break;
+            case "8":
                 mainMenu();
             default:
-                if (!input.equals("6")) {
+                if (!input.equals("8")) {
                     System.out.println("Please enter a valid number");
                     adminMenu();
                 }
@@ -357,7 +376,6 @@ public class Main {
             }
         }
 
-        System.out.println("Please select an account to continue ...  ");
 //        int accNum = scanner.nextInt();
 //        if (accNum - 1 <= temp.getBankAccounts().size())
 //            return temp.getBankAccounts().get(accNum - 1);
@@ -379,7 +397,7 @@ public class Main {
                 deposit();
                 break;
             case "2":
-                withdrawal();
+                withdraw();
                 break;
             /*case "3":
                 //viewbalance();
@@ -407,7 +425,7 @@ public class Main {
         BA.depositMoney(dmoney);
     }
 
-    public void withdrawal() {
+    public void withdraw() {
         BankAcc BA = new BankAcc();
         System.out.println("Please enter the amount to withdrawal");
         double wmoney = scanner.nextDouble();
