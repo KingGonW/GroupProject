@@ -63,12 +63,8 @@ public class Main {
         System.out.println("\nPlease choose an option");
         System.out.println("""
                 1: View All Customers\s
-                2: Create New Customer
-                3: Login to Customer Account
-                4: Find Customer
-                5: Delete Customer
-                6: Transfer Money
-                7: Exit to Main Menu""");
+                2: Login to Customer Account
+                3: Exit to Main Menu""");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -76,39 +72,23 @@ public class Main {
 
                 adminMenu();
                 break;
-            case "2":
-                //createNewCustomer - not yet linked
-                break;
-            case "3" :
+            case "2" :
                 for (Customer customer : customers) {
                     System.out.println(customer.toString());
                 }
                 customerLogin();
                 break;
-            case "4":
-                for (Customer customer : customers) {
-                    System.out.println(customer.toString());
-                }
-                System.out.println("Please enter the customer ID");
-                Long cusID = scanner.nextLong();
-                findCustomer(cusID);
-                break;
-            case "5":
-                //deleteCustomer - not yet linked
-            case "6":
-                transferMoney();
-                break;
-            case "7":
-               // exitApp(); not linked
+            case "3":
+              mainMenu();
                 break;
             default:
-                if (!input.equals("7")) {
+                if (!input.equals("4")) {
                     System.out.println("Please enter a valid number");
                     adminMenu();
                 }
                 break;
         }
-        if (!input.equals("7"))
+        if (!input.equals("4"))
             adminMenu();
         else
             mainMenu();
@@ -152,7 +132,7 @@ public class Main {
             adminMenu();
         }
     }
-    
+
     public Customer findCustomer(Long customerID) {
 
         for (Customer customer : customers) {
@@ -262,8 +242,14 @@ public class Main {
 
 
     public void yourBank(long customerNumber) {
-        System.out.println("BANK MENU\nPlease select an option ... ");
-        System.out.println("\n 1.Create a new Bank account \n 2.View accounts \n 3. View Account Transaction History \n 4.Exit to main menu");
+        System.out.println("Please Select an Option");
+        System.out.println("""
+                1: Create a new Bank account\s
+                2: View accounts
+                3: View Account Transaction History: 
+                4: Exit to Admin Menu
+                5: Exit to Main Menu""");
+
         input = scanner.next();
         switch (input) {
             case "1":
@@ -280,24 +266,28 @@ public class Main {
              // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
                 break;
             case "4":
-                mainMenu();
+                adminMenu();
                 break;
+            case "5":
+                mainMenu();
             default:
-                if (!input.equals("5")) {
+                if (!input.equals("6")) {
                     System.out.println("Please enter a valid number");
                     adminMenu();
                 }
                 break;
         }
-        if (!input.equals("5"))
+        if (!input.equals("6"))
             yourBank(customerNumber);
-        else
-            adminMenu();
     }
 
     private void createNewBankAccount(long customerNumber) {
-        System.out.println("Choose an account to create");
-        System.out.println(" \n 1.Create Current Account \n 2.Create Business Account \n 3.Create ISA Account \n 4.Back to Customer Accounts");
+        System.out.println("Choose Account Type to Create");
+        System.out.println("""
+                1: Create Current Account\s
+                2: Create Business Account
+                3: Create ISA Account:
+                4: Back to Customer Accounts""");
         input = scanner.next();
         switch (input) {
             case "1":
