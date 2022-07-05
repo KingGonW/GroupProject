@@ -467,9 +467,12 @@ public class Main {
         BankAcc BA = new BankAcc();
         printCustomerAccounts(customerNumber);
         System.out.println("Please enter the account to deposit");
+        int AccID = scanner.nextInt();
+        //int ACCID
         System.out.println("Please enter the amount to deposit");
         double dmoney = scanner.nextDouble();
         BA.depositMoney(dmoney);
+        System.out.println("Deposit successfully");
     }
 
     public void withdraw() {
