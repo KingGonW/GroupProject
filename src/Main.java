@@ -473,21 +473,26 @@ public class Main {
         BankAcc BA = new BankAcc();
         int theAccount;
         double dmoney;
+        String memo;
         do{
             printCustomerAccounts(customerNumber);
             System.out.println("Please enter the account to deposit");
             theAccount= scanner.nextInt();
-            if(theAccount < 0 || theAccount >= currentCustomer.numAccounts())
+            if(theAccount < 0 || theAccount >= customerNumber)
             {
                 System.out.println("Invalid Account chosen. Please try again.");
             }
-        }while (theAccount < 0 || theAccount >= currentCustomer.numAccounts());
+        }while (theAccount < 0 || theAccount >= customerNumber);
         do{
             System.out.println("Please enter the amount to deposit");
             dmoney = scanner.nextDouble();
             BA.depositMoney(dmoney);
         }while(dmoney < 0);
-        System.out.println("Deposit successfully");
+        //System.out.println("Deposit successfully");
+        scanner.nextLine();
+        System.out.println("Enter a memo");
+        memo= scanner.next();
+        currentCustomer.addAccountTransaction(theAccount,dmoney,memo);
     }
 
     public void withdraw() {
