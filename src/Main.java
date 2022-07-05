@@ -265,7 +265,7 @@ public class Main {
 
     public void yourBank(long customerNumber) {
         System.out.println("BANK MENU\nPlease select an option ... ");
-        System.out.println("\n 1.Create a new Bank account \n 2.View accounts \n 3.Exit to main menu");
+        System.out.println("\n 1.Create a new Bank account \n 2.View accounts \n 3. View Account Transaction History \n 4.Exit to main menu");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -274,14 +274,21 @@ public class Main {
             case "2":
                 allCustomerAccounts(customerNumber);
                 break;
+            case "3":
+               // showTransactionHistory(Customer currentCustomer, Scanner sc);
+             // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
+                break;
+            case "4":
+                mainMenu();
+                break;
             default:
-                if (!input.equals("3")) {
+                if (!input.equals("5")) {
                     System.out.println("Please enter a valid number");
                     adminMenu();
                 }
                 break;
         }
-        if (!input.equals("3"))
+        if (!input.equals("5"))
             yourBank(customerNumber);
         else
             adminMenu();
@@ -331,7 +338,7 @@ public class Main {
 
     public void yourAccount(BankAcc bankAcc) {
         System.out.println("Choose an Option");
-        System.out.println(" 1.Make a deposit \n 2.Make a withdrawal \n 3.View Balance \n 4.Exit to Customer Menu");
+        System.out.println(" 1.Make a deposit \n 2.Make a withdrawal \n 3.View Balance \n 4. View Account Transaction History  \n 5.Exit to Customer Menu");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -343,8 +350,15 @@ public class Main {
             /*case "3":
                 //viewbalance();
                 break;*/
+             case "4":
+                //showTransactionHistory(Customer currentCustomer, Scanner sc); - see notes in yourBank()
+
+                break;
+            case "5":
+                mainMenu();
+                break;
             default:
-                if (!input.equals("4")) {
+                if (!input.equals("5")) {
                     System.out.println("Please enter a valid number");
                     adminMenu();
                 }
