@@ -8,6 +8,8 @@ public class Main {
     private ArrayList<Customer> customers;
     private Customer currentAccount;
 
+
+
     //i hope this works
     public static void main(String[] args) {
 
@@ -302,9 +304,10 @@ public class Main {
                 }*/
                 printCustomerAccounts(customerNumber);
                 //allCustomerAccounts(customerNumber);
+
                 break;
             case "3":
-                // showTransactionHistory(Customer currentCustomer, Scanner sc);
+               showTransactionHistory(currentAccount, scanner);
                 // how can we get or define the currentCustomer variable - which is supposed to represent the selected customer?- see notes
                 break;
             case "4":
@@ -464,7 +467,7 @@ public class Main {
     //loops through the accounts associated with the Customer
     //and displays the information
     //that information needs to be generated in the withdraw(), deposit() and transfer() methods.
-    public static void showTransactionHistory(Customer currentCustomer, Scanner sc) {
+    public static void showTransactionHistory( Customer currentAccount, Scanner sc) {
 
         int theAccount;
         //get the account for which we wish to show the history
@@ -473,17 +476,17 @@ public class Main {
             //account is chosen from the arraylist. Number refers to the account in the array list,
             // not the account number
             System.out.printf("Enter the number  (1-%d) of the account\n"
-                    + "you wish to see the history of:", currentCustomer.numAccounts());
+                    + "you wish to see the history of:", currentAccount.numAccounts());
 
             // -1 to get to the 0 index position
             theAccount = sc.nextInt() - 1;
-            if (theAccount < 0 || theAccount >= currentCustomer.numAccounts()) {
+            if (theAccount < 0 || theAccount >= currentAccount.numAccounts()) {
                 System.out.println("Invalid Account chosen. Please try again.");
             }
-        } while (theAccount < 0 || theAccount >= currentCustomer.numAccounts());
+        } while (theAccount < 0 || theAccount >= currentAccount.numAccounts());
 
         //print transactions history
-        currentCustomer.printAccountTransactionHistory(theAccount);
+        currentAccount.printAccountTransactionHistory(theAccount);
     }
 
 
