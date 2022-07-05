@@ -325,7 +325,7 @@ public class Main {
         System.out.println("Please Select an Option");
         System.out.println("""
                 1: Create a new Bank account\s
-                2: View accounts
+                2: View accounts  (Note - options 3 - 6 better off in a new menu, accessed by Option 2 - TY Tamara, I will do this soon, Andy)
                 3: View Account Transaction History
                 4. Deposit Funds
                 5. Withdraw Funds
@@ -345,6 +345,12 @@ public class Main {
                 }*/
                 printCustomerAccounts(customerNumber);
                 //allCustomerAccounts(customerNumber);
+
+                //here we need a new menu to encapsulate
+                //                3: View Account Transaction History
+                //                4. Deposit Funds
+                //                5. Withdraw Funds
+                //                6. Transfer Funds
 
                 break;
             case "3":
@@ -467,12 +473,10 @@ public class Main {
         BankAcc BA = new BankAcc();
         printCustomerAccounts(customerNumber);
         System.out.println("Please enter the account to deposit");
-        int AccID = scanner.nextInt();
-        //int ACCID
+        int theAccount= scanner.nextInt();
         System.out.println("Please enter the amount to deposit");
         double dmoney = scanner.nextDouble();
         BA.depositMoney(dmoney);
-        System.out.println("Deposit successfully");
     }
 
     public void withdraw() {
@@ -514,6 +518,8 @@ public class Main {
     //and displays the information
     //that information needs to be generated in the withdraw(), deposit() and transfer() methods.
     public void showTransactionHistory(Long customerNumber) {
+
+        printCustomerAccounts(customerNumber);
         int theAccount;
         int customerNumberInInt = customerNumber.intValue();
 
