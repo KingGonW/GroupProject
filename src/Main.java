@@ -73,9 +73,7 @@ public class Main {
         switch (input) {
             case "1":
                 findAllCustomers();
-                for (int i = 0; i < customers.size(); i++) {
-                    System.out.println(customers.get(i).getName() + customers.get(i).getBankAccounts().toString());
-                }
+
                 adminMenu();
                 break;
             case "2":
@@ -272,6 +270,9 @@ public class Main {
                 createNewBankAccount(customerNumber);
                 break;
             case "2":
+                for (int i = 0; i < customers.size(); i++) {
+                    System.out.println(customers.get(i).getName() + customers.get(i).getBankAccounts().toString());
+                }
                 allCustomerAccounts(customerNumber);
                 break;
             case "3":
