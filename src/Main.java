@@ -477,6 +477,7 @@ public class Main {
         System.out.println("Please enter the amount to deposit");
         double dmoney = scanner.nextDouble();
         BA.depositMoney(dmoney);
+        System.out.println("Deposit successfully");
     }
 
     public void withdraw() {
