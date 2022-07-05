@@ -18,10 +18,10 @@ public class Main {
         main.validCustomer(new Customer("King", "K", "king@gmail.com", "999999999"));
         main.validCustomer(new Customer("Tamara", "T", "tamara@gmail.com", "999999999"));
         main.validCustomer(new Customer("Andy", "A", "andy@gmail.com", "999999999"));
-        main.generateRandomAccounts(main.customers.get(0));
-        main.generateRandomAccounts(main.customers.get(1));
-        main.generateRandomAccounts(main.customers.get(2));
-        main.generateRandomAccounts(main.customers.get(3));
+        main.generateAccounts(main.customers.get(0));
+        main.generateAccounts(main.customers.get(1));
+        main.generateAccounts(main.customers.get(2));
+        main.generateAccounts(main.customers.get(3));
         for (int i = 0; i < main.customers.size(); i++) {
             main.printCustomerAccounts(i + 1l);
         }
@@ -30,7 +30,7 @@ public class Main {
 
     }
 
-    public void generateRandomAccounts(Customer customer){
+    public void generateAccounts(Customer customer){
         for (int i = 0; i < 2; i++) {
             createCurrentAccount(customer.getId());
             createBusinessAccount(customer.getId());
