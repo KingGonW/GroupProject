@@ -511,6 +511,8 @@ public class Main {
     //and displays the information
     //that information needs to be generated in the withdraw(), deposit() and transfer() methods.
     public void showTransactionHistory(Long customerNumber) {
+
+        printCustomerAccounts(customerNumber);
         int theAccount;
         int customerNumberInInt = customerNumber.intValue();
 
