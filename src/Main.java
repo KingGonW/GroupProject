@@ -11,18 +11,16 @@ public class Main {
     Customer currentCustomer = new Customer();
 
 
-
-
     //i hope this works
     public static void main(String[] args) throws IOException {
 
         Main main = new Main();
         main.customers = new ArrayList<>();
         // temporary created to test the app
-        main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "999999999"));
-        main.validCustomer(new Customer("King", "K", "king@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Tamara", "T", "tamara@gmail.com", "999999999"));
-        main.validCustomer(new Customer("Andy", "A", "andy@gmail.com", "999999999"));
+        main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "07374829121"));
+        main.validCustomer(new Customer("King", "K", "king@gmail.com", "07664738222"));
+        main.validCustomer(new Customer("Tamara", "T", "tamara@gmail.com", "07776652499"));
+        main.validCustomer(new Customer("Andy", "A", "andy@gmail.com", "07542323451"));
         main.generateAccounts(main.customers.get(0));
         main.generateAccounts(main.customers.get(1));
         main.generateAccounts(main.customers.get(2));
@@ -44,6 +42,8 @@ public class Main {
             System.out.println("I cannot read that file");
             e.printStackTrace();
         }
+
+
         main.mainMenu();
 
 
@@ -165,8 +165,33 @@ public class Main {
 
     //adding methods in order that it shows up in the admin menu
     public void findAllCustomers() {
-        for (Customer customer : customers) {
-                System.out.println(customer.toString());
+       /* for (Customer customer : customers) {
+            System.out.println(customer.toString());
+        }*/
+
+        //set up variables to read file
+        String filename = "customerArray.txt";
+        String line;
+        ArrayList aList = new ArrayList<>();
+
+        //read the lines of text into an array list
+        try{
+            BufferedReader input = new BufferedReader(new FileReader("customerArray.txt"));
+            if(!input.ready()) { // check whether the file can be read
+                throw new IOException();
+            }
+            while((line = input.readLine()) != null) { //read a line of text
+                aList.add(line); //add the line of text to the array list
+            }
+            input.close();
+        }catch(IOException e) {  // catch any problems found e.g. file not found
+            System.out.println(e);
+        }
+
+        //print out each item in the array list
+        int sz = aList.size();
+        for(int i = 0; i < sz; i++) {
+            System.out.println(aList.get(i).toString());
         }
     }
 
@@ -324,7 +349,7 @@ public class Main {
                 break;
             case "3":
 
-                showTransactionHistory(currentCustomer, scanner);
+                showTransactionHistory(customerNumber);
 
                 break;
             case "4":
@@ -485,26 +510,26 @@ public class Main {
     //loops through the accounts associated with the Customer
     //and displays the information
     //that information needs to be generated in the withdraw(), deposit() and transfer() methods.
-    public static void showTransactionHistory( Customer currentCustomer, Scanner sc) {
-
+    public void showTransactionHistory(Long customerNumber) {
         int theAccount;
-        //get the account for which we wish to show the history
+        int customerNumberInInt = customerNumber.intValue();
 
+        //get the account for which we wish to show the history
         do {
             //account is chosen from the arraylist. Number refers to the account in the array list,
             // not the account number
             System.out.printf("Enter the number  (1-%d) of the account\n"
-                    + "you wish to see the history of:", currentCustomer.numAccounts());
+                    + "you wish to see the history of:", customers.get(customerNumberInInt - 1).numAccounts());
 
             // -1 to get to the 0 index position
-            theAccount = sc.nextInt() - 1;
-            if (theAccount < 0 || theAccount >= currentCustomer.numAccounts()) {
+            theAccount = scanner.nextInt() - 1;
+            if (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).numAccounts()) {
                 System.out.println("Invalid Account chosen. Please try again.");
             }
-        } while (theAccount < 0 || theAccount >= currentCustomer.numAccounts());
+        } while (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).numAccounts());
 
         //print transactions history
-        currentCustomer.printAccountTransactionHistory(theAccount);
+        customers.get(customerNumberInInt - 1).printAccountTransactionHistory(theAccount);
     }
 
 
