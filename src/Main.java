@@ -6,7 +6,7 @@ public class Main {
     private final Scanner scanner = new Scanner(System.in);
     private String input;
     private ArrayList<Customer> customers;
-    private Customer currentAccount;
+
 
 
 
@@ -15,7 +15,6 @@ public class Main {
 
         Main main = new Main();
         main.customers = new ArrayList<>();
-        main.currentAccount = new Customer();
         // temporary created to test the app
         main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "999999999"));
         main.validCustomer(new Customer("King", "K", "king@gmail.com", "999999999"));
@@ -25,9 +24,9 @@ public class Main {
         main.generateAccounts(main.customers.get(1));
         main.generateAccounts(main.customers.get(2));
         main.generateAccounts(main.customers.get(3));
-        for (int i = 0; i < main.customers.size(); i++) {
+       /* for (int i = 0; i < main.customers.size(); i++) {
             main.printCustomerAccounts(i + 1l);
-        }
+        }*/
         main.mainMenu();
 
 
@@ -150,7 +149,7 @@ public class Main {
     //adding methods in order that it shows up in the admin menu
     public void findAllCustomers() {
         for (Customer customer : customers) {
-            System.out.println(customer.toString());
+                System.out.println(customer.toString());
         }
     }
 
@@ -379,7 +378,6 @@ public class Main {
             }
         }
 
-        System.out.println("Please select an account to continue ...  ");
 //        int accNum = scanner.nextInt();
 //        if (accNum - 1 <= temp.getBankAccounts().size())
 //            return temp.getBankAccounts().get(accNum - 1);
