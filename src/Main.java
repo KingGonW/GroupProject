@@ -33,7 +33,8 @@ public class Main {
 
     public void generateAccounts(Customer customer){
         Random random = new Random();
-        for (int i = 0; i < random.nextInt(1,5); i++) {
+        int randomInt = random.nextInt(1,4);
+        for (int i = 0; i < randomInt; i++) {
             createCurrentAccount(customer.getId());
             createBusinessAccount(customer.getId());
             createISAAccount(customer.getId());
