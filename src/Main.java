@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -18,10 +19,40 @@ public class Main {
         main.validCustomer(new Customer("King", "K", "king@gmail.com", "999999999"));
         main.validCustomer(new Customer("Tamara", "T", "tamara@gmail.com", "999999999"));
         main.validCustomer(new Customer("Andy", "A", "andy@gmail.com", "999999999"));
-
+        main.generateAccounts(main.customers.get(0));
+        main.generateAccounts(main.customers.get(1));
+        main.generateAccounts(main.customers.get(2));
+        main.generateAccounts(main.customers.get(3));
+        for (int i = 0; i < main.customers.size(); i++) {
+            main.printCustomerAccounts(i + 1l);
+        }
         main.mainMenu();
 
 
+    }
+
+    public void generateAccounts(Customer customer){
+        Random random = new Random();
+        int randomInt = random.nextInt(1,4);
+        int randomInt2 = random.nextInt(1,4);
+        int randomInt3 = random.nextInt(1,4);
+
+        for (int i = 0; i < randomInt; i++) {
+            createCurrentAccount(customer.getId());
+        }
+        for (int i = 0; i < randomInt2; i++) {
+            createBusinessAccount(customer.getId());
+        }
+        for (int i = 0; i < randomInt3; i++) {
+            createISAAccount(customer.getId());
+        }
+    }
+    
+    public void printCustomerAccounts(Long customerID){
+        int customerNumberInInt = customerID.intValue();
+        System.out.println(customers.get(customerNumberInInt - 1).getName());
+        customers.get(customerNumberInInt - 1).getListOfBankAccounts();
+        
     }
 
     public void validCustomer(Customer customer) {
@@ -298,12 +329,15 @@ public class Main {
         switch (input) {
             case "1":
                 createCurrentAccount(customerNumber);
+                printCustomerAccounts(customerNumber);
                 break;
             case "2":
                 createBusinessAccount(customerNumber);
+                printCustomerAccounts(customerNumber);
                 break;
             case "3":
                 createISAAccount(customerNumber);
+                printCustomerAccounts(customerNumber);
                 break;
             default:
                 if (!input.equals("4")) {
@@ -370,12 +404,14 @@ public class Main {
 
     public void deposit() {
         BankAcc BA = new BankAcc();
+        System.out.println("Please enter the amount to deposit");
         double dmoney = scanner.nextDouble();
         BA.depositMoney(dmoney);
     }
 
     public void withdrawal() {
         BankAcc BA = new BankAcc();
+        System.out.println("Please enter the amount to withdrawal");
         double wmoney = scanner.nextDouble();
         BA.withdrawMoney(wmoney);
     }
@@ -384,7 +420,6 @@ public class Main {
         BankAcc currentAcc = new CurrentAccount();
         int customerNumberInInt = customerNumber.intValue();
         customers.get(customerNumberInInt - 1).getBankAccounts().add(currentAcc);
-        customers.get(customerNumberInInt - 1).getListOfBankAccounts();
     }
 
     public void createBusinessAccount(Long customerNumber) {
@@ -396,7 +431,6 @@ public class Main {
         //only then when balance = 100 or more
         //add the created account to customer array
         customers.get(customerNumberInInt - 1).getBankAccounts().add(businessAcc);
-        customers.get(customerNumberInInt - 1).getListOfBankAccounts();
 
 
     }
@@ -405,7 +439,6 @@ public class Main {
         BankAcc ISAAcc = new ISAAccount();
         int customerNumberInInt = customerNumber.intValue();
         customers.get(customerNumberInInt - 1).getBankAccounts().add(ISAAcc);
-        customers.get(customerNumberInInt - 1).getListOfBankAccounts();
 
     }
 
