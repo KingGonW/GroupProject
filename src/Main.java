@@ -328,7 +328,7 @@ public class Main {
 
                 break;
             case "4":
-                deposit();
+                deposit(customerNumber);
                 //
                 break;
             case "5":
@@ -414,7 +414,7 @@ public class Main {
         input = scanner.next();
         switch (input) {
             case "1":
-                deposit();
+                //deposit(customerNumber);
                 break;
             case "2":
                 withdraw();
@@ -438,8 +438,10 @@ public class Main {
         }
     }
 
-    public void deposit() {
+    public void deposit(long customerNumber) {
         BankAcc BA = new BankAcc();
+        printCustomerAccounts(customerNumber);
+        System.out.println("Please enter the account to deposit");
         System.out.println("Please enter the amount to deposit");
         double dmoney = scanner.nextDouble();
         BA.depositMoney(dmoney);
