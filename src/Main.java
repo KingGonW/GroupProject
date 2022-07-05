@@ -43,31 +43,6 @@ public class Main {
             e.printStackTrace();
         }
 
-        //set up variables to read file
-        String filename = "customerArray.txt";
-        String line;
-        ArrayList aList = new ArrayList<>();
-
-        //read the lines of text into an array list
-        try{
-            BufferedReader input = new BufferedReader(new FileReader("customerArray.txt"));
-            if(!input.ready()) { // check whether the file can be read
-                throw new IOException();
-            }
-            while((line = input.readLine()) != null) { //read a line of text
-                aList.add(line); //add the line of text to the array list
-            }
-            input.close();
-        }catch(IOException e) {  // catch any problems found e.g. file not found
-            System.out.println(e);
-        }
-
-        //print out each item in the array list
-        int sz = aList.size();
-        for(int i = 0; i < sz; i++) {
-            System.out.println(aList.get(i).toString());
-        }
-
 
         main.mainMenu();
 
@@ -190,8 +165,33 @@ public class Main {
 
     //adding methods in order that it shows up in the admin menu
     public void findAllCustomers() {
-        for (Customer customer : customers) {
-                System.out.println(customer.toString());
+       /* for (Customer customer : customers) {
+            System.out.println(customer.toString());
+        }*/
+
+        //set up variables to read file
+        String filename = "customerArray.txt";
+        String line;
+        ArrayList aList = new ArrayList<>();
+
+        //read the lines of text into an array list
+        try{
+            BufferedReader input = new BufferedReader(new FileReader("customerArray.txt"));
+            if(!input.ready()) { // check whether the file can be read
+                throw new IOException();
+            }
+            while((line = input.readLine()) != null) { //read a line of text
+                aList.add(line); //add the line of text to the array list
+            }
+            input.close();
+        }catch(IOException e) {  // catch any problems found e.g. file not found
+            System.out.println(e);
+        }
+
+        //print out each item in the array list
+        int sz = aList.size();
+        for(int i = 0; i < sz; i++) {
+            System.out.println(aList.get(i).toString());
         }
     }
 
