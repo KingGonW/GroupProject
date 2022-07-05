@@ -57,11 +57,13 @@ public class Customer {
     public void setBankAccounts(ArrayList<BankAcc> bankAccounts) {
         this.bankAccounts = bankAccounts;
     }
-    public void getListOfBankAccounts() {
+    public String getListOfBankAccounts() {
+        String temp = "";
         for (int i = 0; i < bankAccounts.size(); i++) {
-            System.out.println(i + 1 + " = " + bankAccounts.get(i).toString());
-            System.out.println();
+            temp += bankAccounts.get(i).toString() + "\n";
         }
+        System.out.println(temp);
+        return temp;
     }
 
     public long getId() {
