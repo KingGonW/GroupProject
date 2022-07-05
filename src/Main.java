@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -31,7 +32,8 @@ public class Main {
     }
 
     public void generateAccounts(Customer customer){
-        for (int i = 0; i < 2; i++) {
+        Random random = new Random();
+        for (int i = 0; i < random.nextInt(1,5); i++) {
             createCurrentAccount(customer.getId());
             createBusinessAccount(customer.getId());
             createISAAccount(customer.getId());
