@@ -236,7 +236,7 @@ Main.transactionsMenu(theBank, sc, currentCustomer);
             System.out.println();
             System.out.println(" 1. Show Account Transaction History");
             System.out.println(" 2. Create An Account");
-            System.out.println(" 3. Delete An Account");
+            System.out.println(" 3. Show Interest");
             System.out.println(" 4. Make a withdrawal");
             System.out.println(" 5. Make a deposit");
             System.out.println(" 6. Make a Transfer");
@@ -247,7 +247,7 @@ Main.transactionsMenu(theBank, sc, currentCustomer);
             userChoice = sc.nextInt();
 
             if (userChoice <1 || userChoice > 8){
-                System.out.println("Invalid choice, please choose 1 - 5.");
+                System.out.println("Invalid choice, please choose 1 - 8.");
             }
         } while( userChoice <1 || userChoice > 8);
 
@@ -256,7 +256,7 @@ Main.transactionsMenu(theBank, sc, currentCustomer);
         switch (userChoice) {
             case 1 -> Main.showTransactionHistory(currentCustomer, sc, theBank);
             case 2 -> Main.addAccountToThisCustomer(currentCustomer, sc, theBank);
-            case 3 ->Main.deleteAccount(currentCustomer, sc,theBank);
+            case 3 ->Main.showInterest(currentCustomer, sc,theBank);
             case 4 -> Main.withdrawFunds(currentCustomer, sc, theBank);
             case 5 -> Main.depositFunds(currentCustomer, sc, theBank);
             case 6 -> Main.transferFunds(currentCustomer, sc, theBank);
@@ -265,26 +265,29 @@ Main.transactionsMenu(theBank, sc, currentCustomer);
         }
     }
 
-    private static void deleteAccount(Customer currentCustomer, Scanner sc, Bank theBank) {
+    private static void showInterest(Customer currentCustomer, Scanner sc, Bank theBank) {
 
-        String AccountNumber;
-        System.out.println("Enter the Account Number would you like to delete?:");
-        System.out.println();
-        currentCustomer.printAccountsSummary();
+        int theAccount;
+        //get the account for which we wish to show the interest
 
-        ////////////////////////////////////////////////
+        do{
 
-       System.out.println("Please enter the Account Number you would like to delete");
-     AccountNumber = sc.next();
-        for (int i = 0; i < theBank.bankAccounts.size(); i++) {
-            if (theBank.bankAccounts.get(i).getID() == AccountNumber) {
-                theBank.bankAccounts.remove(i);
-                System.out.println("====> Selected Account has been successfully removed from the system");
-                Main.selectCustomer(theBank,sc);
+            //account is chosen from the arraylist. Number refers to the account in the array list, not the account number
+            System.out.printf("Enter the number  (1-%d) of the account\n"
+                    + "you wish to see the interest of:",  currentCustomer.numAccounts());
+
+            theAccount = sc.nextInt()-1;
+            if(theAccount < 0  || theAccount >= currentCustomer.numAccounts()){
+                System.out.println("Invalid Account chosen. Please try again.");
             }
-        }
-        System.out.println("====> Account does not exist");
-        Main.selectCustomer(theBank,sc);
+        } while(theAccount < 0  || theAccount >= currentCustomer.numAccounts());
+
+
+        currentCustomer.printAccountInterest(theAccount);
+
+
+        //then takes the User back to the appropriate menu
+        Main.printAccountsMenu(currentCustomer,sc,theBank);
 
     }
 
@@ -529,7 +532,7 @@ Main.transactionsMenu(theBank, sc, currentCustomer);
         System.out.println();
         System.out.println(" 1. Show Account Transaction History");
         System.out.println(" 2. Create An Account");
-        System.out.println(" 3. Delete An Account");
+        System.out.println(" 3. Check Interest");
         System.out.println(" 4. Make a withdrawal");
         System.out.println(" 5. Make a deposit");
         System.out.println(" 6. Make a Transfer");
@@ -541,7 +544,7 @@ Main.transactionsMenu(theBank, sc, currentCustomer);
         switch(userChoice){
             case 1 -> Main.showTransactionHistoryAllAccounts(currentCustomer, sc, theBank);
             case 2 -> Main.addCustomerAndAccount(theBank, sc);
-            case 3 -> Main.deleteAccount(currentCustomer, sc,theBank);
+           // case 3 ->//Main.checkInterestAllAccounts();
           case 4 -> Main.withdrawFundsAllAccounts(currentCustomer, sc, theBank);
             case 5 -> Main.depositFundsAllAccounts(currentCustomer, sc, theBank);
             case 6 -> Main.transferFundsAllAccounts(currentCustomer, sc,theBank);

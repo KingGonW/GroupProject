@@ -5,12 +5,10 @@ import java.util.ArrayList;
 public class Customer {
 
         public final String firstName;
-
         private final String lastName;
-
         private final String CustomerId;
 
-
+        boolean hasISA;
 
         private final ArrayList<BankAccount> bankAccounts;
 
@@ -29,6 +27,8 @@ public class Customer {
             //Print log message - not needed? Maybe call it, maybe not
             //System.out.printf("New User: %s %s with ID %s created.", firstName, lastName, this.CustomerId);
         }
+
+
 
     public void addAccount(BankAccount account) {
 
@@ -103,6 +103,11 @@ public class Customer {
 
     public String getLastName() {
             return this.lastName;
+    }
+
+    public void printAccountInterest(int accountIndex) {
+        this.bankAccounts.get(accountIndex).getYearlyInterest(accountIndex);
+        System.out.println("Testing - well at least the Customer method gets called. Unsure how to return the actual value:(");
     }
 }
 

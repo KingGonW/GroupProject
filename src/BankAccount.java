@@ -17,6 +17,11 @@ public class BankAccount {
     //interest and minimumBalance are shared by all accounts *but* only in ISA accounts will they have a value
     private int interest;
 
+    public int getInterest() {
+         return this.interest;
+    }
+
+
     private int minimumBalance;
 
     //similarly, all accounts have an annual cost, but only in Business Accounts will this have a value
@@ -58,8 +63,8 @@ public class BankAccount {
             return String.format("Account Number: %s, Balance in pounds: %.02f, Account Type: %s, linked to %s %s",
                     this.AccountNumber, balance, this.AccountType, this.holder.firstName, this.holder.getLastName());
         } else {
-            return String.format("Account Number: %s, Balance in pounds: (%.02f), Account Type: %s, linked to %s",
-                    this.AccountNumber, balance, this.AccountType, this.holder);
+            return String.format("Account Number: %s, Balance in pounds: (%.02f), Account Type: %s, linked to %s %s",
+                    this.AccountNumber, balance, this.AccountType, this.holder.firstName, this.holder.getLastName());
         }
 
     }
@@ -90,6 +95,15 @@ public class BankAccount {
 
         Transaction newTransaction = new Transaction(amount, memo, this);
         this.transactions.add(newTransaction);
+    }
+
+    public double getYearlyInterest(int accountIndex) {
+
+        double yearlyInterest = (this.getBalance() / 12) * this.getInterest();
+        return yearlyInterest;
+
+
+
     }
 }
 
