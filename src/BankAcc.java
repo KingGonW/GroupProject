@@ -30,8 +30,6 @@ public class BankAcc {
     private ArrayList<BankAcc> bankAccounts;
 
 
-    BankAcc() {
-    }
 
     //alternate constructor below, with Customer variable attached
     public BankAcc(String accType, String sortCode, Customer holder) {
@@ -59,7 +57,6 @@ public class BankAcc {
         this.accType = accType;
         this.sortCode = sortCode;
         // added opening and closing balance to constructor
-       this.balance = balance;
         Random rand = new Random();
         int nextNum = this.accNum;
         this.accNum = rand.nextInt(99999999);
@@ -159,11 +156,11 @@ public class BankAcc {
     //below relates to PrintAccountTransactionHistory() defined and called in Customer class
     public void printTransHistory() {
 
-        System.out.printf("\nTransaction History for account %s\n", this.accNum);
+        System.out.printf("\nTransaction History for account %s\n", accNum);
 
         //this prints the transactions in reverse order, i.e. the most recent first
-        for (int t = this.transactions.size() - 1; t >= 0; t--) {
-            System.out.printf(this.transactions.get(t).getSummaryLine());
+        for (int t = transactions.size() - 1; t >= 0; t--) {
+            System.out.printf(transactions.get(t).getSummaryLine());
         }
         System.out.println();
     }

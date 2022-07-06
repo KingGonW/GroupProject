@@ -156,13 +156,13 @@ public class Customer {
     //the below links to showTransactionHistory(), defined and called in Main.
     //think of this as a helper method
     public void printAccountTransactionHistory(int accountIndex) {
-        this.bankAccounts.get(accountIndex).printTransHistory();
+        getBankAccounts().get(accountIndex).printTransHistory();
     }
 
     //the below links to showTransactionHistory(), defined and called in Main.
     //think of this as a helper method
     public int numAccounts() {
-        return  this.bankAccounts.size();
+        return  getBankAccounts().size();
     }
 
     //the below gets called in transfer, withdraw and deposit operations
