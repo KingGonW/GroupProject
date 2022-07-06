@@ -29,15 +29,18 @@ public class Customer {
         this.bankAccounts = new ArrayList<BankAcc>();
     }
 
-    public boolean checkISAAcc(Object obj) {
-        if (obj != null) {
-            System.out.println("You  already have an ISA Account ");
-            return false;
-        } else
-            return true;
+    public boolean checkISAAcc() {
+        boolean temp = true;
+        for (int i = 0; i < getBankAccounts().size(); i++) {
+            if (getBankAccounts().get(i).getAccType() == "ISA Account") {
+                System.out.println("You  already have an ISA Account ");
+                temp = false;
+            }
+        }
+
+        return temp;
+
     }
-
-
 
     public long generateUniqueId() {
         counter++;
@@ -56,9 +59,11 @@ public class Customer {
     public ArrayList<BankAcc> getBankAccounts() {
         return bankAccounts;
     }
+
     public void setBankAccounts(ArrayList<BankAcc> bankAccounts) {
         this.bankAccounts = bankAccounts;
     }
+
     public String getListOfBankAccounts() {
         String temp = "";
         for (int i = 0; i < bankAccounts.size(); i++) {
@@ -170,24 +175,25 @@ public class Customer {
     //the below links to showTransactionHistory(), defined and called in Main.
     //think of this as a helper method
     public int numAccounts() {
-        return  getBankAccounts().size();
+        return getBankAccounts().size();
     }
 
     //the below gets called in transfer, withdraw and deposit operations
-    public  void addAccountTransaction(int accountIndex, double amount, String memo) {
+    public void addAccountTransaction(int accountIndex, double amount, String memo) {
         bankAccounts.get(accountIndex).addTransaction(amount, memo);
     }
 
 
     //the below gets called in transfer, withdraw and deposit operations
-    public  int getAccountNumber(int accountIndex) {
+    public int getAccountNumber(int accountIndex) {
         return bankAccounts.get(accountIndex).getAccNum();
     }
 
 
 
-  public double getAccountBalance(int accountIndex) {
-      return this.bankAccounts.get(accountIndex).getBalance();}
+    public double getAccountBalance(int accountIndex) {
+        return this.bankAccounts.get(accountIndex - 1).getBalance();
+    }
 
 
 
