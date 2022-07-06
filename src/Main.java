@@ -26,7 +26,6 @@ public class Main {
         main.generateAccounts(main.customers.get(2));
         main.generateAccounts(main.customers.get(3));
 
-        System.out.println(main.customers.get(0).getListOfBankAccounts());
        /* for (int i = 0; i < main.customers.size(); i++) {
             main.printCustomerAccounts(i + 1l);
         }*/
@@ -49,7 +48,7 @@ public class Main {
             FileWriter writer = new FileWriter("customerAccounts.txt");
             Writer output = new BufferedWriter(writer);
             for (int i = 0; i < main.customers.size(); i++) {
-                output.write(main.printCustomerAccounts(i + 1L));
+                output.write(main.printCustomerAccounts(Long.valueOf(i) + 1));
             }
             output.close();
 
@@ -83,7 +82,7 @@ public class Main {
 
     public String printCustomerAccounts(Long customerID) {
         int customerNumberInInt = customerID.intValue();
-        customers.get(customerNumberInInt - 1).getName();
+        System.out.println(customers.get(customerNumberInInt - 1).getName());
        return customers.get(customerNumberInInt - 1).getListOfBankAccounts();
 
     }
@@ -529,10 +528,10 @@ public class Main {
             printCustomerAccounts(customerNumber );
             System.out.println("Please enter the account to deposit");
             theAccount = scanner.nextInt();
-            if (theAccount < 0 || theAccount >= customers.get(customerNumberInInt ).getBankAccounts().size()) {
+            if (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
                 System.out.println("Invalid Account chosen. Please try again.");
             }
-        } while (theAccount < 0 || theAccount >= customers.get(customerNumberInInt ).getBankAccounts().size());
+        } while (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
         do {
             System.out.println("Please enter the amount to deposit");
             dmoney = scanner.nextDouble();

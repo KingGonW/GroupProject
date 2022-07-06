@@ -30,7 +30,7 @@ public class ISAAccount extends BankAcc {
                     "to keep your ISA account, please keep balance over 100");
             System.out.println("Would you like to deposit money?");
         } else {
-            withdrawMoney(withdrawAmount);
+            super.withdrawMoney(withdrawAmount);
             System.out.println("You have withdrawn " + withdrawAmount + " from your account" + "\n" +
                     "Your Balance is now: " + this.getClosingBalance());
         }
