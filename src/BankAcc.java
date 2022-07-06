@@ -30,10 +30,18 @@ public class BankAcc {
     }
 
 
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(ArrayList<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
     //the below array list relates to Transaction class
     //the idea is that each account holds an array list of the transactions
     //this will be called
-    private ArrayList<Transaction> transactions;
+    private ArrayList<Transaction> transactions = new ArrayList<>();
 
     //the customer variable below is the Customer class. 
     // The idea here is that each account has a linked customer
@@ -57,7 +65,6 @@ public class BankAcc {
         this.accType = accType;
         this.sortCode = sortCode;
         this.accNum = this.getNewAccountNumber();
-        this.transactions = new ArrayList<>();
     }
 
 
@@ -198,7 +205,7 @@ public class BankAcc {
 
     public void addTransaction(double amount, String memo) {
         Transaction newTransaction = new Transaction(amount, memo, this);
-        this.transactions.add(newTransaction);
+        getTransactions().add(newTransaction);
     }
 }
 
