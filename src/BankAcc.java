@@ -57,7 +57,7 @@ public class BankAcc {
         this.accType = accType;
         this.sortCode = sortCode;
         this.accNum = this.getNewAccountNumber();
-
+        this.transactions = new ArrayList<>();
     }
 
 
