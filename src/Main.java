@@ -510,7 +510,7 @@ public class Main {
 
     public void deposit(long customerNumber) {
 
-       //int customerNumberInInt = customerNumber.intValue();
+      int customerNumberInInt = customerNumber.intValue();
         BankAcc BA = new BankAcc();
         int theAccount;
         double dmoney;
