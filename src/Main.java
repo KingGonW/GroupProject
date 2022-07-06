@@ -384,6 +384,7 @@ public class Main {
         System.out.println("""
                
                 1: View Account Transaction History
+                2. View Balance
                 2. Deposit Funds
                 3. Withdraw Funds
                 4. Transfer Funds
@@ -399,19 +400,23 @@ public class Main {
 
                 break;
             case "2":
-                deposit(customerNumber);
+                viewBalance(customerNumber);
                 //
                 break;
             case "3":
-                withdraw();
+                deposit(customerNumber);
+                //
                 break;
             case "4":
-                transferMoney();
+                withdraw();
                 break;
             case "5":
-                adminMenu();
+                transferMoney();
                 break;
             case "6":
+                adminMenu();
+                break;
+            case "7":
                 mainMenu();
             default:
                 if (!input.equals("6")) {
@@ -421,6 +426,11 @@ public class Main {
                 break;
 
         }
+    }
+
+    private void viewBalance(long customerNumber) {
+
+        System.out.println("Nothing here yet");
     }
 
     private void createNewBankAccount(long customerNumber) {
