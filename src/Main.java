@@ -419,7 +419,9 @@ public class Main {
                 1: Create Current Account\s
                 2: Create Business Account
                 3: Create ISA Account:
-                4: Back to Customer Accounts""");
+                4: Back to Customer Accounts
+                5: Back to Admin Menu
+                6: Back to Main Menu""");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -434,17 +436,24 @@ public class Main {
                 createISAAccount(customerNumber);
                 printCustomerAccounts(customerNumber);
                 break;
+            case "4":
+                yourBank(customerNumber);
+                break;
+            case "5":
+                adminMenu();
+                break;
+            case "6":
+                mainMenu();
+                break;
+
             default:
-                if (!input.equals("4")) {
+                if (!input.equals("6")) {
                     System.out.println("Please enter a valid number");
-                    allCustomerAccounts(customerNumber);
+                    yourBank(customerNumber);
                 }
                 break;
         }
-        if (!input.equals("4"))
-            createNewBankAccount(customerNumber);
-        else
-            yourBank(customerNumber);
+
     }
 
     private void allCustomerAccounts(long customerNumber) {
@@ -557,6 +566,7 @@ public class Main {
 
         customers.get(customerNumberInInt - 1).addAccountTransaction(fromTheAccount - 1, wMoney, memo);
     }
+
 
     public void createCurrentAccount(Long customerNumber) {
         BankAcc currentAcc = new CurrentAccount();
