@@ -407,7 +407,7 @@ public class Main {
                 //
                 break;
             case "4":
-                withdraw();
+                withdraw(customerNumber);
                 break;
             case "5":
                 transferMoney();
@@ -496,7 +496,7 @@ public class Main {
                 //deposit(customerNumber);
                 break;
             case "2":
-                withdraw();
+                //withdraw();
                 break;
             /*case "3":
                 //viewbalance();
@@ -519,37 +519,53 @@ public class Main {
 
     public void deposit(Long customerNumber) {
 
-      int customerNumberInInt = customerNumber.intValue();
+        int customerNumberInInt = customerNumber.intValue();
         BankAcc BA = new BankAcc();
-        int theAccount;
+        int totheAccount;
         double dmoney;
         String memo;
         do {
             printCustomerAccounts(customerNumber );
-            System.out.println("Please enter the account to deposit");
-            theAccount = scanner.nextInt();
-            if (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
+            System.out.println("Please enter the account to deposit:");
+            totheAccount = scanner.nextInt();
+            if (totheAccount < 0 || totheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
                 System.out.println("Invalid Account chosen. Please try again.");
             }
-        } while (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
+        } while (totheAccount < 0 || totheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
         do {
-            System.out.println("Please enter the amount to deposit");
+            System.out.println("Please enter the amount to deposit:");
             dmoney = scanner.nextDouble();
             BA.depositMoney(dmoney);
         } while (dmoney < 0);
         //System.out.println("Deposit successfully");
-        scanner.nextLine();
-        System.out.println("Enter a memo");
+        System.out.println("Enter a memo:");
         memo = scanner.next();
 
-        customers.get(customerNumberInInt - 1).addAccountTransaction(theAccount, dmoney, memo);
+        customers.get(customerNumberInInt - 1).addAccountTransaction(totheAccount, dmoney, memo);
     }
 
-    public void withdraw() {
+    public void withdraw(Long customerNumber) {
+        int customerNumberInInt = customerNumber.intValue();
         BankAcc BA = new BankAcc();
-        System.out.println("Please enter the amount to withdrawal");
-        double wmoney = scanner.nextDouble();
-        BA.withdrawMoney(wmoney);
+        int fromtheAccount;
+        double wmoney;
+        String memo;
+        do{
+            printCustomerAccounts(customerNumber );
+            System.out.println("Please enter the account to withdraw money:");
+            fromtheAccount = scanner.nextInt();
+            if (fromtheAccount < 0 || fromtheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
+                System.out.println("Invalid Account chosen. Please try again.");
+            }
+        }while (fromtheAccount < 0 || fromtheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
+        do{
+            System.out.println("Please enter the amount to withdraw");
+            wmoney = scanner.nextDouble();
+            BA.withdrawMoney(wmoney);
+        } while (wmoney < 0);
+        System.out.println("Enter a memo");
+        memo= scanner.nextLine();
+        customers.get(customerNumberInInt - 1).addAccountTransaction(fromtheAccount, wmoney, memo);
     }
 
     public void createCurrentAccount(Long customerNumber) {
