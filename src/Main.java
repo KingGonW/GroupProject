@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-import static sun.security.krb5.Confounder.intValue;
-
 public class Main {
     private final Scanner scanner = new Scanner(System.in);
     private String input;
@@ -13,7 +11,7 @@ public class Main {
     Customer currentCustomer = new Customer();
 
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
         Main main = new Main();
         main.customers = new ArrayList<>();
@@ -51,7 +49,7 @@ public class Main {
             FileWriter writer = new FileWriter("customerAccounts.txt");
             Writer output = new BufferedWriter(writer);
             for (int i = 0; i < main.customers.size(); i++) {
-                output.write(main.printCustomerAccounts(i + 1l));
+                output.write(main.printCustomerAccounts(i + 1L));
             }
             output.close();
 
@@ -193,7 +191,7 @@ public class Main {
 
         //read the lines of text into an array list
         try {
-            BufferedReader input = new BufferedReader(new FileReader("customerArray.txt"));
+            BufferedReader input = new BufferedReader(new FileReader(filename));
             if (!input.ready()) { // check whether the file can be read
                 throw new IOException();
             }
@@ -202,7 +200,7 @@ public class Main {
             }
             input.close();
         } catch (IOException e) {  // catch any problems found e.g. file not found
-            System.out.println(e);
+            e.printStackTrace();
         }
 
         //print out each item in the array list
