@@ -606,6 +606,190 @@ public class Main {
         //print transactions history
         customers.get(customerNumberInInt - 1).printAccountTransactionHistory(theAccount);
     }
+/*the below copied from the other branch.
 
+getAccountBalance() has been defined, in Customer class
+
+
+printAccountsMenu does not need to be defined. Delete it and use the existing menu options above. Its purpose is to bring the user back one level. I think
+printTransactionsMEnu - line 381 - is the matching menu
+
+    public static void transferFunds(Customer currentCustomer, Scanner sc, Bank theBank){
+        //initialise
+        //we need a source account, destination account and amount to transfer
+        //some logic to ensure amount sent accords with balance
+
+        int fromAccount;
+        int toAccount;
+        double transferAmount;
+        double accountBalance;
+
+        //get the source account - same logic, i.e. accessing an array of accounts, as showTransactionHistory();
+        do{
+            System.out.printf("Enter the number  (1-%d) of the account\n"
+                    + "to transfer from:", currentCustomer.numAccounts());
+            fromAccount=sc.nextInt()-1;
+            if(fromAccount < 0 || fromAccount >= currentCustomer.numAccounts())
+            {
+                System.out.println("Invalid Account chosen. Please try again.");
+            }
+
+        } while(fromAccount < 0 || fromAccount >= currentCustomer.numAccounts());
+
+        //now we need the account balance, from the account just chosen
+
+        accountBalance = currentCustomer.getAccountBalance(fromAccount);
+
+        //get the destination account
+        do{
+            System.out.printf("Enter the number  (1-%d) of the account\n"
+                    + "to transfer to:",  currentCustomer.numAccounts());
+            toAccount=sc.nextInt()-1;
+            if(toAccount < 0 || toAccount >= currentCustomer.numAccounts())
+            {
+                System.out.println("Invalid Account chosen. Please try again.");
+            }
+
+        } while(toAccount < 0 || toAccount >= currentCustomer.numAccounts());
+
+        //get the amount to transfer
+        do{
+            System.out.printf("Enter the amount to transfer( max %.02f): ", accountBalance);
+            transferAmount= sc.nextDouble();
+
+            //logic below stops transferring negative funds, or exceeding account balance.
+            //remember to factor in ISA minimum account balance for group project
+            if(transferAmount <0){
+                System.out.println("Amount must be greater than zero!");
+            } else if (transferAmount > accountBalance){
+                System.out.printf("You cannot transfer more than your balance\nof %.02f.\n", accountBalance);
+            }
+        } while(transferAmount < 0 || transferAmount > accountBalance);
+
+        //now transfer can occur
+        //note addAccountTransaction + getAcctId are defined in Customer
+        currentCustomer.addAccountTransaction(fromAccount, -1*transferAmount, String.format("Origin account %s",
+                currentCustomer.getAccountNumber(toAccount)));
+        currentCustomer.addAccountTransaction(toAccount, transferAmount, String.format("Destination account %s",
+                currentCustomer.getAccountNumber(fromAccount)));
+
+        //a brief log/confirmatory message
+        System.out.printf("%s transferred", transferAmount);
+
+        //then takes the User back to the appropriate menu
+        Main.printAccountsMenu(currentCustomer,sc,theBank);
+
+    }
+
+    private static void withdrawFunds(Customer currentCustomer, Scanner sc, Bank theBank) {
+
+        //the logic here is similar to transferFunds();
+        int fromAccount;
+        double withdrawAmount;
+        double accountBalance;
+        String memo;
+
+        //get the account to withdraw from
+        do{
+            System.out.printf("Enter the number (1-%d) of the account\n" +
+                    "to withdraw from: ", currentCustomer.numAccounts());
+            fromAccount = sc.nextInt()-1;
+            if(fromAccount < 0 || fromAccount >= currentCustomer.numAccounts())
+            {
+                System.out.println("Invalid Account chosen. Please try again.");
+            }
+
+        } while (fromAccount < 0 || fromAccount >= currentCustomer.numAccounts());
+
+        //now we need the account balance, from the account just chosen
+        accountBalance= currentCustomer.getAccountBalance(fromAccount);
+
+        //get the amount to transfer
+        do{
+            System.out.printf("Enter the amount to withdraw( max %.02f): ", accountBalance);
+            withdrawAmount= sc.nextDouble();
+
+            //logic below stops withdrawing negative funds, as that would be basically a deposit
+            // or exceeding account balance.
+            //remember to factor in ISA minimum account balance for group project
+            if(withdrawAmount <0){
+                System.out.println("Amount must be greater than zero!");
+            } else if (withdrawAmount > accountBalance){
+                System.out.printf("You cannot withdraw more than your balance\nof %.02f.\n", accountBalance);
+                Main.printAccountsMenu(currentCustomer,sc, theBank);
+            }
+        } while(withdrawAmount < 0 || withdrawAmount > accountBalance);
+
+
+
+        sc.nextLine();
+
+        //now the memo - this is useful for the customer/admin to add a note about the withdrawal.
+        // It can safely be dispensed with, ergo consider removing for group project,
+        //that would mean redefining addAccountTransaction();
+        System.out.println("Enter a memo");
+        memo= sc.nextLine();
+
+        //finally allow the withdrawal
+        currentCustomer.addAccountTransaction(fromAccount,-1*withdrawAmount, memo);
+
+        //a brief log/confirmatory message
+        System.out.printf("%s withdrawn ", withdrawAmount);
+
+        //then takes the User back to the appropriate menu
+        Main.printAccountsMenu(currentCustomer,sc,theBank);
+    }
+
+    private static void depositFunds(Customer currentCustomer, Scanner sc, Bank theBank) {
+
+        //the logic here is basically an inversion of withdrawFunds();
+        int toAccount;
+        double depositAmount;
+        String memo;
+
+        //get the account to transfer from
+        do{
+            System.out.printf("Enter the number (1-%d) of the account\n" +
+                    "to deposit to: ", currentCustomer.numAccounts());
+            toAccount = sc.nextInt()-1;
+            if(toAccount < 0 || toAccount >= currentCustomer.numAccounts())
+            {
+                System.out.println("Invalid Account chosen. Please try again.");
+            }
+
+        } while (toAccount < 0 || toAccount >= currentCustomer.numAccounts());
+
+        //get the amount to deposit
+        do{
+            System.out.println("Enter the amount to deposit");
+            depositAmount= sc.nextDouble();
+
+            //logic below stops users depositing a negative amount, as that would effectively be a withdrawal.
+            //remember to factor in ISA minimum account balance for group project
+            if(depositAmount <0){
+                System.out.println("You cannot deposit less than zero");
+            }
+
+        } while(depositAmount < 0);
+
+        sc.nextLine();
+
+        //now the memo - this is useful for the customer/admin to add a note about the deposit.
+        // It can safely be dispensed with, ergo consider removing for group project,
+        //that would mean redefining addAccountTransaction();
+        System.out.println("Enter a memo");
+        memo= sc.nextLine();
+
+        //finally allow the deposit
+        currentCustomer.addAccountTransaction(toAccount,depositAmount, memo);
+
+        //a brief log/confirmatory message
+        System.out.printf("%s deposited", depositAmount);
+
+        //then takes the User back to the appropriate menu
+        Main.printAccountsMenu(currentCustomer,sc,theBank);
+    }
+
+    */
 
 }
