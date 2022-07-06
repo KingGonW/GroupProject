@@ -385,11 +385,11 @@ public class Main {
                
                 1: View Account Transaction History
                 2. View Balance
-                2. Deposit Funds
-                3. Withdraw Funds
-                4. Transfer Funds
-                5: Exit to Admin Menu
-                6: Exit to Main Menu""");
+                3. Deposit Funds
+                4. Withdraw Funds
+                5. Transfer Funds
+                6: Exit to Admin Menu
+                7: Exit to Main Menu""");
 
         input = scanner.next();
 
@@ -419,7 +419,7 @@ public class Main {
             case "7":
                 mainMenu();
             default:
-                if (!input.equals("6")) {
+                if (!input.equals("7")) {
                     System.out.println("Please enter a valid number");
                     adminMenu();
                 }
@@ -429,6 +429,8 @@ public class Main {
     }
 
     private void viewBalance(long customerNumber) {
+
+
 
         System.out.println("Nothing here yet");
     }
