@@ -25,14 +25,12 @@ public class ISAAccount extends BankAcc {
     @Override
     public void withdrawMoney(double withdrawAmount) {
         //this checks to make withdraw amount doesn't move balance below 100
-        if (this.getOpeningBalance() - withdrawAmount < 100) {
+        if (this.getBalance() - withdrawAmount < 100) {
             System.out.println("Your account balance will be too low, " +
                     "to keep your ISA account, please keep balance over 100");
             System.out.println("Would you like to deposit money?");
         } else {
             super.withdrawMoney(withdrawAmount);
-            System.out.println("You have withdrawn " + withdrawAmount + " from your account" + "\n" +
-                    "Your Balance is now: " + this.getClosingBalance());
         }
     }
 
@@ -96,8 +94,8 @@ public class ISAAccount extends BankAcc {
     public String toString() {
         return "Account Type:" + accountType + " Sort Code: " +
                 ISAsortCode + " Account Number: " + ISAAccountNumber
-                + " Balance " + super.getClosingBalance() +
-                " Interest Rate: " + interestRate + "%%";
+                + " Balance " + this.getBalance() +
+                " Interest Rate: " + "2%";
 
 
     }

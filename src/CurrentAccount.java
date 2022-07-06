@@ -18,7 +18,7 @@ public class CurrentAccount extends BankAcc {
     public String toString() {
         return "Account Type:" + accountType + " Sort Code: " +
                 currentSortCode + " Account Number: " + currentAccountNumber
-                + " Balance: " + super.getClosingBalance();
+                + " Balance: " + this.getBalance();
     }
 
 }
