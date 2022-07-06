@@ -48,7 +48,7 @@ public class Main {
             FileWriter writer = new FileWriter("customerAccounts.txt");
             Writer output = new BufferedWriter(writer);
             for (int i = 0; i < main.customers.size(); i++) {
-                output.write(main.printCustomerAccounts(Long.valueOf(i)));
+                output.write(main.printCustomerAccounts(Long.valueOf(i) + 1));
             }
             output.close();
 
@@ -82,8 +82,8 @@ public class Main {
 
     public String printCustomerAccounts(Long customerID) {
         int customerNumberInInt = customerID.intValue();
-        System.out.println(customers.get(customerNumberInInt ).getName());
-       return customers.get(customerNumberInInt ).getListOfBankAccounts();
+        System.out.println(customers.get(customerNumberInInt - 1).getName());
+       return customers.get(customerNumberInInt - 1).getListOfBankAccounts();
 
     }
 
@@ -525,7 +525,7 @@ public class Main {
         double dmoney;
         String memo;
         do {
-            printCustomerAccounts(customerNumber - 1);
+            printCustomerAccounts(customerNumber );
             System.out.println("Please enter the account to deposit");
             theAccount = scanner.nextInt();
             if (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
