@@ -185,6 +185,12 @@ public class BankAcc {
     }
 
     public double getBalance() {
+        double balance = 0;
+        //run a loop to go through the transactions array list - defined above - and return the balance
+        for(Transaction t: this.transactions){
+            balance += t.getAmount();
+        }
+        return balance;
     }
 }
 
