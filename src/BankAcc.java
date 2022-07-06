@@ -183,5 +183,8 @@ public class BankAcc {
         Transaction newTransaction = new Transaction(amount, memo, this);
         getTransactions().add(newTransaction);
     }
+
+    public double getBalance() {
+    }
 }
 

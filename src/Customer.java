@@ -176,6 +176,6 @@ public class Customer {
         return bankAccounts.get(accountIndex).getAccNum();
     }
 
-   // see notes at bottom of main public double getAccountBalance(int fromAccount) {
-    //}
+  public double getAccountBalance(int accountIndex) {
+      return this.bankAccounts.get(accountIndex).getBalance();}
 }

@@ -608,7 +608,8 @@ public class Main {
     }
 /*the below copied from the other branch.
 
-getAccountBalance() needs to be defined, i.e. the method filled in - in Customer class. Copy from other branch.
+getAccountBalance() has been defined, in Customer class
+
 
 printAccountsMenu does not need to be defined. Delete it and use the existing menu options above. Its purpose is to bring the user back one level. I think
 printTransactionsMEnu - line 381 - is the matching menu
