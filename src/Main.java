@@ -383,11 +383,12 @@ public class Main {
         System.out.println("""
                
                 1: View Account Transaction History
-                2. Deposit Funds
-                3. Withdraw Funds
-                4. Transfer Funds
-                5: Exit to Admin Menu
-                6: Exit to Main Menu""");
+                2. View Balance
+                3. Deposit Funds
+                4. Withdraw Funds
+                5. Transfer Funds
+                6: Exit to Admin Menu
+                7: Exit to Main Menu""");
 
         input = scanner.next();
 
@@ -398,28 +399,39 @@ public class Main {
 
                 break;
             case "2":
-                deposit(customerNumber);
+                viewBalance(customerNumber);
                 //
                 break;
             case "3":
-                withdraw();
+                deposit(customerNumber);
+                //
                 break;
             case "4":
-                transferMoney();
+                withdraw();
                 break;
             case "5":
-                adminMenu();
+                transferMoney();
                 break;
             case "6":
+                adminMenu();
+                break;
+            case "7":
                 mainMenu();
             default:
-                if (!input.equals("6")) {
+                if (!input.equals("7")) {
                     System.out.println("Please enter a valid number");
                     adminMenu();
                 }
                 break;
 
         }
+    }
+
+    private void viewBalance(long customerNumber) {
+
+
+
+        System.out.println("Nothing here yet");
     }
 
     private void createNewBankAccount(long customerNumber) {
