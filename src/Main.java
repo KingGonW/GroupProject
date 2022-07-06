@@ -40,7 +40,7 @@ public class Main {
             output.close();
 
         } catch (IOException e) {
-            System.out.println("I cannot write that file");
+            System.out.println("File Creation Unsuccessful");
             e.printStackTrace();
         }
 
@@ -53,9 +53,11 @@ public class Main {
             output.close();
 
         }catch (IOException e) {
-            System.out.println("I cannot write that file");
+            System.out.println("File Creation Unsuccessful");
             e.printStackTrace();
         }
+
+
 
 
         main.mainMenu();
@@ -75,15 +77,16 @@ public class Main {
         for (int i = 0; i < randomInt2; i++) {
             createBusinessAccount(customer.getId());
         }
-        for (int i = 0; i < randomInt3; i++) {
+
             createISAAccount(customer.getId());
-        }
+
     }
 
     public String printCustomerAccounts(Long customerID) {
         int customerNumberInInt = customerID.intValue();
         System.out.println(customers.get(customerNumberInInt - 1).getName());
        return customers.get(customerNumberInInt - 1).getListOfBankAccounts();
+
 
     }
 
@@ -106,7 +109,9 @@ public class Main {
 
         do {
             System.out.println("Please choose an option");
-            System.out.println("1: Admin Access\n2: Exit Program");
+            System.out.println("""
+            1: Admin Access\s
+            2: Exit Program\n""");
 
 
             input = scanner.next();
@@ -127,7 +132,7 @@ public class Main {
         System.out.println("""
                 1: View All Customers\s
                 2: Login to Customer Account
-                3: Exit to Main Menu""");
+                3: Exit to Main Menu\n""");
         input = scanner.next();
         switch (input) {
             case "1":
@@ -158,31 +163,10 @@ public class Main {
 
     }
 
-    // created default back option to return to previous menu or initial main menu
-    //this can be used in any section of the menu, from viewing customers to creating accounts
-    public void returnMenus() {
 
-        System.out.println("\nChoose an Option");
-        System.out.println("1: Back to Admin Menu\n" +
-                "2: Back to Main Menu");
-
-        input = scanner.next();
-        switch (input) {
-            case "1":
-                adminMenu();
-            case "2":
-                mainMenu();
-
-        }
-
-    }
 
     //adding methods in order that it shows up in the admin menu
     public void findAllCustomers() {
-       /* for (Customer customer : customers) {
-            System.out.println(customer.toString());
-        }*/
-
         //set up variables to read file
         String filename = "customerArray.txt";
         String line;
@@ -215,7 +199,7 @@ public class Main {
         if (temp != 0) {
             yourBank(temp);
         } else {
-            System.out.println("Please enter a valid name ");
+            System.out.println("\nPlease Enter A Valid Name\n");
             adminMenu();
         }
     }
@@ -319,30 +303,28 @@ public class Main {
 
     public long loginValidation() {
         long temp = 0;
-        System.out.println("Please enter customer name ");
-        String cusName = scanner.next();
+        System.out.println("\nPlease Enter A Customer ID\n");
+        int cusName = scanner.nextInt();
         //this changes the first letter of users input to capital letter
         //so no matter what a lower or upper case input, the user will be found by their name
-        cusName = cusName.substring(0, 1).toUpperCase() + cusName.substring(1);
         for (Customer customer : customers) {
-            if (customer.getName().equals(cusName)) {
-                System.out.println("====> WELCOME " + cusName);
+            if (customer.getId() == cusName) {
+                System.out.println("\n======= Welcome To " + customer.getName() + "'s Bank Account =======\n");
                 temp = customer.getId();
             }
         }
-        System.out.println(temp);
         return temp;
 
     }
 
 
     public void yourBank(long customerNumber) {
-        System.out.println("Please Select an Option");
+        System.out.println("\nPlease Select an Option");
         System.out.println("""
-                1: Create a new Bank account\s
+                1: Create A New Bank account\s
                 2: View accounts                
                 3: Exit to Admin Menu
-                4: Exit to Main Menu""");
+                4: Exit to Main Menu\n""");
 
         input = scanner.next();
         switch (input) {
@@ -383,12 +365,13 @@ public class Main {
         System.out.println("""
                
                 1: View Account Transaction History
-                2. View Balance
-                3. Deposit Funds
-                4. Withdraw Funds
-                5. Transfer Funds
-                6: Exit to Admin Menu
-                7: Exit to Main Menu""");
+                2: View Balance
+                3: Deposit Funds
+                4: Withdraw Funds
+                5: Transfer Funds
+                6: Back to Account Menu
+                7: Back to Admin Menu
+                8: Back to Main Menu""");
 
         input = scanner.next();
 
@@ -413,9 +396,11 @@ public class Main {
                 transferMoney();
                 break;
             case "6":
+                yourBank(customerNumber);
+            case "7":
                 adminMenu();
                 break;
-            case "7":
+            case "8":
                 mainMenu();
             default:
                 if (!input.equals("7")) {
@@ -521,27 +506,29 @@ public class Main {
 
         int customerNumberInInt = customerNumber.intValue();
         BankAcc BA = new BankAcc();
-        int totheAccount;
-        double dmoney;
+        int toTheAccount;
+        double dMoney;
         String memo;
         do {
             printCustomerAccounts(customerNumber );
             System.out.println("Please enter the account to deposit:");
-            totheAccount = scanner.nextInt();
-            if (totheAccount < 0 || totheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
+            toTheAccount = scanner.nextInt();
+            if (toTheAccount < 0 || toTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
                 System.out.println("Invalid Account chosen. Please try again.");
             }
-        } while (totheAccount < 0 || totheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
+        } while (toTheAccount < 0 || toTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
         do {
             System.out.println("Please enter the amount to deposit:");
-            dmoney = scanner.nextDouble();
-            BA.depositMoney(dmoney);
-        } while (dmoney < 0);
-        //System.out.println("Deposit successfully");
-        System.out.println("Enter a memo:");
-        memo = scanner.next();
+            dMoney = scanner.nextDouble();
+            System.out.println("Enter a memo:");
+            memo = scanner.next();
+            BA.depositMoney(dMoney);
+            System.out.println("Memo: " + memo);
+        } while (dMoney < 0);
+        //System.out.println("Deposit successfully")
 
-        customers.get(customerNumberInInt - 1).addAccountTransaction(totheAccount, dmoney, memo);
+        customers.get(customerNumberInInt - 1).addAccountTransaction(toTheAccount, dMoney, memo);
+
     }
 
     public void withdraw(Long customerNumber) {
@@ -557,12 +544,13 @@ public class Main {
             if (fromtheAccount < 0 || fromtheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
                 System.out.println("Invalid Account chosen. Please try again.");
             }
-        }while (fromtheAccount < 0 || fromtheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
+        }while (fromtheAccount > 0 || fromtheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
         do{
             System.out.println("Please enter the amount to withdraw");
             wmoney = scanner.nextDouble();
-            BA.withdrawMoney(wmoney);
-        } while (wmoney < 0);
+
+        } while (wmoney > 0);
+        BA.withdrawMoney(wmoney);
         System.out.println("Enter a memo");
         memo= scanner.nextLine();
         customers.get(customerNumberInInt - 1).addAccountTransaction(fromtheAccount, wmoney, memo);
