@@ -24,6 +24,7 @@ public class Bank {
         this.bankAccounts.add(anAcct);
     }
 
+
     public Customer addCustomer(String firstName, String lastName, String emailAddress, String phoneNumber) {
         Customer newCustomer = new Customer(firstName,lastName,emailAddress, phoneNumber);
         this.customers.add(newCustomer);

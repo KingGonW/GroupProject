@@ -63,12 +63,12 @@ public class BankAcc {
         if (this.accNum == nextNum) {
             this.accNum = rand.nextInt(99999999);
         }
-        setBalance(200);
+        depositMoney(200);
     }
 
-    public double getBalance() {
+public double getBalance() {
         return balance;
-    }
+}
     public void setBalance(double balance) {
         this.balance = balance;
     }
@@ -108,8 +108,7 @@ public class BankAcc {
             balance += depositAmount;
             setBalance(balance);
             //new opening balance is the last closing balance amount
-            System.out.println("You Have Deposited $" + depositAmount + "\n" +
-                    "Your Balance is Now: $" + getBalance());
+
         }
 
 
@@ -170,8 +169,8 @@ public class BankAcc {
         getTransactions().add(newTransaction);
     }
 
-/*    public double getBalance() {
-        double balance;
+    /*public double getBalance() {
+
         //run a loop to go through the transactions array list - defined above - and return the balance
         for(Transaction t: this.transactions){
             balance += t.getAmount();

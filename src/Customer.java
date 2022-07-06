@@ -37,6 +37,8 @@ public class Customer {
             return true;
     }
 
+
+
     public long generateUniqueId() {
         counter++;
         return counter;
@@ -66,6 +68,10 @@ public class Customer {
         return temp;
     }
 
+    ArrayList<BankAcc> getAccount() {
+        return bankAccounts;
+    }
+
     public long getId() {
         return id;
     }
@@ -90,6 +96,8 @@ public class Customer {
 //    public void setCurrentBankAcc(BankAcc currentBankAcc) {
 //        this.currentBankAcc = currentBankAcc;
 //    }
+
+
 
     public String getLastName() {
         return lastName;
@@ -176,6 +184,11 @@ public class Customer {
         return bankAccounts.get(accountIndex).getAccNum();
     }
 
+
+
   public double getAccountBalance(int accountIndex) {
       return this.bankAccounts.get(accountIndex).getBalance();}
+
+
+
 }
