@@ -514,13 +514,13 @@ public class Main {
         double dmoney;
         String memo;
         do {
-            printCustomerAccounts(customerNumber);
+            printCustomerAccounts(customerNumber );
             System.out.println("Please enter the account to deposit");
             theAccount = scanner.nextInt();
-            if (theAccount < 0 || theAccount >= customerNumber) {
+            if (theAccount < 0 || theAccount >= customers.get(customerNumberInInt ).getBankAccounts().size()) {
                 System.out.println("Invalid Account chosen. Please try again.");
             }
-        } while (theAccount < 0 || theAccount >= customerNumber);
+        } while (theAccount < 0 || theAccount >= customers.get(customerNumberInInt ).getBankAccounts().size());
         do {
             System.out.println("Please enter the amount to deposit");
             dmoney = scanner.nextDouble();
