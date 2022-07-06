@@ -341,13 +341,9 @@ public class Main {
         System.out.println("Please Select an Option");
         System.out.println("""
                 1: Create a new Bank account\s
-                2: View accounts  (Note - options 3 - 6 better off in a new menu, accessed by Option 2 - TY Tamara, I will do this soon, Andy)
-                3: View Account Transaction History
-                4. Deposit Funds
-                5. Withdraw Funds
-                6. Transfer Funds
-                7: Exit to Admin Menu
-                8: Exit to Main Menu""");
+                2: View accounts                
+                3: Exit to Admin Menu
+                4: Exit to Main Menu""");
 
         input = scanner.next();
         switch (input) {
@@ -362,37 +358,17 @@ public class Main {
                 printCustomerAccounts(customerNumber);
                 //allCustomerAccounts(customerNumber);
 
-                //here we need a new menu to encapsulate
-                //                3: View Account Transaction History
-                //                4. Deposit Funds
-                //                5. Withdraw Funds
-                //                6. Transfer Funds
-
+                //the below menu gets called when Option 2 of yourBank() is selected.
+                printTransactionsMenu(customerNumber);
                 break;
             case "3":
-
-                showTransactionHistory(customerNumber);
-
-                break;
-            case "4":
-                deposit(customerNumber);
-                //
-                break;
-            case "5":
-                withdraw();
-
-                break;
-            case "6":
-                transferMoney();
-
-                break;
-            case "7":
                 adminMenu();
                 break;
-            case "8":
+            case "4":
                 mainMenu();
+                break;
             default:
-                if (!input.equals("8")) {
+                if (!input.equals("4")) {
                     System.out.println("Please enter a valid number");
                     adminMenu();
                 }
@@ -400,6 +376,51 @@ public class Main {
         }
         if (!input.equals("6"))
             yourBank(customerNumber);
+    }
+//the menu below is initialised in yourBank(), when the user chooses Option 2 "View All Accounts"
+    private void printTransactionsMenu(long customerNumber) {
+
+        System.out.println("Please Select an Option");
+        System.out.println("""
+               
+                1: View Account Transaction History
+                2. Deposit Funds
+                3. Withdraw Funds
+                4. Transfer Funds
+                5: Exit to Admin Menu
+                6: Exit to Main Menu""");
+
+        input = scanner.next();
+
+        switch (input){
+            case "1":
+
+                showTransactionHistory(customerNumber);
+
+                break;
+            case "2":
+                deposit(customerNumber);
+                //
+                break;
+            case "3":
+                withdraw();
+                break;
+            case "4":
+                transferMoney();
+                break;
+            case "5":
+                adminMenu();
+                break;
+            case "6":
+                mainMenu();
+            default:
+                if (!input.equals("6")) {
+                    System.out.println("Please enter a valid number");
+                    adminMenu();
+                }
+                break;
+
+        }
     }
 
     private void createNewBankAccount(long customerNumber) {
