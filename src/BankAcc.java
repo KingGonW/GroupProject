@@ -136,28 +136,9 @@ public class BankAcc {
         //new opening balance is the last closing balance amount
         setOpeningBalance(closingBalance);
         this.numberDeposits++; // increment number of deposits each time one is made
-
-
-        //the below posts this info to the Transactions class
-        //for this to work a toAccount variable is needed
-        // to test, let us call depositMoney() from one of the menus
-        //scanner also needed if we want a memo to be added
-        // commenting out the code until necessary things are added
-        // System.out.println("Enter a memo");
-        // memo= sc.nextLine();
-
-        // ideally we want a way to choose the specific customer
-
-        //Customer.addAccountTransaction(toAccount,depositAmount, memo);
-        // ATM.printUserMenu(currentCustomer,sc);
-
     }
 
 
-    //see comments in ISAAccount. I think nested if/else would work better here to check if account is an ISA
-
-    //withdraw and deposit methods need redefining, in Main I think,
-    // where they can take in the account number as an parameter, which the user enters
     public void withdrawMoney(double withdrawAmount) {
 
         if (openingBalance < withdrawAmount) {
@@ -168,16 +149,6 @@ public class BankAcc {
             numberWithdrawals++; // increment number of withdrawals made each time money is withdrawn
         }
 
-        //the below posts this info to the Transactions class
-        //for this to work a fromAccount variable is needed
-        // to test, let us call withdrawMoney() from one of the menus
-        //scanner also needed if we want a memo to be added
-        // ideally we want a way to choose the specific customer
-        // commenting out the code until necessary things are added
-
-        // System.out.println("Enter a memo");
-        // memo= sc.nextLine();
-        //Customer.addAccountTransaction(fromAccount,-1*withdrawAmount, memo);
 
     }
 

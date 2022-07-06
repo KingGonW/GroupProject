@@ -19,9 +19,6 @@ public class CurrentAccount extends BankAcc {
         return "Account Type:" + accountType + " Sort Code: " +
                 currentSortCode + " Account Number: " + currentAccountNumber
                 + " Balance: " + super.getClosingBalance();
-
-
     }
-
 
 }

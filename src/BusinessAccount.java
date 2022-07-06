@@ -14,7 +14,6 @@ public class BusinessAccount extends BankAcc {
         super.getAccNum();
         setBusinessAccountNumber(super.getAccNum());
         this.CreationDate = LocalDate.now();
-
     }
 
     public void setBusinessAccountNumber(int businessAccountNumber) {
@@ -36,8 +35,6 @@ public class BusinessAccount extends BankAcc {
         return "Account Type:" + accountType + " Sort Code: " +
                 businessSortCode + " Account Number: " + businessAccountNumber
                 + " Balance: " + super.getClosingBalance();
-
-
     }
 
 }

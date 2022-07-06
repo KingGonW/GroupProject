@@ -13,7 +13,6 @@ public class Bank {
 
     private ArrayList<BankAcc> bankAccounts;
 
-
     public Bank(String name) {
         this.bankName = name;
 

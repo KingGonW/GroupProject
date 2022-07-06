@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import static sun.security.krb5.Confounder.intValue;
+
 public class Main {
     private final Scanner scanner = new Scanner(System.in);
     private String input;
@@ -507,6 +509,8 @@ public class Main {
     }
 
     public void deposit(long customerNumber) {
+
+       //int customerNumberInInt = customerNumber.intValue();
         BankAcc BA = new BankAcc();
         int theAccount;
         double dmoney;
@@ -528,7 +532,8 @@ public class Main {
         scanner.nextLine();
         System.out.println("Enter a memo");
         memo = scanner.next();
-        currentCustomer.addAccountTransaction(theAccount, dmoney, memo);
+
+        customers.get(customerNumberInInt - 1).addAccountTransaction(theAccount, dmoney, memo);
     }
 
     public void withdraw() {
