@@ -562,13 +562,9 @@ public class Main {
     public void createBusinessAccount(Long customerNumber) {
         BankAcc businessAcc = new BusinessAccount();
         int customerNumberInInt = customerNumber.intValue();
-        //ask user to deposit money to open ISA account
-        //check if balance is less than 100, if yes
-        //prompt user to make balance 100
-        //only then when balance = 100 or more
-        //add the created account to customer array
         customers.get(customerNumberInInt - 1).getBankAccounts().add(businessAcc);
-
+        //require customer to deposit and keep the balance above 25
+        //only the account will be created and add to customer array when the balance is above 25
 
     }
 
@@ -576,6 +572,8 @@ public class Main {
         BankAcc ISAAcc = new ISAAccount();
         int customerNumberInInt = customerNumber.intValue();
         customers.get(customerNumberInInt - 1).getBankAccounts().add(ISAAcc);
+        //require customer to deposit and keep the balance above 100
+        //only the account will be created and add to customer array when the balance is above 100
 
     }
 
