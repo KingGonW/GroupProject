@@ -6,8 +6,6 @@ public class BankAcc {
     private double openingBalance;
     private double closingBalance;
     BankAcc ISAAccount;
-    private double numberDeposits;
-    private double numberWithdrawals;
 
     private String accType;
 
@@ -119,30 +117,14 @@ public class BankAcc {
     }
 
 
-    public double getNumberDeposits() {
-        return numberDeposits;
-    }
-
-    public void setNumberDeposits(double numberDeposits) {
-        this.numberDeposits = numberDeposits;
-    }
-
-    public double getNumberWithdrawals() {
-        return numberWithdrawals;
-    }
-
-    public void setNumberWithdrawals(double numberWithdrawals) {
-        this.numberWithdrawals = numberWithdrawals;
-    }
-
-
     public void depositMoney(double depositAmount) {
         //  System.out.println("Please enter the amount you want to deposit:  ");
         //sets closing balance to balance after deposit was made
-        setClosingBalance(openingBalance += depositAmount);
+        openingBalance += depositAmount;
+        setClosingBalance(openingBalance);
         //new opening balance is the last closing balance amount
         setOpeningBalance(closingBalance);
-        this.numberDeposits++; // increment number of deposits each time one is made
+
     }
 
 
@@ -153,7 +135,6 @@ public class BankAcc {
         } else {
             setClosingBalance(openingBalance -= withdrawAmount);
             setOpeningBalance(closingBalance);
-            numberWithdrawals++; // increment number of withdrawals made each time money is withdrawn
         }
 
 
@@ -183,11 +164,6 @@ public class BankAcc {
             System.out.println("Insufficient Funds, Transfer Unsuccessful");
         }
 
-    }
-
-    public void transactionHistory() {
-        this.numberWithdrawals = 0;
-        this.numberDeposits = 0;
     }
 
 
