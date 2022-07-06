@@ -1,23 +1,6 @@
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 43296210 Balance: 200.0
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 7929611 Balance: 200.0
-Account Type:Business Account Sort Code: 12-23-24 Account Number: 28019439 Balance: 200.0
-Account Type:Business Account Sort Code: 12-23-24 Account Number: 52631380 Balance: 200.0
-Account Type:Business Account Sort Code: 12-23-24 Account Number: 22370096 Balance: 200.0
-Account Type:ISA Account Sort Code: 22-66-44 Account Number: 7007670 Balance 200.0 Interest Rate: 2%
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 91326743 Balance: 200.0
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 80899087 Balance: 200.0
-Account Type:Business Account Sort Code: 12-23-24 Account Number: 3191155 Balance: 200.0
-Account Type:Business Account Sort Code: 12-23-24 Account Number: 35995406 Balance: 200.0
-Account Type:Business Account Sort Code: 12-23-24 Account Number: 25615173 Balance: 200.0
-Account Type:ISA Account Sort Code: 22-66-44 Account Number: 22994733 Balance 200.0 Interest Rate: 2%
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 79620976 Balance: 200.0
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 44278525 Balance: 200.0
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 49899750 Balance: 200.0
-Account Type:Business Account Sort Code: 12-23-24 Account Number: 78498051 Balance: 200.0
-Account Type:Business Account Sort Code: 12-23-24 Account Number: 41697951 Balance: 200.0
-Account Type:ISA Account Sort Code: 22-66-44 Account Number: 96279996 Balance 200.0 Interest Rate: 2%
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 89321953 Balance: 200.0
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 32832293 Balance: 200.0
-Account Type:Business Account Sort Code: 12-23-24 Account Number: 75815596 Balance: 200.0
-Account Type:Business Account Sort Code: 12-23-24 Account Number: 6545220 Balance: 200.0
-Account Type:ISA Account Sort Code: 22-66-44 Account Number: 18235381 Balance 200.0 Interest Rate: 2%
+Account Type:Current Account Sort Code: 00-04-01 Account Number: 50351995 Balance: $200.0
+Account Type:Current Account Sort Code: 00-04-01 Account Number: 86954380 Balance: $200.0
+Account Type:Current Account Sort Code: 00-04-01 Account Number: 71658561 Balance: $200.0
+Account Type:Current Account Sort Code: 00-04-01 Account Number: 82769416 Balance: $200.0
+Account Type:Current Account Sort Code: 00-04-01 Account Number: 41188853 Balance: $200.0
+Account Type:Current Account Sort Code: 00-04-01 Account Number: 2180543 Balance: $200.0
