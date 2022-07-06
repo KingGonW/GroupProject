@@ -175,4 +175,7 @@ public class Customer {
     public  int getAccountNumber(int accountIndex) {
         return bankAccounts.get(accountIndex).getAccNum();
     }
+
+   // see notes at bottom of main public double getAccountBalance(int fromAccount) {
+    //}
 }
