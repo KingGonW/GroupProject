@@ -508,7 +508,7 @@ public class Main {
         }
     }
 
-    public void deposit(long customerNumber) {
+    public void deposit(Long customerNumber) {
 
       int customerNumberInInt = customerNumber.intValue();
         BankAcc BA = new BankAcc();
