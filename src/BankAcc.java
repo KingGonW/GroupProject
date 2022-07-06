@@ -3,45 +3,19 @@ import java.util.Random;
 
 public class BankAcc {
     private int accNum;
-    private double openingBalance;
-    private double closingBalance;
+    private double balance;
     BankAcc ISAAccount;
 
     private String accType;
 
     private String sortCode;
 
-    public String getSortCode() {
-        return sortCode;
-    }
-
-    public void setSortCode(String sortCode) {
-        this.sortCode = sortCode;
-    }
-
-    public String getAccType() {
-        return accType;
-    }
-
-    public void setAccType(String accType) {
-        this.accType = accType;
-    }
-
-
-    public ArrayList<Transaction> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(ArrayList<Transaction> transactions) {
-        this.transactions = transactions;
-    }
-
-    //the below array list relates to Transaction class
+//the below array list relates to Transaction class
     //the idea is that each account holds an array list of the transactions
     //this will be called
     private ArrayList<Transaction> transactions = new ArrayList<>();
 
-    //the customer variable below is the Customer class. 
+    //the customer variable below is the Customer class.
     // The idea here is that each account has a linked customer
     private Customer holder;
 
@@ -54,6 +28,7 @@ public class BankAcc {
     //this might make more sense held in another class,
     // e.g. "Bank" to mimic a bank having a list of accounts
     private ArrayList<BankAcc> bankAccounts;
+
 
     BankAcc() {
     }
@@ -84,57 +59,73 @@ public class BankAcc {
         this.accType = accType;
         this.sortCode = sortCode;
         // added opening and closing balance to constructor
-        this.openingBalance = openingBalance;
-        this.closingBalance = closingBalance;
+       this.balance = balance;
         Random rand = new Random();
         int nextNum = this.accNum;
         this.accNum = rand.nextInt(99999999);
         if (this.accNum == nextNum) {
             this.accNum = rand.nextInt(99999999);
         }
-        depositMoney(200);
+        setBalance(200);
     }
 
-    public double getOpeningBalance() {
-        return openingBalance;
+    public double getBalance() {
+        return balance;
     }
-
-    public void setOpeningBalance(double openingBalance) {
-        this.openingBalance = openingBalance;
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
-
-    public double getClosingBalance() {
-        return closingBalance;
-    }
-
-    public void setClosingBalance(double closingBalance) {
-        this.closingBalance = closingBalance;
-    }
-
 
     public int getAccNum() {
         return accNum;
     }
+    public String getSortCode() {
+        return sortCode;
+    }
 
+    public void setSortCode(String sortCode) {
+        this.sortCode = sortCode;
+    }
+
+    public String getAccType() {
+        return accType;
+    }
+
+    public void setAccType(String accType) {
+        this.accType = accType;
+    }
+
+
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(ArrayList<Transaction> transactions) {
+        this.transactions = transactions;
+    }
 
     public void depositMoney(double depositAmount) {
         //  System.out.println("Please enter the amount you want to deposit:  ");
         //sets closing balance to balance after deposit was made
-        openingBalance += depositAmount;
-        setClosingBalance(openingBalance);
-        //new opening balance is the last closing balance amount
-        setOpeningBalance(closingBalance);
 
-    }
+            balance += depositAmount;
+            setBalance(balance);
+            //new opening balance is the last closing balance amount
+            System.out.println("You Have Deposited $" + depositAmount + "\n" +
+                    "Your Balance is Now: $" + getBalance());
+        }
+
+
 
 
     public void withdrawMoney(double withdrawAmount) {
 
-        if (openingBalance < withdrawAmount) {
-            System.out.println("Insufficient Funds. \n Please Deposit an Amount.");
+        if (balance < withdrawAmount) {
+            System.out.println("Insufficient Funds");
         } else {
-            setClosingBalance(openingBalance -= withdrawAmount);
-            setOpeningBalance(closingBalance);
+            balance -= withdrawAmount;
+            System.out.println("You have withdrawn $" + withdrawAmount + " from your account" + "\n" +
+                    "Your Balance is now: " + getBalance());
         }
 
 
@@ -143,22 +134,20 @@ public class BankAcc {
     public void moneyTransfer(BankAcc fromAccount, BankAcc toAccount, double amountToTransfer) {
 
         if (fromAccount.accType == "ISAAccount") {
-            if (ISAAccount.getOpeningBalance() - amountToTransfer < 100) {
+            if (ISAAccount.getBalance() - amountToTransfer < 100) {
                 System.out.println("Your transfer will make your new openingBalance less than 100 +" +
                         "please keep 100 and above at all times");
                 return;
             }
         }
-        if (fromAccount.openingBalance >= amountToTransfer) {
+        if (fromAccount.getBalance() >= amountToTransfer) {
             //sets the receivers closing balance to include new deposit
-            toAccount.setClosingBalance(toAccount.openingBalance += amountToTransfer);
+            toAccount.setBalance(toAccount.balance += amountToTransfer);
             // new opening balance of receiver is last closing balance amount
-            toAccount.setOpeningBalance(closingBalance);
 
             //sets the senders closing balance to include withdrawal made
-            fromAccount.setClosingBalance(fromAccount.openingBalance -= amountToTransfer);
+            fromAccount.setBalance(fromAccount.balance -= amountToTransfer);
             //sets senders opening to reflect closing balance
-            fromAccount.setOpeningBalance(closingBalance);
             System.out.println("Funds successfully transferred.");
         } else {
             System.out.println("Insufficient Funds, Transfer Unsuccessful");
@@ -184,13 +173,15 @@ public class BankAcc {
         getTransactions().add(newTransaction);
     }
 
-    public double getBalance() {
-        double balance = 0;
+/*    public double getBalance() {
+        double balance;
         //run a loop to go through the transactions array list - defined above - and return the balance
         for(Transaction t: this.transactions){
             balance += t.getAmount();
         }
         return balance;
-    }
+    }*/
+
+
 }
 
