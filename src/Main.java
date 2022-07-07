@@ -263,8 +263,6 @@ public class Main {
         long temp = 0;
         System.out.println("\nPlease Enter A Customer ID");
         int cusName = scanner.nextInt();
-        //this changes the first letter of users input to capital letter
-        //so no matter what a lower or upper case input, the user will be found by their name
         for (Customer customer : customers) {
             if (customer.getId() == cusName) {
                 System.out.println("\n======= Welcome To " + customer.getName() + "'s Bank Account =======\n");
@@ -318,70 +316,6 @@ public class Main {
             bankMenu(customerNumber);
     }
 
-    //the menu below is initialised in bankMenu(), when the user chooses Option 2 "View All Accounts"
-    private void accountMenu(long customerNumber) {
-
-        System.out.println("Please Select an Option");
-        System.out.println("""
-                               
-                1: View Account Transaction History
-                2: View Balance
-                3: View Interest
-                4: Deposit Funds
-                5: Withdraw Funds
-                6: Transfer Funds
-                7: Back to Account Menu
-                8: Back to Admin Menu
-                9: Back to Main Menu""");
-
-        input = scanner.next();
-
-        switch (input) {
-            case "1":
-
-                showTransactionHistory(customerNumber);
-
-                break;
-            case "2":
-                viewBalance(customerNumber);
-                //
-                break;
-            case "3":
-                //showInterest
-                break;
-            case "4":
-                deposit(customerNumber);
-                //
-                break;
-            case "5":
-                withdraw(customerNumber);
-                break;
-            case "6":
-                transferMoney(customerNumber);
-                break;
-            case "7":
-                bankMenu(customerNumber);
-            case "8":
-                adminMenu();
-                break;
-            case "9":
-                mainMenu();
-            default:
-                if (!input.equals("9")) {
-                    System.out.println("Please enter a valid number");
-                    accountMenu(customerNumber);
-                }
-                break;
-
-        }
-    }
-
-    private void viewBalance(long customerNumber) {
-
-
-        System.out.println("Nothing here yet");
-    }
-
     private void createNewBankAccount(long customerNumber) {
         System.out.println("Choose Account Type to Create");
         System.out.println("""
@@ -425,55 +359,195 @@ public class Main {
 
     }
 
-    private void allCustomerAccounts(long customerNumber) {
-        for (Customer customer : customers) {
-            if (customer.getId() == customerNumber) {
-                customer.getListOfBankAccounts();
-            }
-        }
+    //METHODS DISPLAY IN ORDER OF MENU
 
-//        int accNum = scanner.nextInt();
-//        if (accNum - 1 <= temp.getBankAccounts().size())
-//            return temp.getBankAccounts().get(accNum - 1);
-//
-//        System.out.println("please enter a valid number");
+    public void createCurrentAccount(Long customerNumber) {
+        int backMenu;
+        System.out.println("Press 1 To Go Back To Create Account Menu \n " +
+                "Press 2 To Continue");
+        backMenu = scanner.nextInt();
+        if (backMenu == 1) {
+            createNewBankAccount(customerNumber);
+        } else if (backMenu == 2) {
+            BankAcc currentAcc = new CurrentAccount();
+            int customerNumberInInt = customerNumber.intValue();
+            customers.get(customerNumberInInt - 1).getBankAccounts().add(currentAcc);
+            /* System.out.println("Current Account Successfully Created!\n");*/
+        }
     }
 
-    /*public void yourAccount(BankAcc bankAcc) {
-        System.out.println("Choose an Option\n");
+    public void createBusinessAccount(Long customerNumber) {
+        //create variable to allow creation of business account
+        double initialDeposit = 0;
+        //variable to get the customers ID
+        int customerNumberInInt = customerNumber.intValue();
+        int backMenu;
+        //give user choice to return or continue
+        System.out.println("Press 1 To Go Back To Create Account Menu \n " +
+                "Press 2 To Continue");
+        backMenu = scanner.nextInt();
+        if (backMenu == 1) {
+            createNewBankAccount(customerNumber);
+        } else if (backMenu == 2) {
+
+            //while loop here to continue running until the deposit has been made
+            while (initialDeposit == 0) {
+                System.out.println("To Open a Business Account, There is a Yearly Fee of $25\n");
+                System.out.println("How Much Would You Like to Deposit");
+                initialDeposit = scanner.nextDouble();
+
+                //require customer to make an initial deposit of $25 to open Business Account
+                // will only be created when user has deposited 25 or more
+                if (initialDeposit < 25) {//if less than 25, prompt user to deposit 25 or more
+
+                    System.out.println("\nInitial Deposit Must Be $25 or More\n");
+
+                } else {
+                    //once deposit statement has been satisfied, create business account object
+                    BankAcc businessAcc = new BusinessAccount(initialDeposit);
+                    //add business account to desired user in the array customers
+                    customers.get(customerNumberInInt - 1).getBankAccounts().add(businessAcc);
+                    //display message to user to signify successful account creation
+                    System.out.println("Business Account Successfully Created\n");
+                }
+            }
+
+        }
+    }
+
+    public void createISAAccount(Long customerNumber) {
+
+        double initialDeposit = 0;
+        int customerNumberInInt = customerNumber.intValue();
+        int backMenu;
+        System.out.println("Press 1 To Go Back To Create Account Menu\n" +
+                "Press 2 To Continue");
+        backMenu = scanner.nextInt();
+        if (backMenu == 1) {
+            createNewBankAccount(customerNumber);
+        } else if (backMenu == 2) {
+            while (initialDeposit == 0) {
+                System.out.println("To Open An ISA Account, Please Deposit $100 or More\n");
+                System.out.println("How Much Would You Like to Deposit");
+                initialDeposit = scanner.nextDouble();
+
+                if (initialDeposit < 100) {
+                    System.out.println("\nInitial Deposit Must Be $100 or More\n");
+                } else {
+                    BankAcc ISAAcc = new ISAAccount(initialDeposit);
+                    System.out.println("\nISA Account Successfully Created\n");
+                    customers.get(customerNumberInInt - 1).getBankAccounts().add(ISAAcc);
+
+                    //require customer to deposit and keep the balance above 100
+                    //only the account will be created and add to customer array when the balance is above 100
+                }
+            }
+
+        }
+    }
+
+
+    //the menu below is initialised in bankMenu(), when the user chooses Option 2 "View All Accounts"
+    private void accountMenu(long customerNumber) {
+
+        System.out.println("Please Select an Option");
         System.out.println("""
-                1: Make a deposit\s
-                2: Make a withdrawal
-                3: View Balance
-                4: View Account Transaction History
-                5: Exit to Customer Menu""");
+                               
+                1: View Account Transaction History
+                2: View Balance
+                3: View Interest
+                4: Deposit Funds
+                5: Withdraw Funds
+                6: Transfer Funds
+                7: Back to Account Menu
+                8: Back to Admin Menu
+                9: Back to Main Menu""");
+
         input = scanner.next();
+
         switch (input) {
             case "1":
-                //deposit(customerNumber);
+
+                showTransactionHistory(customerNumber);
+
                 break;
             case "2":
-                //withdraw();
+                viewBalance(customerNumber);
                 break;
-            *//*case "3":
-                //viewbalance();
-                break;*//*
+            case "3":
+                //showInterest
+                break;
             case "4":
-                //showTransactionHistory(Customer currentCustomer, Scanner sc); - see notes in bankMenu()
-
+                deposit(customerNumber);
+                //
                 break;
             case "5":
-                mainMenu();
+                withdraw(customerNumber);
                 break;
+            case "6":
+                transferMoney(customerNumber);
+                break;
+            case "7":
+                bankMenu(customerNumber);
+            case "8":
+                adminMenu();
+                break;
+            case "9":
+                mainMenu();
             default:
-                if (!input.equals("5")) {
+                if (!input.equals("9")) {
                     System.out.println("Please enter a valid number");
-                    adminMenu();
+                    accountMenu(customerNumber);
                 }
                 break;
-        }
-    }*/
 
+        }
+    }
+
+    //METHODS DISPLAY IN ORDER OF MENU
+
+    private void viewBalance(long customerNumber) {
+
+
+        System.out.println("Nothing here yet");
+    }
+
+    private void showInterest(long customerNumber) {
+        System.out.println("Nothing here yet");
+    }
+
+
+    //below method shows transaction history
+    //it takes the Customer selected, shown as customerNumberInInt
+    //loops through the accounts associated with the Customer
+    //and displays the information
+    //that information needs to be generated in the withdraw(), deposit() and transfer() methods.
+    public void showTransactionHistory(Long customerNumber) {
+
+        printCustomerAccounts(customerNumber);
+        int theAccount;
+        int customerNumberInInt = customerNumber.intValue();
+
+        //get the account for which we wish to show the history
+        do {
+            //account is chosen from the arraylist. Number refers to the account in the array list,
+            // not the account number
+            System.out.printf("Enter the number  (1-%d) of the account\n"
+                    + "you wish to see the history of:", customers.get(customerNumberInInt - 1).numAccounts());
+
+            // -1 to get to the 0 index position
+            theAccount = scanner.nextInt() - 1;
+            if (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).numAccounts()) {
+                System.out.println("Invalid Account chosen. Please try again.");
+            }
+        } while (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).numAccounts());
+
+        //print transactions history
+        customers.get(customerNumberInInt - 1).printAccountTransactionHistory(theAccount);
+    }
+
+
+    //gather user input to execute deposit method from BankAcc class
     public void deposit(Long customerNumber) {
 
         int customerNumberInInt = customerNumber.intValue();
@@ -483,7 +557,8 @@ public class Main {
         String memo = "";
         double newBalance;
 
-        System.out.println("To Go Back Press 1, to Continue Press 2");
+        System.out.println("Press 1 To Go Back To Account Menu \n" +
+                "Press 2 To Continue ");
         backMenu = scanner.nextInt();
         if (backMenu == 1) {
             accountMenu(customerNumber);
@@ -558,68 +633,6 @@ public class Main {
     }
 
 
-    public void createCurrentAccount(Long customerNumber) {
-        BankAcc currentAcc = new CurrentAccount();
-        int customerNumberInInt = customerNumber.intValue();
-        customers.get(customerNumberInInt - 1).getBankAccounts().add(currentAcc);
-        /* System.out.println("Current Account Successfully Created!\n");*/
-    }
-
-    public void createBusinessAccount(Long customerNumber) {
-        //create variable to allow creation of business account
-        double initialDeposit = 0;
-        //variable to get the customers ID
-        int customerNumberInInt = customerNumber.intValue();
-
-        //while loop here to continue running until the deposit has been made
-        while (initialDeposit == 0) {
-            System.out.println("To Open a Business Account, There is a Yearly Fee of $25\n");
-            System.out.println("How Much Would You Like to Deposit");
-            initialDeposit = scanner.nextDouble();
-
-
-            //require customer to make an initial deposit of $25 to open Business Account
-            // will only be created when user has deposited 25 or more
-            if (initialDeposit < 25) {//if less than 25, prompt user to deposit 25 or more
-                System.out.println("\nInitial Deposit Must Be $25 or More\n");
-            } else {
-                //once deposit statement has been satisfied, create business account object
-                BankAcc businessAcc = new BusinessAccount(initialDeposit);
-                //add business account to desired user in the array customers
-                customers.get(customerNumberInInt - 1).getBankAccounts().add(businessAcc);
-                //display message to user to signify successful account creation
-                System.out.println("Business Account Successfully Created\n");
-
-            }
-        }
-
-
-    }
-
-    public void createISAAccount(Long customerNumber) {
-
-        double initialDeposit = 0;
-        int customerNumberInInt = customerNumber.intValue();
-
-        while (initialDeposit == 0) {
-            System.out.println("To Open An ISA Account, Please Deposit $100 or More\n");
-            System.out.println("How Much Would You Like to Deposit");
-            initialDeposit = scanner.nextDouble();
-
-            if (initialDeposit < 100) {
-                System.out.println("\nInitial Deposit Must Be $100 or More\n");
-            } else {
-                BankAcc ISAAcc = new ISAAccount(initialDeposit);
-                System.out.println("\nISA Account Successfully Created\n");
-                customers.get(customerNumberInInt - 1).getBankAccounts().add(ISAAcc);
-
-                //require customer to deposit and keep the balance above 100
-                //only the account will be created and add to customer array when the balance is above 100
-            }
-        }
-
-    }
-
     private void transferMoney(Long customerNumber) {
 
         int cus1 = customerNumber.intValue();
@@ -660,34 +673,25 @@ public class Main {
 
     }
 
-    //below method shows transaction history
-    //it takes the Customer selected, shown as currentCustomer
-    //loops through the accounts associated with the Customer
-    //and displays the information
-    //that information needs to be generated in the withdraw(), deposit() and transfer() methods.
-    public void showTransactionHistory(Long customerNumber) {
 
-        printCustomerAccounts(customerNumber);
-        int theAccount;
-        int customerNumberInInt = customerNumber.intValue();
-
-        //get the account for which we wish to show the history
-        do {
-            //account is chosen from the arraylist. Number refers to the account in the array list,
-            // not the account number
-            System.out.printf("Enter the number  (1-%d) of the account\n"
-                    + "you wish to see the history of:", customers.get(customerNumberInInt - 1).numAccounts());
-
-            // -1 to get to the 0 index position
-            theAccount = scanner.nextInt() - 1;
-            if (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).numAccounts()) {
-                System.out.println("Invalid Account chosen. Please try again.");
+    private void allCustomerAccounts(long customerNumber) {
+        for (Customer customer : customers) {
+            if (customer.getId() == customerNumber) {
+                customer.getListOfBankAccounts();
             }
-        } while (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).numAccounts());
+        }
 
-        //print transactions history
-        customers.get(customerNumberInInt - 1).printAccountTransactionHistory(theAccount);
+//        int accNum = scanner.nextInt();
+//        if (accNum - 1 <= temp.getBankAccounts().size())
+//            return temp.getBankAccounts().get(accNum - 1);
+//
+//        System.out.println("please enter a valid number");
     }
+
+
+
+
+
 /*the below copied from the other branch.
 
 getAccountBalance() has been defined, in Customer class
