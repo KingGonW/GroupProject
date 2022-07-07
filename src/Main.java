@@ -222,13 +222,6 @@ public class Main {
 
     }
 
-
-
-
-
-
-
-
     /*public void deleteCustomer() {
         System.out.println("Please enter the customer ID");
         long cusID = scanner.nextLong();
@@ -242,8 +235,6 @@ public class Main {
         System.out.println("====> Customer does not exist");
         adminMenu();
     }*/
-
-
 
 
     /*public void newCustomer() {
@@ -448,9 +439,7 @@ public class Main {
 
         switch (input) {
             case "1":
-
                 showTransactionHistory(customerNumber);
-
                 break;
             case "2":
                 viewBalance(customerNumber);
@@ -460,7 +449,6 @@ public class Main {
                 break;
             case "4":
                 deposit(customerNumber);
-                //
                 break;
             case "5":
                 withdraw(customerNumber);
@@ -539,7 +527,7 @@ public class Main {
         double newBalance;
 
         System.out.println("Press 1 To Go Back To Account Menu \n" +
-                "to Continue Press 2");
+                "Press 2 to continue");
         backMenu = scanner.nextInt();
         if (backMenu == 1) {
             accountMenu(customerNumber);
@@ -583,7 +571,8 @@ public class Main {
         double wMoney;
         String memo;
         double newBalance;
-        System.out.println("To Go Back Press 1, to Continue Press 2");
+        System.out.println("Press 1 To Go Back To Account Menu \n" +
+                " Press 2 to continue");
         backMenu = scanner.nextInt();
         if (backMenu == 1) {
             accountMenu(customerNumber);
