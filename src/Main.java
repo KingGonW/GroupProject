@@ -534,15 +534,14 @@ public class Main {
                 System.out.println("Please Enter The Amount to Withdraw");
                 wMoney = scanner.nextDouble();
                 System.out.println("Enter A Memo");
-                memo = scanner.nextLine();
+                memo = scanner.next();
                 customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).withdrawMoney(wMoney);
-                newBalance = customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).getBalance();
-                System.out.println("Withdrawal Successful!");
-                System.out.println("You Have Withdrawn: $" + wMoney + '\n' +
-                        "Your New Balance: $" + newBalance + '\n' +
-                        "Memo: " + memo);
             } while (wMoney < 0);
-
+            //newBalance = customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).getBalance();
+            //System.out.println("Withdrawal Successful!");
+            //System.out.println("You Have Withdrawn: $" + wMoney + '\n' +
+                    //"Your New Balance: $" + newBalance + '\n' +
+                    //"Memo: " + memo);
 
             customers.get(customerNumberInInt - 1).addAccountTransaction(fromTheAccount - 1, wMoney, memo);
         }

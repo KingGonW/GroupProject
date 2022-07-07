@@ -119,8 +119,9 @@ public double getBalance() {
             System.out.println("Insufficient Funds");
         } else {
             balance -= withdrawAmount;
+            setBalance(balance);
             System.out.println("You have withdrawn $" + withdrawAmount + " from your account" + "\n" +
-                    "Your Balance is now: " + getBalance());
+                   "Your Balance is now: " + getBalance());
         }
 
 
