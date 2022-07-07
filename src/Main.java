@@ -225,38 +225,43 @@ public class Main {
     private void transferMoney() {
         findAllCustomers();
 
-        System.out.println("Please enter the Customer ID that you would to transfer from ...");
+        System.out.println("Please Enter The Customer ID Transfer From(1-4):");
         String tempCus1 = scanner.next();
         int cus1 = Integer.parseInt(tempCus1);
         customers.get(cus1 - 1).getListOfBankAccounts();
 
-        System.out.println("Please enter the account ID to transfer from ....");
+        System.out.println("Please Enter The Account ID to Transfer From: ");
         String tempAcc1 = scanner.next();
         int acc1 = Integer.parseInt(tempAcc1);
 
-        System.out.println("Please enter the Customer ID that you would to transfer to ...");
+        System.out.println("Please Enter The Customer to Transfer to(1-4): ");
         String tempCus2 = scanner.next();
         int cus2 = Integer.parseInt(tempCus2);
         customers.get(cus2 - 1).getListOfBankAccounts();
 
-        System.out.println("Please enter the account ID to transfer from ....");
+        System.out.println("Please Enter The Account ID to Transfer From");
         String tempAcc2 = scanner.next();
         int acc2 = Integer.parseInt(tempAcc2);
 
-        System.out.println("Please enter the the amount of money  ....");
+        System.out.println("Please Enter The Amount");
         String tempAmount = scanner.next();
         double amount = Double.parseDouble(tempAmount);
-        customers.get(cus1 - 1).getBankAccounts().get(0).moneyTransfer(getTheAccountNumber(cus1 - 1, acc1 - 1), getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
 
-        //the below posts this info to the Transactions class
-        // this should work
-        // to test, let us call transferMoney() from one of the menus
-        // customers.get(cus1-1).addAccountTransaction(acc1, -1 * amount, String.format("Origin account %s",
-        // customers.get(cus1-1).getAccountNumber(acc2)));
-        //customers.get(cus1-1).addAccountTransaction(acc2, amount, String.format("Destination account %s",
-        //customers.get(cus1-1).getAccountNumber(acc1)));
+      
+            customers.get(cus1 - 1).getBankAccounts().get(0).moneyTransfer
+                    (getTheAccountNumber(cus1 - 1, acc1 - 1),
+                            getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
 
-    }
+            //the below posts this info to the Transactions class
+            // this should work
+            // to test, let us call transferMoney() from one of the menus
+            customers.get(cus1 - 1).addAccountTransaction(acc1, -1 * amount, String.format("Origin account %s",
+                    customers.get(cus1 - 1).getAccountNumber(acc2)));
+            customers.get(cus1 - 1).addAccountTransaction(acc2, amount, String.format("Destination account %s",
+                    customers.get(cus1 - 1).getAccountNumber(acc1)));
+
+        }
+
 
 
 
@@ -468,7 +473,7 @@ public class Main {
 //        System.out.println("please enter a valid number");
     }
 
-    public void yourAccount(BankAcc bankAcc) {
+    /*public void yourAccount(BankAcc bankAcc) {
         System.out.println("Choose an Option\n");
         System.out.println("""
                 1: Make a deposit\s
@@ -484,9 +489,9 @@ public class Main {
             case "2":
                 //withdraw();
                 break;
-            /*case "3":
+            *//*case "3":
                 //viewbalance();
-                break;*/
+                break;*//*
             case "4":
                 //showTransactionHistory(Customer currentCustomer, Scanner sc); - see notes in yourBank()
 
@@ -501,7 +506,7 @@ public class Main {
                 }
                 break;
         }
-    }
+    }*/
 
     public void deposit(Long customerNumber) {
 
