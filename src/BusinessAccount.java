@@ -13,22 +13,23 @@ public class BusinessAccount extends BankAcc {
         super(accountType, businessSortCode);
         super.getAccNum();
         setBusinessAccountNumber(super.getAccNum());
-        this.CreationDate = LocalDate.now();
         this.setBalance(initialDeposit);
-        subscription();
+        this.CreationDate = LocalDate.now();
+        subscription(LocalDate.now());
     }
 
     public void setBusinessAccountNumber(int businessAccountNumber) {
         this.businessAccountNumber = businessAccountNumber;
     }
 
-    public void subscription() {
-        LocalDate date = LocalDate.now();
+    public void subscription(LocalDate date) {
+        date = LocalDate.now();
         if (this.CreationDate.getMonth() == date.getMonth() && this.CreationDate.getDayOfMonth() == date.getDayOfMonth()) {
             this.subscription = 25;
             this.afterSub = this.getBalance() - this.subscription;
+            setBalance(this.afterSub);
         }
-        System.out.println("The balance after annual subscription is" + this.afterSub);
+        System.out.println("The Balance After Annual Subscription is: $" + this.afterSub);
     }
 
 

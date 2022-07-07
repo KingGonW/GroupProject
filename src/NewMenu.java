@@ -363,7 +363,7 @@ public class NewMenu {
     }
 
     public void createBusinessAccount(Long customerNumber) {
-        BankAcc businessAcc = new BusinessAccount();
+        BankAcc businessAcc = new BusinessAccount(0);
         int customerNumberInInt = customerNumber.intValue();
         //ask user to deposit money to open ISA account
         //check if balance is less than 100, if yes
@@ -377,7 +377,7 @@ public class NewMenu {
     }
 
     public void createISAAccount(Long customerNumber) {
-        BankAcc ISAAcc = new ISAAccount();
+        BankAcc ISAAcc = new ISAAccount(0);
         int customerNumberInInt = customerNumber.intValue();
         customers.get(customerNumberInInt - 1).getBankAccounts().add(ISAAcc);
         customers.get(customerNumberInInt - 1).getListOfBankAccounts();

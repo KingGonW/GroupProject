@@ -595,7 +595,7 @@ public class Main {
                 //add business account to desired user in the array customers
                 customers.get(customerNumberInInt - 1).getBankAccounts().add(businessAcc);
                 //display message to user to signify successful account creation
-                System.out.println("\nISA Account Successfully Created\n");
+                System.out.println("Business Account Successfully Created\n");
 
             }
         }
