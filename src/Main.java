@@ -612,11 +612,9 @@ public class Main {
 
     private void transferMoney(Long customerNumber) {
 
-        int customerNumberInInt = customerNumber.intValue();
+        int cus1 = customerNumber.intValue();
 
 
-        String tempCus1 = String.valueOf(customerNumberInInt);
-        int cus1 = Integer.parseInt(tempCus1);
         customers.get(cus1 - 1).getListOfBankAccounts();
 
         System.out.println("Please Enter The Account ID to Transfer From: ");
@@ -645,10 +643,10 @@ public class Main {
         //the below posts this info to the Transactions class
         // this should work
         // to test, let us call transferMoney() from one of the menus
-        customers.get(cus1 - 1).addAccountTransaction(acc1, -1 * amount, String.format("Origin account %s",
-                customers.get(cus1 - 1).getAccountNumber(acc2)));
-        customers.get(cus1 - 1).addAccountTransaction(acc2, amount, String.format("Destination account %s",
-                customers.get(cus1 - 1).getAccountNumber(acc1)));
+        customers.get(cus1 - 1).addAccountTransaction(acc1 - 1, amount, String.format("Origin account %s",
+                customers.get(cus1 - 1).getAccountNumber(acc2 - 1)));
+        customers.get(cus1 - 1).addAccountTransaction(acc2 - 1, amount, String.format("Destination account %s",
+                customers.get(cus1 - 1).getAccountNumber(acc1 - 1)));
 
     }
     //below method shows transaction history
