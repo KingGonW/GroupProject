@@ -507,31 +507,40 @@ public class Main {
 
         int customerNumberInInt = customerNumber.intValue();
         int toTheAccount;
+        int backMenu;
         double dMoney;
         String memo;
         double newBalance;
-        do {
-            printCustomerAccounts(customerNumber);
-            System.out.println("Please Enter The Account to Deposit Into: ");
-            toTheAccount = scanner.nextInt();
-            if (toTheAccount < 0 || toTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
-                System.out.println("Invalid Account Chosen. Please Try Again.");
-            }
-        } while (toTheAccount < 0 || toTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
-        do {
-            System.out.println("Please Enter The Amount to Deposit:");
-            dMoney = scanner.nextDouble();
-            System.out.println("Enter A Memo:");
-            memo = scanner.next();
-            customers.get(customerNumberInInt - 1).getBankAccounts().get(toTheAccount - 1).depositMoney(dMoney);
-        } while (dMoney < 0);
-        newBalance = customers.get(customerNumberInInt - 1).getBankAccounts().get(toTheAccount - 1).getBalance();
-        System.out.println("Deposit Successful!");
-        System.out.println("You Have Deposited: " + dMoney + '\n' +
-                "Your New Balance: " + newBalance + '\n' +
-                "Memo: " + memo);
-        customers.get(customerNumberInInt - 1).addAccountTransaction(toTheAccount - 1, dMoney, memo);
 
+        System.out.println("To Go Back Press 1, to Continue Press 2");
+        backMenu = scanner.nextInt();
+        if (backMenu == 1) {
+            accountMenu(customerNumber);
+        } else if (backMenu == 2) {
+            do {
+                printCustomerAccounts(customerNumber);
+                System.out.println("Please Enter The Account to Deposit Into: ");
+                toTheAccount = scanner.nextInt();
+                if (toTheAccount < 0 || toTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
+                    System.out.println("Invalid Account Chosen. Please Try Again.");
+                }
+
+            } while (toTheAccount < 0 || toTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
+            do {
+                System.out.println("Please Enter The Amount to Deposit:");
+                dMoney = scanner.nextDouble();
+                System.out.println("Enter A Memo:");
+                memo = scanner.next();
+                customers.get(customerNumberInInt - 1).getBankAccounts().get(toTheAccount - 1).depositMoney(dMoney);
+            } while (dMoney < 0);
+            newBalance = customers.get(customerNumberInInt - 1).getBankAccounts().get(toTheAccount - 1).getBalance();
+            System.out.println("Deposit Successful!");
+            System.out.println("You Have Deposited: $" + dMoney + '\n' +
+                    "Your New Balance: $" + newBalance + '\n' +
+                    "Memo: " + memo);
+            customers.get(customerNumberInInt - 1).addAccountTransaction(toTheAccount - 1, dMoney, memo);
+
+        }
     }
 
     public void withdraw(Long customerNumber) {
@@ -544,7 +553,7 @@ public class Main {
             printCustomerAccounts(customerNumber);
             System.out.println("Please Choose An Account to Withdraw From: ");
             fromTheAccount = scanner.nextInt();
-            if (fromTheAccount < 0 || fromTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
+            if (fromTheAccount < 0 || fromTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
                 System.out.println("Invalid Account Chosen. Please Try Again.");
             }
         } while (fromTheAccount < 0 || fromTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
@@ -556,8 +565,8 @@ public class Main {
             customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).withdrawMoney(wMoney);
             newBalance = customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).getBalance();
             System.out.println("Withdrawal Successful!");
-            System.out.println("You Have Withdrawn: " + wMoney + '\n' +
-                    "Your New Balance: " + newBalance + '\n' +
+            System.out.println("You Have Withdrawn: $" + wMoney + '\n' +
+                    "Your New Balance: $" + newBalance + '\n' +
                     "Memo: " + memo);
         } while (wMoney < 0);
 
@@ -570,6 +579,7 @@ public class Main {
         BankAcc currentAcc = new CurrentAccount();
         int customerNumberInInt = customerNumber.intValue();
         customers.get(customerNumberInInt - 1).getBankAccounts().add(currentAcc);
+        System.out.println("Current Account Successfully Created!\n");
     }
 
     public void createBusinessAccount(Long customerNumber) {
