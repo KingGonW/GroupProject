@@ -188,7 +188,7 @@ public class Main {
     public void customerLogin() {
         long temp = loginValidation();
         if (temp != 0) {
-            yourBank(temp);
+            bankMenu(temp);
         } else {
             System.out.println("\nPlease Enter A Valid Name\n");
             adminMenu();
@@ -222,45 +222,7 @@ public class Main {
 
     }
 
-    private void transferMoney() {
-        findAllCustomers();
 
-        System.out.println("Please Enter The Customer ID Transfer From(1-4):");
-        String tempCus1 = scanner.next();
-        int cus1 = Integer.parseInt(tempCus1);
-        customers.get(cus1 - 1).getListOfBankAccounts();
-
-        System.out.println("Please Enter The Account ID to Transfer From: ");
-        String tempAcc1 = scanner.next();
-        int acc1 = Integer.parseInt(tempAcc1);
-
-        System.out.println("Please Enter The Customer to Transfer to(1-4): ");
-        String tempCus2 = scanner.next();
-        int cus2 = Integer.parseInt(tempCus2);
-        customers.get(cus2 - 1).getListOfBankAccounts();
-
-        System.out.println("Please Enter The Account ID to Transfer From");
-        String tempAcc2 = scanner.next();
-        int acc2 = Integer.parseInt(tempAcc2);
-
-        System.out.println("Please Enter The Amount");
-        String tempAmount = scanner.next();
-        double amount = Double.parseDouble(tempAmount);
-
-      
-            customers.get(cus1 - 1).getBankAccounts().get(0).moneyTransfer
-                    (getTheAccountNumber(cus1 - 1, acc1 - 1),
-                            getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
-
-            //the below posts this info to the Transactions class
-            // this should work
-            // to test, let us call transferMoney() from one of the menus
-            customers.get(cus1 - 1).addAccountTransaction(acc1, -1 * amount, String.format("Origin account %s",
-                    customers.get(cus1 - 1).getAccountNumber(acc2)));
-            customers.get(cus1 - 1).addAccountTransaction(acc2, amount, String.format("Destination account %s",
-                    customers.get(cus1 - 1).getAccountNumber(acc1)));
-
-        }
 
 
 
@@ -314,7 +276,7 @@ public class Main {
     }
 
 
-    public void yourBank(long customerNumber) {
+    public void bankMenu(long customerNumber) {
         System.out.println("\nPlease Select an Option");
         System.out.println("""
                 1: Create A New Bank Account\s
@@ -336,7 +298,7 @@ public class Main {
                 printCustomerAccounts(customerNumber);
                 //allCustomerAccounts(customerNumber);
 
-                //the below menu gets called when Option 2 of yourBank() is selected.
+                //the below menu gets called when Option 2 of bankMenu() is selected.
                 accountMenu(customerNumber);
                 break;
             case "3":
@@ -353,10 +315,10 @@ public class Main {
                 break;
         }
         if (!input.equals("6"))
-            yourBank(customerNumber);
+            bankMenu(customerNumber);
     }
 
-    //the menu below is initialised in yourBank(), when the user chooses Option 2 "View All Accounts"
+    //the menu below is initialised in bankMenu(), when the user chooses Option 2 "View All Accounts"
     private void accountMenu(long customerNumber) {
 
         System.out.println("Please Select an Option");
@@ -391,10 +353,10 @@ public class Main {
                 withdraw(customerNumber);
                 break;
             case "5":
-                transferMoney();
+                transferMoney(customerNumber);
                 break;
             case "6":
-                yourBank(customerNumber);
+                bankMenu(customerNumber);
             case "7":
                 adminMenu();
                 break;
@@ -440,7 +402,7 @@ public class Main {
                 printCustomerAccounts(customerNumber);
                 break;
             case "4":
-                yourBank(customerNumber);
+                bankMenu(customerNumber);
                 break;
             case "5":
                 adminMenu();
@@ -452,7 +414,7 @@ public class Main {
             default:
                 if (!input.equals("6")) {
                     System.out.println("Please enter a valid number");
-                    yourBank(customerNumber);
+                    bankMenu(customerNumber);
                 }
                 break;
         }
@@ -493,7 +455,7 @@ public class Main {
                 //viewbalance();
                 break;*//*
             case "4":
-                //showTransactionHistory(Customer currentCustomer, Scanner sc); - see notes in yourBank()
+                //showTransactionHistory(Customer currentCustomer, Scanner sc); - see notes in bankMenu()
 
                 break;
             case "5":
@@ -551,32 +513,39 @@ public class Main {
     public void withdraw(Long customerNumber) {
         int customerNumberInInt = customerNumber.intValue();
         int fromTheAccount;
+        int backMenu;
         double wMoney;
         String memo;
         double newBalance;
-        do {
-            printCustomerAccounts(customerNumber);
-            System.out.println("Please Choose An Account to Withdraw From: ");
-            fromTheAccount = scanner.nextInt();
-            if (fromTheAccount < 0 || fromTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
-                System.out.println("Invalid Account Chosen. Please Try Again.");
-            }
-        } while (fromTheAccount < 0 || fromTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
-        do {
-            System.out.println("Please Enter The Amount to Withdraw");
-            wMoney = scanner.nextDouble();
-            System.out.println("Enter A Memo");
-            memo = scanner.nextLine();
-            customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).withdrawMoney(wMoney);
-            newBalance = customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).getBalance();
-            System.out.println("Withdrawal Successful!");
-            System.out.println("You Have Withdrawn: $" + wMoney + '\n' +
-                    "Your New Balance: $" + newBalance + '\n' +
-                    "Memo: " + memo);
-        } while (wMoney < 0);
+        System.out.println("To Go Back Press 1, to Continue Press 2");
+        backMenu = scanner.nextInt();
+        if (backMenu == 1) {
+            accountMenu(customerNumber);
+        } else if (backMenu == 2) {
+            do {
+                printCustomerAccounts(customerNumber);
+                System.out.println("Please Choose An Account to Withdraw From: ");
+                fromTheAccount = scanner.nextInt();
+                if (fromTheAccount < 0 || fromTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
+                    System.out.println("Invalid Account Chosen. Please Try Again.");
+                }
+            } while (fromTheAccount < 0 || fromTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
+            do {
+                System.out.println("Please Enter The Amount to Withdraw");
+                wMoney = scanner.nextDouble();
+                System.out.println("Enter A Memo");
+                memo = scanner.nextLine();
+                customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).withdrawMoney(wMoney);
+                newBalance = customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).getBalance();
+                System.out.println("Withdrawal Successful!");
+                System.out.println("You Have Withdrawn: $" + wMoney + '\n' +
+                        "Your New Balance: $" + newBalance + '\n' +
+                        "Memo: " + memo);
+            } while (wMoney < 0);
 
 
-        customers.get(customerNumberInInt - 1).addAccountTransaction(fromTheAccount - 1, wMoney, memo);
+            customers.get(customerNumberInInt - 1).addAccountTransaction(fromTheAccount - 1, wMoney, memo);
+        }
     }
 
 
@@ -641,6 +610,47 @@ public class Main {
 
     }
 
+    private void transferMoney(Long customerNumber) {
+
+        int customerNumberInInt = customerNumber.intValue();
+
+
+        String tempCus1 = String.valueOf(customerNumberInInt);
+        int cus1 = Integer.parseInt(tempCus1);
+        customers.get(cus1 - 1).getListOfBankAccounts();
+
+        System.out.println("Please Enter The Account ID to Transfer From: ");
+        String tempAcc1 = scanner.next();
+        int acc1 = Integer.parseInt(tempAcc1);
+
+        findAllCustomers();
+        System.out.println("Please Enter The Customer to Transfer to(1-4): ");
+        String tempCus2 = scanner.next();
+        int cus2 = Integer.parseInt(tempCus2);
+        customers.get(cus2 - 1).getListOfBankAccounts();
+
+        System.out.println("Please Enter The Account ID to Transfer to");
+        String tempAcc2 = scanner.next();
+        int acc2 = Integer.parseInt(tempAcc2);
+
+        System.out.println("Please Enter The Amount");
+        String tempAmount = scanner.next();
+        double amount = Double.parseDouble(tempAmount);
+
+
+        customers.get(cus1 - 1).getBankAccounts().get(0).moneyTransfer
+                (getTheAccountNumber(cus1 - 1, acc1 - 1),
+                        getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
+
+        //the below posts this info to the Transactions class
+        // this should work
+        // to test, let us call transferMoney() from one of the menus
+        customers.get(cus1 - 1).addAccountTransaction(acc1, -1 * amount, String.format("Origin account %s",
+                customers.get(cus1 - 1).getAccountNumber(acc2)));
+        customers.get(cus1 - 1).addAccountTransaction(acc2, amount, String.format("Destination account %s",
+                customers.get(cus1 - 1).getAccountNumber(acc1)));
+
+    }
     //below method shows transaction history
     //it takes the Customer selected, shown as currentCustomer
     //loops through the accounts associated with the Customer
