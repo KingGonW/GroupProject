@@ -10,7 +10,7 @@ public class BankAcc {
 
     private String sortCode;
 
-//the below array list relates to Transaction class
+    //the below array list relates to Transaction class
     //the idea is that each account holds an array list of the transactions
     //this will be called
     private ArrayList<Transaction> transactions = new ArrayList<>();
@@ -28,7 +28,6 @@ public class BankAcc {
     //this might make more sense held in another class,
     // e.g. "Bank" to mimic a bank having a list of accounts
     private ArrayList<BankAcc> bankAccounts;
-
 
 
     //alternate constructor below, with Customer variable attached
@@ -65,9 +64,10 @@ public class BankAcc {
         }
     }
 
-public double getBalance() {
+    public double getBalance() {
         return balance;
-}
+    }
+
     public void setBalance(double balance) {
         this.balance = balance;
     }
@@ -75,6 +75,7 @@ public double getBalance() {
     public int getAccNum() {
         return accNum;
     }
+
     public String getSortCode() {
         return sortCode;
     }
@@ -100,36 +101,42 @@ public double getBalance() {
         this.transactions = transactions;
     }
 
+    //method to deposit money into a users account
     public void depositMoney(double depositAmount) {
-        //  System.out.println("Please enter the amount you want to deposit:  ");
+        //adds amount to the balance
+        balance += depositAmount;
         //sets closing balance to balance after deposit was made
+        setBalance(balance);
 
-            balance += depositAmount;
-            setBalance(balance);
-            //new opening balance is the last closing balance amount
+    }
 
-        }
-    public void showBalance(){
+    public void showBalance() {
         System.out.println(" Balance: " + this.getBalance());
     }
 
-
+    //method to withdraw money from a users account, displaying balance after withdrawal
     public void withdrawMoney(double withdrawAmount) {
-
+//if statement to check balance is smaller than amount
         if (balance < withdrawAmount) {
+            //prints error message to user if they don't have enough money
             System.out.println("Insufficient Funds");
         } else {
+            //amount is deducted from balance if user has enough
             balance -= withdrawAmount;
+            //sets the balance to the balance minus the amount inputted by user
             setBalance(balance);
+            //prints out success message to user
             System.out.println("You have withdrawn $" + withdrawAmount + " from your account" + "\n" +
-                   "Your Balance is now: " + getBalance());
+                    "Your Balance is now: " + getBalance());
         }
 
 
     }
 
+    //this method will allow users to transfer between one account to another, whether their own or another user
     public void moneyTransfer(BankAcc fromAccount, BankAcc toAccount, double amountToTransfer) {
 
+        //if statement to check if account is ISA, won't carry out transfer if amount makes balance below 100
         if (fromAccount.accType == "ISAAccount") {
             if (ISAAccount.getBalance() - amountToTransfer < 100) {
                 System.out.println("Your transfer will make your new openingBalance less than 100 +" +
@@ -137,6 +144,8 @@ public double getBalance() {
                 return;
             }
         }
+        //checks if user has enough money
+        //carry out transfer is so
         if (fromAccount.getBalance() >= amountToTransfer) {
             //sets the receivers closing balance to include new deposit
             toAccount.setBalance(toAccount.balance += amountToTransfer);
@@ -146,7 +155,8 @@ public double getBalance() {
             fromAccount.setBalance(fromAccount.balance -= amountToTransfer);
             //sets senders opening to reflect closing balance
             System.out.println("Funds successfully transferred.");
-        } else {
+
+        } else { //if user does not have enough money, error message will pop up
             System.out.println("Insufficient Funds, Transfer Unsuccessful");
         }
 
