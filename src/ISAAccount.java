@@ -10,7 +10,7 @@ public class ISAAccount extends BankAcc {
     private int ISAAccountNumber;
 
 
-
+//class constructor to create isa account
     public ISAAccount(double initialDeposit) {
         super(accountType, ISAsortCode);
         super.getAccNum();
@@ -23,7 +23,7 @@ public class ISAAccount extends BankAcc {
         this.ISAAccountNumber = ISAAccountNumber;
     }
 
-    //overriding parent class withdraw method
+    //overriding parent class withdraw method, needs
     @Override
     public void withdrawMoney(double withdrawAmount) {
         //this checks to make withdraw amount doesn't move balance below 100
@@ -31,12 +31,14 @@ public class ISAAccount extends BankAcc {
             System.out.println("Withdrawal Amount to Big" + '\n' +
                     "Balance Must Be 100 or Above to Keep ISA");
         } else {
+            //else carry out method in parent class
             super.withdrawMoney(withdrawAmount);
         }
     }
 
+    //method to display
     public void showInterest(){
-        System.out.println("Interest :" + interestRate);
+        System.out.println("Interest: %" + interestRate);
     }
 
 

@@ -326,12 +326,13 @@ public class Main {
                                
                 1: View Account Transaction History
                 2: View Balance
-                3: Deposit Funds
-                4: Withdraw Funds
-                5: Transfer Funds
-                6: Back to Account Menu
-                7: Back to Admin Menu
-                8: Back to Main Menu""");
+                3: View Interest
+                4: Deposit Funds
+                5: Withdraw Funds
+                6: Transfer Funds
+                7: Back to Account Menu
+                8: Back to Admin Menu
+                9: Back to Main Menu""");
 
         input = scanner.next();
 
@@ -346,24 +347,27 @@ public class Main {
                 //
                 break;
             case "3":
+                //showInterest
+                break;
+            case "4":
                 deposit(customerNumber);
                 //
                 break;
-            case "4":
+            case "5":
                 withdraw(customerNumber);
                 break;
-            case "5":
+            case "6":
                 transferMoney(customerNumber);
                 break;
-            case "6":
-                bankMenu(customerNumber);
             case "7":
+                bankMenu(customerNumber);
+            case "8":
                 adminMenu();
                 break;
-            case "8":
+            case "9":
                 mainMenu();
             default:
-                if (!input.equals("8")) {
+                if (!input.equals("9")) {
                     System.out.println("Please enter a valid number");
                     accountMenu(customerNumber);
                 }
@@ -473,10 +477,10 @@ public class Main {
     public void deposit(Long customerNumber) {
 
         int customerNumberInInt = customerNumber.intValue();
-        int toTheAccount;
+        int toTheAccount = 0;
         int backMenu;
-        double dMoney;
-        String memo;
+        double dMoney = 0;
+        String memo = "";
         double newBalance;
 
         System.out.println("To Go Back Press 1, to Continue Press 2");
@@ -487,20 +491,22 @@ public class Main {
             do {
                 printCustomerAccounts(customerNumber);
                 System.out.println("Please Enter The Account to Deposit Into: ");
+
                 toTheAccount = scanner.nextInt();
 
                 if (toTheAccount < 0 || toTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
                     System.out.println("Invalid Account Chosen. Please Try Again.");
                 }
-                
 
             } while (toTheAccount < 0 || toTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size());
             do {
 
                 System.out.println("Please Enter The Amount to Deposit:");
                 dMoney = scanner.nextDouble();
+
                 System.out.println("Enter A Memo:");
                 memo = scanner.next();
+
                 customers.get(customerNumberInInt - 1).getBankAccounts().get(toTheAccount - 1).depositMoney(dMoney);
 
             } while (dMoney < 0);
@@ -591,6 +597,7 @@ public class Main {
     }
 
     public void createISAAccount(Long customerNumber) {
+
         double initialDeposit = 0;
         int customerNumberInInt = customerNumber.intValue();
 

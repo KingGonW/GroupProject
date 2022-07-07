@@ -125,9 +125,6 @@ public class BankAcc {
             balance -= withdrawAmount;
             //sets the balance to the balance minus the amount inputted by user
             setBalance(balance);
-            //prints out success message to user
-            System.out.println("You have withdrawn $" + withdrawAmount + " from your account" + "\n" +
-                    "Your Balance is now: " + getBalance());
         }
 
 
