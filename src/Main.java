@@ -488,11 +488,11 @@ public class Main {
                 printCustomerAccounts(customerNumber);
                 System.out.println("Please Enter The Account to Deposit Into: ");
                 toTheAccount = scanner.nextInt();
-                if (toTheAccount < 0 || toTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
+                if (toTheAccount < 0 || toTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
                     System.out.println("Invalid Account Chosen. Please Try Again.");
                 }
 
-            } while (toTheAccount < 0 || toTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
+            } while (toTheAccount < 0 || toTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size());
             do {
                 System.out.println("Please Enter The Amount to Deposit:");
                 dMoney = scanner.nextDouble();
@@ -526,10 +526,10 @@ public class Main {
                 printCustomerAccounts(customerNumber);
                 System.out.println("Please Choose An Account to Withdraw From: ");
                 fromTheAccount = scanner.nextInt();
-                if (fromTheAccount < 0 || fromTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
+                if (fromTheAccount < 0 || fromTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
                     System.out.println("Invalid Account Chosen. Please Try Again.");
                 }
-            } while (fromTheAccount < 0 || fromTheAccount >= customers.get(customerNumberInInt - 1).getBankAccounts().size());
+            } while (fromTheAccount < 0 || fromTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size());
             do {
                 System.out.println("Please Enter The Amount to Withdraw");
                 wMoney = scanner.nextDouble();
