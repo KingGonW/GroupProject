@@ -109,8 +109,9 @@ public double getBalance() {
             //new opening balance is the last closing balance amount
 
         }
-
-
+    public void showBalance(){
+        System.out.println(" Balance: " + this.getBalance());
+    }
 
 
     public void withdrawMoney(double withdrawAmount) {

@@ -36,8 +36,7 @@ public class BusinessAccount extends BankAcc {
     @Override
     public String toString() {
         return "Account Type:" + accountType + " Sort Code: " +
-                businessSortCode + " Account Number: " + businessAccountNumber
-                + " Balance: $" + super.getBalance();
+                businessSortCode + " Account Number: " + businessAccountNumber;
     }
 
 }

@@ -35,6 +35,10 @@ public class ISAAccount extends BankAcc {
         }
     }
 
+    public void showInterest(){
+        System.out.println("Interest :" + interestRate);
+    }
+
 
     /*
      method to calculate interest on customers yearly average balance
@@ -94,9 +98,7 @@ public class ISAAccount extends BankAcc {
     @Override
     public String toString() {
         return "Account Type:" + accountType + " Sort Code: " +
-                ISAsortCode + " Account Number: " + ISAAccountNumber
-                + " Balance $" + this.getBalance() +
-                " Interest Rate: " + "2%";
+                ISAsortCode + " Account Number: " + ISAAccountNumber;
 
 
     }
