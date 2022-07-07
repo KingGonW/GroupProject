@@ -263,6 +263,8 @@ public class Main {
         long temp = 0;
         System.out.println("\nPlease Enter A Customer ID");
         int cusName = scanner.nextInt();
+        //this changes the first letter of users input to capital letter
+        //so no matter what a lower or upper case input, the user will be found by their name
         for (Customer customer : customers) {
             if (customer.getId() == cusName) {
                 System.out.println("\n======= Welcome To " + customer.getName() + "'s Bank Account =======\n");
@@ -359,36 +361,20 @@ public class Main {
 
     }
 
-    //METHODS DISPLAY IN ORDER OF MENU
-
     public void createCurrentAccount(Long customerNumber) {
-        int backMenu;
-        System.out.println("Press 1 To Go Back To Create Account Menu \n " +
-                "Press 2 To Continue");
-        backMenu = scanner.nextInt();
-        if (backMenu == 1) {
-            createNewBankAccount(customerNumber);
-        } else if (backMenu == 2) {
             BankAcc currentAcc = new CurrentAccount();
             int customerNumberInInt = customerNumber.intValue();
             customers.get(customerNumberInInt - 1).getBankAccounts().add(currentAcc);
             /* System.out.println("Current Account Successfully Created!\n");*/
         }
-    }
+
 
     public void createBusinessAccount(Long customerNumber) {
         //create variable to allow creation of business account
         double initialDeposit = 0;
         //variable to get the customers ID
         int customerNumberInInt = customerNumber.intValue();
-        int backMenu;
-        //give user choice to return or continue
-        System.out.println("Press 1 To Go Back To Create Account Menu \n " +
-                "Press 2 To Continue");
-        backMenu = scanner.nextInt();
-        if (backMenu == 1) {
-            createNewBankAccount(customerNumber);
-        } else if (backMenu == 2) {
+
 
             //while loop here to continue running until the deposit has been made
             while (initialDeposit == 0) {
@@ -413,19 +399,14 @@ public class Main {
             }
 
         }
-    }
+
 
     public void createISAAccount(Long customerNumber) {
 
         double initialDeposit = 0;
         int customerNumberInInt = customerNumber.intValue();
         int backMenu;
-        System.out.println("Press 1 To Go Back To Create Account Menu\n" +
-                "Press 2 To Continue");
-        backMenu = scanner.nextInt();
-        if (backMenu == 1) {
-            createNewBankAccount(customerNumber);
-        } else if (backMenu == 2) {
+
             while (initialDeposit == 0) {
                 System.out.println("To Open An ISA Account, Please Deposit $100 or More\n");
                 System.out.println("How Much Would You Like to Deposit");
@@ -444,7 +425,7 @@ public class Main {
             }
 
         }
-    }
+
 
 
     //the menu below is initialised in bankMenu(), when the user chooses Option 2 "View All Accounts"
@@ -504,7 +485,7 @@ public class Main {
         }
     }
 
-    //METHODS DISPLAY IN ORDER OF MENU
+    //methods displayed in order of menu options
 
     private void viewBalance(long customerNumber) {
 
@@ -558,7 +539,7 @@ public class Main {
         double newBalance;
 
         System.out.println("Press 1 To Go Back To Account Menu \n" +
-                "Press 2 To Continue ");
+                "to Continue Press 2");
         backMenu = scanner.nextInt();
         if (backMenu == 1) {
             accountMenu(customerNumber);
