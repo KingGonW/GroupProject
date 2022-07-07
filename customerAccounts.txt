@@ -1,7 +1,6 @@
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 74003025 Balance: $200.0
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 95788427 Balance: $200.0
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 15562912 Balance: $200.0
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 78131762 Balance: $200.0
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 39116328 Balance: $200.0
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 90865792 Balance: $200.0
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 3305547 Balance: $200.0
+Account Type:Current Account Sort Code: 00-04-01 Account Number: 71275778 Balance: $0.0
+Account Type:Current Account Sort Code: 00-04-01 Account Number: 54376589 Balance: $0.0
+Account Type:Current Account Sort Code: 00-04-01 Account Number: 87671895 Balance: $0.0
+Account Type:Current Account Sort Code: 00-04-01 Account Number: 90796396 Balance: $0.0
+Account Type:Current Account Sort Code: 00-04-01 Account Number: 22622718 Balance: $0.0
+Account Type:Current Account Sort Code: 00-04-01 Account Number: 97277217 Balance: $0.0

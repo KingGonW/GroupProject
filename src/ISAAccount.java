@@ -10,10 +10,12 @@ public class ISAAccount extends BankAcc {
     private int ISAAccountNumber;
 
 
-    public ISAAccount() {
+
+    public ISAAccount(double initialDeposit) {
         super(accountType, ISAsortCode);
         super.getAccNum();
         setISAAccountNumber(super.getAccNum());
+        this.setBalance(initialDeposit);
 
     }
 

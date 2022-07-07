@@ -63,7 +63,6 @@ public class BankAcc {
         if (this.accNum == nextNum) {
             this.accNum = rand.nextInt(99999999);
         }
-        depositMoney(200);
     }
 
 public double getBalance() {

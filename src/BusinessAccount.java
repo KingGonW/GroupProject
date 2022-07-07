@@ -9,11 +9,13 @@ public class BusinessAccount extends BankAcc {
     private double afterSub;
     private LocalDate CreationDate;
 
-    public BusinessAccount() {
+    public BusinessAccount(double initialDeposit) {
         super(accountType, businessSortCode);
         super.getAccNum();
         setBusinessAccountNumber(super.getAccNum());
         this.CreationDate = LocalDate.now();
+        this.setBalance(initialDeposit);
+        subscription();
     }
 
     public void setBusinessAccountNumber(int businessAccountNumber) {
