@@ -352,7 +352,6 @@ public class Main {
         int customerNumberInInt = customerNumber.intValue();
         if (customers.get(customerNumberInInt - 1).checkISAAcc()) {
         while (initialDeposit == 0) {
-
                 System.out.println("To Open An ISA Account, Please Deposit $100 or More\n");
                 System.out.println("How Much Would You Like to Deposit");
             initialDeposit = scanner.nextDouble();
@@ -746,12 +745,13 @@ public class Main {
         accountMenu(customerNumber);
     }
 
-    private void allCustomerAccounts(long customerNumber) {
+    private String allCustomerAccounts(long customerNumber) {
+        String temp = "";
         for (Customer customer : customers) {
-            if (customer.getId() == customerNumber) {
-                customer.getListOfBankAccounts();
-            }
+            if (customer.getId() == customerNumber - 1)
+                temp += customer.getListOfBankAccounts() + "\n";
         }
+        return temp;
     }
 
 
