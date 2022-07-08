@@ -188,13 +188,8 @@ public class Customer {
     public int getAccountNumber(int accountIndex) {
         return bankAccounts.get(accountIndex).getAccNum();
     }
-
-
-
     public double getAccountBalance(int accountIndex) {
         return this.bankAccounts.get(accountIndex - 1).getBalance();
     }
-
-
 
 }
