@@ -612,7 +612,7 @@ public class Main {
 
                 customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).withdrawMoney(wMoney);
 
-            } while (wMoney < 0);
+            } while (wMoney < 0 || customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).getBalance() < wMoney);
             newBalance = customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).getBalance();
             System.out.println("Withdrawal Successful!");
             System.out.println("You Have Withdrawn: $" + wMoney + '\n' +
