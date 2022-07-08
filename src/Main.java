@@ -42,7 +42,7 @@ public class Main {
         for (Customer customer : main.customers) {
             String temp = customer.getName();
             try {
-                FileWriter writer = new FileWriter(temp + ".txt");
+                FileWriter writer = new FileWriter(temp + "'s Accounts.txt");
                 Writer output = new BufferedWriter(writer);
                 output.write(customer.getListOfBankAccounts());
                 output.close();
