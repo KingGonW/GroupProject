@@ -12,7 +12,7 @@ public class Main {
 
         Main main = new Main();
         main.customers = new ArrayList<>();
-
+        //insert the customer detail
         main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "07374829121"));
         main.validCustomer(new Customer("King", "K", "king@gmail.com", "07664738222"));
         main.validCustomer(new Customer("Tamara", "T", "tamara@gmail.com", "07776652499"));
@@ -22,7 +22,7 @@ public class Main {
         main.generateAccounts(main.customers.get(2));
         main.generateAccounts(main.customers.get(3));
 
-
+//save the customer details into a .txt
         try {
             FileWriter writer = new FileWriter("customerArray.txt");
             Writer output = new BufferedWriter(writer);
@@ -37,42 +37,31 @@ public class Main {
             e.printStackTrace();
         }
 
-        //save customer accounts details into a .txt
-
-/*
-        for (Customer customer : main.customers) {
-            String temp = customer.getName();
-            try {
-                FileWriter writer = new FileWriter(temp + "'s Accounts.txt");
-                Writer output = new BufferedWriter(writer);
-                output.write(customer.getListOfBankAccounts());
-                output.close();
-
-            } catch (IOException e) {
-                System.out.println("File Creation Unsuccessful");
-                e.printStackTrace();
-            }
-
-        }*/
-
 
         main.mainMenu();
 
     }
 
+    //method to write accounts of each customer to a file
     public void writeFileForAccounts(Long customerNumber) {
         String temp = "";
         int customerNumberInInt = customerNumber.intValue();
+
+        //for each to interate through customers array
+        //assign customer id to variable temp to be used as file contents
         for (Customer customer : customers) {
             if (customer.getId() == customerNumber - 1) {
                 temp = customer.getName();
             }
         }
 
+        //check to make sure temp isnt empty
         if (!temp.equals("")) {
             try {
-                FileWriter writer = new FileWriter(temp + "'s Accounts.txt");
+                //using temp to add to file creation name
+                FileWriter writer = new FileWriter(temp + ".txt");
                 Writer output = new BufferedWriter(writer);
+                //writes each customer's bank accounts
                 output.write(customers.get(customerNumberInInt - 1).getListOfBankAccounts());
                 output.close();
 
@@ -85,6 +74,7 @@ public class Main {
         }
     }
 
+    //generate random number of current account for each customer, max 3 for each
     public void generateAccounts(Customer customer) {
         Random random = new Random();
         int randomInt = random.nextInt(1, 4);
@@ -96,14 +86,17 @@ public class Main {
 
     }
 
-
+    //print all the accounts that the chosen customer has
     public String printCustomerAccounts(Long customerID) {
         int customerNumberInInt = customerID.intValue();
         System.out.println(customers.get(customerNumberInInt - 1).getName());
         return customers.get(customerNumberInInt - 1).getListOfBankAccounts();
 
 
-        /*String temp = "";
+        //here we tried to read the file but didn't seem to print anything
+        // so have left the original print accounts code
+/*
+        String temp = "";
         String line = "";
         ArrayList<Object> aList = new ArrayList<>();
         int customerNumberInInt = customerID.intValue();
@@ -113,33 +106,28 @@ public class Main {
                 temp = customer.getName();
             }
         }
-
-        while (!temp.equals("")) {
+        //read the lines of text into an array list
+        if (!temp.equals("")) {
             try {
-                BufferedReader input = new BufferedReader(new FileReader(temp + "'s Accounts.txt"));
-
-                while (input.ready()) { //read a line of text
-                    aList.add(input.readLine()); //add the line of text to the array list
-                   *//* for (Object o : aList) {
-
-                        System.out.println(o.toString());
-                    }*//*
-                    System.out.println("print accounts");
+                BufferedReader input = new BufferedReader(new FileReader(temp + ".txt"));
+                if (!input.ready()) { // check whether the file can be read
+                    throw new IOException();
+                }
+                while ((line = input.readLine()) != null) { //read a line of text
+                    *//*aList.add(input.readLine());*//* //add the line of text to the array list
+                    System.out.println(line);
                 }
                 input.close();
             } catch (
                     IOException e) {  // catch any problems found e.g. file not found
                 e.printStackTrace();
-
             }
+        }*/
 
-        }
 
-
-        System.out.println(aList);*/
     }
 
-
+    //check the validation of the customer details
     public void validCustomer(Customer customer) {
         for (Customer value : customers) {
             if (value.getEmailAddress().equals(customer.getEmailAddress())) {
@@ -175,8 +163,7 @@ public class Main {
         } while (!input.equals("2"));
     }
 
-    // add feature to allow admin to transfer money between accounts
-    //add feature to allow admin to create accounts for customers.
+
     private void adminMenu() {
         System.out.println("\nPlease choose an option");
         System.out.println("""
@@ -207,10 +194,8 @@ public class Main {
                 }
                 break;
         }
-        if (!input.equals("4"))
-            adminMenu();
-        else
-            mainMenu();
+        if (!input.equals("4")) adminMenu();
+        else mainMenu();
 
     }
 
@@ -232,8 +217,7 @@ public class Main {
                 aList.add(line); //add the line of text to the array list
             }
             input.close();
-        } catch (
-                IOException e) {  // catch any problems found e.g. file not found
+        } catch (IOException e) {  // catch any problems found e.g. file not found
             e.printStackTrace();
         }
 
@@ -249,12 +233,12 @@ public class Main {
         if (temp != 0) {
             bankMenu(temp);
         } else {
-            System.out.println("\nPlease Enter A Valid Name\n");
+            System.out.println("\nPlease Enter A Valid ID\n");
             adminMenu();
         }
     }
 
-
+    //use to get the account number of the customer
     public BankAcc getTheAccountNumber(int customerId, int accNumber) {
         Long tempLong = (long) customerId;
         Customer temp = null;
@@ -269,10 +253,23 @@ public class Main {
         return null;
     }
 
+    //login to a customer menu
     public long loginValidation() {
         long temp = 0;
+        int cusName = 0;
+        boolean stop = false;
+
         System.out.println("\nPlease Enter A Customer ID");
-        int cusName = scanner.nextInt();
+        do {
+            try {
+                cusName = scanner.nextInt();
+                stop = true;
+            } catch (Exception e) {
+                System.out.println("Error: " + e + '\n' +
+                        "Input Must Be Numerical");
+            }
+        }while(!stop);
+
         //this changes the first letter of users input to capital letter
         //so no matter what a lower or upper case input, the user will be found by their name
         for (Customer customer : customers) {
@@ -318,8 +315,7 @@ public class Main {
                 }
                 break;
         }
-        if (!input.equals("6"))
-            bankMenu(customerNumber);
+        if (!input.equals("6")) bankMenu(customerNumber);
     }
 
     private void createNewBankAccount(long customerNumber) {
@@ -394,8 +390,7 @@ public class Main {
                     initialDeposit = scanner.nextDouble();
                     stop = true;
                 } catch (Exception e) {
-                    System.out.println("Error: " + e + '\n' +
-                            "Input Must Be Numerical");
+                    System.out.println("Error: " + e + '\n' + "Input Must Be Numerical");
                     scanner.next();
                 }
             } while (!stop);
@@ -437,8 +432,7 @@ public class Main {
                         initialDeposit = scanner.nextDouble();
                         stop = true;
                     } catch (Exception e) {
-                        System.out.println("Error: " + e + '\n' +
-                                "Input Must Be Numerical");
+                        System.out.println("Error: " + e + '\n' + "Input Must Be Numerical");
                         scanner.next();
                     }
                 } while (!stop);
@@ -530,10 +524,11 @@ public class Main {
         int input = scanner.nextInt() - 1;
         ISAAccount temp = new ISAAccount();
         for (int i = 0; i < customers.get(customerNumberInInt).getBankAccounts().size(); i++) {
-            if(customers.get(customerNumberInInt).getBankAccounts().get(i).getAccType() == "ISA Account"){
+            if (customers.get(customerNumberInInt).getBankAccounts().get(i).getAccType().equals("ISA Account")) {
                 temp = (ISAAccount) customers.get(customerNumberInInt).getBankAccounts().get(i);
                 temp.showInterest();
-        }}
+            }
+        }
         accountMenu(customerNumber);
     }
 
@@ -554,8 +549,7 @@ public class Main {
         do {
             //account is chosen from the arraylist. Number refers to the account in the array list,
             // not the account number
-            System.out.printf("Enter the number  (1-%d) of the account\n"
-                    + "you wish to see the history of:", customers.get(customerNumberInInt - 1).numAccounts());
+            System.out.printf("Enter the number  (1-%d) of the account\n" + "you wish to see the history of:", customers.get(customerNumberInInt - 1).numAccounts());
 
             // -1 to get to the 0 index position
             do {
@@ -563,8 +557,7 @@ public class Main {
                     theAccount = scanner.nextInt() - 1;
                     stop = true;
                 } catch (Exception e) {
-                    System.out.println("Error: " + e + '\n' +
-                            "Input Must Be Numerical");
+                    System.out.println("Error: " + e + '\n' + "Input Must Be Numerical");
                 }
             } while (!stop);
 
@@ -590,8 +583,7 @@ public class Main {
         double newBalance;
         boolean stop = false;
 
-        System.out.println("Press 1 To Go Back To Account Menu \n" +
-                "Press 2 to continue");
+        System.out.println("Press 1 To Go Back To Account Menu \n" + "Press 2 to continue");
         //try catches used on inputs to catch any input mismatches
         //prompts the user to enter the correct input format to continue
         do {
@@ -599,8 +591,7 @@ public class Main {
                 backMenu = scanner.nextInt();
                 stop = true;
             } catch (Exception e) {
-                System.out.println("Error: " + e + '\n' +
-                        "Please Input a Number");
+                System.out.println("Error: " + e + '\n' + "Please Input a Number");
                 scanner.nextLine();
             }
         } while (!stop);
@@ -612,18 +603,17 @@ public class Main {
             do {
                 printCustomerAccounts(customerNumber);
                 System.out.println("Please Choose An Account to Deposit to: ");
-
+                //prompt user to enter which account they want to deposit from
                 do {
                     try {
                         toTheAccount = scanner.nextInt();
                         stop = false;
                     } catch (Exception e) {
-                        System.out.println("Error: " + e + '\n' +
-                                "Please Input a Number");
+                        System.out.println("Error: " + e + '\n' + "Please Input a Number");
                         scanner.nextLine();
                     }
                 } while (stop);
-
+                //user prompt used to check condition
                 if (toTheAccount < 0 || toTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
                     System.out.println("Invalid Account Chosen. Please Try Again.");
                 }
@@ -632,15 +622,14 @@ public class Main {
             } while (toTheAccount < 0 || toTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size());
             //ise do while loop here again to enter the amount and memo
             do {
-
+                //use do while loop here again to enter the amount and memo
                 do {
                     try {
                         System.out.println("Please Enter An Amount to Deposit:");
                         dMoney = scanner.nextDouble();
                         stop = true;
                     } catch (Exception e) {
-                        System.out.println("Error: " + e + '\n' +
-                                "Please Enter An Amount In Numbers");
+                        System.out.println("Error: " + e + '\n' + "Please Enter An Amount In Numbers");
                         scanner.nextLine();
                     }
                 } while (!stop);
@@ -651,8 +640,7 @@ public class Main {
                         memo = scanner.next();
                         stop = false;
                     } catch (Exception e) {
-                        System.out.println("Error: " + e + '\n' +
-                                "Please Enter Text");
+                        System.out.println("Error: " + e + '\n' + "Please Enter Text");
                         scanner.nextLine();
                         memo = scanner.next();
                     }
@@ -663,9 +651,7 @@ public class Main {
             } while (dMoney < 0);
             newBalance = customers.get(customerNumberInInt - 1).getBankAccounts().get(toTheAccount - 1).getBalance();
             System.out.println("Deposit Successful!");
-            System.out.println("You Have Deposited: $" + dMoney + '\n' +
-                    "Your New Balance: $" + newBalance + '\n' +
-                    "Memo: " + memo);
+            System.out.println("You Have Deposited: $" + dMoney + '\n' + "Your New Balance: $" + newBalance + '\n' + "Memo: " + memo);
             customers.get(customerNumberInInt - 1).addAccountTransaction(toTheAccount - 1, dMoney, memo);
 
             //once code has been executed return user to account menu
@@ -682,8 +668,7 @@ public class Main {
         String memo = "";
         double newBalance;
         boolean stop = false;
-        System.out.println("Press 1 To Go Back To Account Menu \n" +
-                " Press 2 to continue");
+        System.out.println("Press 1 To Go Back To Account Menu \n" + " Press 2 to continue");
         //try catches used on inputs to catch any input mismatches
         //prompts the user to enter the correct input format to continue
         do {
@@ -691,8 +676,7 @@ public class Main {
                 backMenu = scanner.nextInt();
                 stop = true;
             } catch (Exception e) {
-                System.out.println("Error: " + e + '\n' +
-                        "Please Input a Number");
+                System.out.println("Error: " + e + '\n' + "Please Input a Number");
                 scanner.nextLine();
             }
         } while (!stop);
@@ -710,8 +694,7 @@ public class Main {
                         fromTheAccount = scanner.nextInt();
                         stop = false;
                     } catch (Exception e) {
-                        System.out.println("Error: " + e + '\n' +
-                                "Please Input a Number");
+                        System.out.println("Error: " + e + '\n' + "Please Input a Number");
                         scanner.nextLine();
                     }
                 } while (stop);
@@ -731,8 +714,7 @@ public class Main {
                         stop = true;
 
                     } catch (Exception e) {
-                        System.out.println("Error: " + e + '\n' +
-                                "Please Enter An Amount In Numbers");
+                        System.out.println("Error: " + e + '\n' + "Please Enter An Amount In Numbers");
                         scanner.nextLine();
                     }
                 } while (!stop);
@@ -744,8 +726,7 @@ public class Main {
                         memo = scanner.next();
                         stop = false;
                     } catch (Exception e) {
-                        System.out.println("Error: " + e + '\n' +
-                                "Please Enter Text");
+                        System.out.println("Error: " + e + '\n' + "Please Enter Text");
                         scanner.nextLine();
 
                     }
@@ -756,9 +737,7 @@ public class Main {
             } while (wMoney < 0 || customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).getBalance() < wMoney);
             newBalance = customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).getBalance();
             System.out.println("Withdrawal Successful!");
-            System.out.println("You Have Withdrawn: $" + wMoney + '\n' +
-                    "Your New Balance: $" + newBalance + '\n' +
-                    "Memo: " + memo);
+            System.out.println("You Have Withdrawn: $" + wMoney + '\n' + "Your New Balance: $" + newBalance + '\n' + "Memo: " + memo);
 
             customers.get(customerNumberInInt - 1).addAccountTransaction(fromTheAccount - 1, wMoney, memo);
         }
@@ -769,19 +748,14 @@ public class Main {
 
     private void transferMoney(Long customerNumber) {
 
+        //variables initialised to be used in throughout loops
         int cus1 = customerNumber.intValue();
-        String tempAcc1;
         int acc1 = 0;
 
-        String tempCus2;
         int cus2 = 0;
-
-        String tempAcc2;
         int acc2 = 0;
 
-        String tempAmount;
         double amount = 0;
-
         boolean stop = false;
 
         customers.get(cus1 - 1).getListOfBankAccounts();
@@ -789,30 +763,25 @@ public class Main {
         do {
             try {
                 System.out.println("Please Enter The Account ID to Transfer From: ");
-                //tempAcc1 = scanner.next();
-                // acc1 = Integer.parseInt(tempAcc2);
+                //prompt user to choose account after displaying bank accounts
                 acc1 = scanner.nextInt();
-                stop = true;
+                stop = true; //reassign variable from false
             } catch (Exception e) {
-                System.out.println("Error: " + e + '\n' +
-                        "Input Must Be Numerical");
+                System.out.println("Error: " + e + '\n' + "Input Must Be Numerical");
                 scanner.next();
             }
-        } while (!stop);
+        } while (!stop); //loops until user input matches the input type
 
 
         findAllCustomers();
         do {
             try {
                 System.out.println("\nPlease Enter The Customer to Transfer to(1-4): ");
-                //tempCus2 = scanner.next();
-                //cus2 = Integer.parseInt(tempCus2);
                 cus2 = scanner.nextInt();
                 customers.get(cus2 - 1).getListOfBankAccounts();
-                stop = false;
+                stop = false; //variable has to be reassigned every time for while loop to fit condition
             } catch (Exception e) {
-                System.out.println("Error: " + e + '\n' +
-                        "Input Must Be Numerical");
+                System.out.println("Error: " + e + '\n' + "Input Must Be Numerical");
                 scanner.next();
             }
 
@@ -822,13 +791,10 @@ public class Main {
         do {
             try {
                 System.out.println("\nPlease Enter The Account ID to Transfer to");
-                //tempAcc2 = scanner.next();
-                //acc2 = Integer.parseInt(tempAcc2);
                 acc2 = scanner.nextInt();
                 stop = true;
             } catch (Exception e) {
-                System.out.println("Error: " + e + '\n' +
-                        "Input Must Be Numerical");
+                System.out.println("Error: " + e + '\n' + "Input Must Be Numerical");
                 scanner.next();
             }
         } while (!stop);
@@ -837,23 +803,20 @@ public class Main {
         do {
             try {
                 System.out.println("\nPlease Enter The Amount");
-                //tempAmount = scanner.next();
-                //amount = Double.parseDouble(tempAmount);
                 amount = scanner.nextDouble();
                 stop = false;
             } catch (Exception e) {
-                System.out.println("Error: " + e + '\n' +
-                        "Input Must Be Numerical");
+                System.out.println("Error: " + e + '\n' + "Input Must Be Numerical");
                 scanner.next();
             }
         } while (stop);
 
+        //variable inputs taken from the user are used to get origin and destination account
+        //inputs are then used to carry out money transfer method from BankAcc
+        customers.get(cus1 - 1).getBankAccounts().get(0).moneyTransfer(getTheAccountNumber(cus1 - 1, acc1 - 1),
+                getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
 
-        customers.get(cus1 - 1).getBankAccounts().get(0).moneyTransfer
-                (getTheAccountNumber(cus1 - 1, acc1 - 1),
-                        getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
-
-
+        //user inputs used to add transaction to users transaction history
         customers.get(cus1 - 1).addAccountTransaction(acc1 - 1, amount, String.format("Money Transferred To: %s, %s, %s",
                 customers.get(cus2 - 1).getName(), customers.get(cus2 - 1).getLastName(), customers.get(cus2 - 1).getAccountNumber(acc2 - 1)));
 
@@ -861,202 +824,4 @@ public class Main {
     }
 
 
-    private String allCustomerAccounts(long customerNumber) {
-        String temp = "";
-        for (Customer customer : customers) {
-            if (customer.getId() == customerNumber)
-                temp += customer.getListOfBankAccounts() + "\n";
-        }
-        return temp;
     }
-
-
-
-
-/*the below copied from the other branch.
-
-getAccountBalance() has been defined, in Customer class
-
-
-printAccountsMenu does not need to be defined. Delete it and use the existing menu options above. Its purpose is to bring the user back one level. I think
-accountMenu - line 381 - is the matching menu
-
-    public static void transferFunds(Customer currentCustomer, Scanner sc, Bank theBank){
-        //initialise
-        //we need a source account, destination account and amount to transfer
-        //some logic to ensure amount sent accords with balance
-
-        int fromAccount;
-        int toAccount;
-        double transferAmount;
-        double accountBalance;
-
-        //get the source account - same logic, i.e. accessing an array of accounts, as showTransactionHistory();
-        do{
-            System.out.printf("Enter the number  (1-%d) of the account\n"
-                    + "to transfer from:", currentCustomer.numAccounts());
-            fromAccount=sc.nextInt()-1;
-            if(fromAccount < 0 || fromAccount >= currentCustomer.numAccounts())
-            {
-                System.out.println("Invalid Account chosen. Please try again.");
-            }
-
-        } while(fromAccount < 0 || fromAccount >= currentCustomer.numAccounts());
-
-        //now we need the account balance, from the account just chosen
-
-        accountBalance = currentCustomer.getAccountBalance(fromAccount);
-
-        //get the destination account
-        do{
-            System.out.printf("Enter the number  (1-%d) of the account\n"
-                    + "to transfer to:",  currentCustomer.numAccounts());
-            toAccount=sc.nextInt()-1;
-            if(toAccount < 0 || toAccount >= currentCustomer.numAccounts())
-            {
-                System.out.println("Invalid Account chosen. Please try again.");
-            }
-
-        } while(toAccount < 0 || toAccount >= currentCustomer.numAccounts());
-
-        //get the amount to transfer
-        do{
-            System.out.printf("Enter the amount to transfer( max %.02f): ", accountBalance);
-            transferAmount= sc.nextDouble();
-
-            //logic below stops transferring negative funds, or exceeding account balance.
-            //remember to factor in ISA minimum account balance for group project
-            if(transferAmount <0){
-                System.out.println("Amount must be greater than zero!");
-            } else if (transferAmount > accountBalance){
-                System.out.printf("You cannot transfer more than your balance\nof %.02f.\n", accountBalance);
-            }
-        } while(transferAmount < 0 || transferAmount > accountBalance);
-
-        //now transfer can occur
-        //note addAccountTransaction + getAcctId are defined in Customer
-        currentCustomer.addAccountTransaction(fromAccount, -1*transferAmount, String.format("Origin account %s",
-                currentCustomer.getAccountNumber(toAccount)));
-        currentCustomer.addAccountTransaction(toAccount, transferAmount, String.format("Destination account %s",
-                currentCustomer.getAccountNumber(fromAccount)));
-
-        //a brief log/confirmatory message
-        System.out.printf("%s transferred", transferAmount);
-
-        //then takes the User back to the appropriate menu
-        Main.printAccountsMenu(currentCustomer,sc,theBank);
-
-    }
-
-    private static void withdrawFunds(Customer currentCustomer, Scanner sc, Bank theBank) {
-
-        //the logic here is similar to transferFunds();
-        int fromAccount;
-        double withdrawAmount;
-        double accountBalance;
-        String memo;
-
-        //get the account to withdraw from
-        do{
-            System.out.printf("Enter the number (1-%d) of the account\n" +
-                    "to withdraw from: ", currentCustomer.numAccounts());
-            fromAccount = sc.nextInt()-1;
-            if(fromAccount < 0 || fromAccount >= currentCustomer.numAccounts())
-            {
-                System.out.println("Invalid Account chosen. Please try again.");
-            }
-
-        } while (fromAccount < 0 || fromAccount >= currentCustomer.numAccounts());
-
-        //now we need the account balance, from the account just chosen
-        accountBalance= currentCustomer.getAccountBalance(fromAccount);
-
-        //get the amount to transfer
-        do{
-            System.out.printf("Enter the amount to withdraw( max %.02f): ", accountBalance);
-            withdrawAmount= sc.nextDouble();
-
-            //logic below stops withdrawing negative funds, as that would be basically a deposit
-            // or exceeding account balance.
-            //remember to factor in ISA minimum account balance for group project
-            if(withdrawAmount <0){
-                System.out.println("Amount must be greater than zero!");
-            } else if (withdrawAmount > accountBalance){
-                System.out.printf("You cannot withdraw more than your balance\nof %.02f.\n", accountBalance);
-                Main.printAccountsMenu(currentCustomer,sc, theBank);
-            }
-        } while(withdrawAmount < 0 || withdrawAmount > accountBalance);
-
-
-
-        sc.nextLine();
-
-        //now the memo - this is useful for the customer/admin to add a note about the withdrawal.
-        // It can safely be dispensed with, ergo consider removing for group project,
-        //that would mean redefining addAccountTransaction();
-        System.out.println("Enter a memo");
-        memo= sc.nextLine();
-
-        //finally allow the withdrawal
-        currentCustomer.addAccountTransaction(fromAccount,-1*withdrawAmount, memo);
-
-        //a brief log/confirmatory message
-        System.out.printf("%s withdrawn ", withdrawAmount);
-
-        //then takes the User back to the appropriate menu
-        Main.printAccountsMenu(currentCustomer,sc,theBank);
-    }
-
-    private static void depositFunds(Customer currentCustomer, Scanner sc, Bank theBank) {
-
-        //the logic here is basically an inversion of withdrawFunds();
-        int toAccount;
-        double depositAmount;
-        String memo;
-
-        //get the account to transfer from
-        do{
-            System.out.printf("Enter the number (1-%d) of the account\n" +
-                    "to deposit to: ", currentCustomer.numAccounts());
-            toAccount = sc.nextInt()-1;
-            if(toAccount < 0 || toAccount >= currentCustomer.numAccounts())
-            {
-                System.out.println("Invalid Account chosen. Please try again.");
-            }
-
-        } while (toAccount < 0 || toAccount >= currentCustomer.numAccounts());
-
-        //get the amount to deposit
-        do{
-            System.out.println("Enter the amount to deposit");
-            depositAmount= sc.nextDouble();
-
-            //logic below stops users depositing a negative amount, as that would effectively be a withdrawal.
-            //remember to factor in ISA minimum account balance for group project
-            if(depositAmount <0){
-                System.out.println("You cannot deposit less than zero");
-            }
-
-        } while(depositAmount < 0);
-
-        sc.nextLine();
-
-        //now the memo - this is useful for the customer/admin to add a note about the deposit.
-        // It can safely be dispensed with, ergo consider removing for group project,
-        //that would mean redefining addAccountTransaction();
-        System.out.println("Enter a memo");
-        memo= sc.nextLine();
-
-        //finally allow the deposit
-        currentCustomer.addAccountTransaction(toAccount,depositAmount, memo);
-
-        //a brief log/confirmatory message
-        System.out.printf("%s deposited", depositAmount);
-
-        //then takes the User back to the appropriate menu
-        Main.printAccountsMenu(currentCustomer,sc,theBank);
-    }
-
-    */
-
-}
