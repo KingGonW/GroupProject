@@ -39,7 +39,7 @@ public class Main {
 
         //save customer accounts details into a .txt
 
-
+/*
         for (Customer customer : main.customers) {
             String temp = customer.getName();
             try {
@@ -53,7 +53,7 @@ public class Main {
                 e.printStackTrace();
             }
 
-        }
+        }*/
 
 
 
