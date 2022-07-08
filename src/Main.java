@@ -163,7 +163,8 @@ public class Main {
                 aList.add(line); //add the line of text to the array list
             }
             input.close();
-        } catch (IOException e) {  // catch any problems found e.g. file not found
+        } catch (
+                IOException e) {  // catch any problems found e.g. file not found
             e.printStackTrace();
         }
 
@@ -364,10 +365,11 @@ public class Main {
             if (initialDeposit < 100) {
                 System.out.println("\nInitial Deposit Must Be $100 or More\n");
             } else {
-                BankAcc ISAAcc = new ISAAccount(initialDeposit);
-                System.out.println("\nISA Account Successfully Created\n");
-                customers.get(customerNumberInInt - 1).getBankAccounts().add(ISAAcc);
-
+                if (customers.get(customerNumberInInt - 1).checkISAAcc()) {
+                    BankAcc ISAAcc = new ISAAccount(initialDeposit);
+                    System.out.println("\nISA Account Successfully Created\n");
+                    customers.get(customerNumberInInt - 1).getBankAccounts().add(ISAAcc);
+                }
                 //require customer to deposit and keep the balance above 100
                 //only the account will be created and add to customer array when the balance is above 100
             }
@@ -569,7 +571,7 @@ public class Main {
                         "Please Input a Number");
                 scanner.nextLine();
             }
-        }while(!stop);
+        } while (!stop);
 
         if (backMenu == 1) {
             accountMenu(customerNumber);
@@ -587,7 +589,7 @@ public class Main {
                                 "Please Input a Number");
                         scanner.nextLine();
                     }
-                }while(stop);
+                } while (stop);
 
                 if (fromTheAccount < 0 || fromTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
                     System.out.println("Invalid Account Chosen. Please Try Again.");
@@ -608,7 +610,7 @@ public class Main {
                                 "Please Enter An Amount In Numbers");
                         scanner.nextLine();
                     }
-                }while(!stop);
+                } while (!stop);
 
 
                 do {
@@ -622,7 +624,7 @@ public class Main {
                         scanner.nextLine();
 
                     }
-                }while(stop);
+                } while (stop);
 
                 customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).withdrawMoney(wMoney);
 
@@ -691,8 +693,6 @@ public class Main {
         } while (stop);
 
 
-
-
         do {
             try {
                 System.out.println("\nPlease Enter The Account ID to Transfer to");
@@ -718,9 +718,9 @@ public class Main {
             } catch (Exception e) {
                 System.out.println("Error: " + e + '\n' +
                         "Input Must Be Numerical");
-               scanner.next();
+                scanner.next();
             }
-        }while(stop);
+        } while (stop);
 
 
         customers.get(cus1 - 1).getBankAccounts().get(0).moneyTransfer
