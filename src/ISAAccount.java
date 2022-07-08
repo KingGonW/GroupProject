@@ -91,8 +91,10 @@ public class ISAAccount extends BankAcc {
         //using format function to only include 2 decimal places in result
         yearlyInterest = Float.parseFloat(decimalFormat.format(yearlyInterest));
 
-        System.out.println("$" + yearlyAverage);
-        System.out.println("$" + yearlyInterest);
+        System.out.println("Yearly Interest: 2%");
+        System.out.println("Your Average Balance For The Previous Financial Year(Mar31 - Apr1): $" + yearlyAverage + '\n' +
+                "Interest Accumulated Over The Last Financial Year(Mar31 - Apr1): $" + yearlyInterest);
+
     }
 
 
