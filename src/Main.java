@@ -27,7 +27,6 @@ public class Main {
         main.generateAccounts(main.customers.get(3));
 
 
-
         try {
             FileWriter writer = new FileWriter("customerArray.txt");
             Writer output = new BufferedWriter(writer);
@@ -564,10 +563,9 @@ public class Main {
                     "Your New Balance: $" + newBalance + '\n' +
                     "Memo: " + memo);
             customers.get(customerNumberInInt - 1).addAccountTransaction(toTheAccount - 1, dMoney, memo);
+            accountMenu(customerNumber);
         }
     }
-
-
 
 
     public void withdraw(Long customerNumber) {
@@ -579,24 +577,59 @@ public class Main {
         double newBalance;
         System.out.println("Press 1 To Go Back To Account Menu \n" +
                 " Press 2 to continue");
-        backMenu = scanner.nextInt();
+        try {
+            backMenu = scanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("Error: " + e + '\n' +
+                    "Please Input a Number");
+            scanner.nextLine();
+            backMenu = scanner.nextInt();
+        }
+
         if (backMenu == 1) {
             accountMenu(customerNumber);
         } else if (backMenu == 2) {
             do {
                 printCustomerAccounts(customerNumber);
                 System.out.println("Please Choose An Account to Withdraw From: ");
-                fromTheAccount = scanner.nextInt();
+                try {
+                    fromTheAccount = scanner.nextInt();
+                } catch (Exception e) {
+                    System.out.println("Error: " + e + '\n' +
+                            "Please Input a Number");
+                    scanner.nextLine();
+                    fromTheAccount = scanner.nextInt();
+                }
+
                 if (fromTheAccount < 0 || fromTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
                     System.out.println("Invalid Account Chosen. Please Try Again.");
                 }
             } while (fromTheAccount < 0 || fromTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size());
             do {
-                System.out.println("Please Enter The Amount to Withdraw");
-                wMoney = scanner.nextDouble();
-                System.out.println("Enter A Memo");
-                memo = scanner.next();
+
+                try {
+                    System.out.println("Please Enter The Amount to Withdraw:");
+                    wMoney = scanner.nextDouble();
+
+                } catch (Exception e) {
+                    System.out.println("Error: " + e + '\n' +
+                            "Please Enter An Amount In Numbers");
+                    scanner.nextLine();
+                    wMoney = scanner.nextDouble();
+                }
+
+                try {
+                    System.out.println("Enter A Memo:");
+                    memo = scanner.next();
+                } catch (Exception e) {
+                    System.out.println("Error: " + e + '\n' +
+                            "Please Enter Text");
+                    scanner.nextLine();
+                    memo = scanner.next();
+                }
+
                 customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).withdrawMoney(wMoney);
+
             } while (wMoney < 0);
             newBalance = customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).getBalance();
             System.out.println("Withdrawal Successful!");
@@ -606,33 +639,92 @@ public class Main {
 
             customers.get(customerNumberInInt - 1).addAccountTransaction(fromTheAccount - 1, wMoney, memo);
         }
+        accountMenu(customerNumber);
     }
 
 
     private void transferMoney(Long customerNumber) {
 
         int cus1 = customerNumber.intValue();
+        String tempAcc1;
+        int acc1 = 0;
 
+        String tempCus2;
+        int cus2 = 0;
+
+        String tempAcc2;
+        int acc2 = 0;
+
+        String tempAmount;
+        double amount = 0;
+
+        boolean stop = false;
 
         customers.get(cus1 - 1).getListOfBankAccounts();
 
-        System.out.println("Please Enter The Account ID to Transfer From: ");
-        String tempAcc1 = scanner.next();
-        int acc1 = Integer.parseInt(tempAcc1);
+        do {
+            try {
+                System.out.println("Please Enter The Account ID to Transfer From: ");
+                //tempAcc1 = scanner.next();
+                // acc1 = Integer.parseInt(tempAcc2);
+                acc1 = scanner.nextInt();
+                stop = true;
+            } catch (Exception e) {
+                System.out.println("Error: " + e + '\n' +
+                        "Input Must Be Numerical");
+                scanner.next();
+            }
+        } while (!stop);
+
 
         findAllCustomers();
-        System.out.println("Please Enter The Customer to Transfer to(1-4): ");
-        String tempCus2 = scanner.next();
-        int cus2 = Integer.parseInt(tempCus2);
-        customers.get(cus2 - 1).getListOfBankAccounts();
+        do {
+            try {
+                System.out.println("\nPlease Enter The Customer to Transfer to(1-4): ");
+                //tempCus2 = scanner.next();
+                //cus2 = Integer.parseInt(tempCus2);
+                cus2 = scanner.nextInt();
+                customers.get(cus2 - 1).getListOfBankAccounts();
+                stop = false;
+            } catch (Exception e) {
+                System.out.println("Error: " + e + '\n' +
+                        "Input Must Be Numerical");
+                scanner.next();
+            }
 
-        System.out.println("Please Enter The Account ID to Transfer to");
-        String tempAcc2 = scanner.next();
-        int acc2 = Integer.parseInt(tempAcc2);
+        } while (stop);
 
-        System.out.println("Please Enter The Amount");
-        String tempAmount = scanner.next();
-        double amount = Double.parseDouble(tempAmount);
+
+
+
+        do {
+            try {
+                System.out.println("\nPlease Enter The Account ID to Transfer to");
+                //tempAcc2 = scanner.next();
+                //acc2 = Integer.parseInt(tempAcc2);
+                acc2 = scanner.nextInt();
+                stop = true;
+            } catch (Exception e) {
+                System.out.println("Error: " + e + '\n' +
+                        "Input Must Be Numerical");
+                scanner.next();
+            }
+        } while (!stop);
+
+
+        do {
+            try {
+                System.out.println("\nPlease Enter The Amount");
+                //tempAmount = scanner.next();
+                //amount = Double.parseDouble(tempAmount);
+                amount = scanner.nextDouble();
+                stop = false;
+            } catch (Exception e) {
+                System.out.println("Error: " + e + '\n' +
+                        "Input Must Be Numerical");
+               scanner.next();
+            }
+        }while(stop);
 
 
         customers.get(cus1 - 1).getBankAccounts().get(0).moneyTransfer
@@ -642,10 +734,25 @@ public class Main {
         //the below posts this info to the Transactions class
         // this should work
         // to test, let us call transferMoney() from one of the menus
-        customers.get(cus1 - 1).addAccountTransaction(acc1 - 1, amount, String.format("Origin account %s",
-                customers.get(cus1 - 1).getAccountNumber(acc2 - 1)));
-        customers.get(cus1 - 1).addAccountTransaction(acc2 - 1, amount, String.format("Destination account %s",
-                customers.get(cus1 - 1).getAccountNumber(acc1 - 1)));
+        /*customers.get(cus1 - 1).addAccountTransaction(acc1 - 1, amount, String.format("Origin account %s",
+                customers.get(cus1 - 1).getAccountNumber(acc1 - 1)));*/
+        /*customers.get(cus1 - 1).addAccountTransaction(acc2 - 1, amount, String.format("Destination account %s",
+                customers.get(cus1 - 1).getAccountNumber(acc2 - 1)));*/
+
+        customers.get(cus1 - 1).addAccountTransaction(acc1 - 1, amount, String.format("Money Transferred To: %s, %s, %s",
+                customers.get(cus2 - 1).getName(), customers.get(cus2 - 1).getLastName(), customers.get(cus2 - 1).getAccountNumber(acc2 - 1)));
+
+
+        //currentCustomer.addAccountTransaction(fromAccount, -1*transferAmount, String.format("Origin account %s",
+        //                currentCustomer.getAccountNumber(toAccount)));
+        //        currentCustomer.addAccountTransaction(toAccount, transferAmount, String.format("Destination account %s",
+        //                currentCustomer.getAccountNumber(fromAccount)));
+
+
+
+        accountMenu(customerNumber);
+
+
 
     }
 
