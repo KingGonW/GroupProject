@@ -145,7 +145,6 @@ public class Main {
 
     }
 
-
     //adding methods in order that it shows up in the admin menu
     public void findAllCustomers() {
         //set up variables to read file
@@ -173,7 +172,6 @@ public class Main {
             System.out.println(o.toString());
         }
     }
-
 
     public void customerLogin() {
         long temp = loginValidation();
@@ -245,8 +243,6 @@ public class Main {
             case "2":
 
                 printCustomerAccounts(customerNumber);
-
-
                 //the below menu gets called when Option 2 of bankMenu() is selected.
                 accountMenu(customerNumber);
                 break;
@@ -350,8 +346,6 @@ public class Main {
         }
 
     }
-
-
     public void createISAAccount(Long customerNumber) {
 
         double initialDeposit = 0;
@@ -573,7 +567,6 @@ public class Main {
         }
     }
 
-
     public void withdraw(Long customerNumber) {
         int customerNumberInInt = customerNumber.intValue();
         int fromTheAccount = scanner.nextInt();
@@ -663,7 +656,6 @@ public class Main {
         accountMenu(customerNumber);
     }
 
-
     private void transferMoney(Long customerNumber) {
 
         int cus1 = customerNumber.intValue();
@@ -697,7 +689,6 @@ public class Main {
             }
         } while (!stop);
 
-
         findAllCustomers();
         do {
             try {
@@ -730,7 +721,6 @@ public class Main {
             }
         } while (!stop);
 
-
         do {
             try {
                 System.out.println("\nPlease Enter The Amount");
@@ -745,11 +735,9 @@ public class Main {
             }
         } while (stop);
 
-
         customers.get(cus1 - 1).getBankAccounts().get(0).moneyTransfer
                 (getTheAccountNumber(cus1 - 1, acc1 - 1),
                         getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
-
 
         customers.get(cus1 - 1).addAccountTransaction(acc1 - 1, amount, String.format("Money Transferred To: %s, %s, %s",
                 customers.get(cus2 - 1).getName(), customers.get(cus2 - 1).getLastName(), customers.get(cus2 - 1).getAccountNumber(acc2 - 1)));
@@ -758,14 +746,12 @@ public class Main {
         accountMenu(customerNumber);
     }
 
-
     private void allCustomerAccounts(long customerNumber) {
         for (Customer customer : customers) {
             if (customer.getId() == customerNumber) {
                 customer.getListOfBankAccounts();
             }
         }
-
     }
 
 
