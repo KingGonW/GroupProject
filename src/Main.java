@@ -328,12 +328,24 @@ public class Main {
         double initialDeposit = 0;
         //variable to get the customers ID
         int customerNumberInInt = customerNumber.intValue();
+        boolean stop = false;
 
         //while loop here to continue running until the deposit has been made
         while (initialDeposit == 0) {
             System.out.println("To Open a Business Account, There is a Yearly Fee of $25\n");
             System.out.println("How Much Would You Like to Deposit");
-            initialDeposit = scanner.nextDouble();
+
+            do {
+                try {
+                    initialDeposit = scanner.nextDouble();
+                    stop = true;
+                }catch(Exception e) {
+                    System.out.println("Error: " + e + '\n' +
+                            "Input Must Be Numerical");
+                    scanner.next();
+                }
+            }while(!stop);
+
 
             //require customer to make an initial deposit of $25 to open Business Account
             // will only be created when user has deposited 25 or more
@@ -357,11 +369,25 @@ public class Main {
 
         double initialDeposit = 0;
         int customerNumberInInt = customerNumber.intValue();
+        boolean stop = false;
+
         if (customers.get(customerNumberInInt - 1).checkISAAcc()) {
             while (initialDeposit == 0) {
+
                 System.out.println("To Open An ISA Account, Please Deposit $100 or More\n");
                 System.out.println("How Much Would You Like to Deposit");
-                initialDeposit = scanner.nextDouble();
+
+                do {
+                    try {
+                        initialDeposit = scanner.nextDouble();
+                        stop = true;
+                    }catch(Exception e) {
+                        System.out.println("Error: " + e + '\n' +
+                                "Input Must Be Numerical");
+                        scanner.next();
+                    }
+                }while(!stop);
+
                 if (initialDeposit < 100) {
                     System.out.println("\nInitial Deposit Must Be $100 or More\n");
                 } else {
