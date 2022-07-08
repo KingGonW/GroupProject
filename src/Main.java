@@ -37,15 +37,23 @@ public class Main {
             e.printStackTrace();
         }
         //save customer accounts details into a .txt
-        try {
-            FileWriter writer = new FileWriter("customerAccounts.txt");
-            Writer output = new BufferedWriter(writer);
-            output.write(main.allCustomerAccounts());
-            output.close();
 
-        } catch (IOException e) {
-            System.out.println("File Creation Unsuccessful");
-            e.printStackTrace();
+        String temp = "";
+        for (Customer customer : main.customers) {
+            temp += main.customers.get(0) + "\n" + customer.getListOfBankAccounts() + "\n";
+
+            try {
+                FileWriter writer = new FileWriter("customerAccounts.txt");
+                Writer output = new BufferedWriter(writer);
+                output.write(main.allCustomerAccounts());
+                output.close();
+
+            } catch (IOException e) {
+                System.out.println("File Creation Unsuccessful");
+                e.printStackTrace();
+            }
+
+            System.out.println(temp);
         }
 
         main.mainMenu();
