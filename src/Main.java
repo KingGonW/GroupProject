@@ -221,33 +221,6 @@ public class Main {
 
     }
 
-    /*public void deleteCustomer() {
-        System.out.println("Please enter the customer ID");
-        long cusID = scanner.nextLong();
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getId() == cusID) {
-                customers.remove(i);
-                System.out.println("====> Selected customer is successfully removed from the system");
-                adminMenu();
-            }
-        }
-        System.out.println("====> Customer does not exist");
-        adminMenu();
-    }*/
-
-
-    /*public void newCustomer() {
-        System.out.println("Please enter your name:");
-        String tempName = scanner.next();
-        System.out.println("Please enter your last name:");
-        String tempLastName = scanner.next();
-        System.out.println("Please enter your email address:");
-        String tempEmailAddress = scanner.next();
-        System.out.println("Please enter your phone number:");
-        String tempPhone = scanner.next();
-        validCustomer(new Customer(tempName, tempLastName, tempEmailAddress, tempPhone));
-        adminMenu();
-    }*/
 
     public long loginValidation() {
         long temp = 0;
