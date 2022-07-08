@@ -40,7 +40,7 @@ public class Main {
         try {
             FileWriter writer = new FileWriter("customerAccounts.txt");
             Writer output = new BufferedWriter(writer);
-                output.write(main.allCustomerAccounts());
+            output.write(main.allCustomerAccounts());
             output.close();
 
         } catch (IOException e) {
