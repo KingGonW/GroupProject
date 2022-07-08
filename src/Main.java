@@ -41,7 +41,7 @@ public class Main {
             FileWriter writer = new FileWriter("customerAccounts.txt");
             Writer output = new BufferedWriter(writer);
             for (int i = 0; i < main.customers.size(); i++) {
-                output.write(main.printCustomerAccounts((long) i + 1));
+                output.write(main.allCustomerAccounts((long) i ));
             }
             output.close();
 
@@ -748,8 +748,8 @@ public class Main {
     private String allCustomerAccounts(long customerNumber) {
         String temp = "";
         for (Customer customer : customers) {
-            if (customer.getId() == customerNumber - 1)
-                temp += customer.getListOfBankAccounts() + "\n";
+            if (customer.getId() == customerNumber)
+                temp += customer.getName() + " " + customer.getListOfBankAccounts() + "\n";
         }
         return temp;
     }
