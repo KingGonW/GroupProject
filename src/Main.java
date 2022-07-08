@@ -145,7 +145,6 @@ public class Main {
 
     }
 
-
     //adding methods in order that it shows up in the admin menu
     public void findAllCustomers() {
         //set up variables to read file
@@ -173,7 +172,6 @@ public class Main {
             System.out.println(o.toString());
         }
     }
-
 
     public void customerLogin() {
         long temp = loginValidation();
@@ -245,8 +243,6 @@ public class Main {
             case "2":
 
                 printCustomerAccounts(customerNumber);
-
-
                 //the below menu gets called when Option 2 of bankMenu() is selected.
                 accountMenu(customerNumber);
                 break;
@@ -350,15 +346,12 @@ public class Main {
         }
 
     }
-
-
     public void createISAAccount(Long customerNumber) {
 
         double initialDeposit = 0;
         int customerNumberInInt = customerNumber.intValue();
         if (customers.get(customerNumberInInt - 1).checkISAAcc()) {
         while (initialDeposit == 0) {
-
                 System.out.println("To Open An ISA Account, Please Deposit $100 or More\n");
                 System.out.println("How Much Would You Like to Deposit");
             initialDeposit = scanner.nextDouble();
@@ -573,7 +566,6 @@ public class Main {
         }
     }
 
-
     public void withdraw(Long customerNumber) {
         int customerNumberInInt = customerNumber.intValue();
         int fromTheAccount = scanner.nextInt();
@@ -663,7 +655,6 @@ public class Main {
         accountMenu(customerNumber);
     }
 
-
     private void transferMoney(Long customerNumber) {
 
         int cus1 = customerNumber.intValue();
@@ -697,7 +688,6 @@ public class Main {
             }
         } while (!stop);
 
-
         findAllCustomers();
         do {
             try {
@@ -730,7 +720,6 @@ public class Main {
             }
         } while (!stop);
 
-
         do {
             try {
                 System.out.println("\nPlease Enter The Amount");
@@ -745,11 +734,9 @@ public class Main {
             }
         } while (stop);
 
-
         customers.get(cus1 - 1).getBankAccounts().get(0).moneyTransfer
                 (getTheAccountNumber(cus1 - 1, acc1 - 1),
                         getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
-
 
         customers.get(cus1 - 1).addAccountTransaction(acc1 - 1, amount, String.format("Money Transferred To: %s, %s, %s",
                 customers.get(cus2 - 1).getName(), customers.get(cus2 - 1).getLastName(), customers.get(cus2 - 1).getAccountNumber(acc2 - 1)));
@@ -758,14 +745,13 @@ public class Main {
         accountMenu(customerNumber);
     }
 
-
-    private void allCustomerAccounts(long customerNumber) {
+    private String allCustomerAccounts(long customerNumber) {
+        String temp = "";
         for (Customer customer : customers) {
-            if (customer.getId() == customerNumber) {
-                customer.getListOfBankAccounts();
-            }
+            if (customer.getId() == customerNumber - 1)
+                temp += customer.getListOfBankAccounts() + "\n";
         }
-
+        return temp;
     }
 
 
