@@ -552,21 +552,24 @@ public class Main {
 
     public void withdraw(Long customerNumber) {
         int customerNumberInInt = customerNumber.intValue();
-        int fromTheAccount;
-        int backMenu;
-        double wMoney;
-        String memo;
+        int fromTheAccount = scanner.nextInt();
+        int backMenu = scanner.nextInt();
+        double wMoney = scanner.nextDouble();
+        String memo = scanner.nextLine();
         double newBalance;
+        boolean stop = false;
         System.out.println("Press 1 To Go Back To Account Menu \n" +
                 " Press 2 to continue");
-        try {
-            backMenu = scanner.nextInt();
-        } catch (Exception e) {
-            System.out.println("Error: " + e + '\n' +
-                    "Please Input a Number");
-            scanner.nextLine();
-            backMenu = scanner.nextInt();
-        }
+        do {
+            try {
+                backMenu = scanner.nextInt();
+                stop = true;
+            } catch (Exception e) {
+                System.out.println("Error: " + e + '\n' +
+                        "Please Input a Number");
+                scanner.nextLine();
+            }
+        }while(!stop);
 
         if (backMenu == 1) {
             accountMenu(customerNumber);
@@ -574,41 +577,52 @@ public class Main {
             do {
                 printCustomerAccounts(customerNumber);
                 System.out.println("Please Choose An Account to Withdraw From: ");
-                try {
-                    fromTheAccount = scanner.nextInt();
-                } catch (Exception e) {
-                    System.out.println("Error: " + e + '\n' +
-                            "Please Input a Number");
-                    scanner.nextLine();
-                    fromTheAccount = scanner.nextInt();
-                }
+
+                do {
+                    try {
+                        fromTheAccount = scanner.nextInt();
+                        stop = false;
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e + '\n' +
+                                "Please Input a Number");
+                        scanner.nextLine();
+                    }
+                }while(stop);
 
                 if (fromTheAccount < 0 || fromTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
                     System.out.println("Invalid Account Chosen. Please Try Again.");
                 }
+
             } while (fromTheAccount < 0 || fromTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size());
+
             do {
 
-                try {
-                    System.out.println("Please Enter The Amount to Withdraw:");
-                    wMoney = scanner.nextDouble();
+                do {
+                    try {
+                        System.out.println("Please Enter The Amount to Withdraw:");
+                        wMoney = scanner.nextDouble();
+                        stop = true;
 
-                } catch (Exception e) {
-                    System.out.println("Error: " + e + '\n' +
-                            "Please Enter An Amount In Numbers");
-                    scanner.nextLine();
-                    wMoney = scanner.nextDouble();
-                }
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e + '\n' +
+                                "Please Enter An Amount In Numbers");
+                        scanner.nextLine();
+                    }
+                }while(!stop);
 
-                try {
-                    System.out.println("Enter A Memo:");
-                    memo = scanner.next();
-                } catch (Exception e) {
-                    System.out.println("Error: " + e + '\n' +
-                            "Please Enter Text");
-                    scanner.nextLine();
-                    memo = scanner.next();
-                }
+
+                do {
+                    try {
+                        System.out.println("Enter A Memo:");
+                        memo = scanner.next();
+                        stop = false;
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e + '\n' +
+                                "Please Enter Text");
+                        scanner.nextLine();
+
+                    }
+                }while(stop);
 
                 customers.get(customerNumberInInt - 1).getBankAccounts().get(fromTheAccount - 1).withdrawMoney(wMoney);
 
