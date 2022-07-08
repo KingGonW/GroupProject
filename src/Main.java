@@ -38,7 +38,7 @@ public class Main {
         }
         //save customer accounts details into a .txt
 
-
+/*
         for (Customer customer : main.customers) {
             String temp = customer.getName();
             try {
@@ -52,7 +52,7 @@ public class Main {
                 e.printStackTrace();
             }
 
-        }
+        }*/
 
         main.mainMenu();
 
@@ -105,10 +105,47 @@ public class Main {
 
 
     //print all the accounts that the chosen customer got
-    public String printCustomerAccounts(Long customerID) {
-        int customerNumberInInt = customerID.intValue();
+    public void printCustomerAccounts(Long customerID) {
+        /*int customerNumberInInt = customerID.intValue();
         System.out.println(customers.get(customerNumberInInt - 1).getName());
-        return customers.get(customerNumberInInt - 1).getListOfBankAccounts();
+        return customers.get(customerNumberInInt - 1).getListOfBankAccounts();*/
+
+        String temp = "";
+        String line;
+        ArrayList<Object> aList = new ArrayList<>();
+        int customerNumberInInt = customerID.intValue();
+
+        for (Customer customer : customers) {
+            if (customer.getId() == customerNumberInInt - 1) {
+                temp = customer.getName();
+            }
+        }
+
+        if(temp != "") {
+            try {
+                BufferedReader input = new BufferedReader(new FileReader(temp + "'s Accounts.txt"));
+                if (!input.ready()) { // check whether the file can be read
+                    throw new IOException();
+                }
+                while ((line = input.readLine()) != null) { //read a line of text
+                    aList.add(line); //add the line of text to the array list
+                }
+                input.close();
+            } catch (
+                    IOException e) {  // catch any problems found e.g. file not found
+                e.printStackTrace();
+            }
+
+            //print out each item in the array list
+            for (Object o : aList) {
+                System.out.println(o.toString());
+            }
+            System.out.println("print accounts");
+        }
+
+
+
+
     }
 
     //check the validation of the customer details
@@ -556,13 +593,14 @@ public class Main {
                 scanner.nextLine();
             }
         } while (!stop);
+        printCustomerAccounts(customerNumber);
 
         if (backMenu == 1) {
             accountMenu(customerNumber);
         } else if (backMenu == 2) {
             ////use do while loop to choose the account to withdraw
             do {
-                printCustomerAccounts(customerNumber);
+
                 System.out.println("Please Choose An Account to Withdraw From: ");
 
                 do {
