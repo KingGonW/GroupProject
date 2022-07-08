@@ -38,14 +38,13 @@ public class Main {
         }
         //save customer accounts details into a .txt
 
-        String temp = "";
-        for (Customer customer : main.customers) {
-            temp += main.customers.get(0) + "\n" + customer.getListOfBankAccounts() + "\n";
 
+        for (Customer customer : main.customers) {
+            String temp = customer.getName();
             try {
-                FileWriter writer = new FileWriter("customerAccounts.txt");
+                FileWriter writer = new FileWriter(temp + ".txt");
                 Writer output = new BufferedWriter(writer);
-                output.write(main.allCustomerAccounts());
+                output.write(customer.getListOfBankAccounts());
                 output.close();
 
             } catch (IOException e) {
@@ -53,7 +52,6 @@ public class Main {
                 e.printStackTrace();
             }
 
-            System.out.println(temp);
         }
 
         main.mainMenu();
