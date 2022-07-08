@@ -545,8 +545,9 @@ public class Main {
     public void showTransactionHistory(Long customerNumber) {
 
         printCustomerAccounts(customerNumber);
-        int theAccount;
+        int theAccount = 0;
         int customerNumberInInt = customerNumber.intValue();
+        boolean stop = false;
 
         //get the account for which we wish to show the history
         do {
@@ -556,7 +557,16 @@ public class Main {
                     + "you wish to see the history of:", customers.get(customerNumberInInt - 1).numAccounts());
 
             // -1 to get to the 0 index position
-            theAccount = scanner.nextInt() - 1;
+            do{
+                try{
+                    theAccount = scanner.nextInt() - 1;
+                    stop = true;
+                }catch(Exception e) {
+                    System.out.println("Error: " + e + '\n' +
+                            "Input Must Be Numerical");
+                }
+            }while(!stop);
+
             if (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).numAccounts()) {
                 System.out.println("Invalid Account chosen. Please try again.");
             }
@@ -579,11 +589,12 @@ public class Main {
         double newBalance;
         boolean stop = false;
 
-        System.out.println("Press 1 To Go Back To Account Menu \n" +
-                "Press 2 to continue");
+
         //try catches used on inputs to catch any input mismatches
         //prompts the user to enter the correct input format to continue
         do {
+            System.out.println("Press 1 To Go Back To Account Menu \n" +
+                    "Press 2 to continue");
             try {
                 backMenu = scanner.nextInt();
                 stop = true;
