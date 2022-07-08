@@ -437,10 +437,16 @@ public class Main {
     private void viewBalance(long customerNumber) {
 
         System.out.println("Nothing here yet");
+        //once code has been executed return user to account menu
+        accountMenu(customerNumber);
     }
 
     private void showInterest(long customerNumber) {
         System.out.println("Nothing here yet");
+
+        //once code has been executed return user to account menu
+        accountMenu(customerNumber);
+
     }
 
 
@@ -471,6 +477,8 @@ public class Main {
 
         //print transactions history
         customers.get(customerNumberInInt - 1).printAccountTransactionHistory(theAccount);
+        //once code has been executed return user to account menu
+        accountMenu(customerNumber);
     }
 
     //gather user input to execute deposit method from BankAcc class
@@ -559,6 +567,8 @@ public class Main {
                     "Your New Balance: $" + newBalance + '\n' +
                     "Memo: " + memo);
             customers.get(customerNumberInInt - 1).addAccountTransaction(toTheAccount - 1, dMoney, memo);
+
+            //once code has been executed return user to account menu
             accountMenu(customerNumber);
         }
     }
@@ -649,6 +659,7 @@ public class Main {
 
             customers.get(customerNumberInInt - 1).addAccountTransaction(fromTheAccount - 1, wMoney, memo);
         }
+        //once code has been executed return user to account menu
         accountMenu(customerNumber);
     }
 
@@ -743,6 +754,7 @@ public class Main {
         customers.get(cus1 - 1).addAccountTransaction(acc1 - 1, amount, String.format("Money Transferred To: %s, %s, %s",
                 customers.get(cus2 - 1).getName(), customers.get(cus2 - 1).getLastName(), customers.get(cus2 - 1).getAccountNumber(acc2 - 1)));
 
+        //once code has been executed return user to account menu
         accountMenu(customerNumber);
     }
 
