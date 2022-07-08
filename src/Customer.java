@@ -1,5 +1,6 @@
-import java.util.Random;
-import java.util.regex.Pattern;
+
+
+import java.util.ArrayList;
 
 public class Customer {
 
@@ -9,23 +10,41 @@ public class Customer {
     private String emailAddress;
     private String phoneNumber;
 
+    private static long counter = 0;
+
+    private ArrayList<BankAcc> bankAccounts;
+
+
+    public Customer() {
+    }
 
     public Customer(String name, String lastName, String emailAddress, String phoneNumber) {
-        Random random = new Random();
-        setId(random.nextLong(1000));
+        setId(generateUniqueId());
         setEmailAddress(emailAddress);
         setName(name);
         setLastName(lastName);
         setPhoneNumber(phoneNumber);
+
+        //creates an empty list of accounts
+        this.bankAccounts = new ArrayList<BankAcc>();
     }
 
+    public boolean checkISAAcc() {
+        boolean temp = true;
+        for (int i = 0; i < getBankAccounts().size(); i++) {
+            if (getBankAccounts().get(i).getAccType() == "ISA Account") {
+                System.out.println("You  already have an ISA Account ");
+                temp = false;
+            }
+        }
 
-    public boolean checkISAAcc(Object obj) {
-        if (obj != null) {
-            System.out.println("You  already have an ISA Account");
-            return false;
-        } else
-            return true;
+        return temp;
+
+    }
+
+    public long generateUniqueId() {
+        counter++;
+        return counter;
     }
 
     public Customer findCustomer(int id, Customer[] customers) {
@@ -33,17 +52,29 @@ public class Customer {
             if (customers[i].getId() == id)
                 return customers[i];
         }
-        System.out.println("Customer does not exist");
+        System.out.println("Customer does not exist ");
         return null;
-
     }
 
-    public void findAll(Customer[] customers) {
-        for (int i = 0; i < customers.length; i++) {
-            customers[i].showCustomer();
+    public ArrayList<BankAcc> getBankAccounts() {
+        return bankAccounts;
+    }
+
+    public void setBankAccounts(ArrayList<BankAcc> bankAccounts) {
+        this.bankAccounts = bankAccounts;
+    }
+
+    public String getListOfBankAccounts() {
+        String temp = "";
+        for (int i = 0; i < bankAccounts.size(); i++) {
+            temp += bankAccounts.get(i).toString() + "\n";
         }
+        System.out.println(temp);
+        return temp;
+    }
 
-
+    ArrayList<BankAcc> getAccount() {
+        return bankAccounts;
     }
 
     public long getId() {
@@ -63,6 +94,16 @@ public class Customer {
             this.name = name;
     }
 
+//    public BankAcc getCurrentBankAcc() {
+//        return currentBankAcc;
+//    }
+//
+//    public void setCurrentBankAcc(BankAcc currentBankAcc) {
+//        this.currentBankAcc = currentBankAcc;
+//    }
+
+
+
     public String getLastName() {
         return lastName;
     }
@@ -77,7 +118,8 @@ public class Customer {
     }
 
     public void setEmailAddress(String emailAddress) {
-        if (emailAddress.contains("@") && emailAddress.contains(".")) //add email endings
+        // System.out.println("Please enter your email address using one of the following email providers : gmail,hotmail,outlook");
+        if (emailAddress.contains("@gmail.com") || emailAddress.contains("@outlook.com") || emailAddress.contains("@hotmail.com")) //add email endings
             this.emailAddress = emailAddress;
         else {
             this.emailAddress = null;
@@ -108,12 +150,46 @@ public class Customer {
 
     }
 
+    @Override
+    public String toString() {
+        return "Customer ID: " + id + " Name: " +
+                name + " Last Name: " + lastName + " Email: " + emailAddress +
+                " Phone Number: " + phoneNumber;
+    }
+
 
     public void showCustomer() {
         System.out.println("Customer ID: " + id);
         System.out.println("Customer Name: " + name + lastName);
-        System.out.println("Customer Email: " + name);
-        System.out.println("Customer Phone Number: " + name);
+        System.out.println("Customer Email: " + emailAddress);
+        System.out.println("Customer Phone Number: " + phoneNumber);
 
     }
+
+    //the below links to showTransactionHistory(), defined and called in Main.
+    //think of this as a helper method
+    public void printAccountTransactionHistory(int accountIndex) {
+        getBankAccounts().get(accountIndex).printTransHistory();
+    }
+
+    //the below links to showTransactionHistory(), defined and called in Main.
+    //think of this as a helper method
+    public int numAccounts() {
+        return getBankAccounts().size();
+    }
+
+    //the below gets called in transfer, withdraw and deposit operations
+    public void addAccountTransaction(int accountIndex, double amount, String memo) {
+        bankAccounts.get(accountIndex).addTransaction(amount, memo);
+    }
+
+
+    //the below gets called in transfer, withdraw and deposit operations
+    public int getAccountNumber(int accountIndex) {
+        return bankAccounts.get(accountIndex).getAccNum();
+    }
+    public double getAccountBalance(int accountIndex) {
+        return this.bankAccounts.get(accountIndex - 1).getBalance();
+    }
+
 }
