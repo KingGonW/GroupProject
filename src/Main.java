@@ -51,6 +51,7 @@ public class Main {
         main.mainMenu();
 
     }
+
     //generate random number of current account for each customer, max 3 for each
     public void generateAccounts(Customer customer) {
         Random random = new Random();
@@ -59,15 +60,25 @@ public class Main {
         for (int i = 0; i < randomInt; i++) {
             createCurrentAccount(customer.getId());
         }
-
-
     }
+
+
+    private String allCustomerAccounts() {
+        String temp = "";
+        for (Customer customer : customers) {
+            temp += customer.getName() + "\n" + customer.getListOfBankAccounts() + "\n";
+        }
+        return temp;
+    }
+
+
     //print all the accounts that the chosen customer got
     public String printCustomerAccounts(Long customerID) {
         int customerNumberInInt = customerID.intValue();
         System.out.println(customers.get(customerNumberInInt - 1).getName());
         return customers.get(customerNumberInInt - 1).getListOfBankAccounts();
     }
+
     //check the validation of the customer details
     public void validCustomer(Customer customer) {
         for (Customer value : customers) {
@@ -170,6 +181,7 @@ public class Main {
             System.out.println(o.toString());
         }
     }
+
     //
     public void customerLogin() {
         long temp = loginValidation();
@@ -195,6 +207,7 @@ public class Main {
         System.out.println("Cant find the the Account  ");
         return null;
     }
+
     //login to a customer menu
     public long loginValidation() {
         long temp = 0;
@@ -333,18 +346,19 @@ public class Main {
         }
 
     }
+
     public void createISAAccount(Long customerNumber) {
 
         double initialDeposit = 0;
         int customerNumberInInt = customerNumber.intValue();
         if (customers.get(customerNumberInInt - 1).checkISAAcc()) {
-        while (initialDeposit == 0) {
+            while (initialDeposit == 0) {
                 System.out.println("To Open An ISA Account, Please Deposit $100 or More\n");
                 System.out.println("How Much Would You Like to Deposit");
-            initialDeposit = scanner.nextDouble();
-            if (initialDeposit < 100) {
-                System.out.println("\nInitial Deposit Must Be $100 or More\n");
-            } else {
+                initialDeposit = scanner.nextDouble();
+                if (initialDeposit < 100) {
+                    System.out.println("\nInitial Deposit Must Be $100 or More\n");
+                } else {
 
                     BankAcc ISAAcc = new ISAAccount(initialDeposit);
                     System.out.println("\nISA Account Successfully Created\n");
@@ -483,7 +497,7 @@ public class Main {
                         "Please Input a Number");
                 scanner.nextLine();
             }
-        }while(!stop);
+        } while (!stop);
 
         if (backMenu == 1) {
             accountMenu(customerNumber);
@@ -502,7 +516,7 @@ public class Main {
                                 "Please Input a Number");
                         scanner.nextLine();
                     }
-                }while(stop);
+                } while (stop);
 
                 if (toTheAccount < 0 || toTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size()) {
                     System.out.println("Invalid Account Chosen. Please Try Again.");
@@ -523,7 +537,7 @@ public class Main {
                                 "Please Enter An Amount In Numbers");
                         scanner.nextLine();
                     }
-                }while(!stop);
+                } while (!stop);
 
                 do {
                     try {
@@ -536,7 +550,7 @@ public class Main {
                         scanner.nextLine();
                         memo = scanner.next();
                     }
-                }while(stop);
+                } while (stop);
 
                 customers.get(customerNumberInInt - 1).getBankAccounts().get(toTheAccount - 1).depositMoney(dMoney);
 
@@ -735,13 +749,6 @@ public class Main {
         accountMenu(customerNumber);
     }
 
-    private String allCustomerAccounts() {
-        String temp = "";
-        for (Customer customer : customers) {
-                temp += customer.getName() + " " + customer.getListOfBankAccounts() + "\n";
-        }
-        return temp;
-    }
 
 
 
