@@ -40,9 +40,7 @@ public class Main {
         try {
             FileWriter writer = new FileWriter("customerAccounts.txt");
             Writer output = new BufferedWriter(writer);
-            for (int i = 0; i < main.customers.size(); i++) {
-                output.write(main.printCustomerAccounts((long) i + 1));
-            }
+                output.write(main.allCustomerAccounts());
             output.close();
 
         } catch (IOException e) {
@@ -745,11 +743,10 @@ public class Main {
         accountMenu(customerNumber);
     }
 
-    private String allCustomerAccounts(long customerNumber) {
+    private String allCustomerAccounts() {
         String temp = "";
         for (Customer customer : customers) {
-            if (customer.getId() == customerNumber - 1)
-                temp += customer.getListOfBankAccounts() + "\n";
+                temp += customer.getName() + " " + customer.getListOfBankAccounts() + "\n";
         }
         return temp;
     }
