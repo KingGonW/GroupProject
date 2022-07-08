@@ -69,6 +69,7 @@ public class Customer {
         for (int i = 0; i < bankAccounts.size(); i++) {
             temp += bankAccounts.get(i).toString() + "\n";
         }
+        System.out.println(temp);
         return temp;
     }
 

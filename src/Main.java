@@ -56,7 +56,6 @@ public class Main {
         }*/
 
 
-
         main.mainMenu();
 
     }
@@ -85,6 +84,7 @@ public class Main {
             System.out.println("Customer not found");
         }
     }
+
     public void generateAccounts(Customer customer) {
         Random random = new Random();
         int randomInt = random.nextInt(1, 4);
@@ -97,18 +97,16 @@ public class Main {
     }
 
 
-
-
-    public String printCustomerAccounts(Long customerNumber) {
-        int customerNumberInInt = customerNumber.intValue();
+    public String printCustomerAccounts(Long customerID) {
+        int customerNumberInInt = customerID.intValue();
         System.out.println(customers.get(customerNumberInInt - 1).getName());
         return customers.get(customerNumberInInt - 1).getListOfBankAccounts();
 
 
         /*String temp = "";
-        String line;
+        String line = "";
         ArrayList<Object> aList = new ArrayList<>();
-        int customerNumberInInt = customerNumber.intValue();
+        int customerNumberInInt = customerID.intValue();
 
         for (Customer customer : customers) {
             if (customer.getId() == customerNumberInInt - 1) {
@@ -116,30 +114,31 @@ public class Main {
             }
         }
 
-        try {
-            if (!temp.equals("")) {
+        while (!temp.equals("")) {
+            try {
                 BufferedReader input = new BufferedReader(new FileReader(temp + "'s Accounts.txt"));
-                if (!input.ready()) { // check whether the file can be read
-                    throw new IOException();
-                }
-                while ((line = String.valueOf(input.read())) != null) { //read a line of text
-                    aList.add(line); //add the line of text to the array list
+
+                while (input.ready()) { //read a line of text
+                    aList.add(input.readLine()); //add the line of text to the array list
+                   *//* for (Object o : aList) {
+
+                        System.out.println(o.toString());
+                    }*//*
+                    System.out.println("print accounts");
                 }
                 input.close();
+            } catch (
+                    IOException e) {  // catch any problems found e.g. file not found
+                e.printStackTrace();
+
             }
 
-        } catch (
-                IOException e) {  // catch any problems found e.g. file not found
-            e.printStackTrace();
         }
-        System.out.println("print accounts");
-        //print out each item in the array list
-        for (Object o : aList) {
-            System.out.println(o.toString());
-        }
-*/
 
+
+        System.out.println(aList);*/
     }
+
 
     public void validCustomer(Customer customer) {
         for (Customer value : customers) {
@@ -394,12 +393,12 @@ public class Main {
                 try {
                     initialDeposit = scanner.nextDouble();
                     stop = true;
-                }catch(Exception e) {
+                } catch (Exception e) {
                     System.out.println("Error: " + e + '\n' +
                             "Input Must Be Numerical");
                     scanner.next();
                 }
-            }while(!stop);
+            } while (!stop);
 
 
             //require customer to make an initial deposit of $25 to open Business Account
@@ -437,12 +436,12 @@ public class Main {
                     try {
                         initialDeposit = scanner.nextDouble();
                         stop = true;
-                    }catch(Exception e) {
+                    } catch (Exception e) {
                         System.out.println("Error: " + e + '\n' +
                                 "Input Must Be Numerical");
                         scanner.next();
                     }
-                }while(!stop);
+                } while (!stop);
 
                 if (initialDeposit < 100) {
                     System.out.println("\nInitial Deposit Must Be $100 or More\n");
@@ -559,15 +558,15 @@ public class Main {
                     + "you wish to see the history of:", customers.get(customerNumberInInt - 1).numAccounts());
 
             // -1 to get to the 0 index position
-            do{
-                try{
+            do {
+                try {
                     theAccount = scanner.nextInt() - 1;
                     stop = true;
-                }catch(Exception e) {
+                } catch (Exception e) {
                     System.out.println("Error: " + e + '\n' +
                             "Input Must Be Numerical");
                 }
-            }while(!stop);
+            } while (!stop);
 
             if (theAccount < 0 || theAccount >= customers.get(customerNumberInInt - 1).numAccounts()) {
                 System.out.println("Invalid Account chosen. Please try again.");
@@ -685,7 +684,7 @@ public class Main {
         boolean stop = false;
         System.out.println("Press 1 To Go Back To Account Menu \n" +
                 " Press 2 to continue");
-      //try catches used on inputs to catch any input mismatches
+        //try catches used on inputs to catch any input mismatches
         //prompts the user to enter the correct input format to continue
         do {
             try {
