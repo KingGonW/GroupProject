@@ -42,7 +42,7 @@ public class Main {
         for (Customer customer : main.customers) {
             String temp = customer.getName();
             try {
-                FileWriter writer = new FileWriter(temp + ".txt");
+                FileWriter writer = new FileWriter(temp + "'s Accounts.txt");
                 Writer output = new BufferedWriter(writer);
                 output.write(customer.getListOfBankAccounts());
                 output.close();
@@ -56,6 +56,32 @@ public class Main {
 
         main.mainMenu();
 
+    }
+
+
+    public void writeFileForAccounts(Long customerNumber) {
+        String temp = "";
+        int customerNumberInInt = customerNumber.intValue();
+        for (Customer customer : customers) {
+            if (customer.getId() == customerNumber - 1) {
+                temp = customer.getName();
+            }
+        }
+
+        if (temp != "") {
+            try {
+                FileWriter writer = new FileWriter(temp + "'s Accounts.txt");
+                Writer output = new BufferedWriter(writer);
+                output.write(customers.get(customerNumberInInt - 1).getListOfBankAccounts());
+                output.close();
+
+            } catch (IOException e) {
+                System.out.println("File Creation Unsuccessful");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Customer not found");
+        }
     }
 
     //generate random number of current account for each customer, max 3 for each
