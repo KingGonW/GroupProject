@@ -356,9 +356,9 @@ public class Main {
 
         double initialDeposit = 0;
         int customerNumberInInt = customerNumber.intValue();
-
+        if (customers.get(customerNumberInInt - 1).checkISAAcc()) {
         while (initialDeposit == 0) {
-            if (customers.get(customerNumberInInt - 1).checkISAAcc()) {
+
                 System.out.println("To Open An ISA Account, Please Deposit $100 or More\n");
                 System.out.println("How Much Would You Like to Deposit");
             initialDeposit = scanner.nextDouble();
