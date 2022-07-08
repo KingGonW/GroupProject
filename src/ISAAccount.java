@@ -19,6 +19,9 @@ public class ISAAccount extends BankAcc {
 
     }
 
+    public ISAAccount(){
+        super();
+    }
     public void setISAAccountNumber(int ISAAccountNumber) {
         this.ISAAccountNumber = ISAAccountNumber;
     }
@@ -38,7 +41,7 @@ public class ISAAccount extends BankAcc {
 
     //method to display
     public void showInterest(){
-        System.out.println("Interest: %" + interestRate);
+        calcInterest(calcYearlyAverage());
     }
 
 
@@ -46,7 +49,7 @@ public class ISAAccount extends BankAcc {
      method to calculate interest on customers yearly average balance
     to access interest calculation from main menu use calcInterest(calcYearlyAverage())
     */
-    public static float[] calcYearlyAverage() {
+    public float[] calcYearlyAverage() {
 
         //use random function to populate array with random balances
         Random arrRandom = new Random();
@@ -67,7 +70,7 @@ public class ISAAccount extends BankAcc {
 
     }
 
-    public static void calcInterest(float[] yearlyBalance) {
+    public  void calcInterest(float[] yearlyBalance) {
 
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
 

@@ -15,6 +15,10 @@ public class BankAcc {
     //this will be called
     private ArrayList<Transaction> transactions = new ArrayList<>();
 
+    public BankAcc() {
+
+    }
+
     //this method relates to the alternate constructor above
     private int getNewAccountNumber() {
 

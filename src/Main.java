@@ -302,10 +302,7 @@ public class Main {
                 createNewBankAccount(customerNumber);
                 break;
             case "2":
-
                 printCustomerAccounts(customerNumber);
-
-
                 //the below menu gets called when Option 2 of bankMenu() is selected.
                 accountMenu(customerNumber);
                 break;
@@ -316,7 +313,7 @@ public class Main {
                 mainMenu();
                 break;
             default:
-                if (!input.equals("4")) {
+                if (!input.equals("6")) {
                     System.out.println("Please enter a valid number");
                     adminMenu();
                 }
@@ -519,15 +516,25 @@ public class Main {
 
     //methods displayed in order of menu options
 
-    private void viewBalance(long customerNumber) {
-
-        System.out.println("Nothing here yet");
+    private void viewBalance(Long customerNumber) {
+        int customerNumberInInt = customerNumber.intValue();
+        System.out.println("Please choose an Account");
+        int input = scanner.nextInt() - 1;
+        customers.get(customerNumberInInt).getBankAccounts().get(input).getBalance();
         //once code has been executed return user to account menu
         accountMenu(customerNumber);
     }
 
-    private void showInterest(long customerNumber) {
-        System.out.println("Nothing here yet");
+    private void showInterest(Long customerNumber) {
+        int customerNumberInInt = customerNumber.intValue();
+        System.out.println("Please choose an Account");
+        int input = scanner.nextInt() - 1;
+        ISAAccount temp = new ISAAccount();
+        for (int i = 0; i < customers.get(customerNumberInInt).getBankAccounts().size(); i++) {
+            if(customers.get(customerNumberInInt).getBankAccounts().get(i).getAccType() == "ISA Account"){
+                temp = (ISAAccount) customers.get(customerNumberInInt).getBankAccounts().get(i);
+                temp.showInterest();
+        }}
         accountMenu(customerNumber);
     }
 
