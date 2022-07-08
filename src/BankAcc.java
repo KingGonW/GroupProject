@@ -15,29 +15,6 @@ public class BankAcc {
     //this will be called
     private ArrayList<Transaction> transactions = new ArrayList<>();
 
-    //the customer variable below is the Customer class.
-    // The idea here is that each account has a linked customer
-    private Customer holder;
-
-    //below is an array list of customers
-    //this might make more sense held in another class,
-    // e.g. "Bank" to mimic a bank having a list of customers
-    private ArrayList<Customer> customers;
-
-    //below is an array list of accounts
-    //this might make more sense held in another class,
-    // e.g. "Bank" to mimic a bank having a list of accounts
-    private ArrayList<BankAcc> bankAccounts;
-
-
-    //alternate constructor below, with Customer variable attached
-    public BankAcc(String accType, String sortCode, Customer holder) {
-        this.accType = accType;
-        this.sortCode = sortCode;
-        this.accNum = this.getNewAccountNumber();
-    }
-
-
     //this method relates to the alternate constructor above
     private int getNewAccountNumber() {
 

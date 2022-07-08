@@ -8,14 +8,10 @@ public class Main {
     private String input;
     private ArrayList<Customer> customers;
 
-    Customer currentCustomer = new Customer();
-
-
     public static void main(String[] args) {
 
         Main main = new Main();
         main.customers = new ArrayList<>();
-
 
         main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "07374829121"));
         main.validCustomer(new Customer("King", "K", "king@gmail.com", "07664738222"));
@@ -54,9 +50,7 @@ public class Main {
             e.printStackTrace();
         }
 
-
         main.mainMenu();
-
 
     }
 
@@ -75,8 +69,6 @@ public class Main {
         int customerNumberInInt = customerID.intValue();
         System.out.println(customers.get(customerNumberInInt - 1).getName());
         return customers.get(customerNumberInInt - 1).getListOfBankAccounts();
-
-
     }
 
     public void validCustomer(Customer customer) {
@@ -102,7 +94,6 @@ public class Main {
                     1: Admin Access\s
                     2: Exit Program
                     """);
-
 
             input = scanner.next();
             if ("1".equals(input)) {
@@ -217,9 +208,7 @@ public class Main {
 
         System.out.println("Cant find the the Account  ");
         return null;
-
     }
-
 
     public long loginValidation() {
         long temp = 0;
@@ -234,7 +223,6 @@ public class Main {
             }
         }
         return temp;
-
     }
 
 
@@ -254,12 +242,9 @@ public class Main {
                 createNewBankAccount(customerNumber);
                 break;
             case "2":
-               /*for (int i = 0; i < customers.size(); i++) {
 
-                    System.out.println(customers.get(i).getName() + customers.get(i).getBankAccounts().toString());
-                }*/
                 printCustomerAccounts(customerNumber);
-                //allCustomerAccounts(customerNumber);
+
 
                 //the below menu gets called when Option 2 of bankMenu() is selected.
                 accountMenu(customerNumber);
@@ -340,7 +325,6 @@ public class Main {
         double initialDeposit = 0;
         //variable to get the customers ID
         int customerNumberInInt = customerNumber.intValue();
-
 
         //while loop here to continue running until the deposit has been made
         while (initialDeposit == 0) {
@@ -450,7 +434,6 @@ public class Main {
 
     private void viewBalance(long customerNumber) {
 
-
         System.out.println("Nothing here yet");
     }
 
@@ -487,7 +470,6 @@ public class Main {
         //print transactions history
         customers.get(customerNumberInInt - 1).printAccountTransactionHistory(theAccount);
     }
-
 
     //gather user input to execute deposit method from BankAcc class
     public void deposit(Long customerNumber) {
@@ -731,29 +713,11 @@ public class Main {
                 (getTheAccountNumber(cus1 - 1, acc1 - 1),
                         getTheAccountNumber(cus2 - 1, acc2 - 1), amount);
 
-        //the below posts this info to the Transactions class
-        // this should work
-        // to test, let us call transferMoney() from one of the menus
-        /*customers.get(cus1 - 1).addAccountTransaction(acc1 - 1, amount, String.format("Origin account %s",
-                customers.get(cus1 - 1).getAccountNumber(acc1 - 1)));*/
-        /*customers.get(cus1 - 1).addAccountTransaction(acc2 - 1, amount, String.format("Destination account %s",
-                customers.get(cus1 - 1).getAccountNumber(acc2 - 1)));*/
 
         customers.get(cus1 - 1).addAccountTransaction(acc1 - 1, amount, String.format("Money Transferred To: %s, %s, %s",
                 customers.get(cus2 - 1).getName(), customers.get(cus2 - 1).getLastName(), customers.get(cus2 - 1).getAccountNumber(acc2 - 1)));
 
-
-        //currentCustomer.addAccountTransaction(fromAccount, -1*transferAmount, String.format("Origin account %s",
-        //                currentCustomer.getAccountNumber(toAccount)));
-        //        currentCustomer.addAccountTransaction(toAccount, transferAmount, String.format("Destination account %s",
-        //                currentCustomer.getAccountNumber(fromAccount)));
-
-
-
         accountMenu(customerNumber);
-
-
-
     }
 
 
@@ -764,11 +728,6 @@ public class Main {
             }
         }
 
-//        int accNum = scanner.nextInt();
-//        if (accNum - 1 <= temp.getBankAccounts().size())
-//            return temp.getBankAccounts().get(accNum - 1);
-//
-//        System.out.println("please enter a valid number");
     }
 
 
