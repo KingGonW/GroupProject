@@ -1,6 +1,0 @@
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 76489144
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 80143863
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 75101407
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 9423693
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 26318540
-Account Type:Current Account Sort Code: 00-04-01 Account Number: 96484385
