@@ -12,7 +12,7 @@ public class Main {
 
         Main main = new Main();
         main.customers = new ArrayList<>();
-
+        //insert the customer detail
         main.validCustomer(new Customer("Mohsen", "M", "mohsen@gmail.com", "07374829121"));
         main.validCustomer(new Customer("King", "K", "king@gmail.com", "07664738222"));
         main.validCustomer(new Customer("Tamara", "T", "tamara@gmail.com", "07776652499"));
@@ -22,7 +22,7 @@ public class Main {
         main.generateAccounts(main.customers.get(2));
         main.generateAccounts(main.customers.get(3));
 
-
+        //save the customer details into a .txt
         try {
             FileWriter writer = new FileWriter("customerArray.txt");
             Writer output = new BufferedWriter(writer);
@@ -36,7 +36,7 @@ public class Main {
             System.out.println("File Creation Unsuccessful");
             e.printStackTrace();
         }
-
+        //save customer accounts details into a .txt
         try {
             FileWriter writer = new FileWriter("customerAccounts.txt");
             Writer output = new BufferedWriter(writer);
@@ -51,7 +51,7 @@ public class Main {
         main.mainMenu();
 
     }
-
+    //generate random number of current account for each customer, max 3 for each
     public void generateAccounts(Customer customer) {
         Random random = new Random();
         int randomInt = random.nextInt(1, 4);
@@ -62,13 +62,13 @@ public class Main {
 
 
     }
-
+    //print all the accounts that the chosen customer got
     public String printCustomerAccounts(Long customerID) {
         int customerNumberInInt = customerID.intValue();
         System.out.println(customers.get(customerNumberInInt - 1).getName());
         return customers.get(customerNumberInInt - 1).getListOfBankAccounts();
     }
-
+    //check the validation of the customer details
     public void validCustomer(Customer customer) {
         for (Customer value : customers) {
             if (value.getEmailAddress().equals(customer.getEmailAddress())) {
@@ -170,29 +170,18 @@ public class Main {
             System.out.println(o.toString());
         }
     }
-
+    //
     public void customerLogin() {
         long temp = loginValidation();
         if (temp != 0) {
             bankMenu(temp);
         } else {
-            System.out.println("\nPlease Enter A Valid Name\n");
+            System.out.println("\nPlease Enter A Valid ID\n");
             adminMenu();
         }
     }
 
-    public Customer findCustomer(Long customerID) {
-
-        for (Customer customer : customers) {
-            if (customer.getId() == customerID) {
-                System.out.println(customer);
-                return customer;
-            }
-        }
-        System.out.println("====> Customer does not exist");
-        return null;
-    }
-
+    //use to get the account number of the customer
     public BankAcc getTheAccountNumber(int customerId, int accNumber) {
         Long tempLong = (long) customerId;
         Customer temp = null;
@@ -206,7 +195,7 @@ public class Main {
         System.out.println("Cant find the the Account  ");
         return null;
     }
-
+    //login to a customer menu
     public long loginValidation() {
         long temp = 0;
         System.out.println("\nPlease Enter A Customer ID");
@@ -368,7 +357,6 @@ public class Main {
 
     }
 
-
     //the menu below is initialised in bankMenu(), when the user chooses Option 2 "View All Accounts"
     private void accountMenu(long customerNumber) {
 
@@ -424,7 +412,6 @@ public class Main {
     }
 
     //methods displayed in order of menu options
-
     private void viewBalance(long customerNumber) {
 
         System.out.println("Nothing here yet");
@@ -501,6 +488,7 @@ public class Main {
         if (backMenu == 1) {
             accountMenu(customerNumber);
         } else if (backMenu == 2) {
+            ////use do while loop to choose the account to withdraw
             do {
                 printCustomerAccounts(customerNumber);
                 System.out.println("Please Choose An Account to Withdraw From: ");
@@ -522,6 +510,7 @@ public class Main {
 
 
             } while (toTheAccount < 0 || toTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size());
+            //ise do while loop here again to enter the amount and memo
             do {
 
                 do {
@@ -574,6 +563,8 @@ public class Main {
         boolean stop = false;
         System.out.println("Press 1 To Go Back To Account Menu \n" +
                 " Press 2 to continue");
+        //try catches used on inputs to catch any input mismatches
+        //prompts the user to enter the correct input format to continue
         do {
             try {
                 backMenu = scanner.nextInt();
@@ -588,6 +579,7 @@ public class Main {
         if (backMenu == 1) {
             accountMenu(customerNumber);
         } else if (backMenu == 2) {
+            //use do while loop to choose the account to deposit
             do {
                 printCustomerAccounts(customerNumber);
                 System.out.println("Please Choose An Account to Withdraw From: ");
@@ -608,7 +600,7 @@ public class Main {
                 }
 
             } while (fromTheAccount < 0 || fromTheAccount > customers.get(customerNumberInInt - 1).getBankAccounts().size());
-
+            ////use do while loop again to the enter the amount and memo
             do {
 
                 do {
