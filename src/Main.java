@@ -358,14 +358,14 @@ public class Main {
         int customerNumberInInt = customerNumber.intValue();
 
         while (initialDeposit == 0) {
-            System.out.println("To Open An ISA Account, Please Deposit $100 or More\n");
-            System.out.println("How Much Would You Like to Deposit");
+            if (customers.get(customerNumberInInt - 1).checkISAAcc()) {
+                System.out.println("To Open An ISA Account, Please Deposit $100 or More\n");
+                System.out.println("How Much Would You Like to Deposit");
             initialDeposit = scanner.nextDouble();
-
             if (initialDeposit < 100) {
                 System.out.println("\nInitial Deposit Must Be $100 or More\n");
             } else {
-                if (customers.get(customerNumberInInt - 1).checkISAAcc()) {
+
                     BankAcc ISAAcc = new ISAAccount(initialDeposit);
                     System.out.println("\nISA Account Successfully Created\n");
                     customers.get(customerNumberInInt - 1).getBankAccounts().add(ISAAcc);
