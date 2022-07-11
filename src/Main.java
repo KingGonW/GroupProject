@@ -37,7 +37,20 @@ public class Main {
             e.printStackTrace();
         }
 
-       
+        for (Customer customer : main.customers) {
+            String temp = customer.getName();
+            try {
+                FileWriter writer = new FileWriter(temp + "'s Accounts.txt");
+                Writer output = new BufferedWriter(writer);
+                output.write(customer.getListOfBankAccounts());
+                output.close();
+
+            } catch (IOException e) {
+                System.out.println("File Creation Unsuccessful");
+                e.printStackTrace();
+            }
+
+        }
 
 
         main.mainMenu();
@@ -55,24 +68,25 @@ public class Main {
             if (customer.getId() == customerNumber - 1) {
                 temp = customer.getName();
             }
-        }
 
-        //check to make sure temp isnt empty
-        if (!temp.equals("")) {
-            try {
-                //using temp to add to file creation name
-                FileWriter writer = new FileWriter(temp + ".txt");
-                Writer output = new BufferedWriter(writer);
-                //writes each customer's bank accounts
-                output.write(customers.get(customerNumberInInt - 1).getListOfBankAccounts());
-                output.close();
 
-            } catch (IOException e) {
-                System.out.println("File Creation Unsuccessful");
-                e.printStackTrace();
+            //check to make sure temp isnt empty
+            if (!temp.equals("")) {
+                try {
+                    //using temp to add to file creation name
+                    FileWriter writer = new FileWriter(temp + ".txt");
+                    Writer output = new BufferedWriter(writer);
+                    //writes each customer's bank accounts
+                    output.write(customers.get(customerNumberInInt - 1).getListOfBankAccounts());
+                    output.close();
+
+                } catch (IOException e) {
+                    System.out.println("File Creation Unsuccessful");
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("Customer not found");
             }
-        } else {
-            System.out.println("Customer not found");
         }
     }
 
@@ -89,42 +103,48 @@ public class Main {
     }
 
     //print all the accounts that the chosen customer has
-    public String printCustomerAccounts(Long customerID) {
-        int customerNumberInInt = customerID.intValue();
-        System.out.println(customers.get(customerNumberInInt - 1).getName());
-        return customers.get(customerNumberInInt - 1).getListOfBankAccounts();
+    public void printCustomerAccounts(Long customerID) {
+        //   int customerNumberInInt = customerID.intValue();
+//        System.out.println(customers.get(customerNumberInInt - 1).getName());
+//        return customers.get(customerNumberInInt - 1).getListOfBankAccounts();
 
 
         //here we tried to read the file but didn't seem to print anything
         // so have left the original print accounts code
-/*
+
         String temp = "";
         String line = "";
         ArrayList<Object> aList = new ArrayList<>();
         int customerNumberInInt = customerID.intValue();
 
         for (Customer customer : customers) {
-            if (customer.getId() == customerNumberInInt - 1) {
+            if (customer.getId() == customerNumberInInt) {
                 temp = customer.getName();
             }
         }
         //read the lines of text into an array list
         if (!temp.equals("")) {
             try {
-                BufferedReader input = new BufferedReader(new FileReader(temp + ".txt"));
+                BufferedReader input = new BufferedReader(new FileReader(temp + "'s Accounts.txt"));
+                System.out.println(temp);
                 if (!input.ready()) { // check whether the file can be read
                     throw new IOException();
                 }
-                while ((line = input.readLine()) != null) { //read a line of text
-                    *//*aList.add(input.readLine());*//* //add the line of text to the array list
-                    System.out.println(line);
+
+                do {
+                    line = input.readLine();
+                    if (line != null)
+                        System.out.println(line);
                 }
+                while (line != null);//read a line of text
+                //*aList.add(input.readLine());*//* //add the line of text to the array list
+
                 input.close();
             } catch (
                     IOException e) {  // catch any problems found e.g. file not found
                 e.printStackTrace();
             }
-        }*/
+        }
 
 
     }
@@ -219,7 +239,8 @@ public class Main {
                 aList.add(line); //add the line of text to the array list
             }
             input.close();
-        } catch (IOException e) {  // catch any problems found e.g. file not found
+        } catch (
+                IOException e) {  // catch any problems found e.g. file not found
             e.printStackTrace();
         }
 
@@ -270,7 +291,7 @@ public class Main {
                 System.out.println("Error: " + e + '\n' +
                         "Input Must Be Numerical");
             }
-        }while(!stop);
+        } while (!stop);
 
         //this changes the first letter of users input to capital letter
         //so no matter what a lower or upper case input, the user will be found by their name
@@ -826,4 +847,4 @@ public class Main {
     }
 
 
-    }
+}
